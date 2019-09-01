@@ -18,4 +18,10 @@ class EmktController extends Controller
     {
         return new AknaController;
     }
+
+    public function index()
+    {
+        return view('admin.emkt.listas.create');
+    }
+
 }

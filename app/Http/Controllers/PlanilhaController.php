@@ -22,17 +22,22 @@ class PlanilhaController extends Controller
     {
         return Excel::load($file_path)->get();
     }
-
+    
     public function storeFile($file, $file_name, $extension, $storage_path=null)
     {
-
         Excel::create($file_name, function($excel) use ($file) {
             $excel->sheet('sheet_name', function($sheet) use ($file) {
                 $sheet->fromArray($file);
                 $sheet->setAutoSize(true);
             });
         })->store($extension, storage_path($storage_path));
-
     }
 
+    public function getFiles($storage_path)
+    {
+        return glob(storage_path("$storage_path*"));
+    }
+
+    
+    
 }

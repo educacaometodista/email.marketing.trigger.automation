@@ -17,7 +17,7 @@
                         {{ session('message') }}
                         </div>
                     @endif
-                    @include('admin.emkt.partials._alert')
+                    @include('admin.partials._alert')
                     <form action="{{ route('listas.importar.store') }}" method="POST" enctype="multipart/form-data" class="col-md-8 mx-auto my-4">
                         @csrf
                         <label for="extension">Assunto</label><br>

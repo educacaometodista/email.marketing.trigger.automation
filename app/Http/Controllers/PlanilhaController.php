@@ -13,5 +13,10 @@ use Session;
 
 class PlanilhaController extends Controller
 {
-    //
+
+    public function load($file_path)
+    {
+        return Excel::load($file_path)->get();
+    }
+
 }

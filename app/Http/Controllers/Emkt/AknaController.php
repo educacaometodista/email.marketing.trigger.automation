@@ -28,4 +28,15 @@ class AknaController extends Controller
         return file_get_contents($this->storagePath.'/'.$file.'.xml');
     }
 
+    public function post($headers=[], $xml)
+    {
+        $data = $this->data;
+        $data['XML'] = $xml;
+
+        return $response = Curl::to($this->endPoint)
+            ->withData($data)
+            ->withHeaders($headers)
+            ->post();
+    }
+
 }

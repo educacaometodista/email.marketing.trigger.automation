@@ -53,6 +53,8 @@ class AknaController extends Controller
         $xml = str_replace('[URL DO ARQUIVO]', $url_do_arquivo, $xml);
         $xml = str_replace('[NUMERO DA COLUNA EMAIL]', '2', $xml);
 
+        dd($xml);
+
         return $this->post([], $xml);
     }
 

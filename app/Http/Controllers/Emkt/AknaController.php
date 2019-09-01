@@ -23,4 +23,9 @@ class AknaController extends Controller
         $this->codigosIes = include __DIR__.'/client-codes.php';
     }
 
+    public function getXml($file)
+    {
+        return file_get_contents($this->storagePath.'/'.$file.'.xml');
+    }
+
 }

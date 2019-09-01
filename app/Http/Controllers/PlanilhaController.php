@@ -38,6 +38,12 @@ class PlanilhaController extends Controller
         return glob(storage_path("$storage_path*"));
     }
 
-    
-    
+    public function clearStorage($path)
+    {
+        $filesystem = new Filesystem;
+        $filesystem->cleanDirectory(public_path("storage/$path"));
+        $filesystem->cleanDirectory(storage_path($path));
+    }
+
+
 }

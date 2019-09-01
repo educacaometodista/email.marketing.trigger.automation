@@ -41,4 +41,19 @@ class AknaController extends Controller
             ->post();
     }
 
+    public function importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao) 
+    {
+        $codigoIe = $this->codigosIes[strtoupper($instituicao)];
+        $this->data['Client'] = $codigoIe;
+
+        $url_do_arquivo = $this->storagePath.$nome_do_arquivo;
+
+        $xml = $this->getXml('listas/importar-lista-de-contatos');
+        $xml = str_replace('[NOME DA LISTA]', $nome_da_lista, $xml);
+        $xml = str_replace('[URL DO ARQUIVO]', $url_do_arquivo, $xml);
+        $xml = str_replace('[NUMERO DA COLUNA EMAIL]', '2', $xml);
+
+        return $this->post([], $xml);
+    }
+
 }

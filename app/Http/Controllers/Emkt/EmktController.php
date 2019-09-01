@@ -14,4 +14,8 @@ class EmktController extends Controller
         return new PlanilhaController;
     }
 
+    public function aknaAPI()
+    {
+        return new AknaController;
+    }
 }

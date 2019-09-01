@@ -9,5 +9,9 @@ use App\Http\Controllers\PlanilhaController;
 
 class EmktController extends Controller
 {
-    //
+    public function planilha()
+    {
+        return new PlanilhaController;
+    }
+
 }

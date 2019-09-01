@@ -19,8 +19,8 @@ class AknaController extends Controller
     public function __construct()
     {
         $this->storagePath = storage_path().'/akna_xml';
-        $this->data = include __DIR__.'/config/user.php';
-        $this->codigosIes = include __DIR__.'/config/client-codes.php';
+        $this->data = include __DIR__.'/user.php';
+        $this->codigosIes = include __DIR__.'/client-codes.php';
     }
 
 }

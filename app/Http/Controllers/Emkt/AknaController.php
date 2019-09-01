@@ -18,14 +18,16 @@ class AknaController extends Controller
 
     public function __construct()
     {
-        $this->storagePath = storage_path().'/akna_xml';
+        $host = gethostname();
+        $this->storagePath = "$host/akna_lists/";
+        $this->xmlPath = storage_path().'/akna_xml';
         $this->data = include __DIR__.'/user.php';
         $this->codigosIes = include __DIR__.'/client-codes.php';
     }
 
     public function getXml($file)
     {
-        return file_get_contents($this->storagePath.'/'.$file.'.xml');
+        return file_get_contents($this->xmlPath.'/'.$file.'.xml');
     }
 
     public function post($headers=[], $xml)

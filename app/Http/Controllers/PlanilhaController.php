@@ -45,5 +45,20 @@ class PlanilhaController extends Controller
         $filesystem->cleanDirectory(storage_path($path));
     }
 
+    public function downloadZip($path)
+    {
+        $zipName = Session::get('zipName');
+        Session::remove('zipName');
 
+        if(is_string($zipName) && !is_null($zipName) && $zipName != '') {
+            $files = glob(storage_path("$path/*"));
+            \Zipper::make(public_path("storage/$path/$zipName.zip"))->add($files)->close();
+            return response()->download(public_path("storage/$path/$zipName.zip"));
+        } else {
+            return back()->with('danger', 'Não há arquivos para baixar!');
+        }
+    }
+
+    
+    
 }

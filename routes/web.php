@@ -21,6 +21,11 @@ require 'auth/user.php';
 require 'auth/admin.php';
 require 'auth/superadmin.php';
 
+
+Route::prefix('listas')->name('listas.')->namespace('Emkt')->group(function () {
+    Route::resource('/importar', 'EmktController');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

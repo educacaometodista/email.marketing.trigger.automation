@@ -13,6 +13,10 @@ use Session;
 
 class PlanilhaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
 
     public function load($file_path)
     {

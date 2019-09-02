@@ -9,6 +9,11 @@ use App\Http\Controllers\PlanilhaController;
 
 class EmktController extends Controller
 {
+    public function __construct()
+    {
+        $this->instituicoes = ['UMESP', 'UNIMEP', 'IZABELA', 'GRANBERY', 'CENTENARIO', 'IPA'];
+    }
+
     public function planilha()
     {
         return new PlanilhaController;
@@ -41,10 +46,8 @@ class EmktController extends Controller
             
             $this->planilha()->filter($currentFile, $extension, $subject, $date.'-'.$period, 'akna_lists');
 
-            $instituicoes = ['UMESP', 'UNIMEP', 'IZABELA', 'GRANBERY', 'CENTENARIO', 'IPA'];
-
             
-            foreach ($instituicoes as $instituicao)
+            foreach ($this->instituicoes as $instituicao)
             {
                 $nome_do_arquivo = strtolower($instituicao).'-'.$subject.'-'.$date.'-'.$period.'.'.$extension;
                 $nome_da_lista = 'teste'.$instituicao.' - '.str_replace('-', ' ', $subject).' - '.$date.' - '.str_replace('-', '/',$period);

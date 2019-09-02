@@ -22,8 +22,10 @@ require 'auth/admin.php';
 require 'auth/superadmin.php';
 
 
-Route::prefix('listas')->name('listas.')->namespace('Emkt')->group(function () {
-    Route::resource('/importar', 'EmktController');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('listas')->name('listas.')->namespace('Emkt')->group(function () {
+        Route::resource('/importar', 'EmktController');
+    });
 });
 
 Auth::routes();

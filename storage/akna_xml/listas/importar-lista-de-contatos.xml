@@ -2,56 +2,14 @@
 <main>
  <emkt trans="11.10">
  <nome>[NOME DA LISTA]</nome>
- <identificador>[E/C]</identificador>
- <duplicidade_codigo_externo>[S/N]</duplicidade_codigo_externo>
+ <identificador>[IDENTIFICADOR]</identificador>
+ <duplicidade_codigo_externo>[DUPLICIDADE CODIGO EXTERNO]</duplicidade_codigo_externo>
  <arquivo>[URL DO ARQUIVO]</arquivo>
  <separador>[SEPARADOR]</separador>
- <acao>[I/S/R]</acao>
- <opcoes cabecalho="[S/N]" atualizar="[S/N]" />
+ <acao>[ACAO]</acao>
+ <opcoes cabecalho="[CABECALHO]" atualizar="[ATUALIZAR]" />
  <campos>
- <nome col="[NUMERO DA COLUNA NOME]" />
  <email col="[NUMERO DA COLUNA EMAIL]" />
- <sexo col="[NUMERO DA COLUNA SEXO]" />
- <idade col="[NUMERO DA COLUNA IDADE]" />
- <data_nascimento col="[NUMERO DA COLUNA DATA_NASCIMENTO]" />
- <codigo_externo col="[NUMERO DA COLUNA CODIGO_EXTERNO]" />
- <empresa col="[NUMERO DA COLUNA EMPRESA]" />
- <cpf col="[NUMERO DA COLUNA CPF]" />
- <atividade col="[NUMERO DA COLUNA ATIVIDADE]" />
- <profissao col="[NUMERO DA COLUNA PROFISSAO]" />
- <tipoend col="[NUMERO DA COLUNA TIPOEND]" />
- <endereco col="[NUMERO DA COLUNA ENDERECO]" />
- <complemento col="[NUMERO DA COLUNA COMPLEMENTO]" />
- <bairro col="[NUMERO DA COLUNA BAIRRO]" />
- <cidade col="[NUMERO DA COLUNA CIDADE]" />
- <estado col="[NUMERO DA COLUNA ESTADO]" />
- <pais col="[NUMERO DA COLUNA PAIS]" />
- <cep col="[NUMERO DA COLUNA CEP]" />
- <telefone1 col="[NUMERO DA COLUNA TELEFONE1]" />
- <telefone2 col="[NUMERO DA COLUNA TELEFONE2]" />
- <telefone3 col="[NUMERO DA COLUNA TELEFONE3]" />
- <fax col="[NUMERO DA COLUNA FAX]" />
- <infoadc1 col="[NUMERO DA COLUNA INFOADC1]" />
- <infoadc2 col="[NUMERO DA COLUNA INFOADC2]" />
- <infoadc3 col="[NUMERO DA COLUNA INFOADC3]" />
- <infoadc4 col="[NUMERO DA COLUNA INFOADC4]" />
- <infoadc5 col="[NUMERO DA COLUNA INFOADC5]" />
- <infoadc6 col="[NUMERO DA COLUNA INFOADC6]" />
- <infoadc7 col="[NUMERO DA COLUNA INFOADC7]" />
- <infoadc8 col="[NUMERO DA COLUNA INFOADC8]" />
- <infoadc9 col="[NUMERO DA COLUNA INFOADC9]" />
- <infoadc10 col="[NUMERO DA COLUNA INFOADC10]" />
- <infoadc11 col="[NUMERO DA COLUNA INFOADC11]" />
- <infoadc12 col="[NUMERO DA COLUNA INFOADC12]" />
- <infoadc13 col="[NUMERO DA COLUNA INFOADC13]" />
- <infoadc14 col="[NUMERO DA COLUNA INFOADC14]" />
- <infoadc15 col="[NUMERO DA COLUNA INFOADC15]" />
- <infoadc16 col="[NUMERO DA COLUNA INFOADC16]" />
- <infoadc17 col="[NUMERO DA COLUNA INFOADC17]" />
- <infoadc18 col="[NUMERO DA COLUNA INFOADC18]" />
- <infoadc19 col="[NUMERO DA COLUNA INFOADC19]" />
- <infoadc20 col="[NUMERO DA COLUNA INFOADC20]" />
- <data_validade col="[NUMERO DA COLUNA DATA_VALIDADE]" />
  </campos>
  </emkt>
 </main>

@@ -48,14 +48,18 @@ class AknaController extends Controller
         $this->data['Client'] = $codigoIe;
         $url_do_arquivo = $this->fileStorage.$nome_do_arquivo;
 
-        $xml = $this->getXml('listas/importar-lista-de-contatos');
-        $xml = str_replace('[NOME DA LISTA]', $nome_da_lista, $xml);
-        $xml = str_replace('[URL DO ARQUIVO]', $url_do_arquivo, $xml);
-        $xml = str_replace('[NUMERO DA COLUNA EMAIL]', '2', $xml);
+        $xml_request = $this->getXml('listas/importar-lista-de-contatos');
+        $xml_request = str_replace('[NOME DA LISTA]', $nome_da_lista, $xml_request);
+        $xml_request = str_replace('[URL DO ARQUIVO]', $url_do_arquivo, $xml_request);
+        $xml_request = str_replace('[NUMERO DA COLUNA EMAIL]', '2', $xml_request);
 
-        
+        $xml_response = $this->post([], $xml_request);
 
-        return $this->post([], $xml);
+        $xml = new \SimpleXMLElement($xml_response);
+        $codigo_do_processo = $xml->EMKT->PROCESSO[0];
+
+        return $codigo_do_processo;
+
     }
 
 }

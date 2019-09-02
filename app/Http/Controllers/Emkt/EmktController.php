@@ -9,6 +9,8 @@ use App\Http\Controllers\PlanilhaController;
 
 class EmktController extends Controller
 {
+    public $instituicoes;
+    
     public function __construct()
     {
         $this->instituicoes = ['UMESP', 'UNIMEP', 'IZABELA', 'GRANBERY', 'CENTENARIO', 'IPA'];

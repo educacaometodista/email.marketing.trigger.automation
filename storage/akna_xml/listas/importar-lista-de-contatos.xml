@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <main>
- <emkt trans="11.10">
- <nome>[NOME DA LISTA]</nome>
- <identificador>[IDENTIFICADOR]</identificador>
- <duplicidade_codigo_externo>[DUPLICIDADE CODIGO EXTERNO]</duplicidade_codigo_externo>
- <arquivo>[URL DO ARQUIVO]</arquivo>
- <separador>[SEPARADOR]</separador>
- <acao>[ACAO]</acao>
- <opcoes cabecalho="[CABECALHO]" atualizar="[ATUALIZAR]" />
- <campos>
- <email col="[NUMERO DA COLUNA EMAIL]" />
- </campos>
- </emkt>
+    <emkt trans="11.10">
+        <nome>[NOME DA LISTA]</nome>
+        <arquivo>[URL DO ARQUIVO]</arquivo>
+        <separador>[SEPARADOR]</separador>
+        <acao>[ACAO]</acao>
+        <opcoes cabecalho="[CABECALHO]" atualizar="[ATUALIZAR]" />
+        <campos>
+            <email col="[NUMERO DA COLUNA EMAIL]" />
+        </campos>
+    </emkt>
 </main>

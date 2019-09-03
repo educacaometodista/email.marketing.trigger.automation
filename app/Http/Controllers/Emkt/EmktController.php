@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Emkt\AknaController;
 use App\Http\Controllers\PlanilhaController;
+use Session;
 
 class EmktController extends Controller
 {
     public $instituicoes;
-    
+
     public function __construct()
     {
         $this->instituicoes = ['UMESP', 'UNIMEP', 'IZABELA', 'GRANBERY', 'CENTENARIO', 'IPA'];
@@ -28,7 +29,8 @@ class EmktController extends Controller
 
     public function index()
     {
-        return view('admin.emkt.listas.create');
+
+        return view('admin.emkt.listas.create')->with(['instituicoes' => $this->instituicoes]);
     }
 
     public function store(Request $request)
@@ -48,16 +50,22 @@ class EmktController extends Controller
             
             $this->planilha()->filter($currentFile, $extension, $subject, $date.'-'.$period, 'akna_lists');
 
+            $codigos_dos_processos = [];
             
             foreach ($this->instituicoes as $instituicao)
             {
                 $nome_do_arquivo = strtolower($instituicao).'-'.$subject.'-'.$date.'-'.$period.'.'.$extension;
-                $nome_da_lista = 'teste'.$instituicao.' - '.str_replace('-', ' ', $subject).' - '.$date.' - '.str_replace('-', '/',$period);
-                $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao);
-            
+                $nome_da_lista = 'teste-'.$instituicao.' - '.str_replace('-', ' ', $subject).' - '.$date.' - '.str_replace('-', '/',$period);
+                $codigos_dos_processos[$instituicao] = $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao);
             }
 
-            return back()->with('message', 'Suas listas foram importadas, verifique sua conta no Akna');
+
+            foreach ($this->instituicoes as $instituicao)
+            {
+                Session::flash('message-'.$instituicao, $codigos_dos_processos[$instituicao]);
+            }
+
+            return back();
 
         } else {
             return back()->with('message', 'Você precisa importar um documento!');

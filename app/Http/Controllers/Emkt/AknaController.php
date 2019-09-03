@@ -48,17 +48,34 @@ class AknaController extends Controller
         $this->data['Client'] = $codigoIe;
         $url_do_arquivo = $this->fileStorage.$nome_do_arquivo;
 
+
         $xml_request = $this->getXml('listas/importar-lista-de-contatos');
         $xml_request = str_replace('[NOME DA LISTA]', $nome_da_lista, $xml_request);
         $xml_request = str_replace('[URL DO ARQUIVO]', $url_do_arquivo, $xml_request);
         $xml_request = str_replace('[NUMERO DA COLUNA EMAIL]', '2', $xml_request);
+
+        // Separador (',', ';')
+        $xml_request = str_replace('[SEPARADOR]', ';', $xml_request);
+
+        // I = Adicionar o conteúdo do arquivo ao conteúdo da lista
+        // S = Remover o conteúdo anterior da lista antes de importar
+        // R = Excluir da lista os contatos importados do arquivo
+        $xml_request = str_replace('[ACAO]', 'I', $xml_request);
+
+        // S/N - Informe se o seu arquivo importado possui ou não a linha de cabeçalho
+        $xml_request = str_replace('[CABECALHO]', 'S', $xml_request);
+
+        // S/N - • Atualizar - Atualizar os dados dos contatos que estiverem diferentes.
+        $xml_request = str_replace('[ATUALIZAR]', 'S', $xml_request);
+
+        //dd($xml_request);
 
         $xml_response = $this->post([], $xml_request);
 
         $xml = new \SimpleXMLElement($xml_response);
         $codigo_do_processo = $xml->EMKT->PROCESSO[0];
 
-        return $this->consultarSituacaoDoProcesso($codigo_do_processo, $instituicao);
+        $this->consultarSituacaoDoProcesso($codigo_do_processo, $instituicao);
 
     }
 

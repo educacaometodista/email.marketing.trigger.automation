@@ -24,7 +24,7 @@ require 'auth/superadmin.php';
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('listas')->name('listas.')->namespace('Emkt')->group(function () {
-        Route::resource('/importar', 'InstituicaoController');
+        Route::resource('/importar', 'EmktController');
     });
     Route::prefix('instituicoes')->name('instituicoes.')->group(function () {
         Route::resource('/instituicoes', 'InstituicaoController');

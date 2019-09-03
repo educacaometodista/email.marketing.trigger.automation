@@ -75,7 +75,7 @@ class AknaController extends Controller
         $xml = new \SimpleXMLElement($xml_response);
         $codigo_do_processo = $xml->EMKT->PROCESSO[0];
 
-        $this->consultarSituacaoDoProcesso($codigo_do_processo, $instituicao);
+        return $this->consultarSituacaoDoProcesso($codigo_do_processo, $instituicao);
 
     }
 
@@ -87,7 +87,18 @@ class AknaController extends Controller
         $xml_request = $this->getXml('listas/consultar-situacao-de-processo-de-importacao');
         $xml_request = str_replace('[CODIGO DO PROCESSO]', $codigo_do_processo, $xml_request);
 
-        return $this->post([], $xml_request);
+        $xml_response = $this->post([], $xml_request);
+        
+        $xml = new \SimpleXMLElement($xml_response);
+        
+        if($xml->EMKT->MENSAGEM)
+        {
+            return $xml->EMKT->MENSAGEM.' em '.$instituicao;
+
+        } elseif ($xml->FUNC->RETURN[0]) {
+            return $xml->FUNC->RETURN[0].' em '.$instituicao;
+
+        }
 
     }
 

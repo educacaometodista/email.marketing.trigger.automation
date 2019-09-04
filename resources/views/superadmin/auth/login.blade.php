@@ -2,9 +2,6 @@
 
 @section('content')
 
-
-    <!-- Wrapper Start -->
-    <div class="wrapper">
         <!-- Login Page Start -->
         <div class="m-account-w" data-bg-img="{{ url('vendor/dadmin/assets/img/account/wrapper-bg.jpg') }}">
             <div class="m-account">
@@ -27,7 +24,7 @@
                             <div class="m-account--form">
                                 <!-- Logo Start -->
                                 <div class="logo">
-                                    <img src="{{ url('images/logo-mini-light.png') }}" alt="#" style="width: 50%;">
+                                    <img src="{{ url('images/logo-mini-branco.png') }}" alt="#" style="width: 50%;">
                                 </div>
                                 <!-- Logo End -->
 
@@ -96,7 +93,5 @@
             </div>
         </div>
         <!-- Login Page End -->
-    </div>
-    <!-- Wrapper End -->
 
 @endsection

@@ -91,7 +91,29 @@
                     <li><a href="#"><i class="far fa-envelope"></i>Inbox</a></li>
                     <li><a href="#"><i class="fa fa-cog"></i>Configurações</a></li>
                     <li class="dropdown-divider"></li>
-                    <li><a href="#"><i class="fa fa-power-off"></i>Sair</a></li>
+                    <li><a href="#">
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Entrar') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.register') }}">{{ __('Cadastrar-se') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-item" href="{{ route('admin.logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                <i class="fa fa-power-off"></i>Sair</a>
+                            </a>
+                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @endguest
+                    </li>
                 </ul>
             </li>
             <!-- Nav User End -->

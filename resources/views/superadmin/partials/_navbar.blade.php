@@ -91,7 +91,23 @@
                     <li><a href="#"><i class="far fa-envelope"></i>Inbox</a></li>
                     <li><a href="#"><i class="fa fa-cog"></i>Configurações</a></li>
                     <li class="dropdown-divider"></li>
-                    <li><a href="#"><i class="fa fa-power-off"></i>Sair</a></li>
+                    <li><a href="#">
+                        @guest
+                        @else
+                            <li class="nav-item dropdown">
+                                
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-power-off"></i>Sair</a>
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('superadmin.logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                            </li>
+                        @endguest
+                    </li>
                 </ul>
             </li>
             <!-- Nav User End -->

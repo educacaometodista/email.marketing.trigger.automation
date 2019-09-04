@@ -1,23 +1,31 @@
-@extends('layouts.superadmin')
+@extends('layouts.dadmin')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+@include('superadmin.partials._navbar')
+@include('superadmin.partials._sidebar')
 
-                    Você está logado!
+<!-- Main Container Start -->
+<main class="main--container">
+    <!-- Page Header Start -->
+    <section class="page--header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- Page Title Start -->
+                    <h2 class="page--title h5">Dashboard</h2>
+                    <!-- Page Title End -->
+
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item active"><span>Dashboard</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+    <!-- Page Header End -->
+
+    @include('superadmin.partials._footer')
+</main>
+<!-- Main Container End -->
 @endsection

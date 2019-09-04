@@ -27,7 +27,7 @@
                             <div class="m-account--form">
                                 <!-- Logo Start -->
                                 <div class="logo">
-                                    <img src="{{ url('vendor/dadmin/assets/img/logo.png') }}" alt="#">
+                                    <img src="{{ url('images/logo-mini-light.png') }}" alt="#" style="width: 50%;">
                                 </div>
                                 <!-- Logo End -->
 

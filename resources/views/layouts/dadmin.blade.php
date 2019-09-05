@@ -46,7 +46,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/dadmin/assets/css/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/dadmin/assets/css/fullcalendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/dadmin/assets/css/style.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('dashboard/css/style.css') }}">
 
     <!-- Page Level Stylesheets -->
 

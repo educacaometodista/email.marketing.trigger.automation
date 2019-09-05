@@ -47,9 +47,9 @@ class InstituicaoController extends Controller
      * @param  \App\Instituicao  $instituicao
      * @return \Illuminate\Http\Response
      */
-    public function show(Instituicao $instituicao)
+    public function show($id)
     {
-        //
+        return view('admin.emkt.instituicoes.show', ['instituicao' => Instituicao::findOrFail($id)]);
     }
 
     /**

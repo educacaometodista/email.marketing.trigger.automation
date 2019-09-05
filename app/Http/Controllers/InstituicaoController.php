@@ -14,7 +14,7 @@ class InstituicaoController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.emkt.instituicoes.index');
     }
 
     /**

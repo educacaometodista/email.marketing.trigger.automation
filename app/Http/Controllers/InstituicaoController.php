@@ -24,7 +24,7 @@ class InstituicaoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.emkt.instituicoes.create');
     }
 
     /**

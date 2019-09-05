@@ -58,9 +58,9 @@ class InstituicaoController extends Controller
      * @param  \App\Instituicao  $instituicao
      * @return \Illuminate\Http\Response
      */
-    public function edit(Instituicao $instituicao)
+    public function edit($id)
     {
-        //
+        return view('admin.emkt.instituicoes.edit', ['instituicao' => Instituicao::findOrFail($id)]);
     }
 
     /**
@@ -70,7 +70,7 @@ class InstituicaoController extends Controller
      * @param  \App\Instituicao  $instituicao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Instituicao $instituicao)
+    public function update(Request $request, $id)
     {
         //
     }

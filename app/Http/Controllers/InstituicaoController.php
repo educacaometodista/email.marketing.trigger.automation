@@ -90,8 +90,11 @@ class InstituicaoController extends Controller
      * @param  \App\Instituicao  $instituicao
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Instituicao $instituicao)
+    public function destroy($id)
     {
-        //
+        Instituicao::findOrFail($id)->delete();
+
+        return redirect()->route('admin.instituicoes.index')
+            ->with('success', 'Instituição removida com sucesso!');
     }
 }

@@ -64,8 +64,8 @@
                         </a>
 
                         <ul>
-                            <li><a href="#">Todas</a></li>
-                            <li><a href="#">Novo Cadastro</a></li>
+                            <li><a href="{{ route('admin.instituicoes.index' ) }}">Todas</a></li>
+                            <li><a href="{{ route('admin.instituicoes.create') }}">Novo Cadastro</a></li>
                         </ul>
                     </li>
                    

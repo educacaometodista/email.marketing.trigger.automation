@@ -39,6 +39,8 @@ class InstituicaoController extends Controller
         $instituicao->nome = $request->input('nome');
         $instituicao->codigo_da_empresa = $request->input('codigo_da_empresa');
         $instituicao->save();
+        return redirect()->route('admin.instituicoes.edit', compact($instituicao))
+            ->with('success', 'Instituição atualizada com sucesso!');
     }
 
     /**
@@ -77,6 +79,7 @@ class InstituicaoController extends Controller
             'codigo_da_empresa' => $request->codigo_da_empresa
         ]);
 
+        return redirect()->route('admin.instituicoes.edit', compact($instituicao))
             ->with('success', 'Instituição atualizada com sucesso!');
 
     }

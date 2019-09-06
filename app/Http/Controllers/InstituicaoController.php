@@ -72,7 +72,13 @@ class InstituicaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $instituicao = Instituicao::findOrFail($id)->update([
+            'nome' => $request->nome,
+            'codigo_da_empresa' => $request->codigo_da_empresa
+        ]);
+
+            ->with('success', 'Instituição atualizada com sucesso!');
+
     }
 
     /**

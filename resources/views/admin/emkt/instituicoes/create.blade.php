@@ -49,7 +49,7 @@
                             <div class="form-group row">
                                     <span class="label-text col-md-2 col-form-label text-md-right">Nome</span>
                                 <div class="col-md-10">
-                                    <input type="text" name="nome" class="form-control" id="nome" maxlenght="20">
+                                    <input type="text" name="nome" class="form-control" id="nome" maxlenght="20" value="{{ old('nome') }}">
                                 </div>
                             </div>
                             <!-- Form Group End -->
@@ -58,7 +58,7 @@
                             <div class="form-group row">
                                     <span class="label-text col-md-2 col-form-label text-md-right">Código da Empresa</span>
                                 <div class="col-md-10">
-                                    <input type="text" name="codigo_da_empresa" class="form-control" id="codigo_da_empresa" maxlenght="5">
+                                    <input type="text" name="codigo_da_empresa" class="form-control" id="codigo_da_empresa" maxlenght="5" value="{{ old('codigo_da_empresa') }}">
                                 </div>
                             </div>
                             <!-- Form Group End -->

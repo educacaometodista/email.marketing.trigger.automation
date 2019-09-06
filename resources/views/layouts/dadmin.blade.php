@@ -49,6 +49,8 @@
     <link rel="stylesheet" href="{{ asset('dashboard/css/style.css') }}">
 
     <!-- Page Level Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('vendor/dadmin/assets/css/sweetalert.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/dadmin/assets/css/sweetalert-overrides.css') }}">
 
 </head>
 <body>
@@ -78,6 +80,15 @@
 <script src="{{ asset('vendor/dadmin/assets/js/ion.rangeSlider.min.js') }}"></script>
 <script src="{{ asset('vendor/dadmin/assets/js/datatables.min.js') }}"></script>
 <script src="{{ asset('vendor/dadmin/assets/js/main.js') }}"></script>
+
+
+<!-- Page Level Scripts -->
+<script src="{{ asset('vendor/dadmin/assets/js/sweetalert.min.js') }}"></script>
+<script src="{{ asset('vendor/dadmin/assets/js/sweetalert-init.js') }}"></script>
+
+
+
+
 
 <!-- Page Level Scripts -->
 

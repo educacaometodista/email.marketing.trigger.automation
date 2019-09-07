@@ -10,6 +10,7 @@ class Instituicao extends Model
 
     protected $fillable = [
         'nome',
+        'prefixo',
         'codigo_da_empresa',
     ];
 }

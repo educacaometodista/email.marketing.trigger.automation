@@ -58,7 +58,7 @@
                             <div class="form-group row">
                                     <span class="label-text col-md-2 col-form-label text-md-right">Prefixo</span>
                                 <div class="col-md-10">
-                                    <input type="text" name="prefixo" class="form-control" id="prefixo" maxlenght="5" value="{{ old('prefixo') }}">
+                                    <input type="text" name="prefixo" class="form-control" id="prefixo" maxlenght="16" value="{{ old('prefixo') }}">
                                 </div>
                             </div>
                             <!-- Form Group End -->

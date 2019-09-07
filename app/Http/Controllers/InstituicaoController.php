@@ -38,6 +38,7 @@ class InstituicaoController extends Controller
     {
         $instituicao = new Instituicao;
         $instituicao->nome = $request->input('nome');
+        $instituicao->prefixo = $request->input('prefixo');
         $instituicao->codigo_da_empresa = $request->input('codigo_da_empresa');
         $instituicao->save();
         return redirect()->route('admin.instituicoes.edit', compact('instituicao'))

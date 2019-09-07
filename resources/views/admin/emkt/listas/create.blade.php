@@ -42,25 +42,27 @@
 
                     <div class="panel-content">
                     @include('admin.partials._alert')
-                    @foreach($instituicoes as $instituicao)
-                        @if(session('message-'.$instituicao))
-                            @if(str_replace($instituicao, '', session('message-'.$instituicao)) == 'Acesso negado em ')
-                                <div class="alert alert-danger" role="alert">
-                                    {{ session('message-'.$instituicao) }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @elseif(str_replace($instituicao, '', session('message-'.$instituicao)) == 'Processo iniciado em ')
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('message-'.$instituicao) }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                    @if(isset($instituicoes))
+                        @foreach($instituicoes as $instituicao)
+                            @if(session('message-'.$instituicao))
+                                @if(str_replace($instituicao, '', session('message-'.$instituicao)) == 'Acesso negado em ')
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ session('message-'.$instituicao) }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @elseif(str_replace($instituicao, '', session('message-'.$instituicao)) == 'Processo iniciado em ')
+                                    <div class="alert alert-success" role="alert">
+                                        {{ session('message-'.$instituicao) }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
                             @endif
-                        @endif
-                    @endforeach
+                        @endforeach
+                    @endif
 
 
 

@@ -23,7 +23,6 @@ class AknaController extends Controller
         $this->fileStorage = $protocol.$host."/akna_lists/";
         $this->xmlPath = storage_path().'/akna_xml';
         $this->data = include __DIR__.'/user.php';
-        $this->codigosIes = include __DIR__.'/client-codes.php';
     }
 
     public function getXml($file)
@@ -42,12 +41,11 @@ class AknaController extends Controller
             ->post();
     }
 
-    public function importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao) 
+    public function importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao, $codigo_da_empresa) 
     {
-        $codigoIe = $this->codigosIes[strtoupper($instituicao)];
-        $this->data['Client'] = $codigoIe;
+       
+        $this->data['Client'] = $codigo_da_empresa;
         $url_do_arquivo = $this->fileStorage.$nome_do_arquivo;
-
 
         $xml_request = $this->getXml('listas/importar-lista-de-contatos');
         $xml_request = str_replace('[NOME DA LISTA]', $nome_da_lista, $xml_request);
@@ -75,14 +73,13 @@ class AknaController extends Controller
         $xml = new \SimpleXMLElement($xml_response);
         $codigo_do_processo = $xml->EMKT->PROCESSO[0];
 
-        return $this->consultarSituacaoDoProcesso($codigo_do_processo, $instituicao);
+        return $this->consultarSituacaoDoProcesso($codigo_do_processo, $instituicao, $codigo_da_empresa);
 
     }
 
-    public function consultarSituacaoDoProcesso($codigo_do_processo, $instituicao)
+    public function consultarSituacaoDoProcesso($codigo_do_processo, $instituicao, $codigo_da_empresa)
     {
-        $codigoIe = $this->codigosIes[strtoupper($instituicao)];
-        $this->data['Client'] = $codigoIe;
+        $this->data['Client'] = $codigo_da_empresa;
 
         $xml_request = $this->getXml('listas/consultar-situacao-de-processo-de-importacao');
         $xml_request = str_replace('[CODIGO DO PROCESSO]', $codigo_do_processo, $xml_request);
@@ -93,10 +90,10 @@ class AknaController extends Controller
         
         if($xml->EMKT->MENSAGEM)
         {
-            return $xml->EMKT->MENSAGEM.' em '.$instituicao;
+            return 'Lista importada com sucesso em '.$instituicao.'!';
 
         } elseif ($xml->FUNC->RETURN[0]) {
-            return $xml->FUNC->RETURN[0].' em '.$instituicao;
+            return $xml->FUNC->RETURN[0].' em '.$instituicao.'!';
 
         }
 

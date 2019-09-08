@@ -43,18 +43,18 @@
                     <div class="panel-content">
                     @include('admin.partials._alert')
                     @if(isset($instituicoes))
-                        @foreach($instituicoes as $instituicao)
-                            @if(session('message-'.$instituicao))
-                                @if(str_replace($instituicao, '', session('message-'.$instituicao)) == 'Acesso negado em ')
+                        @foreach($instituicoes as $instituicao => $prefixo)
+                            @if(session('message-'.$prefixo))
+                                @if(session('message-'.$prefixo) == "Acesso negado em $instituicao!")
                                     <div class="alert alert-danger" role="alert">
-                                        {{ session('message-'.$instituicao) }}
+                                        {{ session('message-'.$prefixo) }}
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                @elseif(str_replace($instituicao, '', session('message-'.$instituicao)) == 'Processo iniciado em ')
+                                @elseif(session('message-'.$prefixo) == "Lista importada com sucesso em $instituicao!")
                                     <div class="alert alert-success" role="alert">
-                                        {{ session('message-'.$instituicao) }}
+                                        {{ session('message-'.$prefixo) }}
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -63,9 +63,6 @@
                             @endif
                         @endforeach
                     @endif
-
-
-
 
                         <form action="{{ route('admin.listas.importar.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -77,9 +74,9 @@
                                 <div class="col-md-10">
                                     <select name="subject" class="form-control" id="assunto">
                                     <option></option>
-                                    <option value="ausentes">Ausentes</option>
-                                    <option value="inscritos-parciais">Inscritos Parciais</option>
-                                    <option value="lembrete-de-prova">Lembrete de Prova</option>
+                                    <option value="Ausentes">Ausentes</option>
+                                    <option value="Inscritos Parciais">Inscritos Parciais</option>
+                                    <option value="Lembrete de Prova">Lembrete de Prova</option>
                                     </select>
                                 </div>
                             </div>

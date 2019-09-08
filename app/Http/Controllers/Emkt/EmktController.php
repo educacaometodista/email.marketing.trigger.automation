@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Emkt\AknaController;
 use App\Http\Controllers\PlanilhaController;
+use App\Instituicao;
 use Session;
 
 class EmktController extends Controller
@@ -14,7 +15,8 @@ class EmktController extends Controller
 
     public function __construct()
     {
-        $this->instituicoes = ['UMESP', 'UNIMEP', 'IZABELA', 'GRANBERY', 'CENTENARIO', 'IPA'];
+        $this->instituicoes = Instituicao::all()->pluck('nome', 'codigo_da_empresa')->toArray();
+        $this->prefixo = Instituicao::all()->pluck('prefixo', 'nome')->toArray();
     }
 
     public function planilha()
@@ -29,48 +31,46 @@ class EmktController extends Controller
 
     public function index()
     {
-
-        return view('admin.emkt.listas.create')->with(['instituicoes' => $this->instituicoes]);
+        return view('admin.emkt.listas.create')->with(['instituicoes' => $this->prefixo]);
     }
 
     public function store(Request $request)
     {
         if($request->hasFile('import_file'))
         {
-            $extension = 'csv';
-            $subject = $request->input('subject');
-            $date = date('d-m', strtotime($request->input('date')));
-            $period = date('Y', strtotime($request->input('date')));
-
-            $explode_date = explode('-', $date);
-            $month = $explode_date[1];
-            $period .= $month >=7 ? '-2' : '';
-            
-            $currentFile = $this->planilha()->load($request->file('import_file')->getRealPath());
-            
-            $this->planilha()->filter($currentFile, $extension, $subject, $date.'-'.$period, 'akna_lists');
-
-            $codigos_dos_processos = [];
-            
-            foreach ($this->instituicoes as $instituicao)
+            if(isset($this->instituicoes))
             {
-                $nome_do_arquivo = strtolower($instituicao).'-'.$subject.'-'.$date.'-'.$period.'.'.$extension;
-                $nome_da_lista = 'teste-'.$instituicao.' - '.str_replace('-', ' ', $subject).' - '.$date.' - '.str_replace('-', '/',$period);
-                $codigos_dos_processos[$instituicao] = $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao);
+                $extension = 'csv';
+                $subject = $request->input('subject');
+                $date = date('d-m', strtotime($request->input('date')));
+                $period = date('Y', strtotime($request->input('date')));
+
+                $explode_date = explode('-', $date);
+                $month = $explode_date[1];
+                $period .= $month >=7 ? '-2' : '';
+                
+                $currentFile = $this->planilha()->load($request->file('import_file')->getRealPath());
+                
+                $this->planilha()->filter($currentFile, $extension, $subject, $date.'-'.$period, 'akna_lists');
+
+                $codigos_dos_processos = [];
+            
+                foreach ($this->instituicoes as $codigo_da_empresa => $instituicao)
+                {
+                    $nome_do_arquivo = strtolower($this->prefixo[$instituicao]).'-'.$subject.'-'.$date.'-'.$period.'.'.$extension;
+                    $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao]).' - '.str_replace('-', ' ', $subject).' - '.str_replace('-', '/', $date).' - '.str_replace('-', '/',$period);
+                    Session::flash('message-'.$this->prefixo[$instituicao], $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao, $codigo_da_empresa));
+                }
+
+                return back();
+
+            } else {
+
+                return back()->with('warning', 'Não há instituições cadastradas para importar este arquivo!');
             }
-
-
-            foreach ($this->instituicoes as $instituicao)
-            {
-                Session::flash('message-'.$instituicao, $codigos_dos_processos[$instituicao]);
-            }
-
-            return back();
 
         } else {
             return back()->with('message', 'Você precisa importar um documento!');
         }
     }
-
-
 }

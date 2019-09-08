@@ -81,8 +81,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nome</th>
+                                    <th>Prefixo</th>
                                     <th>Código da Empresa</th>
-                                   
                                     <th class="not-sortable">Ações</th>
                                 </tr>
                             </thead>
@@ -91,10 +91,9 @@
 
                                 <tr id="{{ 'instituicao-'.$instituicao->id }}">
                                     <td>{{ $instituicao->id }}</td>
-                                    
                                     <td>{{ $instituicao->nome }}</td>
+                                    <td>{{ $instituicao->prefixo }}</td>
                                     <td>{{ $instituicao->codigo_da_empresa }}</td>
-                                    
                                     <td>
                                         <div class="dropleft">
                                             <a href="#" class="btn-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>

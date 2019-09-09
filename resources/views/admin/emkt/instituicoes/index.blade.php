@@ -83,6 +83,9 @@
                                     <th>Nome</th>
                                     <th>Prefixo</th>
                                     <th>Código da Empresa</th>
+                                    <th>Nome do Remetente</th>
+                                    <th>Email do Remetente</th>
+                                    <th>Email de Retorno</th>
                                     <th class="not-sortable">Ações</th>
                                 </tr>
                             </thead>
@@ -94,6 +97,9 @@
                                     <td>{{ $instituicao->nome }}</td>
                                     <td>{{ $instituicao->prefixo }}</td>
                                     <td>{{ $instituicao->codigo_da_empresa }}</td>
+                                    <td>{{ $instituicao->nome_do_remetente }}</td>
+                                    <td>{{ $instituicao->email_do_remetente }}</td>
+                                    <td>{{ $instituicao->email_de_retorno }}</td>
                                     <td>
                                         <div class="dropleft">
                                             <a href="#" class="btn-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>

@@ -72,9 +72,36 @@
                             </div>
                             <!-- Form Group End -->
 
+                             <!-- Form Group Start -->
+                             <div class="form-group row">
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Nome do Remetente</span>
+                                <div class="col-md-10">
+                                    <input type="text" name="nome_do_remetente" class="form-control" id="nome_do_remetente" maxlenght="16" value="{{ old('nome_do_remetente') }}">
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
+
+                             <!-- Form Group Start -->
+                             <div class="form-group row">
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Email do Remetente</span>
+                                <div class="col-md-10">
+                                    <input type="text" name="email_do_remetente" class="form-control" id="email_do_remetente" maxlenght="26" value="{{ old('email_do_remetente') }}">
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
+                             <!-- Form Group Start -->
+                             <div class="form-group row">
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Email de Retorno</span>
+                                <div class="col-md-10">
+                                    <input type="text" name="email_de_retorno" class="form-control" id="email_de_retorno" maxlenght="26" value="{{ old('email_de_retorno') }}">
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
-                                    
                                     <input type="submit" value="Salvar" class="btn btn-sm btn-rounded btn-success">
                                     <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button>
                                 </div>

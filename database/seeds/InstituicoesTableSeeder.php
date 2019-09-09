@@ -18,36 +18,54 @@ class InstituicoesTableSeeder extends Seeder
         $instituicao->nome = 'Instituto Metodista de Ensino Superior';
         $instituicao->prefixo = 'UMESP';
         $instituicao->codigo_da_empresa = $codigos['UMESP'];
+        $instituicao->nome_do_remetente = 'Universidade Metodista de São Paulo';
+        $instituicao->email_do_remetente = 'informes@metodista.br';
+        $instituicao->email_de_retorno = 'informes@metodista.br';
         $instituicao->save();
 
         $instituicao = new App\Instituicao;
         $instituicao->nome = 'Instituto Educacional Piracicabano';
         $instituicao->prefixo = 'UNIMEP';
         $instituicao->codigo_da_empresa = $codigos['UNIMEP'];
+        $instituicao->nome_do_remetente = 'Universidade Metodista de Piracicaba';
+        $instituicao->email_do_remetente = 'unimep@metodista.br';
+        $instituicao->email_de_retorno = 'unimep@metodista.br';
         $instituicao->save();
 
         $instituicao = new App\Instituicao;
         $instituicao->nome = 'Instituto Metodista Izabela Hendrix';
         $instituicao->prefixo = 'Izabela';
         $instituicao->codigo_da_empresa = $codigos['IZABELA'];
+        $instituicao->nome_do_remetente = 'Centro Universitário Metodista Izabela Hendrix';
+        $instituicao->email_do_remetente = 'informes.imih@izabelahendrix.metodista.br';
+        $instituicao->email_de_retorno = 'informes.imih@izabelahendrix.metodista.br';
         $instituicao->save();
 
         $instituicao = new App\Instituicao;
         $instituicao->nome = 'Instituto Metodista Granbery';
         $instituicao->prefixo = 'Granbery';
         $instituicao->codigo_da_empresa = $codigos['GRANBERY'];
+        $instituicao->nome_do_remetente = 'Faculdade Metodista Granbery';
+        $instituicao->email_do_remetente = 'informes.granbery@granbery.metodista.br';
+        $instituicao->email_de_retorno = 'informes.granbery@granbery.metodista.br';
         $instituicao->save();
 
         $instituicao = new App\Instituicao;
         $instituicao->nome = 'Instituto Metodista Centenário';
         $instituicao->prefixo = 'Fames';
         $instituicao->codigo_da_empresa = $codigos['CENTENARIO'];
+        $instituicao->nome_do_remetente = 'Faculdade Metodista Centenário';
+        $instituicao->email_do_remetente = 'informes.centenario@centenario.metodista.br';
+        $instituicao->email_de_retorno = 'informes.centenario@centenario.metodista.br';
         $instituicao->save();
 
         $instituicao = new App\Instituicao;
         $instituicao->nome = 'Instituto Porto Alegre da Igreja Metodista';
         $instituicao->prefixo = 'IPA';
         $instituicao->codigo_da_empresa = $codigos['IPA'];
+        $instituicao->nome_do_remetente = 'Centro Universitário Metodista IPA';
+        $instituicao->email_do_remetente = 'comunicados@ipa.metodista.br';
+        $instituicao->email_de_retorno = 'comunicados@ipa.metodista.br';
         $instituicao->save();
     }
 }

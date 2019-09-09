@@ -18,6 +18,9 @@ class CreateAcoesTable extends Migration
             $table->string('titulo')->unique();
             $table->string('envio');
             $table->integer('destinatarios');
+            $table->string('nome_do_remetente');
+            $table->string('email_do_remetente');
+            $table->string('email_de_retorno');
             $table->string('status');
             $table->unsignedInteger('mensagem_id');
             $table->timestamps();

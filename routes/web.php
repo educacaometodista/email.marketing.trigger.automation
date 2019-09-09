@@ -28,6 +28,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
         
     Route::resource('/instituicoes', 'InstituicaoController');
+
+    Route::resource('/acoes', 'AcaoController');
+
     
 });
 

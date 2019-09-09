@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Emkt;
 
 use App\Acao;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AcaoController extends Controller
 {
+    public function aknaAPI()
+    {
+        return new AknaController;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -87,7 +92,7 @@ class AcaoController extends Controller
             'mensagem_id' => $request->mensagem_id
         ]);
 
-        return redirect()->route('admin.acoes.edit', compact('instituicao'))
+        return redirect()->route('admin.acoes.edit', compact('acao'))
             ->with('success', 'Ação atualizada com sucesso!');
 
     }

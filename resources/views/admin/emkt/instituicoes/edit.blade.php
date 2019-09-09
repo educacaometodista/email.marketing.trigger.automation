@@ -74,6 +74,33 @@
                             </div>
                             <!-- Form Group End -->
 
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Nome do Remetente</span>
+                                <div class="col-md-10">
+                                    <input type="text" name="nome_do_remetente" class="form-control" id="nome_do_remetente" maxlenght="16" value="{{ $instituicao->nome_do_remetente }}">
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Código da Empresa</span>
+                                <div class="col-md-10">
+                                    <input type="text" name="email_do_remetente" class="form-control" id="email_do_remetente" maxlenght="26" value="{{ $instituicao->email_do_remetente }}">
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Código da Empresa</span>
+                                <div class="col-md-10">
+                                    <input type="text" name="email_de_retorno" class="form-control" id="email_do_retorno" maxlenght="5" value="{{ $instituicao->email_de_retorno }}">
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
                                     

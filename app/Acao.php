@@ -13,6 +13,9 @@ class Acao extends Model
         'envio',
         'destinatarios',
         'status',
+        'nome_do_remetente',
+        'email_do_remetente',
+        'email_de_retorno',
         'mensagem_id'
     ];
 }

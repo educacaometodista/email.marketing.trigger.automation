@@ -9,7 +9,7 @@ use App\Http\Controllers\PlanilhaController;
 use App\Instituicao;
 use Session;
 
-class EmktController extends Controller
+class ListaController extends Controller
 {
     public $instituicoes;
 

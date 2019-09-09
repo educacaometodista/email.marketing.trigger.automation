@@ -39,6 +39,10 @@ class InstituicaoController extends Controller
         $instituicao = new Instituicao;
         $instituicao->nome = $request->input('nome');
         $instituicao->prefixo = $request->input('prefixo');
+        $instituicao->nome_do_remetente = $request->input('nome_do_remetente');
+        $instituicao->email_do_rementente = $request->input('email_do_remetente');
+        $instituicao->email_de_retorno = $request->input('email_de_retono');
+
         $instituicao->codigo_da_empresa = $request->input('codigo_da_empresa');
         $instituicao->save();
         return redirect()->route('admin.instituicoes.edit', compact('instituicao'))
@@ -79,7 +83,10 @@ class InstituicaoController extends Controller
         $instituicao = Instituicao::findOrFail($id)->update([
             'nome' => $request->nome,
             'prefixo' => $request->prefixo,
-            'codigo_da_empresa' => $request->codigo_da_empresa
+            'codigo_da_empresa' => $request->codigo_da_empresa,
+            'nome_do_remetente' => $request->nome_do_remetente,
+            'email_do_remetente' => $request->email_do_remetente,
+            'email_de_retorno' => $request->emauil_de_retorno
         ]);
 
         return redirect()->route('admin.instituicoes.edit', compact('instituicao'))

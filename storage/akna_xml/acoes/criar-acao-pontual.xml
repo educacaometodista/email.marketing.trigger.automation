@@ -1,29 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <main>
     <emkt trans="19.05">
-        <nome>[NOME DA ACAO]</nome>
+        <nome>[TITULO DA ACAO]</nome>
         <mensagem url="true">[NOME OU LINK DA MENSAGEM]</mensagem>
         <usuario>[E-MAIL USUARIO]</usuario>
-        <opcao>
-            <idioma>[SIGLA DO IDIOMA]</idioma>
-            <area_interesse>[AREA DE INTERESSE]</area_interesse>
-            <marca_envio>[MARCA ENVIO]</marca_envio>
-        </opcao>
-        <data_encerramento>[AAAA-MM-DD]</data_encerramento>
+        <data_encerramento>[DATA ENCERRAMENTO]</data_encerramento>
         <nome_remetente>[NOME DO REMETENTE]</nome_remetente>
         <email_remetente>[EMAIL DO REMETENTE]</email_remetente>
         <email_retorno>[EMAIL PARA RETORNO]</email_retorno>
         <assunto>[ASSUNTO]</assunto>
-        <email_termino>[EMAIL DE TERMINO]</email_termino>
-        <solicita_motivo>[S/N]</solicita_motivo>
-        <lista>[NOME DA LISTA]</lista>
-        <filtro type="avancado">
-            <grupo tipo="[GRUPO]">
-                <regra campo="[CAMPO]" operador="[TIPO_DE_OPERADOR]" valor1="[VALOR1]" valor2="[VALOR2]" />
-            </grupo>
-        </filtro>
-        <agendar>
-            <datahora>[DATAHORA AGENDAMENTO]</datahora>
-        </agendar>
     </emkt>
 </main>

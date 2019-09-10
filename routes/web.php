@@ -28,10 +28,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
         
     Route::resource('/instituicoes', 'InstituicaoController');
-
     Route::resource('/acoes', 'Emkt\AcaoController');
-
-    
+    Route::resource('/mensagens', 'Emkt\MensagemController');
 });
 
 Auth::routes();

@@ -59,7 +59,7 @@
                             <div class="form-group row">
                                     <span class="label-text col-md-2 col-form-label text-md-right">URL da Mensagem</span>
                                 <div class="col-md-10">
-                                    <input type="text" name="url_mensagem" class="form-control" id="url_mensagem" maxlenght="16" value="{{ old('url_mensagem') }}">
+                                    <input type="text" name="url_mensagem" class="form-control" id="url_mensagem" value="{{ old('url_mensagem') }}">
                                 </div>
                             </div>
                             <!-- Form Group End -->

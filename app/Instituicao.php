@@ -16,4 +16,9 @@ class Instituicao extends Model
         'email_do_remetente',
         'email_de_retorno',
     ];
+
+    public function mensagens()
+    {
+        return $this->hasMany(Mensagem::class, 'instituicao_id', 'id');
+    }
 }

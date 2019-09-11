@@ -17,7 +17,12 @@ class CreateMensagensTable extends Migration
             $table->increments('id');
             $table->string('titulo');
             $table->string('url');
+            $table->unsignedInteger('instituicao_id');
             $table->timestamps();
+
+            $table->foreign('instituicao_id')
+                ->references('id')
+                ->on('instituicoes');
         });
     }
 

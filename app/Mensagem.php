@@ -10,6 +10,12 @@ class Mensagem extends Model
 
     public $fillable = [
         'titulo',
-        'url'
+        'url',
+        'instituicao_id'
     ];
+
+    public function instituicao()
+    {
+        return $this->belongsTo(Instituicao::class, 'instituicao_id');
+    }
 }

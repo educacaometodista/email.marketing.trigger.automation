@@ -11,7 +11,8 @@ class Mensagem extends Model
     public $fillable = [
         'titulo',
         'url',
-        'instituicao_id'
+        'assunto',
+        'instituicao_id',
     ];
 
     public function instituicao()

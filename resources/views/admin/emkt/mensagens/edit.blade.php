@@ -65,6 +65,16 @@
                             </div>
                             <!-- Form Group End -->
 
+                            
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Assunto</span>
+                                <div class="col-md-10">
+                                    <input type="text" name="assunto" class="form-control" id="assunto" value="{{ $mensagem->assunto }}">
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
                             <!-- Form Group Start -->
                             <div class="form-group row">
                                 <span class="label-text col-md-2 col-form-label text-md-right">Instituição</span>

@@ -37,10 +37,10 @@ class MensagemController extends Controller
      */
     public function store(Request $request)
     {
+        
         $mensagem = new Mensagem;
         $mensagem->titulo = $request->input('titulo');
-        $mensagem->conteudo = $request->input('conteudo');
-
+        $mensagem->url = $request->input('url_mensagem');
         $mensagem->save();
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))
             ->with('success', 'Mensagem criada com sucesso!');
@@ -79,7 +79,7 @@ class MensagemController extends Controller
     {
         $mensagem = Mensagem::findOrFail($id)->update([
             'titulo' => $request->titulo,
-            'conteudo' => $request->conteudo,
+            'url' => $request->url,
             
         ]);
 

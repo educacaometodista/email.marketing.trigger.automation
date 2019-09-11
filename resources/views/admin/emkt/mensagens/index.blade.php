@@ -20,7 +20,7 @@
                             <!-- Page Title End -->
 
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('admin.mensagens.index') }}">Mensagem</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.mensagens.index') }}">Mensagens</a></li>
                                 <li class="breadcrumb-item active"><span>Todas</span></li>
                             </ul>
                         </div>
@@ -82,6 +82,8 @@
                                     <th>ID</th>
                                     <th>Título</th>
                                     <th>URL</th>
+                                    <th>Assunto</th>
+                                    <th>Instituição</th>
                                     <th class="not-sortable">Ações</th>
                                 </tr>
                             </thead>
@@ -92,6 +94,8 @@
                                     <td>{{ $mensagem->id }}</td>
                                     <td>{{ $mensagem->titulo }}</td>
                                     <td>{{ $mensagem->url }}</td>
+                                    <td>{{ $mensagem->assunto }}</td>
+                                    <td>{{ $mensagem->instituicao->nome }}</td>
                                     <td>
                                         <div class="dropleft">
                                             <a href="#" class="btn-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>

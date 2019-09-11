@@ -64,6 +64,21 @@
                             </div>
                             <!-- Form Group End -->
 
+                             <!-- Form Group Start -->
+                             <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Instituição</span>
+
+                                <div class="col-md-10">
+                                    <select name="instituicao" class="form-control" id="instituicao">
+                                    <option></option>
+                                    @foreach($instituicoes as $instituicao)
+                                        <option value="{{ $instituicao->id }}">{{ $instituicao->nome }}</option>
+                                    @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
                             <!--<input type="hidden" name="conteudo" class="form-control" id="conteudo" maxlenght="16" value="{{ old('conteudo') }}">-->
 
                             <div class="row">

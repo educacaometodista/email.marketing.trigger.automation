@@ -65,6 +65,26 @@
                             </div>
                             <!-- Form Group End -->
 
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Instituição</span>
+
+                                <div class="col-md-10">
+                                    <select name="instituicao" class="form-control" id="instituicao">
+                                    <option></option>
+                                    @foreach($instituicoes as $instituicao)
+                                        <option value="{{ $instituicao->id }}"
+                                            @if($instituicao->id == $mensagem->instituicao->id)
+                                                selected
+                                            @endif
+                                            
+                                        >{{ $instituicao->nome }}</option>
+                                    @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
                                     

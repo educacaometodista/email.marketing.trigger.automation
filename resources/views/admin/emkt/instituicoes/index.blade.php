@@ -53,11 +53,11 @@
                     <!-- Records Header Start -->
                     <div class="records--header">
                         <div class="title fa-university">
-                            <h3 class="h3">Instituições 
+                            <h3 class="h3">Instituições
                             <!--<a href="#" class="btn btn-sm btn-outline-info">Manage Orders</a>-->
                         
                             </h3>
-                            <p>6 Instituições encontradas</p>
+                            <p>{{ count($instituicoes) == 1 ? count($instituicoes).' Instituição encontrada' : count($instituicoes).' Instituições encontradas' }}</p>
                         </div>
 
                         <!--<div class="actions">

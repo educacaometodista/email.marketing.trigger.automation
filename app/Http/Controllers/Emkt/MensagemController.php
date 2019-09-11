@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Emkt;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mensagem;
+use App\Instituicao;
 
 class MensagemController extends Controller
 {
@@ -26,7 +27,7 @@ class MensagemController extends Controller
      */
     public function create()
     {
-        return view('admin.emkt.mensagens.create');
+        return view('admin.emkt.mensagens.create', ['instituicoes' => Instituicao::all()]);
     }
 
     /**
@@ -41,6 +42,8 @@ class MensagemController extends Controller
         $mensagem = new Mensagem;
         $mensagem->titulo = $request->input('titulo');
         $mensagem->url = $request->input('url_mensagem');
+        $mensagem->assunto = $request->input('assunto');
+        $mensagem->instituicao_id = $request->input('instituicao');
         $mensagem->save();
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))
             ->with('success', 'Mensagem criada com sucesso!');
@@ -65,7 +68,7 @@ class MensagemController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.emkt.mensagens.edit', ['mensagem' => Mensagem::findOrFail($id)]);
+        return view('admin.emkt.mensagens.edit', ['mensagem' => Mensagem::findOrFail($id), 'instituicoes' => Instituicao::all()]);
     }
 
     /**
@@ -80,6 +83,8 @@ class MensagemController extends Controller
         $mensagem = Mensagem::findOrFail($id)->update([
             'titulo' => $request->titulo,
             'url' => $request->url_mensagem,
+            'assunto' => $request->assunto,
+            'instituicao_id' => $request->instituicao
         ]);
 
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))

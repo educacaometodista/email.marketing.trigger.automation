@@ -79,8 +79,7 @@ class MensagemController extends Controller
     {
         $mensagem = Mensagem::findOrFail($id)->update([
             'titulo' => $request->titulo,
-            'url' => $request->url,
-            
+            'url' => $request->url_mensagem,
         ]);
 
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))

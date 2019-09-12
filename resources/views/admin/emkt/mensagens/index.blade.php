@@ -83,6 +83,7 @@
                                     <th>Título</th>
                                     <th>URL</th>
                                     <th>Assunto</th>
+                                    <th>Tipo de Ação</th>
                                     <th>Instituição</th>
                                     <th class="not-sortable">Ações</th>
                                 </tr>
@@ -95,6 +96,7 @@
                                     <td>{{ $mensagem->titulo }}</td>
                                     <td>{{ $mensagem->url }}</td>
                                     <td>{{ $mensagem->assunto }}</td>
+                                    <td>{{ $mensagem->tipo_de_acao }}</td>
                                     <td>{{ $mensagem->instituicao->nome }}</td>
                                     <td>
                                         <div class="dropleft">

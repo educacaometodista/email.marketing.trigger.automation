@@ -18,6 +18,16 @@
     </div>
 @endif
 
+@if(session()->has('danger'))
+    <div class="alert alert-danger alert-dismissible in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h4><i class="icon fa fa-check"></i> Erro!</h4>
+        {{ session()->get('danger') }}
+    </div>
+@endif
+
 @if($errors->any())
     <div class="alert alert-danger alert-dismissible in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

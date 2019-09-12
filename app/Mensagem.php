@@ -12,6 +12,7 @@ class Mensagem extends Model
         'titulo',
         'url',
         'assunto',
+        'tipo_de_acao',
         'instituicao_id',
     ];
 

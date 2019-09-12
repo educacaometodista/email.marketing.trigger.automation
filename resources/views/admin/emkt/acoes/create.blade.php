@@ -1,7 +1,3 @@
-
-
-
-
 @extends('layouts.dadmin')
 
 @section('content')
@@ -42,7 +38,8 @@
 
                     <div class="panel-content">
                     @include('admin.partials._alert')
-                    
+                    @include('admin.emkt.acoes.partials._alert')
+
                         <form action="{{ route('admin.acoes.store') }}" method="POST">
                             @csrf
                             <!-- Form Group Start -->
@@ -110,9 +107,6 @@
                             </div>
                             <!-- Form Group End -->
 
-
-
-
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
                                     
@@ -120,8 +114,7 @@
                                     <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button>
                                 </div>
                             </div>
-                            
-
+                        
                         </form>
                     </div>
                 </div>

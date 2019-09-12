@@ -27,7 +27,15 @@ class MensagemController extends Controller
      */
     public function create()
     {
-        return view('admin.emkt.mensagens.create', ['instituicoes' => Instituicao::all()]);
+        $tipos_de_acoes = [ 
+            1 => 'Ausentes',
+            2 => 'Inscritos Parciais',
+            3 => 'Lembrete de Prova'
+        ];
+        
+        return view('admin.emkt.mensagens.create', [
+            'instituicoes' => Instituicao::all(),
+            'tipos_de_acoes' => $tipos_de_acoes ]);
     }
 
     /**
@@ -43,6 +51,7 @@ class MensagemController extends Controller
         $mensagem->titulo = $request->input('titulo');
         $mensagem->url = $request->input('url_mensagem');
         $mensagem->assunto = $request->input('assunto');
+        $mensagem->tipo_de_acao = $request->input('tipo_de_acao');
         $mensagem->instituicao_id = $request->input('instituicao');
         $mensagem->save();
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))
@@ -68,7 +77,16 @@ class MensagemController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.emkt.mensagens.edit', ['mensagem' => Mensagem::findOrFail($id), 'instituicoes' => Instituicao::all()]);
+        $tipos_de_acoes = [ 
+            1 => 'Ausentes',
+            2 => 'Inscritos Parciais',
+            3 => 'Lembrete de Prova'
+        ];
+
+        return view('admin.emkt.mensagens.edit', [
+            'mensagem' => Mensagem::findOrFail($id),
+            'instituicoes' => Instituicao::all(), 
+            'tipos_de_acoes' => $tipos_de_acoes ]);
     }
 
     /**
@@ -84,6 +102,7 @@ class MensagemController extends Controller
             'titulo' => $request->titulo,
             'url' => $request->url_mensagem,
             'assunto' => $request->assunto,
+            'tipo_de_acao' => $request->tipo_de_acao,
             'instituicao_id' => $request->instituicao
         ]);
 

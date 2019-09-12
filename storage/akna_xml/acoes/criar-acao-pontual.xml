@@ -2,12 +2,18 @@
 <main>
     <emkt trans="19.05">
         <nome>[TITULO DA ACAO]</nome>
-        <mensagem url="true">[NOME OU LINK DA MENSAGEM]</mensagem>
+        <mensagem url="true">[LINK DA MENSAGEM]</mensagem>
         <usuario>[E-MAIL USUARIO]</usuario>
+        <opcao>
+            <marca_envio>S</marca_envio>
+        </opcao>
         <data_encerramento>[DATA ENCERRAMENTO]</data_encerramento>
         <nome_remetente>[NOME DO REMETENTE]</nome_remetente>
         <email_remetente>[EMAIL DO REMETENTE]</email_remetente>
         <email_retorno>[EMAIL PARA RETORNO]</email_retorno>
         <assunto>[ASSUNTO]</assunto>
+        <agendar>
+            <datahora>[AGENDAMENTO]</datahora>
+        </agendar>
     </emkt>
 </main>

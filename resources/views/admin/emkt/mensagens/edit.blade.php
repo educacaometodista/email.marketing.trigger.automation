@@ -1,7 +1,3 @@
-
-
-
-
 @extends('layouts.dadmin')
 
 @section('content')
@@ -21,7 +17,7 @@
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item active"><span>Novo Cadastro</span></li>
+                        <li class="breadcrumb-item active"><span>Editar</span></li>
                     </ul>
                 </div>
             </div>
@@ -84,7 +80,7 @@
                                         @foreach($tipos_de_acoes as $tipo_de_acao)
                                             <option value="{{ $tipo_de_acao }}"
                                             @if($mensagem->tipo_de_acao == $tipo_de_acao)
-                                                {{ 'selected' }}
+                                                selected
                                             @endif
                                             >{{ $tipo_de_acao }}</option>
                                         @endforeach

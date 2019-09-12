@@ -21,7 +21,7 @@
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item active"><span>Novo Cadastro</span></li>
+                        <li class="breadcrumb-item active"><span>Editar</span></li>
                     </ul>
                 </div>
             </div>

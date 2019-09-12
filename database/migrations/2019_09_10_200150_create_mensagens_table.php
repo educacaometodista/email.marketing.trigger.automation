@@ -18,6 +18,7 @@ class CreateMensagensTable extends Migration
             $table->string('titulo');
             $table->string('url');
             $table->string('assunto');
+            $table->string('tipo_de_acao');
             $table->unsignedInteger('instituicao_id');
             $table->timestamps();
 

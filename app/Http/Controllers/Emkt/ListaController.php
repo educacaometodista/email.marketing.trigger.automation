@@ -51,13 +51,13 @@ class ListaController extends Controller
                 
                 $currentFile = $this->planilha()->load($request->file('import_file')->getRealPath());
                 
-                $this->planilha()->filter($currentFile, $extension, $subject, $date.'-'.$period, 'akna_lists');
+                $this->planilha()->filter($currentFile, $extension, str_replace(' ', '-', strtolower($subject)), $date.'-'.$period, 'akna_lists');
 
                 $codigos_dos_processos = [];
             
                 foreach ($this->instituicoes as $codigo_da_empresa => $instituicao)
                 {
-                    $nome_do_arquivo = strtolower($this->prefixo[$instituicao]).'-'.$subject.'-'.$date.'-'.$period.'.'.$extension;
+                    $nome_do_arquivo = strtolower($this->prefixo[$instituicao]).'-'.strtolower($subject).'-'.$date.'-'.$period.'.'.$extension;
                     $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao]).' - '.str_replace('-', ' ', $subject).' - '.str_replace('-', '/', $date).' - '.str_replace('-', '/',$period);
                     Session::flash('message-'.$this->prefixo[$instituicao], $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao, $codigo_da_empresa));
                 }

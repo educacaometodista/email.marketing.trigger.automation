@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Emkt;
 use App\Acao;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Emkt\ListaController;
+use App\Http\Controllers\PlanilhaController;
+use App\Instituicao;
+use App\Mensagem;
+use Session;
 
 class AcaoController extends Controller
 {
@@ -12,6 +17,12 @@ class AcaoController extends Controller
     {
         return new AknaController;
     }
+
+    public function planilha()
+    {
+        return new PlanilhaController;
+    }
+    
     /**
      * Display a listing of the resource.
      *

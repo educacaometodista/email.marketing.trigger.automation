@@ -40,7 +40,7 @@
                     @include('admin.partials._alert')
                     @include('admin.emkt.acoes.partials._alert')
 
-                        <form action="{{ route('admin.acoes.store') }}" method="POST">
+                        <form action="{{ route('admin.acoes.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <!-- Form Group Start -->
                             <div class="form-group row">
@@ -111,7 +111,7 @@
                                 <div class="col-md-10">
                                     <label class="form-radio">
                                         <input type="radio" name="hasList" value="importar-agora" class="form-radio-input">
-                                        <span class="form-radio-label">Importar Agora</span>
+                                        <span class="form-radio-label" checked>Importar Agora</span>
                                     </label>
                                     <label class="form-radio">
                                         <input type="radio" name="hasList" value="concluido" class="form-radio-input">
@@ -148,11 +148,9 @@
             </div>
         </div>
     </section>
-
     @include('admin.partials._footer')
 </main>
 <!-- Main Container End -->
-
 
 @push('js')
 <script>

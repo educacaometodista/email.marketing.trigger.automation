@@ -115,7 +115,11 @@ class AknaController extends Controller
         $xml_request = str_replace('[EMAIL PARA RETORNO]', $instituicao->email_de_retorno, $xml_request);
         $xml_request = str_replace('[LINK DA MENSAGEM]', $mensagem->url, $xml_request);
         $xml_request = str_replace('[ASSUNTO]', $mensagem->assunto, $xml_request);
-        $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'.$nomes_das_listas[$instituicao->prefixo].'</lista>', $xml_request);
+        
+        if(is_array($nomes_das_listas) && count($nomes_das_listas) > 0)
+            $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'.$nomes_das_listas[$instituicao->prefixo].'</lista>', $xml_request);
+        else
+            $xml_request = str_replace('[NOMES DAS LISTAS]', '', $xml_request);
 
         $xml_response = $this->post([], $xml_request);
 

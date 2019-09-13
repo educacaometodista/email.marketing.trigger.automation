@@ -12,6 +12,7 @@
         <email_remetente>[EMAIL DO REMETENTE]</email_remetente>
         <email_retorno>[EMAIL PARA RETORNO]</email_retorno>
         <assunto>[ASSUNTO]</assunto>
+        [NOMES DAS LISTAS]
         <agendar>
             <datahora>[AGENDAMENTO]</datahora>
         </agendar>

@@ -22,7 +22,7 @@ class AcaoController extends Controller
     {
         return new PlanilhaController;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +41,13 @@ class AcaoController extends Controller
      */
     public function create()
     {
-        return view('admin.emkt.acoes.create');
+        $tipos_de_acoes = [ 
+            1 => 'Ausentes',
+            2 => 'Inscritos Parciais',
+            3 => 'Lembrete de Prova'
+        ];
+
+        return view('admin.emkt.acoes.create', ['instituicoes' => Instituicao::all(), 'tipos_de_acoes' => $tipos_de_acoes]);
     }
 
     /**
@@ -52,16 +58,64 @@ class AcaoController extends Controller
      */
     public function store(Request $request)
     {
-        $acao = new Acao;
-        $acao->titulo = $request->input('titulo');
-        $acao->envio = $request->input('envio');
-        $acao->destinatarios = $request->input('destinatarios');
-        $acao->status = $request->input('status');
-        $acao->mensagem_id = $request->input('mensagem_id');
+        $date = date('d-m-Y', strtotime($request->input('date')));
+        $tipo_de_acao = $request->input('tipo_de_acao');
+        $subject = $tipo_de_acao;
+        $date = str_replace('-', '/', $date);
+        $titulo_da_acao = $request->input('titulo').' '.$date;
+        $agendamento_envio = $request->input('envio');
+        $data_agendamento =  date('Y-m-d', strtotime($request->input('data_agendamento')));
+        $hora_agendamento = $request->input('hora_agendamento');
+        $agendamento_envio = $data_agendamento.' '.$hora_agendamento.':00';
+        $extension = 'csv';
+        $hasAction = true;
+        $hasList = $request->input('hasList');
 
-        $acao->save();
-        return redirect()->route('admin.acoes.edit', compact('acao'))
-            ->with('success', 'Ação atualizada com sucesso!');
+        if($hasList == 'importar-agora')
+        {
+            if($request->hasFile('import_file'))
+            {
+                $currentFile = $this->planilha()->load($request->file('import_file')->getRealPath());
+            }
+    
+            $nomes_das_listas = (new ListaController())->import($currentFile, $extension, $subject, $date, $hasAction);
+        } else {
+            $nomes_das_listas = null;
+        }
+
+        $instituicoes = Instituicao::all();
+        $instituicoes_selecionadas = [];
+
+        foreach ($instituicoes as $instituicao)
+        {
+            $mensagem = Mensagem::all()
+                ->where('tipo_de_acao', '=', $tipo_de_acao)
+                ->where('instituicao_id', '=', $instituicao->id)
+                ->first();
+                
+            if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
+            {
+                $status = $this->aknaAPI()->criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas);
+                    
+                if($status != 'Já existe uma campanha cadastrada com esse título!')
+                {
+                    $acao = new Acao;
+                    $acao->titulo = $titulo_da_acao;
+                    $acao->envio = $agendamento_envio;
+                    $acao->destinatarios = 0;
+                    $acao->status = $status;
+                    $acao->mensagem_id = $mensagem->id;
+                    $acao->save();
+
+                } else {
+                    return back()->with('danger', 'Já existe uma campanha cadastrada com esse título!');
+                }
+                    
+                Session::flash('message-'.$instituicao->prefixo, $status);
+            }
+        }
+
+        return back()->with('success', 'Ação criada com sucesso!');
     }
 
     /**
@@ -75,9 +129,4 @@ class AcaoController extends Controller
         return view('admin.emkt.acao.show', ['acao' => Acao::findOrFail($id)]);
     }
 
-    
-
-    
-
-    
 }

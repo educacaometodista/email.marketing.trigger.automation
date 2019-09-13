@@ -86,7 +86,7 @@
 <script src="{{ asset('vendor/dadmin/assets/js/sweetalert.min.js') }}"></script>
 <script src="{{ asset('vendor/dadmin/assets/js/sweetalert-init.js') }}"></script>
 
-@stack('render-msg')
+@stack('js')
 
 
 

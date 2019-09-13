@@ -107,6 +107,32 @@
                             </div>
                             <!-- Form Group End -->
 
+                            <div class="form-group row"> <span class="label-text col-md-2 col-form-label text-md-right py-0">Situação da Lista</span>
+                                <div class="col-md-10">
+                                    <label class="form-radio">
+                                        <input type="radio" name="hasList" value="importar-agora" class="form-radio-input">
+                                        <span class="form-radio-label">Importar Agora</span>
+                                    </label>
+                                    <label class="form-radio">
+                                        <input type="radio" name="hasList" value="concluido" class="form-radio-input">
+                                        <span class="form-radio-label">Concluído</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Form Group Start -->
+                            <div id="input-lista" class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Arquivo</span>
+
+                                <div class="col-md-10">
+                                    <label class="custom-file">
+                                        <input type="file" name="import_file" class="custom-file-input" id="arquivo">
+                                        <span class="custom-file-label">Selecione um arquivo</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
                                     
@@ -126,5 +152,19 @@
     @include('admin.partials._footer')
 </main>
 <!-- Main Container End -->
-@endsection
 
+
+@push('js')
+<script>
+    $('input[name="hasList"]').click(function () {
+        if($(this).val() == 'importar-agora')
+        {
+            $('#input-lista').removeClass('d-none')
+        } else {
+            $('#input-lista').addClass('d-none')
+        }
+    })
+</script>
+@endpush
+
+@endsection

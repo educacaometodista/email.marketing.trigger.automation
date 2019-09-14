@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Emkt;
 
 use App\Instituicao;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class InstituicaoController extends Controller
 {

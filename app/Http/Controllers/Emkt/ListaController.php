@@ -31,6 +31,11 @@ class ListaController extends Controller
 
     public function index()
     {
+        return view('admin.emkt.listas.index');
+    }
+
+    public function create()
+    {
         return view('admin.emkt.listas.create')->with(['instituicoes' => $this->prefixo]);
     }
 

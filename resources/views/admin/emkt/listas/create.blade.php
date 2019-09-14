@@ -1,7 +1,3 @@
-
-
-
-
 @extends('layouts.dadmin')
 
 @section('content')
@@ -64,7 +60,7 @@
                         @endforeach
                     @endif
 
-                        <form action="{{ route('admin.listas.importar.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.listas.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <!-- Form Group Start -->

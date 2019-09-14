@@ -54,7 +54,7 @@
             </li>
 
             <li>
-                <a href="#">Cadastros</a>
+                <a href="#">E-Mail Marketing</a>
 
                 <ul>
                     <li>
@@ -68,14 +68,19 @@
                             <li><a href="{{ route('admin.instituicoes.create') }}">Novo Cadastro</a></li>
                         </ul>
                     </li>
-                   
-                </ul>
-            </li>
 
-            <li>
-                <a href="#">E-Mail Marketing</a>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th"></i>
+                            <span>Mensagens</span>
+                        </a>
 
-                <ul>
+                        <ul>
+                            <li><a href="{{ route('admin.instituicoes.index' ) }}">Todas</a></li>
+                            <li><a href="{{ route('admin.instituicoes.create') }}">Novo Cadastro</a></li>
+                        </ul>
+                    </li>
+
                     <li>
                         <a href="#">
                             <i class="fa fa-th"></i>
@@ -84,9 +89,22 @@
 
                         <ul>
                             <li><a href="#">Todas</a></li>
-                            <li><a href="#">Importar Arquivo</a></li>
+                            <li><a href="{{ route('admin.listas.create') }}">Importar</a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th"></i>
+                            <span>Ações</span>
+                        </a>
+
+                        <ul>
+                            <li><a href="{{ route('admin.acoes.index') }}">Todas</a></li>
+                            <li><a href="{{ route('admin.acoes.create') }}">Criar Nova</a></li>
+                        </ul>
+                    </li>
+                   
                 </ul>
             </li>
 

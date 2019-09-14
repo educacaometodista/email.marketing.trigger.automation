@@ -22,14 +22,13 @@ require 'auth/admin.php';
 require 'auth/superadmin.php';
 
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::prefix('listas')->name('listas.')->namespace('Emkt')->group(function () {
-        Route::resource('/importar', 'ListaController');
-    });
-        
+Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
+
+    Route::resource('/listas', 'ListaController');
+    Route::resource('/acoes', 'AcaoController');
+    Route::resource('/mensagens', 'MensagemController');        
     Route::resource('/instituicoes', 'InstituicaoController');
-    Route::resource('/acoes', 'Emkt\AcaoController');
-    Route::resource('/mensagens', 'Emkt\MensagemController');
+    Route::resource('/acoes', 'AcaoController');
 });
 
 Auth::routes();

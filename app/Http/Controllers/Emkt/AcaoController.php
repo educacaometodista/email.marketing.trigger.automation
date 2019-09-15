@@ -104,6 +104,8 @@ class AcaoController extends Controller
                     $acao->envio = $agendamento_envio;
                     $acao->destinatarios = 0;
                     $acao->status = $status;
+                    $acao->agendamento = $agendamento_envio;
+                    $acao->usuario = Auth::user()->id;
                     $acao->mensagem_id = $mensagem->id;
                     $acao->save();
 

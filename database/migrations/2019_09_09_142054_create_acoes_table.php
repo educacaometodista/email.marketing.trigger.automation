@@ -19,6 +19,8 @@ class CreateAcoesTable extends Migration
             $table->string('envio');
             $table->integer('destinatarios');
             $table->string('status');
+            $table->string('agendamento');
+            $table->string('usuario');
             $table->unsignedInteger('mensagem_id');
             $table->timestamps();
         });

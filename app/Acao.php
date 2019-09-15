@@ -13,6 +13,8 @@ class Acao extends Model
         'envio',
         'destinatarios',
         'status',
+        'agendamento',
+        'usuario',
         'mensagem_id'
     ];
 }

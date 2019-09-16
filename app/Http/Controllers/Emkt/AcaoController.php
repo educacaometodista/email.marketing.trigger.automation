@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Emkt\ListaController;
 use App\Http\Controllers\PlanilhaController;
+use Illuminate\Support\Facades\Auth;
 use App\Instituicao;
 use App\Mensagem;
 use Session;
@@ -88,20 +89,41 @@ class AcaoController extends Controller
         $hasAction = true;
         $hasList = $request->input('hasList');
 
-        if($hasList == 'importar-agora')
-        {
-            if($request->hasFile('import_file'))
-            {
-                $currentFile = $this->planilha()->load($request->file('import_file')->getRealPath());
-            }
-    
-            $nomes_das_listas = (new ListaController())->import($currentFile, $extension, $subject, $date, $hasAction);
-        } else {
-            $nomes_das_listas = null;
-        }
-
         $instituicoes = Instituicao::all();
         $instituicoes_selecionadas = [];
+
+
+       
+            //importar listas
+            if($hasList == 'importar-agora')
+            {
+                if($request->hasFile('import_file'))
+                {
+                    $currentFile = $this->planilha()->load($request->file('import_file')->getRealPath());
+                }
+        
+                $nomes_das_listas = (new ListaController())->import($currentFile, $extension, $subject, $date, $hasAction);
+
+            } else {
+                $nomes_das_listas = null;
+            }
+
+
+        $acoes_a_criar = [];
+
+        foreach($instituicoes as $instituicao)
+        {
+            $status = $this->aknaAPI()->consultarAcao($titulo_da_acao, $instituicao);
+
+            if($status == 'Ação não encontrada' && array_key_exists($instituicao->prefixo, $nomes_das_listas)) {
+                $acoes_a_criar[$instituicao->prefixo] = $nomes_das_listas[$instituicao->prefixo];
+            } else {
+                Session::flash('message-danger-'.$instituicao->prefixo, 'Já existe uma campanha cadastrada com o título "'.$titulo_da_acao.'".');
+            }
+        }
+
+
+        $status = null;
 
         foreach ($instituicoes as $instituicao)
         {
@@ -109,32 +131,44 @@ class AcaoController extends Controller
                 ->where('tipo_de_acao', '=', $tipo_de_acao)
                 ->where('instituicao_id', '=', $instituicao->id)
                 ->first();
-                
-            if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
-            {
-                $status = $this->aknaAPI()->criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas);
-                    
-                if($status != 'Já existe uma campanha cadastrada com esse título!')
-                {
-                    $acao = new Acao;
-                    $acao->titulo = $titulo_da_acao;
-                    $acao->envio = $agendamento_envio;
-                    $acao->destinatarios = 0;
-                    $acao->status = $status;
-                    $acao->agendamento = $agendamento_envio;
-                    $acao->usuario = Auth::user()->id;
-                    $acao->mensagem_id = $mensagem->id;
-                    $acao->save();
 
-                } else {
-                    return back()->with('danger', 'Já existe uma campanha cadastrada com esse título!');
+            if(isset($acoes_a_criar[$instituicao->prefixo]))
+            {
+                if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
+                {
+                    $status = $this->aknaAPI()->criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas);
+                        
+                    if($status != 'Já existe uma campanha cadastrada com esse título!')
+                    {
+                        $acao = new Acao;
+                        $acao->titulo = $titulo_da_acao;
+                        $acao->envio = $agendamento_envio;
+                        $acao->destinatarios = 0;
+                        $acao->status = $status;
+                        $acao->agendamento = $agendamento_envio;
+                        $acao->usuario = Auth::user()->id;
+                        $acao->mensagem_id = $mensagem->id;
+                        $acao->save();
+    
+                    } else {
+                        Session::flash('message-danger-'.$instituicao->prefixo, 'Já existe uma campanha cadastrada com o título "'.$titulo_da_acao.'".');
+
+                    }
+                        
+                    Session::flash('success', "Ação criada com sucesso em $instituicao->nome!");
+
                 }
-                    
-                Session::flash('message-'.$instituicao->prefixo, $status);
             }
+
+
+
+            
         }
 
-        return back()->with('success', 'Ação criada com sucesso!');
+        return back();
+
+
+
     }
 
     /**

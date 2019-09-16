@@ -58,6 +58,18 @@ class AcaoController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'date' => 'required|date',
+            'tipo_de_acao' => 'required|min:2|max:30',
+            'titulo' => 'required|min:2|max:30',
+            'data_agendamento' => 'required|date',
+            'hora_agendamento'=> 'required',
+            'hasList' => 'required',
+            'import_file' => 'required|file|mimes:xlsx,csv,txt'
+        ]);
+
+
         $date = date('d-m-Y', strtotime($request->input('date')));
         $tipo_de_acao = $request->input('tipo_de_acao');
         $subject = $tipo_de_acao;

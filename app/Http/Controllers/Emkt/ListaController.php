@@ -41,6 +41,12 @@ class ListaController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'import_file' => 'required|file|mimes:xlsx,csv,txt',
+            'subject' => 'required|min:2|max:30|string',
+            'date' => 'required|date'
+        ]);
+
         if($request->hasFile('import_file'))
         {
             $extension = 'csv';
@@ -59,7 +65,7 @@ class ListaController extends Controller
     public function import($currentFile, $extension, $subject, $date, $hasAction)
     {
         $explode_date = explode('/', $date);
-
+        $explode_date = explode('-', $date);
         $day = $explode_date[0];
         $month = $explode_date[1];
         $period = $explode_date[2];

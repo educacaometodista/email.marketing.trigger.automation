@@ -127,6 +127,20 @@ class AknaController extends Controller
 
         $xml = new \SimpleXMLElement($xml_response);
 
+        return str_replace('.', "$instituicao->nome!", $xml->EMKT->RETURN[0]);
+    }
+
+    public function consultarAcao($titulo_da_acao, $instituicao)
+    {
+        $this->data['Client'] = $instituicao->codigo_da_empresa;
+
+        $xml_request = $this->getXml('acoes/informacoes-da-acao');
+        $xml_request = str_replace('[TITULO DA ACAO]', $titulo_da_acao, $xml_request);
+       
+        $xml_response = $this->post([], $xml_request);
+
+        $xml = new \SimpleXMLElement($xml_response);
+
         return str_replace('.', '!', $xml->EMKT->RETURN[0]);
     }
 }

@@ -35,7 +35,7 @@ class PlanilhaController extends Controller
 
     public function getFiles($storage_path)
     {
-        return glob(storage_path("$storage_path*"));
+        return glob(public_path("$storage_path*"));
     }
 
     public function clearStorage($path)

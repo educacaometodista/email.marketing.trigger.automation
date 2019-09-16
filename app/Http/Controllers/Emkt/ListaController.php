@@ -59,7 +59,7 @@ class ListaController extends Controller
             return $this->import($currentFile, $extension, $subject, $date, $hasAction);
 
         } else {
-            return back()->with('message', 'Você precisa importar um documento!');
+            return back()->with('danger', 'Você precisa importar um documento!');
         }
     }
 

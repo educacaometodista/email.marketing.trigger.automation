@@ -23,6 +23,8 @@ class AknaController extends Controller
         $this->fileStorage = $protocol.$host."/akna_lists/";
         $this->xmlPath = storage_path().'/akna_xml';
         $this->data = include __DIR__.'/user.php';
+
+        return $this->middleware('auth:admin');
     }
 
     public function getXml($file)
@@ -117,7 +119,7 @@ class AknaController extends Controller
         $xml_request = str_replace('[ASSUNTO]', $mensagem->assunto, $xml_request);
         
         if(is_array($nomes_das_listas) && count($nomes_das_listas) > 0)
-            $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'.$nomes_das_listas[$instituicao->prefixo].'</lista>', $xml_request);
+            $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'.'lista-de-teste'.'</lista>', $xml_request);
         else
             $xml_request = str_replace('[NOMES DAS LISTAS]', '', $xml_request);
 

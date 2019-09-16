@@ -9,6 +9,10 @@ use App\Instituicao;
 
 class MensagemController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *

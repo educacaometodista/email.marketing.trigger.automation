@@ -53,7 +53,7 @@ class MensagemController extends Controller
         $request->validate([
             'titulo' => 'required|min:2|max:30|string|unique:mensagens',
             'url_da_imagem' => 'required|min:10|max:10000|string',
-            'assunto' => 'required|min:2|max:80|string',
+            'assunto' => 'required|min:2|max:200|string',
             'tipo_de_acao' => 'required|min:2|max:30|string',
             'instituicao' => 'required|min:1|max:40|string'
         ]);

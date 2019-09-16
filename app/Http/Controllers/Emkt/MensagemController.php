@@ -53,14 +53,14 @@ class MensagemController extends Controller
         $request->validate([
             'titulo' => 'required|min:2|max:30|string|unique:mensagens',
             'url_da_imagem' => 'required|min:10|max:10000|string',
-            'assunto' => 'required|min:2|max:30|string',
+            'assunto' => 'required|min:2|max:80|string',
             'tipo_de_acao' => 'required|min:2|max:30|string',
             'instituicao' => 'required|min:1|max:40|string'
         ]);
         
         $mensagem = new Mensagem;
         $mensagem->titulo = $request->input('titulo');
-        $mensagem->url = $request->input('url_mensagem');
+        $mensagem->url = $request->input('url_da_imagem');
         $mensagem->assunto = $request->input('assunto');
         $mensagem->tipo_de_acao = $request->input('tipo_de_acao');
         $mensagem->instituicao_id = $request->input('instituicao');
@@ -112,14 +112,14 @@ class MensagemController extends Controller
         $request->validate([
             'titulo' => 'required|min:2|max:30|string|unique:mensagens',
             'url_da_imagem' => 'required|min:10|max:10000|string',
-            'assunto' => 'required|min:2|max:30|string',
+            'assunto' => 'required|min:2|max:80|string',
             'tipo_de_acao' => 'required|min:2|max:30|string',
             'instituicao' => 'required|min:1|max:40|string'
         ]);
         
         $mensagem = Mensagem::findOrFail($id)->update([
             'titulo' => $request->titulo,
-            'url' => $request->url_mensagem,
+            'url' => $request->url_da_imagem,
             'assunto' => $request->assunto,
             'tipo_de_acao' => $request->tipo_de_acao,
             'instituicao_id' => $request->instituicao

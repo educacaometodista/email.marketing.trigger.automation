@@ -65,8 +65,9 @@ class ListaController extends Controller
 
     public function import($currentFile, $extension, $subject, $date, $hasAction)
     {
-        $explode_date = explode('/', $date);
-        $explode_date = explode('-', $date);
+        $explode_date = explode('-', str_replace('/', '-', $date));
+
+
         $day = $explode_date[0];
         $month = $explode_date[1];
         $period = $explode_date[2];
@@ -75,16 +76,21 @@ class ListaController extends Controller
         if(isset($this->instituicoes))
         {
             $this->planilha()->filter($currentFile, $extension, str_replace(' ', '-', strtolower($subject)), $day.'-'.$month.'-'.$period, 'akna_lists');
+            $all_files = $this->planilha()->getFiles('akna_lists');
 
             $codigos_dos_processos = [];
             $nomes_das_listas = [];
         
-            foreach ($this->instituicoes as $codigo_da_empresa => $instituicao)
+            foreach($this->instituicoes as $codigo_da_empresa => $instituicao)
             {
                 $nome_do_arquivo = strtolower($this->prefixo[$instituicao]).'-'.strtolower($subject).'-'.$day.'-'.$month.'-'.$period.'.'.$extension;
-                $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao]).' - '.str_replace('-', ' ', $subject).' - '.$day.'/'.$month.' - '.str_replace('-', '/',$period);
-                Session::flash('message-'.$this->prefixo[$instituicao], $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao, $codigo_da_empresa));
-                $nomes_das_listas[$this->prefixo[$instituicao]] = $nome_da_lista;
+                
+                if(in_array(public_path("akna_lists/$nome_do_arquivo"), $all_files))
+                {
+                    $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao]).' - '.str_replace('-', ' ', $subject).' - '.$day.'/'.$month.' - '.str_replace('-', '/',$period);
+                    Session::flash('message-'.$this->prefixo[$instituicao], $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao, $codigo_da_empresa));
+                    $nomes_das_listas[$this->prefixo[$instituicao]] = $nome_da_lista;
+                }
             }
 
             return $hasAction == true ? $nomes_das_listas : back();

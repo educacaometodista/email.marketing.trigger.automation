@@ -46,6 +46,13 @@ class MensagemController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'titulo' => 'required|min:2|max:30|string|unique:mensagens',
+            'url_da_imagem' => 'required|min:10|max:10000|string',
+            'assunto' => 'required|min:2|max:30|string',
+            'tipo_de_acao' => 'required|min:2|max:30|string',
+            'instituicao' => 'required|min:1|max:40|string'
+        ]);
         
         $mensagem = new Mensagem;
         $mensagem->titulo = $request->input('titulo');
@@ -98,6 +105,14 @@ class MensagemController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'titulo' => 'required|min:2|max:30|string|unique:mensagens',
+            'url_da_imagem' => 'required|min:10|max:10000|string',
+            'assunto' => 'required|min:2|max:30|string',
+            'tipo_de_acao' => 'required|min:2|max:30|string',
+            'instituicao' => 'required|min:1|max:40|string'
+        ]);
+        
         $mensagem = Mensagem::findOrFail($id)->update([
             'titulo' => $request->titulo,
             'url' => $request->url_mensagem,

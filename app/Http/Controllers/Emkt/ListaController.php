@@ -17,6 +17,7 @@ class ListaController extends Controller
     {
         $this->instituicoes = Instituicao::all()->pluck('nome', 'codigo_da_empresa')->toArray();
         $this->prefixo = Instituicao::all()->pluck('prefixo', 'nome')->toArray();
+        return $this->middleware('auth:admin');        
     }
 
     public function planilha()

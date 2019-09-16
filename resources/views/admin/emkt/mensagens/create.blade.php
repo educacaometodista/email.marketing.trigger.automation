@@ -59,7 +59,7 @@
                             <div class="form-group row">
                                     <span class="label-text col-md-2 col-form-label text-md-right">URL da Mensagem</span>
                                 <div class="col-md-10">
-                                    <input type="text" name="url_mensagem" class="form-control" id="url_mensagem" value="{{ old('url_mensagem') }}">
+                                    <input type="text" name="url_da_imagem" class="form-control" id="url_da_imagem" value="{{ old('url_da_imagem') }}">
                                 </div>
                             </div>
                             <!-- Form Group End -->
@@ -157,7 +157,7 @@
         };
     }
 
-    document.getElementById('url_mensagem').onchange = function() {
+    document.getElementById('url_da_imagem').onchange = function() {
         renderMsg(this.value);
     }
 

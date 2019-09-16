@@ -110,7 +110,7 @@ class InstituicaoController extends Controller
             'codigo_da_empresa' => $request->codigo_da_empresa,
             'nome_do_remetente' => $request->nome_do_remetente,
             'email_do_remetente' => $request->email_do_remetente,
-            'email_de_retorno' => $request->emauil_de_retorno
+            'email_de_retorno' => $request->email_de_retorno
         ]);
 
         return redirect()->route('admin.instituicoes.edit', compact('instituicao'))

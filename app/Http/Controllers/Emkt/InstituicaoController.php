@@ -37,6 +37,15 @@ class InstituicaoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nome' => 'required|min:2|max:30|string|unique:instituicoes',
+            'prefixo' => 'required|min:2|max:16/string|unique:instituicoes',
+            'nome_do_remetente' => 'required|min:2|max:30',
+            'email_do_remetente' => 'required|min:4|max:40|email',
+            'email_de_retorno' => 'required|min:4|max:40|email',
+            'codigo_da_empresa' => 'required|min:4|max:5|unique:instituicoes'
+        ]);
+
         $instituicao = new Instituicao;
         $instituicao->nome = $request->input('nome');
         $instituicao->prefixo = $request->input('prefixo');
@@ -81,6 +90,15 @@ class InstituicaoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nome' => 'required|min:2|max:30|string|unique:instituicoes',
+            'prefixo' => 'required|min:2|max:16|string|unique:instituicoes',
+            'nome_do_remetente' => 'required|min:2|max:30',
+            'email_do_remetente' => 'required|min:4|max:40|email',
+            'email_de_retorno' => 'required|min:4|max:40|email',
+            'codigo_da_empresa' => 'required|min:4|max:5|unique:instituicoes'
+        ]);
+
         $instituicao = Instituicao::findOrFail($id)->update([
             'nome' => $request->nome,
             'prefixo' => $request->prefixo,

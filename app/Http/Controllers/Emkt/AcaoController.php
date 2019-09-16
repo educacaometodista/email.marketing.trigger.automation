@@ -13,6 +13,11 @@ use Session;
 
 class AcaoController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('auth:admin');
+    }
+    
     public function aknaAPI()
     {
         return new AknaController;

@@ -17,7 +17,8 @@
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item active"><span>Novo Cadastro</span></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Lista de Contatos</a></li>
+                        <li class="breadcrumb-item active"><span>Importar Lista</span></li>
                     </ul>
                 </div>
             </div>
@@ -80,7 +81,7 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Data do Documento</span>
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Incluir Data</span>
                                 <div class="col-md-10">
                                     <input type="date" name="date" class="form-control" id="data-do-documento">
                                 </div>

@@ -29,7 +29,7 @@
                                 <!-- Logo End -->
 
                                 <form action="{{ route('admin.login') }}" method="POST">
-                                    <label class="m-account--title text-loginarea">ÁREA DE LOGIN</label>
+                                    <label class="m-account--title text-admin">ÁREA DE LOGIN</label>
                                     @csrf
 
                                     <div class="form-group">
@@ -69,17 +69,8 @@
                                             </a>
                                         @endif
 
-                                        <button type="submit" class="btn btn-rounded btn-warning">Login</button>
+                                        <button type="submit" class="btn btn-rounded btn-primary">Login</button>
                                     </div>
-
-                                    <!--<div class="m-account--alt">
-                                        <p><span>OR LOGIN WITH</span></p>
-
-                                        <div class="btn-list">
-                                            <a href="#" class="btn btn-rounded btn-warning">Facebook</a>
-                                            <a href="#" class="btn btn-rounded btn-warning">Google</a>
-                                        </div>
-                                    </div>-->
 
                                     <div class="m-account--footer">
                                         <p>&copy; 2019 Educação Metodista</p>

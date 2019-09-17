@@ -6881,3 +6881,19 @@ div#recordsListView_paginate {
 .m-account--content-register {
     min-width: 100%;
 }
+
+.esqueceu-superadmin{
+    color:#cccccc;
+}
+
+.esqueceu-superadmin:hover{
+    color:#2bb3c0;
+}
+
+.esqueceu-admin{
+    color:#cccccc;
+}
+
+.esqueceu-admin:hover{
+    color:#745faa;
+}

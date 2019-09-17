@@ -6,11 +6,9 @@
         <div class="m-account-w" data-bg-img="{{ url('vendor/dadmin/assets/img/account/wrapper-bg.jpg') }}">
             <div class="m-account">
                 <div class="row no-gutters">
-                    <div class="col-md-12">
-                        <!-- Login Content Start -->
-                        <div class="m-account--content-w" data-bg-img="{{ url('vendor/dadmin/assets/img/account/content-bg.jpg') }}">
-                            <div class="m-account--content-register">
-                            <div class="m-account--form-w-register">
+                    <div class="col-md-6">
+                        <!-- Login Form Start -->
+                        <div class="m-account--form-w">
                             <div class="m-account--form">
                                 <!-- Logo Start -->
                                 <div class="logo">
@@ -19,16 +17,16 @@
                                 <!-- Logo End -->
 
                                 <form action="{{ route('admin.login') }}" method="POST">
-                                    <label class="m-account--title text-loginarea">CADASTRO DE ADMINISTRADOR</label>
+                                    <label class="m-account--title text-admin">REGISTRO DE ADMINISTRADOR</label>
                                     @csrf
 
                                     <div class="form-group">
                                         <div class="input-group">
                                         <div class="input-group-prepend">
-                                                <i class="fas fa-at"></i>
+                                                <i class="fas fa-user"></i>
                                             </div>
 
-                                            <input placeholder="Digite o Nome" id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus autocomplete="off">
+                                            <input placeholder="Digite o nome" id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus autocomplete="off">
                                             @if ($errors->has('email'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('email') }}</strong>
@@ -36,7 +34,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <div class="input-group">
                                         <div class="input-group-prepend">
@@ -55,10 +53,10 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                         <div class="input-group-prepend">
-                                                <i class="fas fa-user"></i>
+                                            <i class="fas fa-at"></i>
                                             </div>
 
-                                            <input placeholder="Digite o E-mail" id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus autocomplete="off">
+                                            <input placeholder="Digite o e-mail" id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus autocomplete="off">
                                             @if ($errors->has('email'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('email') }}</strong>
@@ -98,17 +96,8 @@
                                     </div>
 
                                     <div class="m-account--actions">
-                                        <button type="submit" class="btn btn-rounded btn-block btn-warning">Cadastrar</button>
+                                        <button type="submit" class="btn btn-rounded btn-primary">CADASTRAR</button>
                                     </div>
-
-                                    <!--<div class="m-account--alt">
-                                        <p><span>OR LOGIN WITH</span></p>
-
-                                        <div class="btn-list">
-                                            <a href="#" class="btn btn-rounded btn-warning">Facebook</a>
-                                            <a href="#" class="btn btn-rounded btn-warning">Google</a>
-                                        </div>
-                                    </div>-->
 
                                     <div class="m-account--footer">
                                         <p>&copy; 2019 Educação Metodista</p>
@@ -117,14 +106,17 @@
                             </div>
                         </div>
                         <!-- Login Form End -->
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Login Content Start -->
+                        <div class="m-account--content-w" data-bg-img="{{ url('vendor/dadmin/assets/img/account/content-bg-admin.jpg') }}">
+                            <div class="m-account--content">
+                                <h2 class="h2">Cadastre um novo Administrador!</h2>
+                                <p>Automação da régua manual de captação para uso interno da Gerência de Comunicação e Marketing.</p>
+                                <a href="{{ route('user.login') }}" class="btn btn-rounded">Acesso de Usuário</a>
                             </div>
                         </div>
                         <!-- Login Content End -->
-                    </div>
-
-                    <div class="col-md-6">
-                        <!-- Login Form Start -->
-                        
                     </div>
                 </div>
             </div>

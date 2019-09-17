@@ -35,10 +35,10 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
     Route::resource('/acoes', 'AcaoController');
 });
 
-// Redireciona o usuário deslogado que tentar se registrar para a página de Login
-Route::get('/user/register', function() {
-    return redirect('/user/login');
-});
+// // Redireciona o usuário deslogado que tentar se registrar para a página de Login
+// Route::get('/user/register', function() {
+//     return redirect('/user/login');
+// });
 
 Auth::routes();
 

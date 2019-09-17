@@ -17,7 +17,8 @@
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item active"><span>Novo Cadastro</span></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Ações</a></li>
+                        <li class="breadcrumb-item active"><span>Criar Nova</span></li>
                     </ul>
                 </div>
             </div>

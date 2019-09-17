@@ -13,6 +13,6 @@ yarn-error.log
 #Remover arquivos abertos
 *.psd
 
-# Remover ao fim do projeto
-/database/seeds/SuperadminsSeeder.php
-/database/seeds/AdminsTableSeeder.php
+# # Remover ao fim do projeto
+# /database/seeds/SuperadminsSeeder.php
+# /database/seeds/AdminsTableSeeder.php

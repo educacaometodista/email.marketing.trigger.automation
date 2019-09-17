@@ -12,6 +12,7 @@
                             <div class="m-account--content">
                                 <h2 class="h2">Seja bem-vindo, Administrador!</h2>
                                 <p>Automação da régua manual de captação para uso interno da Gerência de Comunicação e Marketing.</p>
+                                <a href="{{ route('user.login') }}" class="btn btn-rounded">Acessar como Usuário</a>
                             </div>
                         </div>
                         <!-- Login Content End -->

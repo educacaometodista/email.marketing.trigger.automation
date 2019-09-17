@@ -107,7 +107,7 @@ class PlanilhaController extends Controller
     public function filter($currentFile, $extension, $subject, $date, $storage_path)
     {
 
-        $this->validator($subject);
+        $this->validator($subject, $currentFile);
         
         $currentFile = $currentFile->toArray();
         

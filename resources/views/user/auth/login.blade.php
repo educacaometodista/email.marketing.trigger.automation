@@ -29,7 +29,7 @@
                                 <!-- Logo End -->
 
                                 <form action="{{ route('user.login') }}" method="POST">
-                                    <label class="m-account--title text-loginarea">ÁREA DE LOGIN</label>
+                                    <label class="m-account--title text-admin">ÁREA DE LOGIN</label>
                                     @csrf
 
                                     <div class="form-group">
@@ -69,7 +69,7 @@
                                             </a>
                                         @endif
 
-                                        <button type="submit" class="btn btn-rounded btn-warning">Login</button>
+                                        <button type="submit" class="btn btn-rounded btn-primary">Login</button>
                                     </div>
 
                                     <!--<div class="m-account--alt">

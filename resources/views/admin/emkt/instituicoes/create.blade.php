@@ -21,8 +21,9 @@
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item active"><span>Novo Cadastro</span></li>
-                    </ul>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Instituições</a></li>
+                                <li class="breadcrumb-item active"><span>Novo Cadastro</span></li>
+                            </ul>
                 </div>
             </div>
         </div>
@@ -47,7 +48,7 @@
                             @csrf
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Nome</span>
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Nome da Instituição</span>
                                 <div class="col-md-10">
                                     <input type="text" name="nome" class="form-control" id="nome" maxlenght="20" value="{{ old('nome') }}">
                                 </div>
@@ -84,7 +85,7 @@
 
                              <!-- Form Group Start -->
                              <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Email do Remetente</span>
+                                    <span class="label-text col-md-2 col-form-label text-md-right">E-mail do Remetente</span>
                                 <div class="col-md-10">
                                     <input type="text" name="email_do_remetente" class="form-control" id="email_do_remetente" maxlenght="26" value="{{ old('email_do_remetente') }}">
                                 </div>
@@ -93,7 +94,7 @@
 
                              <!-- Form Group Start -->
                              <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Email de Retorno</span>
+                                    <span class="label-text col-md-2 col-form-label text-md-right">E-mail de Retorno</span>
                                 <div class="col-md-10">
                                     <input type="text" name="email_de_retorno" class="form-control" id="email_de_retorno" maxlenght="26" value="{{ old('email_de_retorno') }}">
                                 </div>

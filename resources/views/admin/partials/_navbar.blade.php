@@ -33,19 +33,19 @@
 
     <div class="navbar--nav ml-auto">
         <ul class="nav">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fa fa-bell"></i>
-                    <!--<span class="badge text-white bg-blue">7</span>-->
+                    <span class="badge text-white bg-blue">7</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fa fa-envelope"></i>
-                    <!--<span class="badge text-white bg-blue">4</span>-->
+                    <span class="badge text-white bg-blue">4</span>
                 </a>
-            </li>
+            </li> -->
 
             <!-- Nav Language Start -->
             <!--<li class="nav-item dropdown nav-language">
@@ -87,8 +87,8 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="far fa-user"></i>Perfil</a></li>
-                    <li><a href="#"><i class="far fa-envelope"></i>Inbox</a></li>
+                    <li><a href="#"><i class="far fa-user"></i>Minha Conta</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i>Cadastrar Usuário</a></li>
                     <li><a href="#"><i class="fa fa-cog"></i>Configurações</a></li>
                     <li class="dropdown-divider"></li>
                     <li><a href="#">

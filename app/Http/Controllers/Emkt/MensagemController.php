@@ -32,9 +32,11 @@ class MensagemController extends Controller
     public function create()
     {
         $tipos_de_acoes = [ 
-            1 => 'Ausentes',
-            2 => 'Inscritos Parciais',
-            3 => 'Lembrete de Prova'
+            'Ausentes' => 'Ausentes',
+            'Inscritos Parciais' => 'Inscritos Parciais',
+            'Inscritos Parciais Ead' => 'Inscritos Parciais Ead',
+            'Lembrete de Prova' => 'Lembrete de Prova',
+            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados'
         ];
         
         return view('admin.emkt.mensagens.create', [
@@ -89,9 +91,11 @@ class MensagemController extends Controller
     public function edit($id)
     {
         $tipos_de_acoes = [ 
-            1 => 'Ausentes',
-            2 => 'Inscritos Parciais',
-            3 => 'Lembrete de Prova'
+            'Ausentes' => 'Ausentes',
+            'Inscritos Parciais' => 'Inscritos Parciais',
+            'Inscritos Parciais Ead' => 'Inscritos Parciais Ead',
+            'Lembrete de Prova' => 'Lembrete de Prova',
+            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados'
         ];
 
         return view('admin.emkt.mensagens.edit', [

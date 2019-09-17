@@ -6826,3 +6826,44 @@ body.page-light .main--footer-light {
     font-size: 25px !important;
     font-weight: bold;
 }
+
+div#recordsListView_paginate {
+    text-transform: capitalize;
+}
+
+.m-account--form-w-register {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    min-height: 100%;
+    padding: 60px 25px;
+    color: #ccc;
+    background-color: #1b2223c7;
+    -ms-flex-align: center;
+       -webkit-box-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+            justify-content: center;
+      -ms-flex-pack: center;
+}
+
+.m-account--content-w-register {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    min-height: 100%;
+    padding: 60px 30px;
+    color: #fff;
+    background-color: #acacac;
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+            justify-content: center;
+    -ms-flex-align: end;
+    -webkit-box-align: end;
+            align-items: flex-end;
+    text-align: center;
+}
+
+.m-account--content-register {
+    min-width: 100%;
+}

@@ -37,7 +37,14 @@ class ListaController extends Controller
 
     public function create()
     {
-        return view('admin.emkt.listas.create')->with(['instituicoes' => $this->prefixo]);
+        $tipos_de_acoes = [ 
+            'ausentes' => 'Ausentes',
+            'inscritos-parciais' => 'Inscritos Parciais',
+            'lembrete-de-prova' => 'Lembrete de Prova',
+            'aprovados-não-matriculados' => 'Aprovados Não Matriculados'
+        ];
+
+        return view('admin.emkt.listas.create')->with(['instituicoes' => $this->prefixo, 'tipos_de_acoes' => $tipos_de_acoes]);
     }
 
     public function store(Request $request)

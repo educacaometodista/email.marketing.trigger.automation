@@ -57,8 +57,8 @@
                                 <div class="col-md-10">
                                     <select name="tipo_de_acao" class="form-control" id="tipo_de_acao">
                                         <option></option>
-                                        @foreach($tipos_de_acoes as $tipo_de_acao)
-                                            <option value="{{ $tipo_de_acao }}">{{ $tipo_de_acao }}</option>
+                                        @foreach($tipos_de_acoes as $key => $tipo_de_acao)
+                                            <option value="{{ $key }}">{{ $tipo_de_acao }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -121,7 +121,7 @@
                             </div>
 
                             <!-- Form Group Start -->
-                            <div id="input-lista" class="form-group row">
+                            <div id="input-lista" class="form-group row d-none">
                                 <span class="label-text col-md-2 col-form-label text-md-right">Arquivo</span>
 
                                 <div class="col-md-10">

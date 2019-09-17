@@ -40,6 +40,7 @@ class ListaController extends Controller
         $tipos_de_acoes = [ 
             'ausentes' => 'Ausentes',
             'inscritos-parciais' => 'Inscritos Parciais',
+            'inscritos-parciais-ead' => 'Inscritos Parciais Ead',
             'lembrete-de-prova' => 'Lembrete de Prova',
             'aprovados-não-matriculados' => 'Aprovados Não Matriculados'
         ];

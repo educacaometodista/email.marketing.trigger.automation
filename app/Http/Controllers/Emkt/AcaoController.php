@@ -48,11 +48,11 @@ class AcaoController extends Controller
     public function create()
     {
         $tipos_de_acoes = [ 
-            'ausentes' => 'Ausentes',
-            'inscritos-parciais' => 'Inscritos Parciais',
-            'inscritos-parciais-ead' => 'Inscritos Parciais Ead',
-            'lembrete-de-prova' => 'Lembrete de Prova',
-            'aprovados-não-matriculados' => 'Aprovados Não Matriculados'
+            'Ausentes' => 'Ausentes',
+            'Inscritos Parciais' => 'Inscritos Parciais',
+            'Inscritos Parciais Ead' => 'Inscritos Parciais Ead',
+            'Lembrete de Prova' => 'Lembrete de Prova',
+            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados'
         ];
 
         return view('admin.emkt.acoes.create', ['instituicoes' => Instituicao::all(), 'tipos_de_acoes' => $tipos_de_acoes]);
@@ -76,9 +76,11 @@ class AcaoController extends Controller
             'import_file' => 'required|file|mimes:xlsx,csv,txt'
         ]);
 
+
         $date = date('d-m-Y', strtotime($request->input('date')));
         $tipo_de_acao = $request->input('tipo_de_acao');
         $subject = $tipo_de_acao;
+                
         $date = str_replace('-', '/', $date);
         $titulo_da_acao = $request->input('titulo').' '.$date;
         $agendamento_envio = $request->input('envio');
@@ -119,8 +121,6 @@ class AcaoController extends Controller
 
             if($status == 'Ação não encontrada' && array_key_exists($instituicao->prefixo, $nomes_das_listas)) {
                 $acoes_a_criar[$instituicao->prefixo] = $nomes_das_listas[$instituicao->prefixo];
-            } else {
-                Session::flash('message-danger-'.$instituicao->prefixo, 'Já existe uma campanha cadastrada com o título "'.$titulo_da_acao.'" em '. $instituicao->nome.'.');
             }
         }
 

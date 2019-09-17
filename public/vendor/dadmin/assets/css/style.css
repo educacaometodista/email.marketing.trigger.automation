@@ -6815,3 +6815,14 @@ body.page-light .main--footer-light {
         text-align: left;
     }
 }
+
+/*------------------------------------*\
+    12. ESTILIZAÇÕES EDUCAÇÃO METODISTA
+\*------------------------------------*/
+
+.text-loginarea{
+    color:#e16123!important;
+    text-transform: uppercase;
+    font-size: 25px !important;
+    font-weight: bold;
+}

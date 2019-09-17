@@ -3,8 +3,8 @@
     <!-- Navbar Header Start -->
     <div class="navbar--header">
         <!-- Logo Start -->
-        <a href="#" class="logo">
-            <img src="{{ asset('vendor/dadmin/assets/img/logo.png') }}" alt="">
+        <a href="#" class="logo" style="text-align:center;">
+            <img src="http://portal.metodista.br/msg/institucional/comunicados-2018/imagens/educacao-metodista.png" alt="">
         </a>
         <!-- Logo End -->
 
@@ -33,19 +33,19 @@
 
     <div class="navbar--nav ml-auto">
         <ul class="nav">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fa fa-bell"></i>
-                    <!--<span class="badge text-white bg-blue">7</span>-->
+                    <span class="badge text-white bg-blue">7</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fa fa-envelope"></i>
-                    <!--<span class="badge text-white bg-blue">4</span>-->
+                    <span class="badge text-white bg-blue">4</span>
                 </a>
-            </li>
+            </li> -->
 
             <!-- Nav Language Start -->
             <!--<li class="nav-item dropdown nav-language">

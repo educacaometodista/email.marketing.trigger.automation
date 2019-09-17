@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <!-- Page Title Start -->
-                            <h2 class="page--title h5">Cadastros</h2>
+                            <h2 class="page--title h5">Instituições</h2>
                             <!-- Page Title End -->
 
                             <ul class="breadcrumb">
@@ -82,10 +82,10 @@
                                     <th>ID</th>
                                     <th>Nome</th>
                                     <th>Prefixo</th>
-                                    <th>Código da Empresa</th>
-                                    <th>Nome do Remetente</th>
-                                    <th>Email do Remetente</th>
-                                    <th>Email de Retorno</th>
+                                    <th>Código</th>
+                                    <th>Remetente</th>
+                                    <th>E-mail</th>
+                                    <th>Retorno</th>
                                     <th class="not-sortable">Ações</th>
                                 </tr>
                             </thead>

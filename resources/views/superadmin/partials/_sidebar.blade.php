@@ -1,12 +1,12 @@
 <!-- Sidebar Start -->
 <aside class="sidebar" data-trigger="scrollbar">
     <!-- Sidebar Profile Start -->
-    <div class="sidebar--profile">
-        <!--div class="profile--img">
-            <a href="#">
-                <img src="#" alt="" class="rounded-circle">
+    <!-- <div class="sidebar--profile">
+        <div class="profile--img">
+            <a href="#" class="logo" style="text-align:center;">
+                <img src="http://portal.metodista.br/msg/institucional/comunicados-2018/imagens/educacao-metodista.png" alt="">
             </a>
-        </div-->
+        </div>
 
         <div class="profile--name">
             <a href="#" class="btn-link">Comunicação e Marketing</a>
@@ -36,7 +36,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
     <!-- Sidebar Profile End -->
 
     <!-- Sidebar Navigation Start -->
@@ -54,18 +54,18 @@
             </li>
 
             <li>
-                <a href="#">Cadastros</a>
+                <a href="#">FUNÇÕES</a>
 
                 <ul>
                     <li>
                         <a href="#">
-                            <i class="fa fa-th"></i>
+                        <i class="fas fa-university"></i>
                             <span>Instituições</span>
                         </a>
 
                         <ul>
-                            <li><a href="#">Todas</a></li>
-                            <li><a href="#">Novo Cadastro</a></li>
+                            <li><a href="#"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li><a href="#"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
                         </ul>
                     </li>
                    
@@ -73,20 +73,34 @@
             </li>
 
             <li>
-                <a href="#">E-Mail Marketing</a>
+                <a href="#">USUÁRIOS</a>
 
                 <ul>
                     <li>
                         <a href="#">
-                            <i class="fa fa-th"></i>
-                            <span>Listas</span>
+                        <i class="fas fa-user"></i>
+                            <span>Administradores</span>
                         </a>
 
                         <ul>
-                            <li><a href="#">Todas</a></li>
-                            <li><a href="#">Importar Arquivo</a></li>
+                            <li><a href="#"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li><a href="#"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
                         </ul>
-                    </li>
+                    </li>                   
+                </ul>
+
+                <ul>
+                    <li>
+                        <a href="#">
+                        <i class="fas fa-user"></i>
+                            <span>Usuários</span>
+                        </a>
+
+                        <ul>
+                            <li><a href="#"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li><a href="#"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
+                        </ul>
+                    </li>                   
                 </ul>
             </li>
 

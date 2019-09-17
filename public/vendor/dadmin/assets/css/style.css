@@ -6827,6 +6827,13 @@ body.page-light .main--footer-light {
     font-weight: bold;
 }
 
+.text-superadmin{
+    color:#17a2b8!important;
+    text-transform: uppercase;
+    font-size: 25px !important;
+    font-weight: bold;
+}
+
 div#recordsListView_paginate {
     text-transform: capitalize;
 }

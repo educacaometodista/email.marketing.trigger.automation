@@ -2,14 +2,14 @@
 <aside class="sidebar" data-trigger="scrollbar">
     <!-- Sidebar Profile Start -->
     <div class="sidebar--profile">
-        <div class="profile--img">
+        <!--div class="profile--img">
             <a href="#">
                 <img src="#" alt="" class="rounded-circle">
             </a>
-        </div>
+        </div-->
 
         <div class="profile--name">
-            <a href="#" class="btn-link">Educação Metodista</a>
+            <a href="#" class="btn-link">Comunicação e Marketing</a>
         </div>
 
         <div class="profile--nav">

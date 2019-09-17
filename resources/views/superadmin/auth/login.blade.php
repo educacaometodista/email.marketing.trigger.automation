@@ -10,9 +10,9 @@
                         <!-- Login Content Start -->
                         <div class="m-account--content-w" data-bg-img="{{ url('vendor/dadmin/assets/img/account/content-bg.jpg') }}">
                             <div class="m-account--content">
-                                <h2 class="h2">Lorem ipsum</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <!--<a href="register.html" class="btn btn-rounded">Register Now</a>-->
+                                <h2 class="h2">Seja bem-vindo(a)!</h2>
+                                <p>Automação da régua manual de captação para uso interno da Gerência de Comunicação e Marketing.</p>
+                                <a href="{{ route('admin.login') }}" class="btn btn-rounded">Acessar como Administrador</a>
                             </div>
                         </div>
                         <!-- Login Content End -->
@@ -29,16 +29,16 @@
                                 <!-- Logo End -->
 
                                 <form action="{{ route('superadmin.login') }}" method="POST">
-                                    <label class="m-account--title">Login</label>
+                                    <label class="m-account--title text-loginarea">ÁREA DE LOGIN</label>
                                     @csrf
 
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <i class="fas fa-user"></i>
+                                                <i class="fas fa-superadmin"></i>
                                             </div>
 
-                                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus autocomplete="off">
+                                            <input placeholder="Digite seu e-mail" id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus autocomplete="off">
                                             @if ($errors->has('email'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('email') }}</strong>
@@ -53,7 +53,7 @@
                                                 <i class="fas fa-key"></i>
                                             </div>
 
-                                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" autocomplete="off" required>
+                                            <input placeholder="Digite sua senha" id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" autocomplete="off" required>
                                             @if ($errors->has('password'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('password') }}</strong>
@@ -69,7 +69,7 @@
                                             </a>
                                         @endif
 
-                                        <button type="submit" class="btn btn-rounded btn-info">Login</button>
+                                        <button type="submit" class="btn btn-rounded btn-warning">Login</button>
                                     </div>
 
                                     <!--<div class="m-account--alt">

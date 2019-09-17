@@ -66,7 +66,7 @@ class PlanilhaController extends Controller
     public function validator($subject, $currentFile)
     {
         $currentFile = is_object($currentFile) ? $currentFile->toArray() : (is_array($currentFile) ? $currentFile : null);
-        $filter_name = ($subject == 'ausentes' || $subject == 'inscritos-parciais' || $subject == 'lembrete-de-prova') ? 'Presencial' : 'Ead';
+        $filter_name = ($subject == 'ausentes' || $subject == 'inscritos-parciais' || $subject == 'lembrete-de-prova'  || $subject == 'aprovados-não-matriculados') ? 'Presencial' : 'Ead';
 
         if($filter_name == 'Ead')
         {
@@ -83,7 +83,7 @@ class PlanilhaController extends Controller
                     return false;
                 }
             } else {
-                
+
                 Session::flash('danger', 'O formato do arquivo não é válido!');
                 return false;
             }

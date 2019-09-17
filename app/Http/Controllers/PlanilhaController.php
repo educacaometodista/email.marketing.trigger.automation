@@ -66,11 +66,11 @@ class PlanilhaController extends Controller
     public function validator($subject, $currentFile)
     {
         $currentFile = is_object($currentFile) ? $currentFile->toArray() : (is_array($currentFile) ? $currentFile : null);
-        $filter_name = ($subject == 'ausentes' || $subject == 'inscritos-parciais' || $subject == 'lembrete-de-prova'  || $subject == 'aprovados-não-matriculados') ? 'Presencial' : 'Ead';
+        $filter_name = ($subject == 'Ausentes' || $subject == 'Inscritos Parciais' || $subject == 'Lembrete de Prova'  || $subject == 'Aprovados Não Matriculados') ? 'Presencial' : 'Ead';
 
         if($filter_name == 'Ead')
         {
-
+            die('O filtro para Ead ainda não existe');
         } elseif($filter_name == 'Presencial') {
 
             if(!empty($currentFile[0]))
@@ -98,6 +98,8 @@ class PlanilhaController extends Controller
         if(!$this->validator($subject, $currentFile)) {
             return back();
         }
+
+        $subject = strtolower($subject);
         
         $currentFile = $currentFile->toArray();
         

@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <!-- Page Title Start -->
-                            <h2 class="page--title h5">Cadastros</h2>
+                            <h2 class="page--title h5">Mensagens</h2>
                             <!-- Page Title End -->
 
                             <ul class="breadcrumb">
@@ -25,23 +25,6 @@
                             </ul>
                         </div>
 
-                        <!--<div class="col-lg-6">
-                            <div class="summary--widget">
-                                <div class="summary--item">
-                                    <p class="summary--chart" data-trigger="sparkline" data-type="bar" data-width="5" data-height="38" data-color="#009378">2,9,7,9,11,9,7,5,7,7,9,11</p>
-
-                                    <p class="summary--title">This Month</p>
-                                    <p class="summary--stats text-green">2,371,527</p>
-                                </div>
-
-                                <div class="summary--item">
-                                    <p class="summary--chart" data-trigger="sparkline" data-type="bar" data-width="5" data-height="38" data-color="#e16123">2,3,7,7,9,11,9,7,9,11,9,7</p>
-
-                                    <p class="summary--title">Last Month</p>
-                                    <p class="summary--stats text-orange">2,527,371</p>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </section>
@@ -53,19 +36,10 @@
                     <!-- Records Header Start -->
                     <div class="records--header">
                         <div class="title fa-envelope">
-                            <h3 class="h3">Ações 
-                            <!--<a href="#" class="btn btn-sm btn-outline-info">Manage Orders</a>-->
-                        
-                            </h3>
+                            <h3 class="h3">Mensagens</h3>
                             <p>{{ count($mensagens) == 1 ? count($mensagens).' Mensagem encontrada' : count($mensagens).' Mensagens encontradas' }}</p>
                         </div>
 
-                        <!--<div class="actions">
-                            <form action="#" class="search">
-                                <input type="text" class="form-control" placeholder="Order ID or Customer Name..." required>
-                                <button type="submit" class="btn btn-rounded"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>-->
                     </div>
                     <!-- Records Header End -->
                 </div>

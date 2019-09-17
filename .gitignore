@@ -9,4 +9,10 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+#Remover arquivos abertos
 *.psd
+
+# Remover ao fim do projeto
+/database/seeds/SuperadminsSeeder.php
+/database/seeds/AdminsTableSeeder.php

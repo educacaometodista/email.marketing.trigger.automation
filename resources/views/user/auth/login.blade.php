@@ -69,7 +69,7 @@
                                             </a>
                                         @endif
 
-                                        <button type="submit" class="btn btn-rounded btn-primar">Login</button>
+                                        <button type="submit" class="btn btn-rounded btn-warning">Login</button>
                                     </div>
 
                                     <!--<div class="m-account--alt">

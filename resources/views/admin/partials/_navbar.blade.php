@@ -3,8 +3,8 @@
     <!-- Navbar Header Start -->
     <div class="navbar--header">
         <!-- Logo Start -->
-        <a href="#" class="logo">
-            <img src="{{ asset('vendor/dadmin/assets/img/logo.png') }}" alt="">
+        <a href="#" class="logo" style="text-align:center;">
+            <img src="http://portal.metodista.br/msg/institucional/comunicados-2018/imagens/educacao-metodista.png" alt="">
         </a>
         <!-- Logo End -->
 

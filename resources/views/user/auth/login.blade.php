@@ -17,6 +17,7 @@
                         </div>
                         <!-- Login Content End -->
                     </div>
+                    
                     <div class="col-md-6">
                         <!-- Login Form Start -->
                         <div class="m-account--form-w">

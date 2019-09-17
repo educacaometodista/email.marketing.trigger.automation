@@ -70,9 +70,9 @@
                                 <div class="col-md-10">
                                     <select name="subject" class="form-control" id="assunto">
                                     <option></option>
-                                    <option value="Ausentes">Ausentes</option>
-                                    <option value="Inscritos Parciais">Inscritos Parciais</option>
-                                    <option value="Lembrete de Prova">Lembrete de Prova</option>
+                                    @foreach($tipos_de_acoes as $key => $tipo_de_acao)
+                                        <option value="{{ $key }}">{{ $tipo_de_acao }}</option>
+                                    @endforeach
                                     </select>
                                 </div>
                             </div>

@@ -115,7 +115,7 @@
                                     </label>
                                     <label class="form-radio">
                                         <input type="radio" name="hasList" value="concluido" class="form-radio-input">
-                                        <span class="form-radio-label">Concluído</span>
+                                        <span class="form-radio-label">Já Importado</span>
                                     </label>
                                 </div>
                             </div>

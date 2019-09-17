@@ -8,9 +8,9 @@
                 <div class="row no-gutters">
                     <div class="col-md-6">
                         <!-- Login Content Start -->
-                        <div class="m-account--content-w" data-bg-img="{{ url('vendor/dadmin/assets/img/account/content-bg.jpg') }}">
+                        <div class="m-account--content-w" data-bg-img="{{ url('vendor/dadmin/assets/img/account/content-bg-admin.jpg') }}">
                             <div class="m-account--content">
-                                <h2 class="h2">Seja bem-vindo(a)!</h2>
+                                <h2 class="h2">Seja bem-vindo, Administrador!</h2>
                                 <p>Automação da régua manual de captação para uso interno da Gerência de Comunicação e Marketing.</p>
                                 <a href="{{ route('superadmin.login') }}" class="btn btn-rounded">Acessar como Super Administrador</a>
                             </div>
@@ -64,7 +64,7 @@
 
                                     <div class="m-account--actions">
                                         @if (Route::has('password.request'))
-                                            <a class="btn-link" href="{{ route('admin.password.request') }}">
+                                            <a class="btn-link esqueceu-admin" href="{{ route('admin.password.request') }}">
                                                 {{ __('Esqueceu sua senha?') }}
                                             </a>
                                         @endif

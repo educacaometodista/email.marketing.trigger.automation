@@ -6897,3 +6897,10 @@ div#recordsListView_paginate {
 .esqueceu-admin:hover{
     color:#745faa;
 }
+
+h2 i.fas {
+    background-color: #e16123;
+    padding: 10px 15px 10px 15px;
+    color: #fff;
+    border-radius: 30px;
+}

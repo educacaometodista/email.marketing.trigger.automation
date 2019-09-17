@@ -15,15 +15,16 @@
     <section class="page--header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6">
-                    <!-- Page Title Start -->
-                    <h2 class="page--title h5">Mensagens</h2>
-                    <!-- Page Title End -->
+            <div class="col-lg-6">
+                            <!-- Page Title Start -->
+                            <h2 class="page--title h5">Mensagens</h2>
+                            <!-- Page Title End -->
 
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item active"><span>Novo Cadastro</span></li>
-                    </ul>
-                </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.mensagens.index') }}">Mensagens</a></li>
+                                <li class="breadcrumb-item active"><span>Nova Mensagem</span></li>
+                            </ul>
+                        </div>
             </div>
         </div>
     </section>
@@ -48,7 +49,7 @@
                             @csrf
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Título</span>
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Título da Mensagem</span>
                                 <div class="col-md-10">
                                     <input type="text" name="titulo" class="form-control" id="titulo" maxlenght="20" value="{{ old('titulo') }}">
                                 </div>

@@ -24,7 +24,11 @@ require 'auth/superadmin.php';
 
 Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
 
-    Route::resource('/listas', 'ListaController');
+    Route::prefix('listas')->name('listas.')->group(function () {
+        Route::get('create', 'ListaController@create')->name('create');
+        Route::post('store', 'ListaController@store')->name('store');
+    });
+
     Route::resource('/acoes', 'AcaoController');
     Route::resource('/mensagens', 'MensagemController');        
     Route::resource('/instituicoes', 'InstituicaoController');

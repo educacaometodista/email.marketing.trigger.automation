@@ -13,6 +13,8 @@ use Session;
 
 class PlanilhaController extends Controller
 {
+    public $filterType;
+
     public function __construct()
     {
         $this->middleware('auth:admin');
@@ -59,10 +61,53 @@ class PlanilhaController extends Controller
         }
     }
 
+    
+
+    public function validator($filter_name, $currentFile)
+    {
+
+        try {
+
+            $currentFile = is_object($currentFile) ? $currentFile->toArray() : (is_array($currentFile) ? $currentFile : null);
+        
+            if(is_null($currentFile) && !isset($currentFile))
+                return back()->with('danger', 'O formato do arquivo não é válido!');
+
+            if(isset($filter_name)){
+                $filter_name = strtolower($filter_name);
+            }
+
+            switch ($filter_name) {
+                case 'ead':
+
+                    break;
+                
+                default:
+
+                    if(!array_key_exists('nome', $currentFile[0]) || !array_key_exists('e_mail', $currentFile[0]) || !array_key_exists('celular', $currentFile[0]) || !array_key_exists('instituição', $currentFile[0]))
+                    {
+                        //Não possui todas as colunas
+                        return back()->with('danger')->with('danger', 'O formato do arquivo não é válido!');
+                    }
+
+                    break;
+            }
+
+        } catch(Exception $e) {
+
+            return back()->with('danger', $e->getMessage());
+        }
+    }
+
+    public function setFilterTypeBySubject($subject)
+    {
+        $this->filterType = ($subject == 'Ausentes' || $subject == 'Inscritos Parciais' || $subject == 'Lembrete de Prova') ? 'Presencial' : 'Ead';
+    }
+
     public function filter($currentFile, $extension, $subject, $date, $storage_path)
     {
 
-        //$validated = $request->validated();
+        $this->validator($subject);
         
         $currentFile = $currentFile->toArray();
         

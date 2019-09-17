@@ -3,14 +3,14 @@
 <aside class="sidebar" data-trigger="scrollbar">
     <!-- Sidebar Profile Start -->
     <div class="sidebar--profile">
-        <div class="profile--img">
+        <!--div class="profile--img">
             <a href="#">
                 <img src="#" alt="" class="rounded-circle">
             </a>
-        </div>
+        </div-->
 
         <div class="profile--name">
-            <a href="#" class="btn-link">Educação Metodista</a>
+            <a href="#" class="btn-link">Comunicação e Marketing</a>
         </div>
 
         <div class="profile--nav">
@@ -60,52 +60,52 @@
                 <ul>
                     <li>
                         <a href="#">
-                            <i class="fa fa-th"></i>
+                            <i class="fas fa-university"></i>
                             <span>Instituições</span>
                         </a>
 
                         <ul>
-                            <li><a href="{{ route('admin.instituicoes.index' ) }}">Todas</a></li>
-                            <li><a href="{{ route('admin.instituicoes.create') }}">Novo Cadastro</a></li>
+                            <li><a href="{{ route('admin.instituicoes.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li><a href="{{ route('admin.instituicoes.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
                         </ul>
                     </li>
 
                     <li>
                         <a href="#">
-                            <i class="fa fa-th"></i>
+                            <i class="fas fa-inbox"></i>
                             <span>Mensagens</span>
                         </a>
 
                         <ul>
-                            <li><a href="{{ route('admin.mensagens.index' ) }}">Todas</a></li>
-                            <li><a href="{{ route('admin.mensagens.create') }}">Novo Cadastro</a></li>
+                            <li><a href="{{ route('admin.mensagens.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li><a href="{{ route('admin.mensagens.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
                         </ul>
                     </li>
 
                     <li>
                         <a href="#">
-                            <i class="fa fa-th"></i>
-                            <span>Listas</span>
-                        </a>
-
-                        <ul>
-                            <li><a href="#">Todas</a></li>
-                            <li><a href="{{ route('admin.listas.create') }}">Importar</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-th"></i>
+                        <i class="fas fa-paper-plane"></i>
                             <span>Ações</span>
                         </a>
 
                         <ul>
-                            <li><a href="{{ route('admin.acoes.index') }}">Todas</a></li>
-                            <li><a href="{{ route('admin.acoes.create') }}">Criar Nova</a></li>
+                            <li><a href="{{ route('admin.acoes.index') }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li><a href="{{ route('admin.acoes.create') }}"><i class="fas fa-plus"></i> Criar Nova</a></li>
                         </ul>
                     </li>
-                   
+
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-list-ul"></i>
+                            <span>Listas de Contatos</span>
+                        </a>
+
+                        <ul>
+                            <li><a href="#"><i class="fas fa-bars"></i> Todas as Listas</a></li>
+                            <li><a href="{{ route('admin.listas.create') }}"><i class="fas fa-cloud-upload-alt"></i> Importar Lista</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </li>
 

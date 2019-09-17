@@ -38,11 +38,11 @@ class ListaController extends Controller
     public function create()
     {
         $tipos_de_acoes = [ 
-            'ausentes' => 'Ausentes',
-            'inscritos-parciais' => 'Inscritos Parciais',
-            'inscritos-parciais-ead' => 'Inscritos Parciais Ead',
-            'lembrete-de-prova' => 'Lembrete de Prova',
-            'aprovados-não-matriculados' => 'Aprovados Não Matriculados'
+            'Ausentes' => 'Ausentes',
+            'Inscritos Parciais' => 'Inscritos Parciais',
+            'Inscritos Parciais Ead' => 'Inscritos Parciais Ead',
+            'Lembrete de Prova' => 'Lembrete de Prova',
+            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados'
         ];
 
         return view('admin.emkt.listas.create')->with(['instituicoes' => $this->prefixo, 'tipos_de_acoes' => $tipos_de_acoes]);
@@ -83,7 +83,7 @@ class ListaController extends Controller
 
         if(isset($this->instituicoes))
         {
-            $this->planilha()->filter($currentFile, $extension, str_replace(' ', '-', strtolower($subject)), $day.'-'.$month.'-'.$period, 'akna_lists');
+            $this->planilha()->filter($currentFile, $extension, str_replace(' ', '-', $subject), $day.'-'.$month.'-'.$period, 'akna_lists');
             $all_files = $this->planilha()->getFiles('akna_lists');
 
             $codigos_dos_processos = [];

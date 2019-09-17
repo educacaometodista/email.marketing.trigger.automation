@@ -10,7 +10,7 @@
                         <!-- Login Content Start -->
                         <div class="m-account--content-w" data-bg-img="{{ url('vendor/dadmin/assets/img/account/content-bg.jpg') }}">
                             <div class="m-account--content">
-                                <h2 class="h2">Seja bem-vindo(a)!</h2>
+                                <h2 class="h2">Seja bem-vindo, Usuário!</h2>
                                 <p>Automação da régua manual de captação para uso interno da Gerência de Comunicação e Marketing.</p>
                                 <a href="{{ route('admin.login') }}" class="btn btn-rounded">Acessar como Administrador</a>
                             </div>

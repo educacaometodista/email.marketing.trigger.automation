@@ -48,9 +48,11 @@ class AcaoController extends Controller
     public function create()
     {
         $tipos_de_acoes = [ 
-            1 => 'Ausentes',
-            2 => 'Inscritos Parciais',
-            3 => 'Lembrete de Prova'
+            'ausentes' => 'Ausentes',
+            'inscritos-parciais' => 'Inscritos Parciais',
+            'inscritos-parciais-ead' => 'Inscritos Parciais Ead',
+            'lembrete-de-prova' => 'Lembrete de Prova',
+            'aprovados-não-matriculados' => 'Aprovados Não Matriculados'
         ];
 
         return view('admin.emkt.acoes.create', ['instituicoes' => Instituicao::all(), 'tipos_de_acoes' => $tipos_de_acoes]);

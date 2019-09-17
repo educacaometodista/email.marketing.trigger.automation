@@ -64,7 +64,6 @@ class AcaoController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'date' => 'required|date',
             'tipo_de_acao' => 'required|min:2|max:30',
@@ -74,7 +73,6 @@ class AcaoController extends Controller
             'hasList' => 'required',
             'import_file' => 'required|file|mimes:xlsx,csv,txt'
         ]);
-
 
         $date = date('d-m-Y', strtotime($request->input('date')));
         $tipo_de_acao = $request->input('tipo_de_acao');
@@ -92,7 +90,9 @@ class AcaoController extends Controller
         $instituicoes = Instituicao::all();
         $instituicoes_selecionadas = [];
 
-
+        foreach($instituicoes as $instituicao)
+            if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
+                array_push($instituicoes_selecionadas, $instituicao);
        
             //importar listas
             if($hasList == 'importar-agora')
@@ -111,21 +111,20 @@ class AcaoController extends Controller
 
         $acoes_a_criar = [];
 
-        foreach($instituicoes as $instituicao)
+        foreach($instituicoes_selecionadas as $instituicao)
         {
             $status = $this->aknaAPI()->consultarAcao($titulo_da_acao, $instituicao);
 
             if($status == 'Ação não encontrada' && array_key_exists($instituicao->prefixo, $nomes_das_listas)) {
                 $acoes_a_criar[$instituicao->prefixo] = $nomes_das_listas[$instituicao->prefixo];
             } else {
-                Session::flash('message-danger-'.$instituicao->prefixo, 'Já existe uma campanha cadastrada com o título "'.$titulo_da_acao.'".');
+                Session::flash('message-danger-'.$instituicao->prefixo, 'Já existe uma campanha cadastrada com o título "'.$titulo_da_acao.'" em '. $instituicao->nome.'.');
             }
         }
 
-
         $status = null;
 
-        foreach ($instituicoes as $instituicao)
+        foreach ($instituicoes_selecionadas as $instituicao)
         {
             $mensagem = Mensagem::all()
                 ->where('tipo_de_acao', '=', $tipo_de_acao)
@@ -151,24 +150,16 @@ class AcaoController extends Controller
                         $acao->save();
     
                     } else {
-                        Session::flash('message-danger-'.$instituicao->prefixo, 'Já existe uma campanha cadastrada com o título "'.$titulo_da_acao.'".');
-
+                        Session::flash('message-danger-'.$instituicao->prefixo, 'Já existe uma campanha cadastrada com o título "'.$titulo_da_acao.'" em '. $instituicao->nome.'.');
                     }
                         
                     Session::flash('success', "Ação criada com sucesso em $instituicao->nome!");
 
                 }
             }
-
-
-
-            
         }
 
         return back();
-
-
-
     }
 
     /**

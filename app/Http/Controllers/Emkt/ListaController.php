@@ -75,7 +75,6 @@ class ListaController extends Controller
     {
         $explode_date = explode('-', str_replace('/', '-', $date));
 
-
         $day = $explode_date[0];
         $month = $explode_date[1];
         $period = $explode_date[2];
@@ -83,7 +82,7 @@ class ListaController extends Controller
 
         if(isset($this->instituicoes))
         {
-            $this->planilha()->filter($currentFile, $extension, str_replace(' ', '-', $subject), $day.'-'.$month.'-'.$period, 'akna_lists');
+            $this->planilha()->filter($currentFile, $extension, str_replace('', '', str_replace(' ', '-', strtolower($subject))), $day.'-'.$month.'-'.$period, 'akna_lists');
             $all_files = $this->planilha()->getFiles('akna_lists');
 
             $codigos_dos_processos = [];
@@ -91,7 +90,9 @@ class ListaController extends Controller
         
             foreach($this->instituicoes as $codigo_da_empresa => $instituicao)
             {
-                $nome_do_arquivo = strtolower($this->prefixo[$instituicao]).'-'.strtolower($subject).'-'.$day.'-'.$month.'-'.$period.'.'.$extension;
+                $nome_do_arquivo = strtolower($this->prefixo[$instituicao]).'-'.str_replace('-ead', '', str_replace(' ', '-', strtolower($subject))).'-'.$day.'-'.$month.'-'.$period.'.'.$extension;
+
+                $nome_do_arquivo = str_replace(' ', '-', $nome_do_arquivo);
                 
                 if(in_array(public_path("akna_lists/$nome_do_arquivo"), $all_files))
                 {

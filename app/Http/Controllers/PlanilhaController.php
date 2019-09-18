@@ -292,7 +292,6 @@ class PlanilhaController extends Controller
         foreach($currentFile as $row)
         {
             array_push($umesp_file, $row);
-            break;
         }
 
         $this->clearStorage($storage_path);

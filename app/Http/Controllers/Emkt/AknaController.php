@@ -8,7 +8,7 @@ use Ixudra\Curl\Facades\Curl;
 
 class AknaController extends Controller
 {
-    public $endPoint = 'http://app.akna.com.br/emkt/int/integracao.php';
+    public $endPoint = 'https://app.akna.com.br/emkt/int/integracao.php';
 
     public $storagePath = '';
 

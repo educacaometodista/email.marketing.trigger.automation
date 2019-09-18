@@ -15,7 +15,7 @@ class ListaController extends Controller
 
     public function __construct()
     {
-        $this->instituicoes = Instituicao::all()->pluck('nome', 'codigo_da_empresa')->toArray();
+        $this->instituicoes = Instituicao::all();
         $this->prefixo = Instituicao::all()->pluck('prefixo', 'nome')->toArray();
         return $this->middleware('auth:admin');        
     }
@@ -40,7 +40,7 @@ class ListaController extends Controller
         $tipos_de_acoes = [ 
             'Ausentes' => 'Ausentes',
             'Inscritos Parciais' => 'Inscritos Parciais',
-            'Inscritos Parciais Ead' => 'Inscritos Parciais Ead',
+            'Inscritos Parciais a Distancia' => 'Inscritos Parciais Ead',
             'Lembrete de Prova' => 'Lembrete de Prova',
             'Aprovados Não Matriculados' => 'Aprovados Não Matriculados'
         ];
@@ -82,23 +82,27 @@ class ListaController extends Controller
 
         if(isset($this->instituicoes))
         {
+
             $this->planilha()->filter($currentFile, $extension, str_replace('', '', str_replace(' ', '-', strtolower($subject))), $day.'-'.$month.'-'.$period, 'akna_lists');
+
             $all_files = $this->planilha()->getFiles('akna_lists');
 
             $codigos_dos_processos = [];
             $nomes_das_listas = [];
+
+            //dd($all_files);
         
-            foreach($this->instituicoes as $codigo_da_empresa => $instituicao)
+            foreach($this->instituicoes as $instituicao)
             {
-                $nome_do_arquivo = strtolower($this->prefixo[$instituicao]).'-'.str_replace('-ead', '', str_replace(' ', '-', strtolower($subject))).'-'.$day.'-'.$month.'-'.$period.'.'.$extension;
+                $nome_do_arquivo = strtolower($this->prefixo[$instituicao->nome]).'-'.str_replace('-a-distancia', '', str_replace(' ', '-', strtolower($subject))).'-'.$day.'-'.$month.'-'.$period.'.'.$extension;
 
                 $nome_do_arquivo = str_replace(' ', '-', $nome_do_arquivo);
-                
+
                 if(in_array(public_path("akna_lists/$nome_do_arquivo"), $all_files))
                 {
-                    $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao]).' - '.str_replace('-', ' ', $subject).' - '.$day.'/'.$month.' - '.str_replace('-', '/',$period);
-                    Session::flash('message-'.$this->prefixo[$instituicao], $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao, $codigo_da_empresa));
-                    $nomes_das_listas[$this->prefixo[$instituicao]] = $nome_da_lista;
+                    $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao->nome]).' - '.str_replace('-', ' ', $subject).' - '.$day.'/'.$month.' - '.str_replace('-', '/',$period);
+                    Session::flash('message-'.$this->prefixo[$instituicao->nome], $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao->nome, $instituicao->codigo_da_empresa));
+                    $nomes_das_listas[$this->prefixo[$instituicao->nome]] = $nome_da_lista;
                 }
             }
 

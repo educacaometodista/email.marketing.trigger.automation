@@ -20,7 +20,7 @@ class CreateInstituicoesTable extends Migration
             $table->string('nome_do_remetente');
             $table->string('email_do_remetente');
             $table->string('email_de_retorno');
-            $table->string('codigo_da_empresa')->unique();
+            $table->string('codigo_da_empresa');
 
             $table->timestamps();
         });

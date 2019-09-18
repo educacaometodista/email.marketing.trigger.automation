@@ -48,7 +48,7 @@ class InstituicaoController extends Controller
             'nome_do_remetente' => 'required|min:2|max:30',
             'email_do_remetente' => 'required|min:4|max:40|email',
             'email_de_retorno' => 'required|min:4|max:40|email',
-            'codigo_da_empresa' => 'required|min:4|max:5|unique:instituicoes'
+            'codigo_da_empresa' => 'required|min:4|max:5'
         ]);
 
         $instituicao = new Instituicao;
@@ -101,7 +101,7 @@ class InstituicaoController extends Controller
             'nome_do_remetente' => 'required|min:2|max:30',
             'email_do_remetente' => 'required|min:4|max:40|email',
             'email_de_retorno' => 'required|min:4|max:40|email',
-            'codigo_da_empresa' => 'required|min:4|max:5|unique:instituicoes'
+            'codigo_da_empresa' => 'required|min:4|max:5'
         ]);
 
         $instituicao = Instituicao::findOrFail($id)->update([

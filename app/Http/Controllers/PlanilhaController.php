@@ -13,7 +13,7 @@ use Session;
 
 class PlanilhaController extends Controller
 {
-    public $filterType;
+    public $filter_name;
 
     public function __construct()
     {
@@ -66,12 +66,16 @@ class PlanilhaController extends Controller
     public function validator($subject, $currentFile)
     {
         $currentFile = is_object($currentFile) ? $currentFile->toArray() : (is_array($currentFile) ? $currentFile : null);
-        $filter_name = ($subject == 'Ausentes' || $subject == 'Inscritos Parciais' || $subject == 'Lembrete de Prova'  || $subject == 'Aprovados Não Matriculados') ? 'Presencial' : 'Ead';
 
-        if($filter_name == 'Ead')
+        $this->filter_name = ($subject == 'ausentes' || $subject == 'inscritos-parciais' || $subject == 'lembrete-de-prova'  || $subject == 'Aprovados Não Matriculados') ? 'Presencial' : 'Ead';
+        
+        if($this->filter_name == 'Ead')
         {
-            die('O filtro para Ead ainda não existe');
-        } elseif($filter_name == 'Presencial') {
+            
+
+            
+
+        } elseif($this->filter_name == 'Presencial') {
 
             if(!empty($currentFile[0]))
             {
@@ -92,6 +96,19 @@ class PlanilhaController extends Controller
         return true;
     }
 
+    public function getFilter($currentFile, $extension, $subject, $date, $storage_path)
+    {
+        if($this->filter_name == 'Ead')
+        {
+            $this->filtroEad($currentFile, $extension, $subject, $date, $storage_path);
+
+        } elseif($this->filter_name = 'Presencial') {
+
+            $this->filtroPresencial($currentFile, $extension, $subject, $date, $storage_path);
+
+        }
+    }
+
     public function filter($currentFile, $extension, $subject, $date, $storage_path)
     {
 
@@ -103,6 +120,12 @@ class PlanilhaController extends Controller
         
         $currentFile = $currentFile->toArray();
         
+        $this->getFilter($currentFile, $extension, $subject, $date, $storage_path);
+       
+    }
+
+    public function filtroPresencial($currentFile, $extension, $subject, $date, $storage_path)
+    {
         $document_hash = md5($subject.$date.date('d-m-y h:i:s'));
 
         $headers = [];
@@ -186,7 +209,6 @@ class PlanilhaController extends Controller
                     case 'Ipa':
                         array_push($ipa_file, $row);
                         break;
-                    
                 }
             }
 
@@ -231,15 +253,76 @@ class PlanilhaController extends Controller
             }
 
             return $file_list;
-
         } else {
 
             return back()->with('message', 'Este documento não pode ser tratado!');
-
         }
+
     }
 
-    
-       
-    
+    public function filtroEad($currentFile, $extension, $subject, $date, $storage_path)
+    {
+
+        $document_hash = md5($subject.$date.date('d-m-y h:i:s'));
+
+        $headers = [];
+
+        //if(array_key_exists('nome', $currentFile[0]) && array_key_exists('e_mail', $currentFile[0]) && array_key_exists('celular', $currentFile[0]) && array_key_exists('instituição', $currentFile[0]))
+        //{
+
+        foreach($currentFile[0] as $header => $value)
+            array_push($headers, $header);
+        
+        foreach($currentFile as $key_row => $row)
+        {
+            
+            foreach($row as $key => $cell)
+            {
+                if(!($key == 'nome' || $key == 'e_mail' || $key == 'número' || $key == 'ddd'))
+                        unset($currentFile[$key_row][$key]);               
+
+            }
+            
+            $planilha = new Planilha;
+            $planilha->nome = $currentFile[$key_row]['nome'];
+            $planilha->email = $currentFile[$key_row]['e_mail'];
+            $planilha->celular = ($currentFile[$key_row]['número'] && $currentFile[$key_row]['ddd']) ? $currentFile[$key_row]['ddd'].$currentFile[$key_row]['número'] : '';
+            $planilha->instituicao = 'EAD UMESP';
+            $planilha->documento = $document_hash;
+
+            $planilha->save();
+        }
+
+        Session::put('zipName', "$subject-$date");
+
+        $currentFile = Planilha::select('nome', 'email', 'celular', 'instituicao')
+                                ->where('documento', '=', $document_hash)
+                                ->orderBy('instituicao')
+                                ->orderBy('nome')
+                                ->get()
+                                ->toArray();
+
+        $umesp_file = [];
+
+        foreach($currentFile as $row)
+        {
+            array_push($umesp_file, $row);
+            break;
+        }
+
+        $this->clearStorage($storage_path);
+
+        $file_list = [];
+
+        if(count($umesp_file) > 0)
+        {
+            $this->storeFile($umesp_file, 'ead-umesp-'.$subject.'-'.$date, $extension, $storage_path);
+            array_push($file_list, 'ead-umesp-'.$subject.'-'.$date);
+        }
+
+
+        return $file_list;
+    }
+
+
 }

@@ -25,7 +25,7 @@ class InstituicoesTableSeeder extends Seeder
 
         $instituicao = new App\Instituicao;
         $instituicao->nome = 'Instituto Metodista de Ensino Superior Ead';
-        $instituicao->prefixo = 'EAD UMESP';
+        $instituicao->prefixo = 'EaD-UMESP';
         $instituicao->codigo_da_empresa = $codigos['UMESP'];
         $instituicao->nome_do_remetente = 'Universidade Metodista de São Paulo Ead';
         $instituicao->email_do_remetente = 'informes@metodista.br';

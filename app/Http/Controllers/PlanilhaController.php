@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 use App\Planilhas\Planilha;
 use Session;
 
-
 class PlanilhaController extends Controller
 {
     public $filter_name;
@@ -61,18 +60,13 @@ class PlanilhaController extends Controller
         }
     }
 
-    
-
     public function validator($subject, $currentFile)
     {
         $currentFile = is_object($currentFile) ? $currentFile->toArray() : (is_array($currentFile) ? $currentFile : null);
 
-        $this->filter_name = ($subject == 'ausentes' || $subject == 'inscritos-parciais' || $subject == 'lembrete-de-prova'  || $subject == 'Aprovados Não Matriculados') ? 'Presencial' : 'Ead';
-        
+        $this->filter_name = ($subject == 'ausentes' || $subject == 'inscritos-parciais' || $subject == 'lembrete-de-prova' || $subject == 'aprovados-não-matriculados') ? 'Presencial' : 'Ead';
         if($this->filter_name == 'Ead')
         {
-            
-
             
 
         } elseif($this->filter_name == 'Presencial') {
@@ -83,11 +77,9 @@ class PlanilhaController extends Controller
                 {
                     //Não possui todas as colunas
                     Session::flash('danger', 'O formato do arquivo não é válido!');
-
                     return false;
                 }
             } else {
-
                 Session::flash('danger', 'O formato do arquivo não é válido!');
                 return false;
             }
@@ -102,7 +94,7 @@ class PlanilhaController extends Controller
         {
             $this->filtroEad($currentFile, $extension, $subject, $date, $storage_path);
 
-        } elseif($this->filter_name = 'Presencial') {
+        } elseif($this->filter_name == 'Presencial') {
 
             $this->filtroPresencial($currentFile, $extension, $subject, $date, $storage_path);
 
@@ -263,31 +255,24 @@ class PlanilhaController extends Controller
     public function filtroEad($currentFile, $extension, $subject, $date, $storage_path)
     {
 
+        $subject = str_replace('-a-distancia', '', $subject);
         $document_hash = md5($subject.$date.date('d-m-y h:i:s'));
-
         $headers = [];
-
-        //if(array_key_exists('nome', $currentFile[0]) && array_key_exists('e_mail', $currentFile[0]) && array_key_exists('celular', $currentFile[0]) && array_key_exists('instituição', $currentFile[0]))
-        //{
 
         foreach($currentFile[0] as $header => $value)
             array_push($headers, $header);
         
         foreach($currentFile as $key_row => $row)
         {
-            
             foreach($row as $key => $cell)
-            {
                 if(!($key == 'nome' || $key == 'e_mail' || $key == 'número' || $key == 'ddd'))
                         unset($currentFile[$key_row][$key]);               
-
-            }
             
             $planilha = new Planilha;
             $planilha->nome = $currentFile[$key_row]['nome'];
             $planilha->email = $currentFile[$key_row]['e_mail'];
             $planilha->celular = ($currentFile[$key_row]['número'] && $currentFile[$key_row]['ddd']) ? $currentFile[$key_row]['ddd'].$currentFile[$key_row]['número'] : '';
-            $planilha->instituicao = 'EAD UMESP';
+            $planilha->instituicao = 'EaD-UMESP';
             $planilha->documento = $document_hash;
 
             $planilha->save();
@@ -320,9 +305,7 @@ class PlanilhaController extends Controller
             array_push($file_list, 'ead-umesp-'.$subject.'-'.$date);
         }
 
-
         return $file_list;
     }
-
 
 }

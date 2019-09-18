@@ -20,7 +20,7 @@ class AknaController extends Controller
     {
         $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
         $host = $_SERVER['HTTP_HOST'];
-        $this->fileStorage = $protocol.$host."/akna_lists/";
+        $this->fileStorage = $protocol.$host."/public/akna_lists/";
         $this->xmlPath = storage_path().'/akna_xml';
         $this->data = include __DIR__.'/user.php';
 

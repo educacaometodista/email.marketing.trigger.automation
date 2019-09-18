@@ -97,7 +97,7 @@ class AcaoController extends Controller
         foreach($instituicoes as $instituicao)
             if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
                 array_push($instituicoes_selecionadas, $instituicao);
-       
+
             //importar listas
             if($hasList == 'importar-agora')
             {
@@ -137,6 +137,7 @@ class AcaoController extends Controller
             {
                 if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
                 {
+                    sleep(40);
                     $status = $this->aknaAPI()->criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas);
                         
                     if($status != 'Já existe uma campanha cadastrada com esse título!')

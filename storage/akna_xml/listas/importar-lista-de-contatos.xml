@@ -2,7 +2,7 @@
 <main>
     <emkt trans="11.10">
         <nome>[NOME DA LISTA]</nome>
-        <arquivo>[URL DO ARQUIVO]</arquivo>
+        <arquivo>https://aknametodista.000webhostapp.com/teste-lista-akna.csv</arquivo>
         <separador>[SEPARADOR]</separador>
         <acao>[ACAO]</acao>
         <opcoes cabecalho="[CABECALHO]" atualizar="[ATUALIZAR]" />

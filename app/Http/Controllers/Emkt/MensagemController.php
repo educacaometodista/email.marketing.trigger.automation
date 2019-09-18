@@ -93,7 +93,7 @@ class MensagemController extends Controller
         $tipos_de_acoes = [ 
             'Ausentes' => 'Ausentes',
             'Inscritos Parciais' => 'Inscritos Parciais',
-            'Inscritos Parciais Ead' => 'Inscritos Parciais Ead',
+            'Inscritos Parciais a Distancia' => 'Inscritos Parciais Ead',
             'Lembrete de Prova' => 'Lembrete de Prova',
             'Aprovados Não Matriculados' => 'Aprovados Não Matriculados'
         ];

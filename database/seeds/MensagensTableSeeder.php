@@ -17,6 +17,14 @@ class MensagensTableSeeder extends Seeder
         $mensagem->tipo_de_acao = 'Ausentes';
         $mensagem->instituicao_id = 1;
         $mensagem->save();
+
+        $mensagem = new App\Mensagem;
+        $mensagem->titulo = 'Inscritos Parciais Ead - Branco';
+        $mensagem->url = 'http://portal.metodista.br/msg/campanha/vestibular/2019/2-semestre/inscricoes/ausentes';
+        $mensagem->assunto = 'Inscritos Parciais Ead';
+        $mensagem->tipo_de_acao = 'Inscritos Parciais a Distancia';
+        $mensagem->instituicao_id = 1;
+        $mensagem->save();
     }
 
 }

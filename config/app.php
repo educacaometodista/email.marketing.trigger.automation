@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Educação Metodista'),
+    'name' => env('APP_NAME', 'Automação de Disparos | GECOM'),
 
     /*
     |--------------------------------------------------------------------------

@@ -23,7 +23,7 @@ class MensagensTableSeeder extends Seeder
         $mensagem->url = 'http://portal.metodista.br/msg/campanha/vestibular/2019/2-semestre/inscricoes/ausentes';
         $mensagem->assunto = 'Inscritos Parciais Ead';
         $mensagem->tipo_de_acao = 'Inscritos Parciais a Distancia';
-        $mensagem->instituicao_id = 1;
+        $mensagem->instituicao_id = 2;
         $mensagem->save();
     }
 

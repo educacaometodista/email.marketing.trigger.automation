@@ -23,12 +23,12 @@
     <!-- Sidebar Toggle Button End -->
 
     <!-- Navbar Search Start -->
-    <div class="navbar--search">
+    <!-- <div class="navbar--search">
         <form action="#">
             <input type="search" name="search" class="form-control" placeholder="Buscar..." required>
             <button class="btn-link"><i class="fa fa-search"></i></button>
         </form>
-    </div>
+    </div> -->
     <!-- Navbar Search End -->
 
     <div class="navbar--nav ml-auto">

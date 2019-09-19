@@ -1,44 +1,6 @@
 
 <!-- Sidebar Start -->
 <aside class="sidebar" data-trigger="scrollbar">
-    <!-- Sidebar Profile Start -->
-    <!-- <div class="sidebar--profile">
-        <div class="profile--img">
-            <a href="#">
-                <img src="#" alt="" class="rounded-circle">
-            </a>
-        </div
-
-        <div class="profile--name">
-            <a href="#" class="btn-link">Comunicação e Marketing</a>
-        </div>
-
-        <div class="profile--nav">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a href="#" class="nav-link" title="User Profile">
-                        <i class="fa fa-user"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" title="Lock Screen">
-                        <i class="fa fa-lock"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" title="Messages">
-                        <i class="fa fa-envelope"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" title="Logout">
-                        <i class="fa fa-sign-out-alt"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div> -->
-    <!-- Sidebar Profile End -->
 
     <!-- Sidebar Navigation Start -->
     <div class="sidebar--nav">
@@ -46,7 +8,7 @@
             <li>
                 <ul>
                     <li class="active">
-                        <a href="#">
+                        <a href="{{ route('admin.home') }}">
                             <i class="fa fa-home"></i>
                             <span>Dashboard</span>
                         </a>
@@ -55,11 +17,11 @@
             </li>
 
             <li>
-                <a href="#">E-Mail Marketing</a>
+                <a href="javascript:void(0)">E-Mail Marketing</a>
 
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="javascript:void(0)">
                             <i class="fas fa-university"></i>
                             <span>Instituições</span> 
                         </a>
@@ -71,19 +33,19 @@
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="javascript:void(0)">
                             <i class="fas fa-list-ul"></i>
                             <span>Listas de Contatos</span>
                         </a>
 
                         <ul>
-                            <li><a href="#"><i class="fas fa-bars"></i> Todas as Listas</a></li>
+                            <li><a href="javascript:void(0)"><i class="fas fa-bars"></i> Todas as Listas</a></li>
                             <li><a href="{{ route('admin.listas.create') }}"><i class="fas fa-cloud-upload-alt"></i> Importar Lista</a></li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="javascript:void(0)">
                             <i class="fas fa-inbox"></i>
                             <span>Mensagens</span>
                         </a>
@@ -95,7 +57,7 @@
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="javascript:void(0)">
                         <i class="fas fa-paper-plane"></i>
                             <span>Ações</span>
                         </a>

@@ -87,15 +87,10 @@
                 </a>
 
                 <ul class="dropdown-menu">
-<<<<<<< HEAD
                     <li><a href="{{ route('admin.edit', Auth::user()->id ) }}"><i class="far fa-user"></i>Minha Conta</a></li>
-                    <li><a href="#"><i class="fas fa-users"></i>Cadastrar Usuário</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i>Configurações</a></li>
-=======
-                    <li><a href="{{ route('admin.edit')}}"><i class="far fa-user"></i>Minha Conta</a></li>
                     <li><a href="{{ route('user.register')}}"><i class="fas fa-users"></i>Cadastrar Usuário</a></li>
                     <li><a href="javascript:void(0)"><i class="fa fa-cog"></i>Configurações</a></li>
->>>>>>> bb3a5720f0585fd1bde0a82c3a875fabe1091c53
+
                     <li class="dropdown-divider"></li>
                     <li><a href="javascript:void(0)">
                     @guest

@@ -20,7 +20,7 @@ class Acao extends Model
 
     public function usuario()
     {
-        return $this->hasOne(Admin::class, 'usuario_id');
+        return $this->belongsTo(Admin::class, 'usuario_id');
     }
 
     public function instituicao()

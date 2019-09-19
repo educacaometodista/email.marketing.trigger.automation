@@ -16,7 +16,7 @@
                             <!-- Page Title End -->
 
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('admin.mensagens.index') }}">Mensagens</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.acoes.index') }}">Ações</a></li>
                                 <li class="breadcrumb-item active"><span>Todas</span></li>
                             </ul>
                         </div>
@@ -49,11 +49,11 @@
                     <!-- Records Header Start -->
                     <div class="records--header">
                         <div class="title fa-envelope">
-                            <h3 class="h3">Mensagens 
+                            <h3 class="h3">Ações 
                             <!--<a href="#" class="btn btn-sm btn-outline-info">Manage Orders</a>-->
                         
                             </h3>
-                            <p>{{ count($mensagens) == 1 ? count($mensagens).' Mensagem encontrada' : count($mensagens).' Mensagens encontradas' }}</p>
+                            <p>{{ count($acoes) == 1 ? count($acoes).' Ação encontrada' : count($acoes).' Ações encontradas' }}</p>
                         </div>
 
                         <!--<div class="actions">
@@ -71,43 +71,47 @@
 
                 <div class="panel">
 
-                    <div class="records--list" data-title="Lista de mensagens">
+                    <div class="records--list" data-title="Lista de ações">
                         <table id="recordsListView">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Título</th>
-                                    <th>URL</th>
-                                    <th>Assunto</th>
                                     <th>Tipo de Ação</th>
+                                    <th>Status</th>
+                                    <th>Agendamento</th>
+                                    <th>Destinatários</th>
+                                    <th>Usuário</th>
                                     <th>Instituição</th>
-                                    <th class="not-sortable">Ações</th>
+                                    <!--<th class="not-sortable">Ações</th>-->
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($mensagens as $mensagem)
+                                @foreach($acoes as $acao)
 
-                                <tr id="{{ 'mensagem-'.$mensagem->id }}">
-                                    <td>{{ $mensagem->id }}</td>
-                                    <td>{{ $mensagem->titulo }}</td>
-                                    <td>{{ $mensagem->url }}</td>
-                                    <td>{{ $mensagem->assunto }}</td>
-                                    <td>{{ $mensagem->tipo_de_acao }}</td>
-                                    <td>{{ $mensagem->instituicao->nome }}</td>
-                                    <td>
+                                <tr id="{{ 'acao-'.$acao->id }}">
+                                    <td>{{ $acao->id }}</td>
+                                    <td>{{ $acao->titulo }}</td>
+                                    <td>{{ $acao->tipo_de_acao }}</td>
+                                    <td>{{ $acao->status }}</td>
+                                    <td>{{ $acao->agendamento }}</td>
+                                    <td>{{ $acao->destinatarios }}</td>
+                                    <td>{{ $acao->usuario->name }}</td>
+                                    <td>{{ $acao->instituicao->nome }}</td>
+                                    <!--<td>
                                         <div class="dropleft">
                                             <a href="#" class="btn-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
 
                                             <div class="dropdown-menu">
-                                                <a href="{{ route('admin.mensagens.edit', $mensagem->id ) }}" class="dropdown-item">Editar</a>
-                                                <form action="{{ route('admin.mensagens.destroy', $mensagem->id) }}" method="POST">
+                                                <a href="{{ route('admin.acoes.edit', $acao->id ) }}" class="dropdown-item">Editar</a>
+                                                <form action="{{ route('admin.acoes.destroy', $acao->id) }}" method="POST">
                                                     @csrf
                                                     {{method_field('DELETE')}}
                                                     <button class="dropdown-item btn-remove">Excluir</button>
                                                 </form>
                                             </div>
                                         </div>
-                                    </td>
+                                    </td>-->
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -16,7 +16,6 @@ class CreateAcoesTable extends Migration
         Schema::create('acoes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titulo')->unique();
-            $table->string('envio');
             $table->integer('destinatarios');
             $table->string('status');
             $table->string('agendamento');

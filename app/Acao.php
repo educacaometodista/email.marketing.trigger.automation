@@ -10,7 +10,6 @@ class Acao extends Model
 
     public $fillable = [
         'titulo',
-        'envio',
         'destinatarios',
         'status',
         'agendamento',

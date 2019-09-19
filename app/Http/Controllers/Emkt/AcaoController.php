@@ -144,7 +144,6 @@ class AcaoController extends Controller
                     {
                         $acao = new Acao;
                         $acao->titulo = $titulo_da_acao;
-                        $acao->envio = $agendamento_envio;
                         $acao->destinatarios = 0;
                         $acao->status = $status;
                         $acao->agendamento = $agendamento_envio;

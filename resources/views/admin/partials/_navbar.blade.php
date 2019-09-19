@@ -89,6 +89,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="{{ route('admin.edit', Auth::user()->id ) }}"><i class="far fa-user"></i>Minha Conta</a></li>
                     <li><a href="{{ route('user.register')}}"><i class="fas fa-users"></i>Cadastrar Usuário</a></li>
+                    <li><a href="{{ route('admin.register')}}"><i class="fas fa-users"></i>Cadastrar Novo Administrador</a></li>
                     <li><a href="javascript:void(0)"><i class="fa fa-cog"></i>Configurações</a></li>
 
                     <li class="dropdown-divider"></li>

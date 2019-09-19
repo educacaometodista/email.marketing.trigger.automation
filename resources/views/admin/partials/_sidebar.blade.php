@@ -7,7 +7,7 @@
         <ul>
             <li>
                 <ul>
-                    <li class="active">
+                    <li class="">
                         <a href="{{ route('admin.home') }}">
                             <i class="fa fa-home"></i>
                             <span>Dashboard</span>
@@ -20,51 +20,51 @@
                 <a href="javascript:void(0)">E-Mail Marketing</a>
 
                 <ul>
-                    <li>
+                    <li class="{{ classActivePath('/admin/instituicoes', 'open', 2) }}">
                         <a href="javascript:void(0)">
                             <i class="fas fa-university"></i>
                             <span>Instituições</span> 
                         </a>
 
                         <ul>
-                            <li><a href="{{ route('admin.instituicoes.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
-                            <li><a href="{{ route('admin.instituicoes.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
+                            <li class="{{ classActivePath('/admin/instituicoes', 'active', 0) }}"><a href="{{ route('admin.instituicoes.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li class="{{ classActivePath('/admin/instituicoes/create', 'active', 0) }}"><a href="{{ route('admin.instituicoes.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
                         </ul>
                     </li>
 
-                    <li>
+                    <li class="{{ classActivePath('/admin/listas', 'open', 2) }}">
                         <a href="javascript:void(0)">
                             <i class="fas fa-list-ul"></i>
                             <span>Listas de Contatos</span>
                         </a>
 
                         <ul>
-                            <li><a href="javascript:void(0)"><i class="fas fa-bars"></i> Todas as Listas</a></li>
-                            <li><a href="{{ route('admin.listas.create') }}"><i class="fas fa-cloud-upload-alt"></i> Importar Lista</a></li>
+                            <li class="{{ classActivePath('/admin/listas', 'active', 0) }}"><a href="javascript:void(0)"><i class="fas fa-bars"></i> Todas as Listas</a></li>
+                            <li  class="{{ classActivePath('/admin/listas/create', 'active', 0) }}"><a href="{{ route('admin.listas.create') }}"><i class="fas fa-cloud-upload-alt"></i> Importar Lista</a></li>
                         </ul>
                     </li>
 
-                    <li>
+                    <li class="{{ classActivePath('/admin/mensagens', 'open', 2) }}">
                         <a href="javascript:void(0)">
                             <i class="fas fa-inbox"></i>
                             <span>Mensagens</span>
                         </a>
 
                         <ul>
-                            <li><a href="{{ route('admin.mensagens.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
-                            <li><a href="{{ route('admin.mensagens.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
+                            <li class="{{ classActivePath('/admin/mensagens', 'active', 0) }}"><a href="{{ route('admin.mensagens.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li class="{{ classActivePath('/admin/mensagens/create', 'active', 0) }}"><a href="{{ route('admin.mensagens.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
                         </ul>
                     </li>
 
-                    <li>
+                    <li class="{{ classActivePath('/admin/acoes', 'open', 2) }}">
                         <a href="javascript:void(0)">
                         <i class="fas fa-paper-plane"></i>
                             <span>Ações</span>
                         </a>
 
                         <ul>
-                            <li><a href="{{ route('admin.acoes.index') }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
-                            <li><a href="{{ route('admin.acoes.create') }}"><i class="fas fa-plus"></i> Criar Nova</a></li>
+                            <li class="{{ classActivePath('/admin/acoes', 'open', 0) }}"><a href="{{ route('admin.acoes.index') }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li class="{{ classActivePath('/admin/acoes/create', 'open', 0) }}"><a href="{{ route('admin.acoes.create') }}"><i class="fas fa-plus"></i> Criar Nova</a></li>
                         </ul>
                     </li>
 

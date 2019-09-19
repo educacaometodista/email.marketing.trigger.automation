@@ -54,23 +54,16 @@
             </li>
 
             <li>
-                <a href="#">FUNÇÕES</a>
-
-                <ul>
-                    <li>
-                        <a href="#">
-                        <i class="fas fa-university"></i>
-                            <span>Instituições</span>
+                        <a href="javascript:void(0)">
+                            <i class="fas fa-university"></i>
+                            <span>Instituições</span> 
                         </a>
 
                         <ul>
-                            <li><a href="#"><i class="fas fa-bars"></i> Listar Todas</a></li>
-                            <li><a href="#"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
+                            <li><a href="{{ route('admin.instituicoes.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li><a href="{{ route('admin.instituicoes.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
                         </ul>
                     </li>
-                   
-                </ul>
-            </li>
 
             <li>
                 <a href="#">USUÁRIOS</a>

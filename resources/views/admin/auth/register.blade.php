@@ -17,7 +17,7 @@
                                 <!-- Logo End -->
 
                                 <form action="{{ route('admin.register') }}" method="POST">
-                                <label class="m-account--title text-loginarea">REGISTRO DE USUÁRIO</label>
+                                <label class="m-account--title text-admin">REGISTRO DE USUÁRIO</label>
                                     @csrf
 
                                     <div class="form-group">
@@ -96,7 +96,7 @@
                                     </div>
 
                                     <div class="m-account--actions">
-                                        <button type="submit" class="btn btn-rounded btn-warning">CADASTRAR</button>
+                                        <button type="submit" class="btn btn-rounded btn-primary">CADASTRAR</button>
                                     </div>
 
                                     <div class="m-account--footer">

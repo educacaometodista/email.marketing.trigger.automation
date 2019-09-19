@@ -3,13 +3,13 @@
     <!-- Navbar Header Start -->
     <div class="navbar--header">
         <!-- Logo Start -->
-        <a href="#" class="logo" style="text-align:center;">
+        <a href="javascript:void(0)" class="logo" style="text-align:center;">
             <img src="http://portal.metodista.br/msg/institucional/comunicados-2018/imagens/educacao-metodista.png" alt="">
         </a>
         <!-- Logo End -->
 
         <!-- Sidebar Toggle Button Start -->
-        <a href="#" class="navbar--btn" data-toggle="sidebar" title="Toggle Sidebar">
+        <a href="javascript:void(0)" class="navbar--btn" data-toggle="sidebar" title="Toggle Sidebar">
             <i class="fa fa-bars"></i>
         </a>
         <!-- Sidebar Toggle Button End -->
@@ -17,7 +17,7 @@
     <!-- Navbar Header End -->
 
     <!-- Sidebar Toggle Button Start -->
-    <a href="#" class="navbar--btn" data-toggle="sidebar" title="Toggle Sidebar">
+    <a href="javascript:void(0)" class="navbar--btn" data-toggle="sidebar" title="Toggle Sidebar">
         <i class="fa fa-bars"></i>
     </a>
     <!-- Sidebar Toggle Button End -->
@@ -34,14 +34,14 @@
     <div class="navbar--nav ml-auto">
         <ul class="nav">
             <!-- <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="javascript:void(0)" class="nav-link">
                     <i class="fa fa-bell"></i>
                     <span class="badge text-white bg-blue">7</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="javascript:void(0)" class="nav-link">
                     <i class="fa fa-envelope"></i>
                     <span class="badge text-white bg-blue">4</span>
                 </a>
@@ -49,7 +49,7 @@
 
             <!-- Nav Language Start -->
             <!--<li class="nav-item dropdown nav-language">
-                <a href="#" class="nav-link" data-toggle="dropdown">
+                <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown">
                     <img src="assets/img/flags/us.png" alt="">
                     <span>English</span>
                     <i class="fa fa-angle-down"></i>
@@ -80,18 +80,18 @@
 
             <!-- Nav User Start -->
             <li class="nav-item dropdown nav--user online">
-                <a href="#" class="nav-link" data-toggle="dropdown">
+                <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown">
                     <img src="{{ Auth::user()->foto_de_perfil }}" alt="" class="rounded-circle">
                     <span>{{ Auth::user()->name }}</span>
                     <i class="fa fa-angle-down"></i>
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="far fa-user"></i>Minha Conta</a></li>
-                    <li><a href="#"><i class="fas fa-users"></i>Cadastrar Usuário</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i>Configurações</a></li>
+                    <li><a href="{{ route('admin.edit')}}"><i class="far fa-user"></i>Minha Conta</a></li>
+                    <li><a href="{{ route('user.register')}}"><i class="fas fa-users"></i>Cadastrar Usuário</a></li>
+                    <li><a href="javascript:void(0)"><i class="fa fa-cog"></i>Configurações</a></li>
                     <li class="dropdown-divider"></li>
-                    <li><a href="#">
+                    <li><a href="javascript:void(0)">
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Entrar') }}</a>

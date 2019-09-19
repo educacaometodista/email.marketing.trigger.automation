@@ -20,6 +20,7 @@ class CreateAcoesTable extends Migration
             $table->integer('destinatarios');
             $table->string('status');
             $table->string('agendamento');
+            $table->string('tipo_de_acao');
             $table->unsignedInteger('usuario_id');
             $table->unsignedInteger('instituicao_id');
             $table->timestamps();

@@ -15,7 +15,7 @@ class Acao extends Model
         'status',
         'agendamento',
         'usuario_id',
-        'mensagem_id'
+        'instituicao_id'
     ];
 
     public function usuario()
@@ -23,8 +23,8 @@ class Acao extends Model
         return $this->hasOne(Admin::class, 'usuario_id');
     }
 
-    public function mensagem()
+    public function instituicao()
     {
-        return $this->belongsTo(Mensagem::class, 'mensagem_id');
+        return $this->belongsTo(Instituicao::class, 'instituicao_id');
     }
 }

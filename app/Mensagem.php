@@ -20,4 +20,9 @@ class Mensagem extends Model
     {
         return $this->belongsTo(Instituicao::class, 'instituicao_id');
     }
+
+    public function acao()
+    {
+        return $this->hasOne(Acao::class);
+    }
 }

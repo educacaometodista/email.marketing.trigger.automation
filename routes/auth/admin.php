@@ -6,4 +6,6 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::get('/', 'HomeController@index')->name('/');
         Route::get('home', 'HomeController@index')->name('home');
     });
+    Route::get('edit/{id}', 'Auth\EditController@edit')->name('edit');
+    Route::post('update', 'Auth\EditController@update')->name('update');
 });

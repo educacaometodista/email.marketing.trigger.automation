@@ -67,7 +67,19 @@ class PlanilhaController extends Controller
         $this->filter_name = ($subject == 'ausentes' || $subject == 'inscritos-parciais' || $subject == 'lembrete-de-prova' || $subject == 'aprovados-não-matriculados') ? 'Presencial' : 'Ead';
         if($this->filter_name == 'Ead')
         {
-            
+
+            if(!empty($currentFile[0]))
+            {
+                if(!array_key_exists('nome', $currentFile[0]) || !array_key_exists('e_mail', $currentFile[0]) || !array_key_exists('número', $currentFile[0]) || !array_key_exists('ddd', $currentFile[0]))
+                {
+                    //Não possui todas as colunas
+                    Session::flash('danger', 'O formato do arquivo não é válido!');
+                    return false;
+                }
+            } else {
+                Session::flash('danger', 'O formato do arquivo não é válido!');
+                return false;
+            }
 
         } elseif($this->filter_name == 'Presencial') {
 

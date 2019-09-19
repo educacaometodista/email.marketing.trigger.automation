@@ -28,9 +28,6 @@ class CreateAcoesTable extends Migration
                 ->references('id')
                 ->on('admins');
 
-            $table->foreign('mensagem_id')
-                ->references('id')
-                ->on('mensagens');
         });
     }
 

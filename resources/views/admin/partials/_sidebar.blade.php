@@ -71,6 +71,62 @@
                 </ul>
             </li>
 
+
+            <li>
+                <a href="javascript:void(0)">SMS Marketing <span class="badge bg-orange text-white">Em breve</span></a>
+
+                <!-- <ul>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <i class="fas fa-university"></i>
+                            <span>Instituições</span> 
+                        </a>
+
+                        <ul>
+                            <li><a href="{{ route('admin.instituicoes.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li><a href="{{ route('admin.instituicoes.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0)">
+                            <i class="fas fa-list-ul"></i>
+                            <span>Listas de Contatos</span>
+                        </a>
+
+                        <ul>
+                            <li><a href="javascript:void(0)"><i class="fas fa-bars"></i> Todas as Listas</a></li>
+                            <li><a href="{{ route('admin.listas.create') }}"><i class="fas fa-cloud-upload-alt"></i> Importar Lista</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0)">
+                            <i class="fas fa-inbox"></i>
+                            <span>Mensagens</span>
+                        </a>
+
+                        <ul>
+                            <li><a href="{{ route('admin.mensagens.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li><a href="{{ route('admin.mensagens.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0)">
+                        <i class="fas fa-paper-plane"></i>
+                            <span>Ações</span>
+                        </a>
+
+                        <ul>
+                            <li><a href="{{ route('admin.acoes.index') }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <li><a href="{{ route('admin.acoes.create') }}"><i class="fas fa-plus"></i> Criar Nova</a></li>
+                        </ul>
+                    </li>
+
+                </ul> -->
+            </li>
+
         </ul>
     </div>
     <!-- Sidebar Navigation End -->

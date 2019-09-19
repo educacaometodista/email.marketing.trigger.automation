@@ -54,7 +54,7 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                <span class="label-text col-md-2 col-form-label text-md-right">Tipo de Ação</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right" id="tipoAcao">Tipo de Ação</span>
                                 <div class="col-md-10">
                                     <select name="tipo_de_acao" class="form-control" id="tipo_de_acao">
                                         <option></option>
@@ -80,7 +80,7 @@
                                 <div class="col-md-5 form-inline">
                                     @foreach($instituicoes as $key => $instituicao)
 
-                                    <label class="form-check mr-3">
+                                    <label class="form-check mr-3" id="{{ $instituicao->prefixo }}">
                                         <input type="checkbox" name="{{ 'instituicao-'.strtolower($instituicao->prefixo) }}" value="{{ $instituicao->prefixo }}" class="form-check-input"> <span class="form-check-label">{{ $instituicao->nome }}</span>
                                     </label>
 
@@ -110,13 +110,13 @@
 
                             <div class="form-group row"> <span class="label-text col-md-2 col-form-label text-md-right py-0">Situação da Lista</span>
                                 <div class="col-md-10">
-                                    <label class="form-radio">
-                                        <input type="radio" name="hasList" value="importar-agora" class="form-radio-input">
-                                        <span class="form-radio-label" checked>Importar Agora</span>
+                                <label class="form-radio">
+                                        <input type="radio" name="hasList" value="concluido" class="form-radio-input" checked>
+                                        <span class="form-radio-label">Já Importado</span>
                                     </label>
                                     <label class="form-radio">
-                                        <input type="radio" name="hasList" value="concluido" class="form-radio-input">
-                                        <span class="form-radio-label">Já Importado</span>
+                                        <input type="radio" name="hasList" value="importar-agora" class="form-radio-input" >
+                                        <span class="form-radio-label">Importar Agora</span>
                                     </label>
                                 </div>
                             </div>
@@ -162,7 +162,35 @@
         } else {
             $('#input-lista').addClass('d-none')
         }
-    })
+    });
+
+
+
+    $("#tipo_de_acao").change(function(){
+    if($(this).val()=="Inscritos Parciais a Distancia")
+    {    
+        $("label#UMESP").hide();
+        $("label#UNIEP").hide();
+        $("label#Izabela").hide();
+        $("label#Granbery").hide();
+        $("label#Fames").hide();
+        $("label#IPA").hide();
+        $("label#UNIMEP").hide();
+        $("label#EaD-UMESP").show();
+    }
+    else
+    {
+        $("label#EaD-UMESP").hide();
+        $("label#UMESP").show();
+        $("label#UNIEP").show();
+        $("label#Izabela").show();
+        $("label#Granbery").show();
+        $("label#Fames").show();
+        $("label#IPA").show();
+        $("label#UNIMEP").show();
+    };
+});
+
 </script>
 @endpush
 

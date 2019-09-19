@@ -6904,3 +6904,7 @@ h2 i.fas {
     color: #fff;
     border-radius: 30px;
 }
+
+.d-none {
+    display: none;
+}

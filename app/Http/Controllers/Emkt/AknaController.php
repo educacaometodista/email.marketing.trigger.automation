@@ -140,4 +140,18 @@ class AknaController extends Controller
 
         return str_replace('.', '!', $xml->EMKT->RETURN[0]);
     }
+
+    public function destinatariosDaAcao($titulo_da_acao, $instituicao)
+    {
+        $this->data['Client'] = $instituicao->codigo_da_empresa;
+
+        $xml_request = $this->getXml('acoes/informacoes-da-acao');
+        $xml_request = str_replace('[TITULO DA ACAO]', $titulo_da_acao, $xml_request);
+       
+        $xml_response = $this->post([], $xml_request);
+
+        $xml = new \SimpleXMLElement($xml_response);
+
+        return $xml->EMKT->ACAO->CONTATOS->TOTAL;
+    }
 }

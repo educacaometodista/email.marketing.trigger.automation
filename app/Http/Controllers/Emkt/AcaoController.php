@@ -139,12 +139,14 @@ class AcaoController extends Controller
                 {
                     sleep(40);
                     $status = $this->aknaAPI()->criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas);
+                    $destinarios = $this->aknaAPI()->destinatariosDaAcao($titulo_da_acao, $instituicao);
+
                         
                     if($status != 'Já existe uma campanha cadastrada com esse título!')
                     {
                         $acao = new Acao;
                         $acao->titulo = $titulo_da_acao;
-                        $acao->destinatarios = 0;
+                        $acao->destinatarios = $destinarios;
                         $acao->status = $status;
                         $acao->agendamento = $agendamento_envio;
                         $acao->tipo_de_acao = $tipo_de_acao;

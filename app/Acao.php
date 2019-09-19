@@ -25,6 +25,6 @@ class Acao extends Model
 
     public function mensagem()
     {
-        return $this->hasOne(Mensagem::class, 'mensagem_id');
+        return $this->belongsTo(Mensagem::class, 'mensagem_id');
     }
 }

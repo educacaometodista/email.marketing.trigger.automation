@@ -14,7 +14,17 @@ class Acao extends Model
         'destinatarios',
         'status',
         'agendamento',
-        'usuario',
+        'usuario_id',
         'mensagem_id'
     ];
+
+    public function usuario()
+    {
+        return $this->hasOne(Admin::class, 'usuario_id');
+    }
+
+    public function mensagem()
+    {
+        return $this->hasOne(Mensagem::class, 'mensagem_id');
+    }
 }

@@ -50,8 +50,8 @@
                                     </div>
 
                                     <div class="m-account--actions">
-                                        <p>
-                                                Não lembra seu e-mail? <a href="{{ route('user.password.request') }}" class="pl-1" style="color:#e16123;">Entre em contato com o suporte.</a>
+                                        <p>     
+                                        Não lembra seu e-mail? <a href="mailto:leonardo.almeida@metodista.br, erick.serrano@metodista.br, fernando.zancope@metodista.br, thiago.tamosauskas@metodista.br?subject=[AUTOMAÇÃO DE DISPAROS] Esqueci meu e-mail" class="pl-1" style="color:#e16123;">Entre em contato com o suporte.</a>
                                         </p>
                                     </div>
                                     <div class="m-account--actions">

@@ -51,9 +51,7 @@
 
                                     <div class="m-account--actions">
                                         <p>
-                                            <a class="btn-link esqueceu-admin" href="{{ route('admin.password.request') }}">
-                                                Não lembra seu e-mail? <a href="#" class="pl-2" style="color:#745faa;">Entre em contato com o suporte.
-                                            </a>
+                                                Não lembra seu e-mail? <a href="{{ route('admin.password.request') }}" class="pl-1" style="color:#745faa;">Entre em contato com o suporte.</a>
                                         </p>
                                     </div>
                                     <div class="m-account--actions">

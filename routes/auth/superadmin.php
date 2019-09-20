@@ -8,4 +8,8 @@ Route::prefix('superadmin')->name('superadmin.')->namespace('Superadmin')->group
         Route::get('register', 'HomeController@index');
 
     });
+
+    Route::get('/password/reset', function () {
+        return redirect('/login');
+    });
 });

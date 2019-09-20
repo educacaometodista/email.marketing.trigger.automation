@@ -46,7 +46,8 @@ class ResetPasswordNotification extends Notification
             ->subject('Redefinição de Senha')
             ->greeting('Olá!')
             ->line('Sua solicitação de recuperação de senha acabou de chegar. Clique no botão abaixo para redefinir sua senha.')
-            ->action('Redefinir Senha', route('admin.password.reset', $this->token))
+            ->action('Redefinir Senha', route('admin.password.reset', $this->token));
+            
     }
 
     /**

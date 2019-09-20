@@ -41,7 +41,7 @@
                     @include('admin.partials._alert')
                     @include('admin.emkt.acoes.partials._alert')
 
-                        <form action="{{ route('admin.acoes.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.acoes.store') }}" method="POST" enctype="multipart/form-data" id="formulario">
                             @csrf
                             <!-- Form Group Start -->
                             <div class="form-group row">
@@ -143,6 +143,17 @@
                             </div>
                         
                         </form>
+
+                        <div class="col-md-12 mb-5 d-none" id="progress-bar">
+                            <h5 class="h5 fw--600 mb-3">Aguarde, isso pode levar alguns minutos...</h5>
+
+                            <div class="progress h-15px">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-orange w-75">
+
+                                </div>
+                            </div>
+                            
+                            
                     </div>
                 </div>
                 <!-- Panel End -->
@@ -163,8 +174,6 @@
             $('#input-lista').addClass('d-none')
         }
     });
-
-
 
     $("#tipo_de_acao").change(function(){
     if($(this).val()=="Inscritos Parciais a Distancia")
@@ -189,6 +198,12 @@
         $("label#IPA").show();
         $("label#UNIMEP").show();
     };
+
+    $('#formulario').submit(function() {
+        $(this).hide();
+        $('#progress-bar').removeClass('d-none');
+    });
+
 });
 
 </script>

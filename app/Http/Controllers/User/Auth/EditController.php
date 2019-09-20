@@ -17,7 +17,10 @@ class EditController extends Controller
 
     public function edit($id)
     {
-        return view('user.auth.edit', ['user' => User::findOrfail($id)]);
+        if($id == Auth::user()->id)
+            return view('user.auth.edit', ['user' => User::findOrfail($id)]);
+        else
+            return redirect()->route('user.home');
     }
 
     public function update(Request $request, $id)

@@ -6,10 +6,9 @@ function classActivePath($path, $activeClass, $n)
         $i = 0;
         $final_path = '';
         $explode_path = explode('/', $_SERVER['REQUEST_URI']);
-        while($n > $i)
+        foreach ($explode_path as $value)
         {
-            $i++;
-            $final_path .= '/'.$explode_path[$i];
+            $final_path .= '/'.$value;
         }
         if($path == $final_path)
             echo " $activeClass";

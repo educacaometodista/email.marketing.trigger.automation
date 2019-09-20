@@ -82,7 +82,7 @@
                                     </div>-->
 
                                     <div class="m-account--footer">
-                                        <p>&copy; 2019 Educação Metodista</p>
+                                        <p><a href="https://github.com/educacaometodista" style="color:#999;" target="_blank">&copy; 2019 Educação Metodista</a></p>
                                     </div>
                                 </form>
                             </div>

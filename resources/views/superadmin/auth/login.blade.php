@@ -63,12 +63,6 @@
                                     </div>
 
                                     <div class="m-account--actions">
-                                        @if (Route::has('password.request'))
-                                            <a class="btn-link esqueceu-superadmin" href="{{ route('superadmin.password.request') }}">
-                                                {{ __('Esqueceu sua senha?') }}
-                                            </a>
-                                        @endif
-
                                         <button type="submit" class="btn btn-rounded btn-info">Login</button>
                                     </div>
 
@@ -82,7 +76,7 @@
                                     </div>-->
 
                                     <div class="m-account--footer">
-                                        <p>&copy; 2019 Educação Metodista</p>
+                                        <p><a href="https://github.com/educacaometodista" style="color:#999;" target="_blank">&copy; 2019 Educação Metodista</a></p>
                                     </div>
                                 </form>
                             </div>

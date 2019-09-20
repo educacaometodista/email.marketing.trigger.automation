@@ -9,7 +9,7 @@ Route::prefix('superadmin')->name('superadmin.')->namespace('Superadmin')->group
 
     });
 
-    Route::get('/password/reset', function () {
+    Route::get('/password/email', function () {
         return redirect('superadmin/login');
     });
 });

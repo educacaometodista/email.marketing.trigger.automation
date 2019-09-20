@@ -20,4 +20,22 @@ class EditController extends Controller
         return view('admin.auth.edit', ['admin' => Admin::findOrfail($id)]);
     }
 
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|min:2|max:255|string',
+            'password' => 'required|min:6|max:255|string',
+            'foto_de_perfil' => 'required|min:8|max:255|string'
+        ]);
+
+        $admin = Admin::findOrFail($id)->update([
+            'name' => $request->name,
+            'password' => bcrypt($request->password),
+            'foto_de_perfil' => $request->foto_de_perfil,
+        ]);
+
+        return redirect()->route('admin.edit', compact('admin'))
+            ->with('success', 'Informações alteradas com sucesso!');
+    }
+
 }

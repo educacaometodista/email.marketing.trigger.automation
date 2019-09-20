@@ -8,5 +8,8 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
     });
     Route::get('edit/{id}', 'Auth\EditController@edit')->name('edit');
     Route::post('update/{id}', 'Auth\EditController@update')->name('update');
-    
+
+    Route::get('/password/reset', function () {
+        return redirect('admin/login');
+    });
 });

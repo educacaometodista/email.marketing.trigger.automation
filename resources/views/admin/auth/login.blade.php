@@ -35,7 +35,7 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                         <div class="input-group-prepend">
-                                                <i class="fas fa-user"></i>
+                                                <i class="fas fa-envelope"></i>
                                             </div>
 
                                             <input placeholder="Digite seu e-mail" id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus autocomplete="off">

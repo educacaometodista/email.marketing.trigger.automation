@@ -73,7 +73,7 @@ class AcaoController extends Controller
             'data_agendamento' => 'required|date',
             'hora_agendamento'=> 'required',
             'hasList' => 'required',
-            'import_file' => 'required|file|mimes:xlsx,csv,txt'
+            'import_file' => 'file|mimes:xlsx,csv,txt'
         ]);
 
 

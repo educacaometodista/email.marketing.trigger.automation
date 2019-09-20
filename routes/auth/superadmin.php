@@ -10,6 +10,6 @@ Route::prefix('superadmin')->name('superadmin.')->namespace('Superadmin')->group
     });
 
     Route::get('/password/reset', function () {
-        return redirect('/login');
+        return redirect('superadmin/login');
     });
 });

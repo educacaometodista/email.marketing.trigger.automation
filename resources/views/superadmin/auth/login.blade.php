@@ -63,12 +63,6 @@
                                     </div>
 
                                     <div class="m-account--actions">
-                                        @if (Route::has('password.request'))
-                                            <a class="btn-link esqueceu-superadmin" href="{{ route('superadmin.password.request') }}">
-                                                {{ __('Esqueceu sua senha?') }}
-                                            </a>
-                                        @endif
-
                                         <button type="submit" class="btn btn-rounded btn-info">Login</button>
                                     </div>
 

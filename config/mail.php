@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'crm@webid.net.br'),
-        'name' => env('MAIL_FROM_NAME', 'Gerênciamento de Comunicação e Marketing'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@webid.net.br'),
+        'name' => env('MAIL_FROM_NAME', 'Gerência de Comunicação e Marketing'),
     ],
 
     /*

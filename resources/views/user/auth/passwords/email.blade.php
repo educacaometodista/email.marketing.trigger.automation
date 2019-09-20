@@ -61,7 +61,7 @@
                                     </div>
 
                                     <div class="m-account--footer">
-                                        <p><p><a href="https://github.com/educacaometodista" target="_blank">&copy; 2019 Educação Metodista</a></p></p>
+                                        <p><a href="https://github.com/educacaometodista" style="color:#999;" target="_blank">&copy; 2019 Educação Metodista</a></p>
                                     </div>
                                 </form>
                             </div>

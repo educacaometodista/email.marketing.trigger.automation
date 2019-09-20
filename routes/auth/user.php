@@ -10,7 +10,7 @@ Route::prefix('user')->name('user.')->namespace('User')->group(function () {
     Route::get('edit/{id}', 'Auth\EditController@edit')->name('edit');
     Route::post('update/{id}', 'Auth\EditController@update')->name('update');
 
-    Route::get('/password/reset', function () {
+    Route::get('/password/email', function () {
         return redirect('user/login');
     });
 });

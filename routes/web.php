@@ -45,7 +45,14 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
         Route::post('/destroy/{id}', 'MensagemController@destroy')->name('destroy');
     });
 
-    Route::resource('/instituicoes', 'InstituicaoController');
+    Route::prefix('instituicoes')->name('instituicoes.')->group(function () {
+        Route::get('/', 'InstituicaoController@index')->name('index');
+        Route::get('/create', 'InstituicaoController@create')->name('create');
+        Route::get('/{id}/edit', 'InstituicaoController@edit')->name('edit');
+        Route::post('/store', 'InstituicaoController@store')->name('store');
+        Route::put('/{id}', 'InstituicaoController@update')->name('update');
+        Route::post('/destroy/{id}', 'InstituicaoController@destroy')->name('destroy');
+    });
 });
 
 // // Redireciona o usuário deslogado que tentar se registrar para a página de Login

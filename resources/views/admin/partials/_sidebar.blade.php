@@ -7,7 +7,7 @@
         <ul>
             <li>
                 <ul>
-                    <li class="">
+                    <li class="{{ classActivePath('/admin/home', 'active', 0) }}">
                         <a href="{{ route('admin.home') }}">
                             <i class="fa fa-home"></i>
                             <span>Dashboard</span>

@@ -114,7 +114,7 @@ class MensagemController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'titulo' => 'required|min:2|max:30|string|unique:mensagens',
+            'titulo' => 'required|min:2|max:30|string',
             'url_da_imagem' => 'required|min:10|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
             'tipo_de_acao' => 'required|min:2|max:30|string',

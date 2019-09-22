@@ -31,8 +31,8 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
 
     Route::prefix('acoes')->name('acoes.')->group(function () {
         Route::get('/', 'AcaoController@index')->name('index');
-        Route::get('/acoes/create', 'AcaoController@create')->name('create');
-        Route::post('/acoes/store', 'AcaoController@store')->name('store');
+        Route::get('/create', 'AcaoController@create')->name('create');
+        Route::post('/store', 'AcaoController@store')->name('store');
         //Route::get('/acoes/{titulo}', 'AcaoController@show');
     });
 

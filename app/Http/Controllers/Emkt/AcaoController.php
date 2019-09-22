@@ -124,6 +124,8 @@ class AcaoController extends Controller
             }
         }
 
+        sleep(40);
+
         $status = null;
 
         foreach ($instituicoes_selecionadas as $instituicao)
@@ -137,7 +139,6 @@ class AcaoController extends Controller
             {
                 if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
                 {
-                    sleep(40);
                     $status = $this->aknaAPI()->criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas);
                     $destinarios = $this->aknaAPI()->destinatariosDaAcao($titulo_da_acao, $instituicao);
 
@@ -173,9 +174,9 @@ class AcaoController extends Controller
      * @param  \App\Acao  $acao
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    /*public function show($titulo)
     {
-        return view('admin.emkt.acao.show', ['acao' => Acao::findOrFail($id)]);
-    }
+        return view('admin.emkt.acao.show', ['acao' => Acao::where('titulo', '==', $titulo)]);
+    }*/
 
 }

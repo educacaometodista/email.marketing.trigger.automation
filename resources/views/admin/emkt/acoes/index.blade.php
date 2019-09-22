@@ -83,7 +83,6 @@
                                     <th>Destinatários</th>
                                     <th>Usuário</th>
                                     <th>Instituição</th>
-                                    <!--<th class="not-sortable">Ações</th>-->
                                 </tr>
                             </thead>
                             <tbody>
@@ -98,20 +97,6 @@
                                     <td>{{ $acao->destinatarios }}</td>
                                     <td>{{ $acao->usuario->name }}</td>
                                     <td>{{ $acao->instituicao->nome }}</td>
-                                    <!--<td>
-                                        <div class="dropleft">
-                                            <a href="#" class="btn-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-
-                                            <div class="dropdown-menu">
-                                                <a href="{{ route('admin.acoes.edit', $acao->id ) }}" class="dropdown-item">Editar</a>
-                                                <form action="{{ route('admin.acoes.destroy', $acao->id) }}" method="POST">
-                                                    @csrf
-                                                    {{method_field('DELETE')}}
-                                                    <button class="dropdown-item btn-remove">Excluir</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>-->
                                 </tr>
                                 @endforeach
                             </tbody>

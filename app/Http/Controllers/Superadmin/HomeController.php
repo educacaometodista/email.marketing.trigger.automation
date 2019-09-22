@@ -14,6 +14,11 @@ class HomeController extends Controller
 
     public function index()
     {
+        return redirect()->route('superadmin.home');
+    }
+
+    public function home()
+    {
         return view('superadmin.home');
     }
 }

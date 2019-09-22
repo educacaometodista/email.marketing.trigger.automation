@@ -33,10 +33,18 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
         Route::get('/', 'AcaoController@index')->name('index');
         Route::get('/create', 'AcaoController@create')->name('create');
         Route::post('/store', 'AcaoController@store')->name('store');
-        //Route::get('/acoes/{titulo}', 'AcaoController@show');
+        //Route::get('/{id}', 'AcaoController@show')->name('show');
     });
 
-    Route::resource('/mensagens', 'MensagemController');        
+    Route::prefix('mensagens')->name('mensagens.')->group(function () {
+        Route::get('/', 'MensagemController@index')->name('index');
+        Route::get('/create', 'MensagemController@create')->name('create');
+        Route::get('/{id}/edit', 'MensagemController@edit')->name('edit');
+        Route::post('/store', 'MensagemController@store')->name('store');
+        Route::put('/{id}', 'MensagemController@update')->name('update');
+        Route::post('/destroy/{id}', 'MensagemController@destroy')->name('destroy');
+    });
+
     Route::resource('/instituicoes', 'InstituicaoController');
 });
 

@@ -29,10 +29,15 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
         Route::post('store', 'ListaController@store')->name('store');
     });
 
-    Route::resource('/acoes', 'AcaoController');
+    Route::prefix('acoes')->name('acoes.')->group(function () {
+        Route::get('/acoes', 'AcaoController@index');
+        Route::get('/acoes/create', 'AcaoController@create');
+        Route::post('/acoes/store', 'AcaoController@store');
+        //Route::get('/acoes/{titulo}', 'AcaoController@show');
+    });
+
     Route::resource('/mensagens', 'MensagemController');        
     Route::resource('/instituicoes', 'InstituicaoController');
-    Route::resource('/acoes', 'AcaoController');
 });
 
 // // Redireciona o usuário deslogado que tentar se registrar para a página de Login

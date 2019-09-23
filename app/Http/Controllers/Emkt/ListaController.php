@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Emkt\AknaController;
 use App\Http\Controllers\PlanilhaController;
 use App\Instituicao;
+use App\Lista;
 use Session;
 
 class ListaController extends Controller
@@ -112,5 +113,11 @@ class ListaController extends Controller
 
             return back()->with('warning', 'Não há instituições cadastradas para importar este arquivo!');
         }   
+    }
+
+    public function download($nome_da_lista, $extension)
+    {
+        $lista = Lista::where($nome_da_lista, '==', 'nome_da_lista')->first();
+        return (new PlanilhaController)->download(eval($lista), $extension);
     }
 }

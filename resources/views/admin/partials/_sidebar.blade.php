@@ -39,7 +39,7 @@
                         </a>
 
                         <ul>
-                            <li class="{{ classActivePath('/admin/listas', 'active', 0) }}"><a href="javascript:void(0)"><i class="fas fa-bars"></i> Todas as Listas</a></li>
+                            <!--<li class="{{ classActivePath('/admin/listas', 'active', 0) }}"><a href="javascript:void(0)"><i class="fas fa-bars"></i> Todas as Listas</a></li>-->
                             <li  class="{{ classActivePath('/admin/listas/create', 'active', 0) }}"><a href="{{ route('admin.listas.create') }}"><i class="fas fa-cloud-upload-alt"></i> Importar Lista</a></li>
                         </ul>
                     </li>

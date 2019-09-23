@@ -11,6 +11,7 @@ class Lista extends Model
     public $fillable = [
         'nome_da_lista',
         'nome_do_arquivo',
+        'contatos',
         'conteudo',
         'instituicao_id',
     ];

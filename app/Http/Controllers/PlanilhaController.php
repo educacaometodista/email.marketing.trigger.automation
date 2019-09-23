@@ -31,7 +31,7 @@ class PlanilhaController extends Controller
                 $sheet->fromArray($file);
                 $sheet->setAutoSize(true);
             });
-        })->store($extension, public_path($storage_path));
+        })->store($extension, $storage_path);
     }
 
     public function getFiles($storage_path)
@@ -222,37 +222,37 @@ class PlanilhaController extends Controller
 
             if(count($umesp_file) > 0)
             {
-                $this->storeFile($umesp_file, 'umesp-'.$subject.'-'.$date, $extension, $storage_path);
+                $this->storeFile($umesp_file, 'umesp-'.$subject.'-'.$date, $extension, public_path($storage_path));
                 array_push($file_list, 'umesp-'.$subject.'-'.$date);
             }
 
             if(count($unimep_file) > 0)
             {
-                $this->storeFile($unimep_file, 'unimep-'.$subject.'-'.$date, $extension, $storage_path);
+                $this->storeFile($unimep_file, 'unimep-'.$subject.'-'.$date, $extension, public_path($storage_path));
                 array_push($file_list, 'unimep-'.$subject.'-'.$date);
             }
                 
             if(count($izabela_file) > 0)
             {
-                $this->storeFile($izabela_file, 'izabela-'.$subject.'-'.$date, $extension, $storage_path);
+                $this->storeFile($izabela_file, 'izabela-'.$subject.'-'.$date, $extension, public_path($storage_path));
                 array_push($file_list, 'izabela-'.$subject.'-'.$date);
             }
 
             if(count($granbery_file) > 0)
             {
-                $this->storeFile($granbery_file, 'granbery-'.$subject.'-'.$date, $extension, $storage_path);
+                $this->storeFile($granbery_file, 'granbery-'.$subject.'-'.$date, $extension, public_path($storage_path));
                 array_push($file_list, 'granbery-'.$subject.'-'.$date);
             }
 
             if(count($fames_file) > 0)
             {
-                $this->storeFile($fames_file, 'fames-'.$subject.'-'.$date, $extension, $storage_path);
+                $this->storeFile($fames_file, 'fames-'.$subject.'-'.$date, $extension, public_path($storage_path));
                 array_push($file_list, 'fames-'.$subject.'-'.$date);
             }
                 
             if(count($ipa_file) > 0)
             {
-                $this->storeFile($ipa_file, 'ipa-'.$subject.'-'.$date, $extension, $storage_path);
+                $this->storeFile($ipa_file, 'ipa-'.$subject.'-'.$date, $extension, public_path($storage_path));
                 array_push($file_list, 'ipa-'.$subject.'-'.$date);
             }
 
@@ -312,11 +312,13 @@ class PlanilhaController extends Controller
 
         if(count($umesp_file) > 0)
         {
-            $this->storeFile($umesp_file, 'ead-umesp-'.$subject.'-'.$date, $extension, $storage_path);
+            $this->storeFile($umesp_file, 'ead-umesp-'.$subject.'-'.$date, $extension, public_path($storage_path));
             array_push($file_list, 'ead-umesp-'.$subject.'-'.$date);
         }
 
         return $file_list;
     }
+
+
 
 }

@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return redirect('/user/login');
 });
@@ -20,7 +9,6 @@ Auth::routes();
 require 'auth/user.php';
 require 'auth/admin.php';
 require 'auth/superadmin.php';
-
 
 Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
 
@@ -53,12 +41,8 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
         Route::put('/{id}', 'InstituicaoController@update')->name('update');
         Route::post('/destroy/{id}', 'InstituicaoController@destroy')->name('destroy');
     });
-});
 
-// // Redireciona o usuário deslogado que tentar se registrar para a página de Login
-// Route::get('/user/register', function() {
-//     return redirect('/user/login');
-// });
+});
 
 Auth::routes();
 

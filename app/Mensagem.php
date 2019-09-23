@@ -10,7 +10,8 @@ class Mensagem extends Model
 
     public $fillable = [
         'titulo',
-        'url',
+        'nome_do_arquivo',
+        'conteudo',
         'assunto',
         'tipo_de_acao',
         'instituicao_id',

@@ -55,8 +55,8 @@ class MensagemController extends Controller
     {
         $request->validate([
             'titulo' => 'required|min:2|max:80|string|unique:mensagens',
-            'nome_do_arquivo' => 'required|min:10|max:10000|string',
-            'conteudo' => 'required|min:10|max:10000|string',
+            'nome_do_arquivo' => 'required|min:1|max:10000|string|unique:mensagens',
+            'conteudo' => 'required|min:3|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
             'tipo_de_acao' => 'required|min:2|max:30|string',
             'instituicao' => 'required|min:1|max:40|string'
@@ -70,6 +70,9 @@ class MensagemController extends Controller
         $mensagem->tipo_de_acao = $request->input('tipo_de_acao');
         $mensagem->instituicao_id = $request->input('instituicao');
         $mensagem->save();
+
+        Mensagem::createFile($mensagem->nome_do_arquivo, $mensagem->conteudo, $mensagem->instituicao->prefixo);
+
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))
             ->with('success', 'Mensagem criada com sucesso!');
     }

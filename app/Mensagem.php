@@ -43,4 +43,9 @@ class Mensagem extends Model
         $new_content = str_replace($campo_variavel, $valor, $file_content);
         file_put_contents($file_name, $new_content);
     }
+
+    public static function renameFile($file_name, $new_file_name, $instituicao_prefixo)
+    {
+        rename(public_path("mensagens/$instituicao_prefixo/$file_name.html"), public_path("mensagens/$instituicao_prefixo/$new_file_name.html"));
+    }
 }

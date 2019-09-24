@@ -56,7 +56,7 @@ class Mensagem extends Model
 
     public static function deleteFile($file_name, $instituicao_prefixo)
     {
-        delete(public_path("mensagens/$instituicao_prefixo/$file_name.html"));
+        unlink(public_path("mensagens/$instituicao_prefixo/$file_name.html"));
     }
     
 }

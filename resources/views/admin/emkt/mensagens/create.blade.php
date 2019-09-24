@@ -107,7 +107,7 @@
                         <div class="form-group row">
                                     <span class="label-text col-md-2 col-form-label text-md-right">Conteúdo</span>
                                 <div class="col-md-10">
-                                <textarea style="height:300px; background-color:#1c2324;color:#eee;font-size:12px;" id="conteudo" name="conteudo" class="form-control" data-trigger="summernote">{{ $mensagem->conteudo }}</textarea>
+                                <textarea style="height:300px; background-color:#1c2324;color:#eee;font-size:12px;" id="conteudo" name="conteudo" class="form-control" data-trigger="summernote">{{ old('conteudo') }}</textarea>
                                 </div>
                             </div>
                             <!-- Form Group End -->

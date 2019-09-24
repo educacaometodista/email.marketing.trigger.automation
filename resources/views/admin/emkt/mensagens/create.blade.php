@@ -58,9 +58,9 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">URL da Mensagem</span>
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Nome do Arquivo</span>
                                 <div class="col-md-10">
-                                    <input type="text" name="url_da_imagem" class="form-control" id="url_da_imagem" value="{{ old('url_da_imagem') }}">
+                                    <input type="text" name="nome_do_arquivo" class="form-control" id="nome_do_arquivo" maxlenght="30" value="{{ old('nome_do_arquivo') }}">
                                 </div>
                             </div>
                             <!-- Form Group End -->
@@ -99,6 +99,15 @@
                                         <option value="{{ $instituicao->id }}">{{ $instituicao->nome }}</option>
                                     @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
+                        <!-- Form Group Start -->
+                        <div class="form-group row">
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Conteúdo</span>
+                                <div class="col-md-10">
+                                <textarea style="height:300px; background-color:#1c2324;color:#eee;font-size:12px;" id="conteudo" name="conteudo" class="form-control" data-trigger="summernote">{{ $mensagem->conteudo }}</textarea>
                                 </div>
                             </div>
                             <!-- Form Group End -->

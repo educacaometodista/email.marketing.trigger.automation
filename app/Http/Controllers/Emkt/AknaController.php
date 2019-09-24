@@ -115,7 +115,7 @@ class AknaController extends Controller
         $xml_request = str_replace('[NOME DO REMETENTE]', $instituicao->nome_do_remetente, $xml_request);
         $xml_request = str_replace('[EMAIL DO REMETENTE]', $instituicao->email_do_remetente, $xml_request);
         $xml_request = str_replace('[EMAIL PARA RETORNO]', $instituicao->email_de_retorno, $xml_request);
-        $xml_request = str_replace('[LINK DA MENSAGEM]', $mensagem->url, $xml_request);
+        $xml_request = str_replace('[LINK DA MENSAGEM]', $mensagem->getUrl(), $xml_request);
         $xml_request = str_replace('[ASSUNTO]', $mensagem->assunto, $xml_request);
         
             $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'. $nomes_das_listas[$instituicao->prefixo].'</lista>', $xml_request);;

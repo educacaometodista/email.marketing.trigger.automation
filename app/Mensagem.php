@@ -53,4 +53,10 @@ class Mensagem extends Model
     {
         file_put_contents(public_path("mensagens/$instituicao_prefixo/$file_name.html"), $content);
     }
+
+    public static function deleteFile($file_name, $instituicao_prefixo)
+    {
+        delete(public_path("mensagens/$instituicao_prefixo/$file_name.html"));
+    }
+    
 }

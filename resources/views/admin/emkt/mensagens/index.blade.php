@@ -57,6 +57,7 @@
                                     <th>Título</th>
                                     <th>Assunto</th>
                                     <th>Tipo de Ação</th>
+                                    <th>Nome do Arquivo</th>
                                     <th>Instituição</th>
                                     <th>Visualizar</th>
                                     <th class="not-sortable">Ações</th>
@@ -64,12 +65,12 @@
                             </thead>
                             <tbody>
                                 @foreach($mensagens as $mensagem)
-
                                 <tr id="{{ 'mensagem-'.$mensagem->id }}">
                                     <td>{{ $mensagem->id }}</td>
                                     <td>{{ $mensagem->titulo }}</td>
                                     <td>{{ $mensagem->assunto }}</td>
                                     <td>{{ $mensagem->tipo_de_acao }}</td>
+                                    <td>{{ $mensagem->nome_do_arquivo.'.html' }}</td>
                                     <td>{{ $mensagem->instituicao->nome }}</td>
                                     <td><a href="{{ $mensagem->getUrl() }}" target="_blank"><i class="fas fa-eye"></i></a></td>
                                     <td>

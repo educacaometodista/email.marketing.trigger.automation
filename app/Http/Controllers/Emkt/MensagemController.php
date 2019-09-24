@@ -56,7 +56,7 @@ class MensagemController extends Controller
         $request->validate([
             'titulo' => 'required|min:2|max:80|string|unique:mensagens',
             'nome_do_arquivo' => 'required|min:1|max:10000|string|unique:mensagens',
-            'conteudo' => 'required|min:3|max:10000|string',
+            'conteudo' => 'required|min:1|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
             'tipo_de_acao' => 'required|min:2|max:30|string',
             'instituicao' => 'required|min:1|max:40|string'
@@ -121,8 +121,8 @@ class MensagemController extends Controller
     {
         $request->validate([
             'titulo' => 'required|min:2|max:80|string',
-            'nome_do_arquivo' => 'required|min:10|max:10000|string',
-            'conteudo' => 'required|min:10|max:10000|string',
+            'nome_do_arquivo' => 'required|min:1|max:10000|string',
+            'conteudo' => 'required|min:1|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
             'tipo_de_acao' => 'required|min:2|max:30|string',
             'instituicao' => 'required|min:1|max:40|string'
@@ -157,7 +157,9 @@ class MensagemController extends Controller
      */
     public function destroy($id)
     {
-        Mensagem::findOrFail($id)->delete();
+        $mensagem = Mensagem::findOrFail($id);
+        Mensagem::deleteFile($mensagem->nome_do_arquivo, $mensagem->instituicao->prefixo);
+        $mensagem->delete();
 
         return redirect()->route('admin.mensagens.index')
             ->with('success', 'Mensagem removida com sucesso!');

@@ -26,4 +26,9 @@ class Mensagem extends Model
     {
         return $this->hasOne(Acao::class);
     }
+
+    public function getUrl()
+    {
+        return (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].'/mensagens/'.strtolower($this->prefixo).'/'.$this->nome_do_arquivo.'.html';
+    }
 }

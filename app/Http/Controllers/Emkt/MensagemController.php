@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mensagem;
 use App\Instituicao;
+use Storage;
 
 class MensagemController extends Controller
 {
@@ -54,7 +55,8 @@ class MensagemController extends Controller
     {
         $request->validate([
             'titulo' => 'required|min:2|max:30|string|unique:mensagens',
-            'url_da_imagem' => 'required|min:10|max:10000|string',
+            'nome_do_arquivo' => 'required|min:10|max:10000|string',
+            'conteudo' => 'required|min:10|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
             'tipo_de_acao' => 'required|min:2|max:30|string',
             'instituicao' => 'required|min:1|max:40|string'
@@ -62,7 +64,8 @@ class MensagemController extends Controller
         
         $mensagem = new Mensagem;
         $mensagem->titulo = $request->input('titulo');
-        $mensagem->url = $request->input('url_da_imagem');
+        $mensagem->nome_do_arquivo = $request->input('nome_do_arquivo');
+        $mensagem->conteudo = $request->input('conteudo');
         $mensagem->assunto = $request->input('assunto');
         $mensagem->tipo_de_acao = $request->input('tipo_de_acao');
         $mensagem->instituicao_id = $request->input('instituicao');
@@ -115,7 +118,8 @@ class MensagemController extends Controller
     {
         $request->validate([
             'titulo' => 'required|min:2|max:30|string',
-            'url_da_imagem' => 'required|min:10|max:10000|string',
+            'nome_do_arquivo' => 'required|min:10|max:10000|string',
+            'conteudo' => 'required|min:10|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
             'tipo_de_acao' => 'required|min:2|max:30|string',
             'instituicao' => 'required|min:1|max:40|string'
@@ -123,7 +127,8 @@ class MensagemController extends Controller
         
         $mensagem = Mensagem::findOrFail($id)->update([
             'titulo' => $request->titulo,
-            'url' => $request->url_da_imagem,
+            'nome_do_arquivo' => $request->nome_do_arquivo,
+            'conteudo' => $request->conteudo,
             'assunto' => $request->assunto,
             'tipo_de_acao' => $request->tipo_de_acao,
             'instituicao_id' => $request->instituicao

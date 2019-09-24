@@ -48,4 +48,9 @@ class Mensagem extends Model
     {
         rename(public_path("mensagens/$instituicao_prefixo/$file_name.html"), public_path("mensagens/$instituicao_prefixo/$new_file_name.html"));
     }
+
+    public static function createFile($file_name, $content ,$instituicao_prefixo)
+    {
+        file_put_contents(public_path("mensagens/$instituicao_prefixo/$file_name.html"), $content);
+    }
 }

@@ -30,7 +30,7 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
         Route::get('/{id}/edit', 'MensagemController@edit')->name('edit');
         Route::post('/store', 'MensagemController@store')->name('store');
         Route::put('/{id}', 'MensagemController@update')->name('update');
-        Route::post('/destroy/{id}', 'MensagemController@destroy')->name('destroy');
+        Route::delete('/{id}', 'MensagemController@destroy')->name('destroy');
     });
 
     Route::prefix('instituicoes')->name('instituicoes.')->group(function () {
@@ -39,7 +39,7 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
         Route::get('/{id}/edit', 'InstituicaoController@edit')->name('edit');
         Route::post('/store', 'InstituicaoController@store')->name('store');
         Route::put('/{id}', 'InstituicaoController@update')->name('update');
-        Route::post('/destroy/{id}', 'InstituicaoController@destroy')->name('destroy');
+        Route::delete('/{id}', 'InstituicaoController@destroy')->name('destroy');
     });
 
 });

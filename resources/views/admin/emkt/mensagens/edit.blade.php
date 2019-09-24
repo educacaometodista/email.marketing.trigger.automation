@@ -60,16 +60,6 @@
                                 </div>
                             </div>
                             <!-- Form Group End -->
-
-                            <!-- Form Group Start -->
-                            <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">URL da Mensagem</span>
-                                <div class="col-md-10">
-                                    <input type="text" name="url_da_imagem" class="form-control" id="url_da_imagem" value="{{ $mensagem->url }}">
-                                </div>
-                            </div>
-                            <!-- Form Group End -->
-
                             
                             <!-- Form Group Start -->
                             <div class="form-group row">

@@ -152,4 +152,11 @@ class MensagemController extends Controller
         return redirect()->route('admin.mensagens.index')
             ->with('success', 'Mensagem removida com sucesso!');
     }
+
+    public function editFile($file_name, $campo_variavel, $valor)
+    {
+        $file_content = file_get_content(public_path("mensagens/$file_name.html"));
+        $new_content = str_replace($campo_variavel, $valor, $file_content);
+        file_put_contents($file_name, $new_content);
+    }
 }

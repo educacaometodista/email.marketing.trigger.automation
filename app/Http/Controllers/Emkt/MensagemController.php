@@ -54,7 +54,7 @@ class MensagemController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titulo' => 'required|min:2|max:30|string|unique:mensagens',
+            'titulo' => 'required|min:2|max:80|string|unique:mensagens',
             'nome_do_arquivo' => 'required|min:10|max:10000|string',
             'conteudo' => 'required|min:10|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
@@ -117,7 +117,7 @@ class MensagemController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'titulo' => 'required|min:2|max:30|string',
+            'titulo' => 'required|min:2|max:80|string',
             'nome_do_arquivo' => 'required|min:10|max:10000|string',
             'conteudo' => 'required|min:10|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
@@ -125,7 +125,11 @@ class MensagemController extends Controller
             'instituicao' => 'required|min:1|max:40|string'
         ]);
         
-        $mensagem = Mensagem::findOrFail($id)->update([
+        $mensagem = Mensagem::findOrFail($id);
+
+        $nome_do_arquivo = $mensagem->nome_do_arquivo;
+
+        $mensagem->update([
             'titulo' => $request->titulo,
             'nome_do_arquivo' => $request->nome_do_arquivo,
             'conteudo' => $request->conteudo,
@@ -133,6 +137,9 @@ class MensagemController extends Controller
             'tipo_de_acao' => $request->tipo_de_acao,
             'instituicao_id' => $request->instituicao
         ]);
+
+        Mensagem::editFileContent($request->nome_do_arquivo, $request->conteudo, $mensagem->instituicao->prefixo);
+        Mensagem::renameFile($nome_do_arquivo, $request->nome_do_arquivo, $mensagem->instituicao->prefixo);
 
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))
             ->with('success', 'Mensagem atualizada com sucesso!');
@@ -153,10 +160,4 @@ class MensagemController extends Controller
             ->with('success', 'Mensagem removida com sucesso!');
     }
 
-    public function editFile($file_name, $campo_variavel, $valor)
-    {
-        $file_content = file_get_content(public_path("mensagens/$file_name.html"));
-        $new_content = str_replace($campo_variavel, $valor, $file_content);
-        file_put_contents($file_name, $new_content);
-    }
 }

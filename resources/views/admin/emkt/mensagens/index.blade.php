@@ -55,10 +55,10 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Título</th>
-                                    <th>URL</th>
                                     <th>Assunto</th>
                                     <th>Tipo de Ação</th>
                                     <th>Instituição</th>
+                                    <th>Visualizar</th>
                                     <th class="not-sortable">Ações</th>
                                 </tr>
                             </thead>
@@ -68,10 +68,10 @@
                                 <tr id="{{ 'mensagem-'.$mensagem->id }}">
                                     <td>{{ $mensagem->id }}</td>
                                     <td>{{ $mensagem->titulo }}</td>
-                                    <td>{{ $mensagem->url }}</td>
                                     <td>{{ $mensagem->assunto }}</td>
                                     <td>{{ $mensagem->tipo_de_acao }}</td>
                                     <td>{{ $mensagem->instituicao->nome }}</td>
+                                    <td><a href="{{ $mensagem->getUrl() }}" target="_blank"><i class="fas fa-eye"></i></a></td>
                                     <td>
                                         <div class="dropleft">
                                             <a href="#" class="btn-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>

@@ -28,20 +28,15 @@ class MensagensTableSeeder extends Seeder
         $mensagem->save();
         */
 
-        $host = include __DIR__.'/host.php';
-        $path = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$host.'/mensagens';
-
         $mensagem = new App\Mensagem;
         $mensagem->titulo = 'Lembrete de Prova - Template Branco';
         //$mensagem->url = 'http://portal.metodista.br/msg/campanha/vestibular/2020/1-semestre/presencial/lembrete-de-prova/';
         $mensagem->nome_do_arquivo = 'lembrete-de-prova';
-        $mensagem->content = get_file_content($path.'/umesp/lembrete-de-prova.html');
+        $mensagem->conteudo = file_get_contents(public_path('mensagens/umesp/lembrete-de-prova.html'));
         $mensagem->assunto = 'Não se esqueça: o dia da sua prova está chegando!';
         $mensagem->tipo_de_acao = 'Lembrete de Prova';
         $mensagem->instituicao_id = 1;
-        $mensagem->save();
-
-        
+        $mensagem->save();        
 
         /*$mensagem = new App\Mensagem;
         $mensagem->titulo = 'Aprovados Não Matriculado - Template Branco';

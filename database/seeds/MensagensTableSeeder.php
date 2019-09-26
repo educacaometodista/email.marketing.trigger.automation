@@ -11,7 +11,7 @@ class MensagensTableSeeder extends Seeder
     public function run()
     {
         //UMESP
-        $mensagem = new App\Mensagem;
+        /*$mensagem = new App\Mensagem;
         $mensagem->titulo = 'Ausentes - Template Branco';
         $mensagem->url = 'http://portal.metodista.br/msg/campanha/vestibular/2020/1-semestre/presencial/ausentes';
         $mensagem->assunto = 'Sentimos sua falta! Mas ainda dá tempo de começar sua graduação em 2019';
@@ -26,16 +26,24 @@ class MensagensTableSeeder extends Seeder
         $mensagem->tipo_de_acao = 'Inscritos Parciais';
         $mensagem->instituicao_id = 1;
         $mensagem->save();
+        */
+
+        $host = include __DIR__.'/host.php';
+        $path = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$host.'/mensagens';
 
         $mensagem = new App\Mensagem;
         $mensagem->titulo = 'Lembrete de Prova - Template Branco';
-        $mensagem->url = 'http://portal.metodista.br/msg/campanha/vestibular/2020/1-semestre/presencial/lembrete-de-prova/';
+        //$mensagem->url = 'http://portal.metodista.br/msg/campanha/vestibular/2020/1-semestre/presencial/lembrete-de-prova/';
+        $mensagem->nome_do_arquivo = 'lembrete-de-prova';
+        $mensagem->content = get_file_content($path.'/umesp/lembrete-de-prova.html');
         $mensagem->assunto = 'Não se esqueça: o dia da sua prova está chegando!';
         $mensagem->tipo_de_acao = 'Lembrete de Prova';
         $mensagem->instituicao_id = 1;
         $mensagem->save();
 
-        $mensagem = new App\Mensagem;
+        
+
+        /*$mensagem = new App\Mensagem;
         $mensagem->titulo = 'Aprovados Não Matriculado - Template Branco';
         $mensagem->url = 'http://portal.metodista.br/msg/campanha/vestibular/2020/1-semestre/presencial/aprovados-nao-matriculados';
         $mensagem->assunto = 'Falta pouco para você finalizar sua matrícula';
@@ -215,7 +223,7 @@ class MensagensTableSeeder extends Seeder
         $mensagem->assunto = 'Falta pouco para você finalizar sua matrícula';
         $mensagem->tipo_de_acao = 'Aprovados Não Matriculado';
         $mensagem->instituicao_id = 7;
-        $mensagem->save();
+        $mensagem->save();*/
         
     }
 

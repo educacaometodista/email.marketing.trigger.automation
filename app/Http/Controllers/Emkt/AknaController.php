@@ -24,7 +24,7 @@ class AknaController extends Controller
         $this->xmlPath = storage_path().'/akna_xml';
         $this->data = include __DIR__.'/user.php';
 
-        return $this->middleware('auth:admin');
+        $this->middleware('auth:admin');
     }
 
     public function getXml($file)

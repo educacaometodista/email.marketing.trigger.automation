@@ -27,7 +27,7 @@ class AdminsTableSeeder extends Seeder
         $admin->save();
 
         $admin = new App\Admin;
-        $admin->name = 'Erick Firmo';
+        $admin->name = 'Érick Firmo';
         $admin->email = 'erick.serrano@metodista.br';
         $admin->foto_de_perfil = 'https://avatars3.githubusercontent.com/u/34639603?s=460&v=4';
         $admin->password = bcrypt('psw');

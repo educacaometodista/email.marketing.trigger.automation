@@ -46,17 +46,17 @@ class Mensagem extends Model
 
     public static function renameFile($file_name, $new_file_name, $instituicao_prefixo)
     {
-        rename(public_path("mensagens/$instituicao_prefixo/$file_name.html"), public_path("mensagens/$instituicao_prefixo/$new_file_name.html"));
+        rename(public_path("mensagens/".strtolower($instituicao_prefixo)."/$file_name.html"), public_path("mensagens/".strtolower($instituicao_prefixo)."/$new_file_name.html"));
     }
 
     public static function createFile($file_name, $content ,$instituicao_prefixo)
     {
-        file_put_contents(public_path("mensagens/$instituicao_prefixo/$file_name.html"), $content);
+        file_put_contents(public_path("mensagens/".strtolower($instituicao_prefixo)."/$file_name.html"), $content);
     }
 
     public static function deleteFile($file_name, $instituicao_prefixo)
     {
-        unlink(public_path("mensagens/$instituicao_prefixo/$file_name.html"));
+        unlink(public_path("mensagens/".strtolower($instituicao_prefixo)."/$file_name.html"));
     }
     
 }

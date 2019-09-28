@@ -174,37 +174,39 @@
             $('#input-lista').addClass('d-none')
         }
     });
-    /*
-    $("#tipo_de_acao").change(function(){
-    if($(this).val()=="Inscritos Parciais a Distancia")
-    {    
-        $("label#UMESP").hide();
-        $("label#UNIEP").hide();
-        $("label#Izabela").hide();
-        $("label#Granbery").hide();
-        $("label#Fames").hide();
-        $("label#IPA").hide();
-        $("label#UNIMEP").hide();
-        $("label#EaD-UMESP").show();
-    }
-    else
-    {
-        $("label#EaD-UMESP").hide();
-        $("label#UMESP").show();
-        $("label#UNIEP").show();
-        $("label#Izabela").show();
-        $("label#Granbery").show();
-        $("label#Fames").show();
-        $("label#IPA").show();
-        $("label#UNIMEP").show();
-    };
 
-    $('#formulario').submit(function() {
-        $(this).hide();
-        $('#progress-bar').removeClass('d-none');
+    /*$("#tipo_de_acao").change(function(){
+        if($(this).val()=="Inscritos Parciais a Distancia")
+        {    
+            $("label#UMESP").hide();
+            $("label#UNIEP").hide();
+            $("label#Izabela").hide();
+            $("label#Granbery").hide();
+            $("label#Fames").hide();
+            $("label#IPA").hide();
+            $("label#UNIMEP").hide();
+            $("label#EaD-UMESP").show();
+        }
+        else
+        {
+            $("label#EaD-UMESP").hide();
+            $("label#UMESP").show();
+            $("label#UNIEP").show();
+            $("label#Izabela").show();
+            $("label#Granbery").show();
+            $("label#Fames").show();
+            $("label#IPA").show();
+            $("label#UNIMEP").show();
+        };
+
     });*/
 
-});
+    
+    $('#formulario').submit(function() {
+            $(this).hide();
+            $('#progress-bar').removeClass('d-none');
+    });
+
 
 </script>
 @endpush

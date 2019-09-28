@@ -67,7 +67,7 @@ class PlanilhaController extends Controller
         if($subject == 'ausentes' || $subject == 'inscritos-parciais' || $subject == 'lembrete-de-prova' || $subject == 'aprovados-não-matriculados')
             $this->filter_name = 'Presencial';
 
-        elseif($subject == 'ausentes-ead' || $subject == 'inscritos-parciais-ead' || $subject == 'lembrete-de-prova-ead' || $subject == 'aprovados-não-matriculados-ead')
+        elseif($subject == 'ausentes-a-distancia' || $subject == 'inscritos-parciais-a-distancia' || $subject == 'lembrete-de-prova-a-distancia' || $subject == 'aprovados-não-matriculados-a-distancia')
             $this->filter_name = 'Ead';
         
         if($this->filter_name == 'Ead')

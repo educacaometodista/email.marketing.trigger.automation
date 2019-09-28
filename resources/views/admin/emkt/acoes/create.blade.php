@@ -174,7 +174,7 @@
             $('#input-lista').addClass('d-none')
         }
     });
-
+    /*
     $("#tipo_de_acao").change(function(){
     if($(this).val()=="Inscritos Parciais a Distancia")
     {    
@@ -202,7 +202,7 @@
     $('#formulario').submit(function() {
         $(this).hide();
         $('#progress-bar').removeClass('d-none');
-    });
+    });*/
 
 });
 

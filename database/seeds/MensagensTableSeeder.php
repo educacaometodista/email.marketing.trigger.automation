@@ -230,6 +230,7 @@ class MensagensTableSeeder extends Seeder
         $mensagem->assunto = 'Falta pouco para você finalizar sua matrícula';
         $mensagem->tipo_de_acao = 'Aprovados Não Matriculados';
         $mensagem->instituicao_id = 6;
+        $mensagem->save();        
 
         //Granbery
         $mensagem = new App\Mensagem;
@@ -266,6 +267,7 @@ class MensagensTableSeeder extends Seeder
         $mensagem->assunto = 'Falta pouco para você finalizar sua matrícula';
         $mensagem->tipo_de_acao = 'Aprovados Não Matriculados';
         $mensagem->instituicao_id = 7;
+        $mensagem->save();        
 
         //Granbery EaD
         $mensagem = new App\Mensagem;
@@ -302,6 +304,7 @@ class MensagensTableSeeder extends Seeder
         $mensagem->assunto = 'Falta pouco para você finalizar sua matrícula';
         $mensagem->tipo_de_acao = 'Aprovados Não Matriculados';
         $mensagem->instituicao_id = 8;
+        $mensagem->save();        
       
         //Fames
         $mensagem = new App\Mensagem;
@@ -338,6 +341,7 @@ class MensagensTableSeeder extends Seeder
         $mensagem->assunto = 'Falta pouco para você finalizar sua matrícula';
         $mensagem->tipo_de_acao = 'Aprovados Não Matriculados';
         $mensagem->instituicao_id = 9;
+        $mensagem->save();        
 
         //Fames EaD
         $mensagem = new App\Mensagem;
@@ -374,6 +378,7 @@ class MensagensTableSeeder extends Seeder
         $mensagem->assunto = 'Falta pouco para você finalizar sua matrícula';
         $mensagem->tipo_de_acao = 'Aprovados Não Matriculados';
         $mensagem->instituicao_id = 10;
+        $mensagem->save();        
 
         //IPA
         $mensagem = new App\Mensagem;
@@ -410,6 +415,7 @@ class MensagensTableSeeder extends Seeder
         $mensagem->assunto = 'Falta pouco para você finalizar sua matrícula';
         $mensagem->tipo_de_acao = 'Aprovados Não Matriculados';
         $mensagem->instituicao_id = 11;
+        $mensagem->save();        
 
         //IPA EaD
         $mensagem = new App\Mensagem;
@@ -446,6 +452,7 @@ class MensagensTableSeeder extends Seeder
         $mensagem->assunto = 'Falta pouco para você finalizar sua matrícula';
         $mensagem->tipo_de_acao = 'Aprovados Não Matriculados';
         $mensagem->instituicao_id = 12;
+        $mensagem->save();
 
     }
 

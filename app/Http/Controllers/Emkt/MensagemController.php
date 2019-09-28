@@ -34,10 +34,13 @@ class MensagemController extends Controller
     {
         $tipos_de_acoes = [ 
             'Ausentes' => 'Ausentes',
+            'Ausentes Ead' => 'Ausentes Ead',
             'Inscritos Parciais' => 'Inscritos Parciais',
             'Inscritos Parciais Ead' => 'Inscritos Parciais Ead',
             'Lembrete de Prova' => 'Lembrete de Prova',
-            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados'
+            'Lembrete de Prova Ead' => 'Lembrete de Prova Ead',
+            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados',
+            'Aprovados Não Matriculados Ead' => 'Aprovados Não Matriculados Ead'
         ];
         
         return view('admin.emkt.mensagens.create', [
@@ -98,10 +101,13 @@ class MensagemController extends Controller
     {
         $tipos_de_acoes = [ 
             'Ausentes' => 'Ausentes',
+            'Ausentes Ead' => 'Ausentes Ead',
             'Inscritos Parciais' => 'Inscritos Parciais',
-            'Inscritos Parciais a Distancia' => 'Inscritos Parciais Ead',
+            'Inscritos Parciais Ead' => 'Inscritos Parciais Ead',
             'Lembrete de Prova' => 'Lembrete de Prova',
-            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados'
+            'Lembrete de Prova Ead' => 'Lembrete de Prova Ead',
+            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados',
+            'Aprovados Não Matriculados Ead' => 'Aprovados Não Matriculados Ead'
         ];
 
         return view('admin.emkt.mensagens.edit', [

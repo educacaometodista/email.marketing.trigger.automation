@@ -64,10 +64,14 @@ class PlanilhaController extends Controller
     {
         $currentFile = is_object($currentFile) ? $currentFile->toArray() : (is_array($currentFile) ? $currentFile : null);
 
-        $this->filter_name = ($subject == 'ausentes' || $subject == 'inscritos-parciais' || $subject == 'lembrete-de-prova' || $subject == 'aprovados-não-matriculados') ? 'Presencial' : 'Ead';
+        if($subject == 'ausentes' || $subject == 'inscritos-parciais' || $subject == 'lembrete-de-prova' || $subject == 'aprovados-não-matriculados')
+            $this->filter_name = 'Presencial';
+
+        elseif($subject == 'ausentes-ead' || $subject == 'inscritos-parciais-ead' || $subject == 'lembrete-de-prova-ead' || $subject == 'aprovados-não-matriculados-ead')
+            $this->filter_name = 'Ead';
+        
         if($this->filter_name == 'Ead')
         {
-
             if(!empty($currentFile[0]))
             {
                 if(!array_key_exists('nome', $currentFile[0]) || !array_key_exists('e_mail', $currentFile[0]) || !array_key_exists('número', $currentFile[0]) || !array_key_exists('ddd', $currentFile[0]))
@@ -300,10 +304,39 @@ class PlanilhaController extends Controller
                                 ->toArray();
 
         $umesp_file = [];
+        $unimep_file = [];
+        $izabela_file = [];
+        $granbery_file = [];
+        $fames_file = [];
+        $ipa_file = [];
 
         foreach($currentFile as $row)
         {
-            array_push($umesp_file, $row);
+            switch ($row['instituicao']) {
+                case 'Umesp':
+                    array_push($umesp_file, $row);
+                    break;
+
+                case 'Unimep':
+                    array_push($unimep_file, $row);
+                    break;
+
+                case 'Izabela':
+                    array_push($izabela_file, $row);
+                    break;
+
+                case 'Granbery':
+                    array_push($granbery_file, $row);
+                    break;
+
+                case 'Fames':
+                    array_push($fames_file, $row);
+                    break;
+                    
+                case 'Ipa':
+                    array_push($ipa_file, $row);
+                    break;
+            }
         }
 
         $this->clearStorage($storage_path);
@@ -312,8 +345,38 @@ class PlanilhaController extends Controller
 
         if(count($umesp_file) > 0)
         {
-            $this->storeFile($umesp_file, 'ead-umesp-'.$subject.'-'.$date, $extension, public_path($storage_path));
-            array_push($file_list, 'ead-umesp-'.$subject.'-'.$date);
+            $this->storeFile($umesp_file, 'umesp-'.$subject.'-'.$date, $extension, public_path($storage_path));
+            array_push($file_list, 'umesp-'.$subject.'-'.$date);
+        }
+
+        if(count($unimep_file) > 0)
+        {
+            $this->storeFile($unimep_file, 'unimep-'.$subject.'-'.$date, $extension, public_path($storage_path));
+            array_push($file_list, 'unimep-'.$subject.'-'.$date);
+        }
+            
+        if(count($izabela_file) > 0)
+        {
+            $this->storeFile($izabela_file, 'izabela-'.$subject.'-'.$date, $extension, public_path($storage_path));
+            array_push($file_list, 'izabela-'.$subject.'-'.$date);
+        }
+
+        if(count($granbery_file) > 0)
+        {
+            $this->storeFile($granbery_file, 'granbery-'.$subject.'-'.$date, $extension, public_path($storage_path));
+            array_push($file_list, 'granbery-'.$subject.'-'.$date);
+        }
+
+        if(count($fames_file) > 0)
+        {
+            $this->storeFile($fames_file, 'fames-'.$subject.'-'.$date, $extension, public_path($storage_path));
+            array_push($file_list, 'fames-'.$subject.'-'.$date);
+        }
+            
+        if(count($ipa_file) > 0)
+        {
+            $this->storeFile($ipa_file, 'ipa-'.$subject.'-'.$date, $extension, public_path($storage_path));
+            array_push($file_list, 'ipa-'.$subject.'-'.$date);
         }
 
         return $file_list;

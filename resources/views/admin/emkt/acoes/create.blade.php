@@ -84,6 +84,11 @@
                                         <input type="checkbox" name="{{ 'instituicao-'.strtolower($instituicao->prefixo) }}" value="{{ $instituicao->prefixo }}" class="form-check-input"> <span class="form-check-label">{{ $instituicao->nome }}</span>
                                     </label>
 
+                                    @if(round(count($instituicoes)) / 2 == ($key+1))
+                                        </div>
+                                        <div class="col-md-5 form-inline">
+                                    @endif
+
                                     @endforeach
                                 </div>
                             </div>

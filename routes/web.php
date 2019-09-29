@@ -42,6 +42,8 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
         Route::delete('/{id}', 'InstituicaoController@destroy')->name('destroy');
     });
 
+    Route::resource('tipos-de-acoes', 'TipoDeAcaoController');
+
 });
 
 Auth::routes();

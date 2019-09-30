@@ -78,10 +78,10 @@
                                         <option></option>
                                         @foreach($tipos_de_acoes as $tipo_de_acao)
                                             <option value="{{ $tipo_de_acao }}"
-                                            @if($mensagem->tipo_de_acao == $tipo_de_acao)
+                                            @if($mensagem->tipo_de_acao == $tipo_de_acao->nome)
                                                 selected
                                             @endif
-                                            >{{ $tipo_de_acao }}</option>
+                                            >{{ $tipo_de_acao->nome_de_exibicao }}</option>
                                         @endforeach
                                     </select>
                                 </div>

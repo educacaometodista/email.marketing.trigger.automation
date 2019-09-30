@@ -13,7 +13,7 @@ class Mensagem extends Model
         'nome_do_arquivo',
         'conteudo',
         'assunto',
-        'tipo_de_acao',
+        'tipo_de_acao_id',
         'instituicao_id',
     ];
 
@@ -22,9 +22,9 @@ class Mensagem extends Model
         return $this->belongsTo(Instituicao::class, 'instituicao_id');
     }
 
-    public function acao()
+    public function tipo_de_acao()
     {
-        return $this->hasOne(Acao::class);
+        return $this->belongsTo(TipoDeAcao::class, 'tipo_de_acao_id');
     }
 
     public function getUrl()

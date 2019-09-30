@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminsTableSeeder::class);
         $this->call(InstituicoesTableSeeder::class);
         $this->call(MensagensTableSeeder::class);
+        $this->call(TiposDeAcoesTableSeeder::class);
+
     }
 }

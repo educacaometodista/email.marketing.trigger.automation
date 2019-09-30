@@ -10,6 +10,7 @@ use App\Http\Controllers\PlanilhaController;
 use Illuminate\Support\Facades\Auth;
 use App\Instituicao;
 use App\Mensagem;
+use App\TipoDeAcao;
 use Session;
 
 class AcaoController extends Controller
@@ -47,18 +48,8 @@ class AcaoController extends Controller
      */
     public function create()
     {
-        $tipos_de_acoes = [ 
-            'Ausentes' => 'Ausentes',
-            'Ausentes a Distancia' => 'Ausentes Ead',
-            'Inscritos Parciais' => 'Inscritos Parciais',
-            'Inscritos Parciais a Distancia' => 'Inscritos Parciais Ead',
-            'Lembrete de Prova' => 'Lembrete de Prova',
-            'Lembrete de Prova a Distancia' => 'Lembrete de Prova Ead',
-            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados',
-            'Aprovados Não Matriculados a Distancia' => 'Aprovados Não Matriculados Ead'
-        ];
 
-        return view('admin.emkt.acoes.create', ['instituicoes' => Instituicao::all(), 'tipos_de_acoes' => $tipos_de_acoes]);
+        return view('admin.emkt.acoes.create', ['instituicoes' => Instituicao::all(), 'tipos_de_acoes' => TipoDeAcao::all()]);
     }
 
     /**

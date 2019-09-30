@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mensagem;
 use App\Instituicao;
+use App\TipoDeAcao;
 use Storage;
 
 class MensagemController extends Controller
@@ -31,21 +32,10 @@ class MensagemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $tipos_de_acoes = [ 
-            'Ausentes' => 'Ausentes',
-            'Ausentes a Distancia' => 'Ausentes Ead',
-            'Inscritos Parciais' => 'Inscritos Parciais',
-            'Inscritos Parciais a Distancia' => 'Inscritos Parciais Ead',
-            'Lembrete de Prova' => 'Lembrete de Prova',
-            'Lembrete de Prova a Distancia' => 'Lembrete de Prova Ead',
-            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados',
-            'Aprovados Não Matriculados a Distancia' => 'Aprovados Não Matriculados Ead'
-        ];
-        
+    {        
         return view('admin.emkt.mensagens.create', [
             'instituicoes' => Instituicao::all(),
-            'tipos_de_acoes' => $tipos_de_acoes ]);
+            'tipos_de_acoes' => TipoDeAcao::all() ]);
     }
 
     /**
@@ -99,21 +89,11 @@ class MensagemController extends Controller
      */
     public function edit($id)
     {
-        $tipos_de_acoes = [ 
-            'Ausentes' => 'Ausentes',
-            'Ausentes a Distancia' => 'Ausentes Ead',
-            'Inscritos Parciais' => 'Inscritos Parciais',
-            'Inscritos Parciais a Distancia' => 'Inscritos Parciais Ead',
-            'Lembrete de Prova' => 'Lembrete de Prova',
-            'Lembrete de Prova a Distancia' => 'Lembrete de Prova Ead',
-            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados',
-            'Aprovados Não Matriculados a Distancia' => 'Aprovados Não Matriculados Ead'
-        ];
 
         return view('admin.emkt.mensagens.edit', [
             'mensagem' => Mensagem::findOrFail($id),
             'instituicoes' => Instituicao::all(), 
-            'tipos_de_acoes' => $tipos_de_acoes ]);
+            'tipos_de_acoes' => TipoDeAcao::all() ]);
     }
 
     /**

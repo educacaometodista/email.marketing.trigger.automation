@@ -26,6 +26,10 @@ class CreateMensagensTable extends Migration
             $table->foreign('instituicao_id')
                 ->references('id')
                 ->on('instituicoes');
+
+            $table->foreign('tipo_de_acao_id')
+                ->references('id')
+                ->on('tipos_de_acoes');
         });
     }
 

@@ -12,4 +12,9 @@ class TipoDeAcao extends Model
         'nome',
         'nome_de_exibicao'
     ] ;
+
+    public function mensagens()
+    {
+        return $this->hasMany(Mensagem::class, 'tipo_de_acao_id', 'id');
+    }
 }

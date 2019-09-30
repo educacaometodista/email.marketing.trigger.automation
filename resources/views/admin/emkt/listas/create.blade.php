@@ -71,8 +71,8 @@
                                 <div class="col-md-10">
                                     <select name="subject" class="form-control" id="assunto">
                                     <option></option>
-                                    @foreach($tipos_de_acoes as $key => $tipo_de_acao)
-                                        <option value="{{ $key }}">{{ $tipo_de_acao }}</option>
+                                    @foreach($tipos_de_acoes as $tipo_de_acao)
+                                        <option value="{{ $tipo_de_acao->nome }}">{{ $tipo_de_acao->nome_de_exibicao }}</option>
                                     @endforeach
                                     </select>
                                 </div>

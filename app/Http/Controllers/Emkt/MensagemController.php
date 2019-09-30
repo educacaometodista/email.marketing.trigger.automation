@@ -51,7 +51,7 @@ class MensagemController extends Controller
             'nome_do_arquivo' => 'required|min:1|max:10000|string|unique:mensagens',
             'conteudo' => 'required|min:1|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
-            'tipo_de_acao' => 'required|min:2|max:30|string',
+            'tipo_de_acao' => 'required|min:1|max:80|string',
             'instituicao' => 'required|min:1|max:40|string'
         ]);
         
@@ -60,7 +60,7 @@ class MensagemController extends Controller
         $mensagem->nome_do_arquivo = $request->input('nome_do_arquivo');
         $mensagem->conteudo = $request->input('conteudo');
         $mensagem->assunto = $request->input('assunto');
-        $mensagem->tipo_de_acao = $request->input('tipo_de_acao');
+        $mensagem->tipo_de_acao_id = $request->input('tipo_de_acao');
         $mensagem->instituicao_id = $request->input('instituicao');
         $mensagem->save();
 
@@ -110,7 +110,7 @@ class MensagemController extends Controller
             'nome_do_arquivo' => 'required|min:1|max:10000|string',
             'conteudo' => 'required|min:1|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
-            'tipo_de_acao' => 'required|min:2|max:30|string',
+            'tipo_de_acao' => 'required|min:1|max:80|string',
             'instituicao' => 'required|min:1|max:40|string'
         ]);
         
@@ -123,7 +123,7 @@ class MensagemController extends Controller
             'nome_do_arquivo' => $request->nome_do_arquivo,
             'conteudo' => $request->conteudo,
             'assunto' => $request->assunto,
-            'tipo_de_acao' => $request->tipo_de_acao,
+            'tipo_de_acao_id' => $request->tipo_de_acao_id,
             'instituicao_id' => $request->instituicao
         ]);
 

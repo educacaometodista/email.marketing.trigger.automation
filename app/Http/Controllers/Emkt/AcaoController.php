@@ -62,7 +62,7 @@ class AcaoController extends Controller
     {
         $request->validate([
             'date' => 'required|date',
-            'tipo_de_acao' => 'required|min:2|max:30',
+            'tipo_de_acao' => 'required|min:1|max:30',
             'titulo' => 'required|min:2|max:30',
             'data_agendamento' => 'required|date',
             'hora_agendamento'=> 'required',
@@ -72,8 +72,8 @@ class AcaoController extends Controller
 
 
         $date = date('d-m-Y', strtotime($request->input('date')));
-        $tipo_de_acao = $request->input('tipo_de_acao');
-        $subject = $tipo_de_acao;
+        $tipo_de_acao_id = $request->input('tipo_de_acao');
+        $subject = $tipo_de_acao_id;
                 
         $date = str_replace('-', '/', $date);
         $titulo_da_acao = $request->input('titulo').' '.$date;
@@ -125,7 +125,7 @@ class AcaoController extends Controller
         foreach ($instituicoes_selecionadas as $instituicao)
         {
             $mensagem = Mensagem::all()
-                ->where('tipo_de_acao', '=', $tipo_de_acao)
+                ->where('tipo_de_acao_id', '=', $tipo_de_acao_id)
                 ->where('instituicao_id', '=', $instituicao->id)
                 ->first();
 
@@ -144,7 +144,7 @@ class AcaoController extends Controller
                         $acao->destinatarios = $destinarios;
                         $acao->status = $status;
                         $acao->agendamento = $agendamento_envio;
-                        $acao->tipo_de_acao = $tipo_de_acao;
+                        $acao->tipo_de_acao = $tipo_de_acao_id;
                         $acao->usuario_id = Auth::user()->id;
                         $acao->instituicao_id = $instituicao->id;
                         $acao->save();

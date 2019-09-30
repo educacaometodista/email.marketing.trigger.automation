@@ -46,27 +46,28 @@ class ListaController extends Controller
     {
         $request->validate([
             'import_file' => 'required|file|mimes:xlsx,csv,txt',
-            'subject' => 'required|min:2|max:30|string',
+            'tipo_de_acao' => 'required|min:2|max:30|string',
             'date' => 'required|date'
         ]);
 
         if($request->hasFile('import_file'))
         {
             $extension = 'csv';
-            $subject = $request->input('subject');
+            $tipo_de_acao_id = $request->input('tipo_de_acao');
             $date = date('d-m-Y', strtotime($request->input('date')));
             $currentFile = $this->planilha()->load($request->file('import_file')->getRealPath());
             $hasAction = false;
 
-            return $this->import($currentFile, $extension, $subject, $date, $hasAction);
+            return $this->import($currentFile, $extension, $tipo_de_acao_id, $date, $hasAction);
 
         } else {
             return back()->with('danger', 'Você precisa importar um documento!');
         }
     }
 
-    public function import($currentFile, $extension, $subject, $date, $hasAction)
+    public function import($currentFile, $extension, $tipo_de_acao_id, $date, $hasAction)
     {
+        $tipo_de_acao = TipoDeAcao::findOrFail($tipo_de_acao_id);
         $explode_date = explode('-', str_replace('/', '-', $date));
 
         $day = $explode_date[0];
@@ -77,7 +78,7 @@ class ListaController extends Controller
         if(isset($this->instituicoes))
         {
 
-            $this->planilha()->filter($currentFile, $extension, str_replace('', '', str_replace(' ', '-', strtolower($subject))), $day.'-'.$month.'-'.$period, 'akna_lists');
+            $this->planilha()->filter($currentFile, $extension, str_replace('', '', str_replace(' ', '-', strtolower($tipo_de_acao->nome))), $day.'-'.$month.'-'.$period, 'akna_lists');
 
             $all_files = $this->planilha()->getFiles('akna_lists');
 
@@ -88,13 +89,13 @@ class ListaController extends Controller
         
             foreach($this->instituicoes as $instituicao)
             {
-                $nome_do_arquivo = strtolower($this->prefixo[$instituicao->nome]).'-'.str_replace('-a-distancia', '', str_replace(' ', '-', strtolower($subject))).'-'.$day.'-'.$month.'-'.$period.'.'.$extension;
+                $nome_do_arquivo = strtolower($this->prefixo[$instituicao->nome]).'-'.str_replace('-a-distancia', '', str_replace(' ', '-', strtolower($tipo_de_acao->nome))).'-'.$day.'-'.$month.'-'.$period.'.'.$extension;
 
                 $nome_do_arquivo = str_replace(' ', '-', $nome_do_arquivo);
 
                 if(in_array(public_path("akna_lists/$nome_do_arquivo"), $all_files))
                 {
-                    $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao->nome]).' - '.str_replace('-', ' ', $subject).' - '.$day.'/'.$month.' - '.str_replace('-', '/',$period);
+                    $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao->nome]).' - '.str_replace('-', ' ', $tipo_de_acao).' - '.$day.'/'.$month.' - '.str_replace('-', '/',$period);
                     $status = $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao->nome, $instituicao->codigo_da_empresa);
                     Session::flash('message-'.$this->prefixo[$instituicao->nome], $status);
                     $nomes_das_listas[$this->prefixo[$instituicao->nome]] = $nome_da_lista;

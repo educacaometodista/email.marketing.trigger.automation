@@ -311,8 +311,8 @@ class PlanilhaController extends Controller
 
         if(count($umesp_file) > 0)
         {
-            $this->storeFile($umesp_file, 'ead-umesp-'.$subject.'-'.$date, $extension, public_path($storage_path));
-            array_push($file_list, 'ead-umesp-'.$subject.'-'.$date);
+            $this->storeFile($umesp_file, 'ead-umesp-'.$tipo_de_acao.'-'.$date, $extension, public_path($storage_path));
+            array_push($file_list, 'ead-umesp-'.$tipo_de_acao.'-'.$date);
         }
 
         return $file_list;

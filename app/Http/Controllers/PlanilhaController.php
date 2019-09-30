@@ -177,12 +177,7 @@ class PlanilhaController extends Controller
 
         Session::put('zipName', "$tipo_de_acao-$date");
 
-        $currentFile = Planilha::select('nome', 'email', 'celular', 'instituicao')
-                                ->where('documento', '=', $document_hash)
-                                ->orderBy('instituicao')
-                                ->orderBy('nome')
-                                ->get()
-                                ->toArray();
+        $currentFile = $this->select($document_hash);
 
         $umesp_file = [];
         $unimep_file = [];
@@ -264,6 +259,16 @@ class PlanilhaController extends Controller
 
     }
 
+    public function select($document_hash)
+    {
+        return Planilha::select('nome', 'email', 'celular', 'instituicao')
+            ->where('documento', '=', $document_hash)
+            ->orderBy('instituicao')
+            ->orderBy('nome')
+            ->get()
+            ->toArray();
+    }
+
     public function filtroEad($currentFile, $extension, $tipo_de_acao, $date, $storage_path)
     {
 
@@ -292,12 +297,9 @@ class PlanilhaController extends Controller
 
         Session::put('zipName', "$tipo_de_acao-$date");
 
-        $currentFile = Planilha::select('nome', 'email', 'celular', 'instituicao')
-                                ->where('documento', '=', $document_hash)
-                                ->orderBy('instituicao')
-                                ->orderBy('nome')
-                                ->get()
-                                ->toArray();
+        $currentFile = $this->select($document_hash);
+
+        
         $umesp_file = [];
 
         foreach($currentFile as $row)

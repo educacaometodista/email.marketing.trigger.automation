@@ -19,7 +19,7 @@ class CreateMensagensTable extends Migration
             $table->string('nome_do_arquivo');
             $table->longText('conteudo');
             $table->string('assunto');
-            $table->string('tipo_de_acao');
+            $table->unsignedInteger('tipo_de_acao_id');
             $table->unsignedInteger('instituicao_id');
             $table->timestamps();
 

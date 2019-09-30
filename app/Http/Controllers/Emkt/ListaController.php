@@ -8,6 +8,7 @@ use App\Http\Controllers\Emkt\AknaController;
 use App\Http\Controllers\PlanilhaController;
 use App\Instituicao;
 use App\Lista;
+use App\TipoDeAcao;
 use Session;
 
 class ListaController extends Controller
@@ -38,18 +39,7 @@ class ListaController extends Controller
 
     public function create()
     {
-        $tipos_de_acoes = [ 
-            'Ausentes' => 'Ausentes',
-            'Ausentes a Distancia' => 'Ausentes Ead',
-            'Inscritos Parciais' => 'Inscritos Parciais',
-            'Inscritos Parciais a Distancia' => 'Inscritos Parciais Ead',
-            'Lembrete de Prova' => 'Lembrete de Prova',
-            'Lembrete de Prova a Distancia' => 'Lembrete de Prova Ead',
-            'Aprovados Não Matriculados' => 'Aprovados Não Matriculados',
-            'Aprovados Não Matriculados a Distancia' => 'Aprovados Não Matriculados Ead'
-        ];
-
-        return view('admin.emkt.listas.create')->with(['instituicoes' => $this->prefixo, 'tipos_de_acoes' => $tipos_de_acoes]);
+        return view('admin.emkt.listas.create')->with(['instituicoes' => $this->prefixo, 'tipos_de_acoes' => TipoDeAcao::all()]);
     }
 
     public function store(Request $request)

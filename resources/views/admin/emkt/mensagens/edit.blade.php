@@ -77,7 +77,7 @@
                                     <select name="tipo_de_acao" class="form-control" id="tipo_de_acao">
                                         <option></option>
                                         @foreach($tipos_de_acoes as $tipo_de_acao)
-                                            <option value="{{ $tipo_de_acao }}"
+                                            <option value="{{ $tipo_de_acao->id }}"
                                             @if($mensagem->tipo_de_acao == $tipo_de_acao->nome)
                                                 selected
                                             @endif

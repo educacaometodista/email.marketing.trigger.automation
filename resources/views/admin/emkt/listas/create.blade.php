@@ -69,10 +69,10 @@
                                 <span class="label-text col-md-2 col-form-label text-md-right">Tipo de Ação</span>
 
                                 <div class="col-md-10">
-                                    <select name="subject" class="form-control" id="assunto">
+                                    <select name="tipo_de_acao" class="form-control" id="tipo_de_acao">
                                     <option></option>
                                     @foreach($tipos_de_acoes as $tipo_de_acao)
-                                        <option value="{{ $tipo_de_acao->nome }}">{{ $tipo_de_acao->nome_de_exibicao }}</option>
+                                        <option value="{{ $tipo_de_acao->id }}">{{ $tipo_de_acao->nome_de_exibicao }}</option>
                                     @endforeach
                                     </select>
                                 </div>

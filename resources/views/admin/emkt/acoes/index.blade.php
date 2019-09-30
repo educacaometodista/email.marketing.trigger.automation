@@ -91,7 +91,7 @@
                                 <tr id="{{ 'acao-'.$acao->id }}">
                                     <td>{{ $acao->id }}</td>
                                     <td>{{ $acao->titulo }}</td>
-                                    <td>{{ $acao->tipo_de_acao }}</td>
+                                    <td>{{ $acao->tipo_de_acao->nome_de_exibicao }}</td>
                                     <td>{{ $acao->status }}</td>
                                     <td>{{ $acao->agendamento }}</td>
                                     <td>{{ $acao->destinatarios }}</td>

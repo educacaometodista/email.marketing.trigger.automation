@@ -73,7 +73,6 @@ class AcaoController extends Controller
 
         $date = date('d-m-Y', strtotime($request->input('date')));
         $tipo_de_acao_id = $request->input('tipo_de_acao');
-        $subject = $tipo_de_acao_id;
                 
         $date = str_replace('-', '/', $date);
         $titulo_da_acao = $request->input('titulo').' '.$date;
@@ -100,7 +99,7 @@ class AcaoController extends Controller
                     $currentFile = $this->planilha()->load($request->file('import_file')->getRealPath());
                 }
         
-                $nomes_das_listas = (new ListaController())->import($currentFile, $extension, $subject, $date, $hasAction);
+                $nomes_das_listas = (new ListaController())->import($currentFile, $extension, $tipo_de_acao_id, $date, $hasAction);
 
             } else {
                 $nomes_das_listas = null;
@@ -144,7 +143,7 @@ class AcaoController extends Controller
                         $acao->destinatarios = $destinarios;
                         $acao->status = $status;
                         $acao->agendamento = $agendamento_envio;
-                        $acao->tipo_de_acao = $tipo_de_acao_id;
+                        $acao->tipo_de_acao_id = $tipo_de_acao_id;
                         $acao->usuario_id = Auth::user()->id;
                         $acao->instituicao_id = $instituicao->id;
                         $acao->save();

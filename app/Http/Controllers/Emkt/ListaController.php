@@ -105,7 +105,8 @@ class ListaController extends Controller
                 if(in_array(public_path("akna_lists/$nome_do_arquivo"), $all_files))
                 {
                     $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao->nome]).' - '.str_replace('-', ' ', $subject).' - '.$day.'/'.$month.' - '.str_replace('-', '/',$period);
-                    Session::flash('message-'.$this->prefixo[$instituicao->nome], $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao->nome, $instituicao->codigo_da_empresa));
+                    $status = $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao->nome, $instituicao->codigo_da_empresa);
+                    Session::flash('message-'.$this->prefixo[$instituicao->nome], $status);
                     $nomes_das_listas[$this->prefixo[$instituicao->nome]] = $nome_da_lista;
                 }
             }

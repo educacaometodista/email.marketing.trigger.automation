@@ -295,41 +295,11 @@ class PlanilhaController extends Controller
                                 ->orderBy('nome')
                                 ->get()
                                 ->toArray();
-
         $umesp_file = [];
-        $unimep_file = [];
-        $izabela_file = [];
-        $granbery_file = [];
-        $fames_file = [];
-        $ipa_file = [];
-
+        
         foreach($currentFile as $row)
         {
-            switch ($row['instituicao']) {
-                case 'Umesp':
-                    array_push($umesp_file, $row);
-                    break;
-
-                case 'Unimep':
-                    array_push($unimep_file, $row);
-                    break;
-
-                case 'Izabela':
-                    array_push($izabela_file, $row);
-                    break;
-
-                case 'Granbery':
-                    array_push($granbery_file, $row);
-                    break;
-
-                case 'Fames':
-                    array_push($fames_file, $row);
-                    break;
-                    
-                case 'Ipa':
-                    array_push($ipa_file, $row);
-                    break;
-            }
+            array_push($umesp_file, $row);
         }
 
         $this->clearStorage($storage_path);
@@ -338,38 +308,8 @@ class PlanilhaController extends Controller
 
         if(count($umesp_file) > 0)
         {
-            $this->storeFile($umesp_file, 'ead-umesp-'.$tipo_de_acao.'-'.$date, $extension, public_path($storage_path));
-            array_push($file_list, 'ead-umesp-'.$tipo_de_acao.'-'.$date);
-        }
-
-        if(count($unimep_file) > 0)
-        {
-            $this->storeFile($unimep_file, 'ead-unimep-'.$tipo_de_acao.'-'.$date, $extension, public_path($storage_path));
-            array_push($file_list, 'ead-unimep-'.$tipo_de_acao.'-'.$date);
-        }
-            
-        if(count($izabela_file) > 0)
-        {
-            $this->storeFile($izabela_file, 'ead-izabela-'.$tipo_de_acao.'-'.$date, $extension, public_path($storage_path));
-            array_push($file_list, 'ead-izabela-'.$tipo_de_acao.'-'.$date);
-        }
-
-        if(count($granbery_file) > 0)
-        {
-            $this->storeFile($granbery_file, 'ead-granbery-'.$tipo_de_acao.'-'.$date, $extension, public_path($storage_path));
-            array_push($file_list, 'ead-granbery-'.$tipo_de_acao.'-'.$date);
-        }
-
-        if(count($fames_file) > 0)
-        {
-            $this->storeFile($fames_file, 'ead-fames-'.$tipo_de_acao.'-'.$date, $extension, public_path($storage_path));
-            array_push($file_list, 'ead-fames-'.$tipo_de_acao.'-'.$date);
-        }
-            
-        if(count($ipa_file) > 0)
-        {
-            $this->storeFile($ipa_file, 'ead-ipa-'.$tipo_de_acao.'-'.$date, $extension, public_path($storage_path));
-            array_push($file_list, 'ead-ipa-'.$tipo_de_acao.'-'.$date);
+            $this->storeFile($umesp_file, 'ead-umesp-'.$subject.'-'.$date, $extension, public_path($storage_path));
+            array_push($file_list, 'ead-umesp-'.$subject.'-'.$date);
         }
 
         return $file_list;

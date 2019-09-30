@@ -46,7 +46,7 @@ class TiposDeAcoesTableSeeder extends Seeder
         $tipo_de_acao->save();
 
         $tipo_de_acao = new App\TipoDeAcao;
-        $tipo_de_acao->nome = 'Aprovados Não Matriculados a Distancia';
+        $tipo_de_acao->nome = 'Aprovados Nao Matriculados a Distancia';
         $tipo_de_acao->nome_de_exibicao = 'Aprovados Não Matriculados Ead';
         $tipo_de_acao->save();
 

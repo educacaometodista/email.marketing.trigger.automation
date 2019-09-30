@@ -46,7 +46,7 @@ class ListaController extends Controller
     {
         $request->validate([
             'import_file' => 'required|file|mimes:xlsx,csv,txt',
-            'tipo_de_acao' => 'required|min:2|max:30|string',
+            'tipo_de_acao' => 'required|min:1|max:30|string',
             'date' => 'required|date'
         ]);
 
@@ -95,7 +95,7 @@ class ListaController extends Controller
 
                 if(in_array(public_path("akna_lists/$nome_do_arquivo"), $all_files))
                 {
-                    $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao->nome]).' - '.str_replace('-', ' ', $tipo_de_acao).' - '.$day.'/'.$month.' - '.str_replace('-', '/',$period);
+                    $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao->nome]).' - '.str_replace('-', ' ', $tipo_de_acao->nome).' - '.$day.'/'.$month.' - '.str_replace('-', '/',$period);
                     $status = $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao->nome, $instituicao->codigo_da_empresa);
                     Session::flash('message-'.$this->prefixo[$instituicao->nome], $status);
                     $nomes_das_listas[$this->prefixo[$instituicao->nome]] = $nome_da_lista;

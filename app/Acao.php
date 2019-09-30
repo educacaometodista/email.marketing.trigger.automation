@@ -13,7 +13,7 @@ class Acao extends Model
         'destinatarios',
         'status',
         'agendamento',
-        'tipo_de_acao',
+        'tipo_de_acao_id',
         'usuario_id',
         'instituicao_id'
     ];

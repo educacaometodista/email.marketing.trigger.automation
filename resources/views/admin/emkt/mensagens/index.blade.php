@@ -69,7 +69,7 @@
                                     <td>{{ $mensagem->id }}</td>
                                     <td>{{ $mensagem->titulo }}</td>
                                     <td>{{ $mensagem->assunto }}</td>
-                                    <td>{{ $mensagem->tipo_de_acao }}</td>
+                                    <td>{{ $mensagem->tipo_de_acao->nome_de_exibicao }}</td>
                                     <td>{{ $mensagem->nome_do_arquivo.'.html' }}</td>
                                     <td>{{ $mensagem->instituicao->nome }}</td>
                                     <td><a href="{{ $mensagem->getUrl() }}" target="_blank"><i class="fas fa-eye"></i></a></td>

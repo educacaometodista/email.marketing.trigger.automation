@@ -64,11 +64,14 @@ class PlanilhaController extends Controller
     {
         $currentFile = is_object($currentFile) ? $currentFile->toArray() : (is_array($currentFile) ? $currentFile : null);
 
-        if($tipo_de_acao == 'ausentes' || $tipo_de_acao == 'inscritos-parciais' || $tipo_de_acao == 'lembrete-de-prova' || $tipo_de_acao == 'aprovados-nao-matriculados')
+        if($tipo_de_acao == 'ausentes' || $tipo_de_acao == 'inscritos-parciais' || $tipo_de_acao == 'lembrete-de-prova' || $tipo_de_acao == 'aprovados-nao-matriculados') {
+            
             $this->filter_name = 'Presencial';
 
-        elseif($tipo_de_acao == 'ausentes-a-distancia' || $tipo_de_acao == 'inscritos-parciais-a-distancia' || $tipo_de_acao == 'lembrete-de-prova-a-distancia' || $tipo_de_acao == 'aprovados-nao-matriculados-a-distancia')
+        } elseif($tipo_de_acao == 'ausentes-a-distancia' || $tipo_de_acao == 'inscritos-parciais-a-distancia' || $tipo_de_acao == 'lembrete-de-prova-a-distancia' || $tipo_de_acao == 'aprovados-nao-matriculados-a-distancia')
+        {
             $this->filter_name = 'Ead';
+        }
         
         if($this->filter_name == 'Ead')
         {
@@ -296,7 +299,7 @@ class PlanilhaController extends Controller
                                 ->get()
                                 ->toArray();
         $umesp_file = [];
-        
+
         foreach($currentFile as $row)
         {
             array_push($umesp_file, $row);

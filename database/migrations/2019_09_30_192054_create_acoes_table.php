@@ -21,16 +21,16 @@ class CreateAcoesTable extends Migration
             $table->string('agendamento');
             $table->string('tipo_de_acao');
             $table->unsignedInteger('usuario_id');
-            $table->unsignedInteger('instituicao_id');
+            $table->unsignedInteger('tipo_de_acao_da_instituicao_id');
             $table->timestamps();
 
             $table->foreign('usuario_id')
                 ->references('id')
                 ->on('admins');
 
-            $table->foreign('instituicao_id')
+            $table->foreign('tipo_de_acao_da_instituicao_id')
                 ->references('id')
-                ->on('instituicoes');
+                ->on('tipos_de_acoes_das_instituicoes');
 
         });
     }

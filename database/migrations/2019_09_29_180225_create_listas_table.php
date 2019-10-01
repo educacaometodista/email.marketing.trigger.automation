@@ -20,11 +20,16 @@ class CreateListasTable extends Migration
             $table->integer('contatos');
             $table->string('conteudo');
             $table->unsignedInteger('instituicao_id');
+            $table->unsignedInteger('filtro_id');
             $table->timestamps();
 
             $table->foreign('instituicao_id')
                 ->references('id')
                 ->on('instituicoes');
+
+            $table->foreign('filtro_id')
+                ->references('id')
+                ->on('filtros');
         });
     }
 

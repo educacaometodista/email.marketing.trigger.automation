@@ -16,4 +16,9 @@ class Instituicao extends Model
         'email_do_remetente',
         'email_de_retorno',
     ];
+
+    public function tipos_de_acoes_da_instituicao()
+    {
+        return $this->hasMany(TipoDeAcaoDaInstituicao::class, 'instituicao_id', 'id');
+    }
 }

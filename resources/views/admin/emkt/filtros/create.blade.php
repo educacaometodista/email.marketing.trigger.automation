@@ -57,9 +57,9 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Nome de Exibição</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Regra</span>
                                 <div class="col-md-10">
-                                    <input type="text" name="regra" class="form-control" id="regra" maxlenght="40" value="{{ old('regra') }}">
+                                    <textarea style="height:300px; background-color:#1c2324;color:#eee;font-size:12px;" id="regra" name="regra" class="form-control" data-trigger="summernote">{{ old('regra') }}</textarea>
                                 </div>
                             </div>
                             <!-- Form Group End -->

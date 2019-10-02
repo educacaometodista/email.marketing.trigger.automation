@@ -11,5 +11,10 @@ class TipoDeAcao extends Model
     public $fillable = [
         'nome',
         'nome_de_exibicao'
-    ] ;
+    ];
+
+    public function tipo_de_acao_das_instituicoes()
+    {
+        return $this->hasMany(TipoDeAcaoDaInstituicao::class, 'tipo_de_acao_id', 'id');
+    }
 }

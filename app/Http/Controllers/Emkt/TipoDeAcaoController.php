@@ -25,7 +25,7 @@ class TipoDeAcaoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.emkt.tipos-de-acoes.create');
     }
 
     /**

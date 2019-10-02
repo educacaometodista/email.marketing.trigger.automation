@@ -61,5 +61,26 @@ class FiltroController extends Controller
         return view('admin.emkt.filtros.edit', ['filtro' => Filtro::findOrFail($id)]);
     }
 
-    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nome' => 'required|min:2|max:255|string',
+            'nome_de_exibicao' => 'required|min:2|max:255|string',
+        ]);
+
+        $filtro = Filtro::findOrFail($id)->update([
+            'nome' => $request->nome,
+            'nome_de_exibicao' => $request->nome_de_exibicao,
+        ]);
+
+        return redirect()->route('admin.filtros.edit', compact('filtro'))
+            ->with('success', 'Filtro atualizado com sucesso!');
+    }
 }

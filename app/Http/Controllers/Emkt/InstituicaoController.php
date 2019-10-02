@@ -61,7 +61,7 @@ class InstituicaoController extends Controller
         $instituicao->codigo_da_empresa = $request->input('codigo_da_empresa');
         $instituicao->save();
         return redirect()->route('admin.instituicoes.edit', compact('instituicao'))
-            ->with('success', 'Instituição atualizada com sucesso!');
+            ->with('success', 'Instituição criada com sucesso!');
     }
 
     /**

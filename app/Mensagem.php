@@ -13,19 +13,7 @@ class Mensagem extends Model
         'nome_do_arquivo',
         'conteudo',
         'assunto',
-        'tipo_de_acao_id',
-        'instituicao_id',
     ];
-
-    public function instituicao()
-    {
-        return $this->belongsTo(Instituicao::class, 'instituicao_id');
-    }
-
-    public function tipo_de_acao()
-    {
-        return $this->belongsTo(TipoDeAcao::class, 'tipo_de_acao_id');
-    }
 
     public function getUrl()
     {

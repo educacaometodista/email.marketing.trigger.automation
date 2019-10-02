@@ -59,6 +59,18 @@
                     <li class="{{ classActivePath('/admin/acoes', 'open', 2) }}">
                         <a href="javascript:void(0)">
                         <i class="fas fa-paper-plane"></i>
+                            <span>Tipos de Ações</span>
+                        </a>
+
+                        <ul>
+                            <li class="{{ classActivePath('/admin/tipos-de-acoes', 'open', 0) }}"><a href="{{ route('admin.tipos-de-acoes.index') }}"><i class="fas fa-bars"></i> Listar Todos</a></li>
+                            <li class="{{ classActivePath('/admin/tipos-de-acoes/create', 'open', 0) }}"><a href="{{ route('admin.tipos-de-acoes.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="{{ classActivePath('/admin/acoes', 'open', 2) }}">
+                        <a href="javascript:void(0)">
+                        <i class="fas fa-paper-plane"></i>
                             <span>Ações</span>
                         </a>
 

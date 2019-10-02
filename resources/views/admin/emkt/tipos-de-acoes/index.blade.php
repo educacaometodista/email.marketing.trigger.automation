@@ -75,7 +75,7 @@
 
                 <div class="panel">
 
-                    <div class="records--list" data-title="Lista de instituições">
+                    <div class="records--list" data-title="Lista de tipos de ações">
                         <table id="recordsListView">
                             <thead>
                                 <tr>

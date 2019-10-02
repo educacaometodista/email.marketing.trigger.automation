@@ -103,6 +103,9 @@ class TipoDeAcaoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TipoDeAcao::findOrFail($id)->delete();
+
+        return redirect()->route('admin.tipos-de-acoes.index')
+            ->with('success', 'Tipo de Ação removida com sucesso!');
     }
 }

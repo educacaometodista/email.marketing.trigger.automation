@@ -36,7 +36,18 @@ class TipoDeAcaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required|min:2|max:255|string|unique:tipos_de_acoes',
+            'nome_de_exibicao' => 'required|min:255|max:255|string|unique:tipos_de_acoes',
+        ]);
+
+        $tipo_de_acao = new TipoDeAcao;
+        $tipo_de_acao->nome = $request->input('nome');
+        $tipo_de_acao->nome_de_exibicao = $request->input('nome_de_exibicao');
+        $tipo_de_acao->save();
+        
+        return redirect()->route('admin.tipos-de-acoes.edit', compact('tipos_de_aco'))
+            ->with('success', 'Tipo de Ação criada com sucesso!');
     }
 
     /**

@@ -56,6 +56,18 @@
                         </ul>
                     </li>
 
+                    <li class="{{ classActivePath('/admin/filtros', 'open', 2) }}">
+                        <a href="javascript:void(0)">
+                        <i class="fas fa-paper-plane"></i>
+                            <span>Filtros</span>
+                        </a>
+
+                        <ul>
+                            <li class="{{ classActivePath('/admin/filtros', 'open', 0) }}"><a href="{{ route('admin.filtros.index') }}"><i class="fas fa-bars"></i> Listar Todos</a></li>
+                            <li class="{{ classActivePath('/admin/filtros/create', 'open', 0) }}"><a href="{{ route('admin.filtros.create') }}"><i class="fas fa-plus"></i> Criar Novo</a></li>
+                        </ul>
+                    </li>
+
                     <li class="{{ classActivePath('/admin/tipos-de-acoes', 'open', 2) }}">
                         <a href="javascript:void(0)">
                         <i class="fas fa-paper-plane"></i>

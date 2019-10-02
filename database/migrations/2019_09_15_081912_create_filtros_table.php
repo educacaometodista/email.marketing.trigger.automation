@@ -15,6 +15,7 @@ class CreateFiltrosTable extends Migration
     {
         Schema::create('filtros', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nome')->unique();
             $table->string('regra');
             $table->timestamps();
 

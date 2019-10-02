@@ -21,7 +21,7 @@ class TipoDeAcaoController extends Controller
      */
     public function index()
     {
-        return view('admin.emtk.tipos-de-acoes.index', ['tipos_de_acoes' => TipoDeAcao::all()]);
+        return view('admin.emkt.tipos-de-acoes.index', ['tipos_de_acoes' => TipoDeAcao::all()]);
     }
 
     /**

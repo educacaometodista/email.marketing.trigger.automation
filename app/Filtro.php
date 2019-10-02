@@ -9,6 +9,7 @@ class Filtro extends Model
     public $table = 'filtros';
 
     public $fillable = [
+        'nome',
         'regra'
     ];
 

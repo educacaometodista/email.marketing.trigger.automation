@@ -43,8 +43,8 @@ class TipoDeAcaoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required|min:2|max:255|string|unique:tipos_de_acoes',
-            'nome_de_exibicao' => 'required|min:255|max:255|string|unique:tipos_de_acoes',
+            'nome' => 'required|min:2|max:2|string|unique:tipos_de_acoes',
+            'nome_de_exibicao' => 'required|min:2|max:255|string|unique:tipos_de_acoes',
         ]);
 
         $tipo_de_acao = new TipoDeAcao;

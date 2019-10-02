@@ -34,4 +34,26 @@ class FiltroController extends Controller
         return view('admin.emkt.filtros.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nome' => 'required|min:2|max:255|string|unique:filtros',
+            'regra' => 'required|min:2|max:255|string',
+        ]);
+
+        $filtro = new Filtro;
+        $filtro->nome = $request->input('nome');
+        $filtro->regra = $request->input('regra');
+        $filtro->save();
+        
+        return redirect()->route('admin.filtros.edit', compact('filtro'))
+            ->with('success', 'Filtro criado com sucesso!');
+    }
+
 }

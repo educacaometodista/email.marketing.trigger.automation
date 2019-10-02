@@ -117,7 +117,7 @@ class AcaoController extends Controller
             }
         }
 
-        sleep(40);
+        sleep(200);
 
         $status = null;
 
@@ -139,7 +139,7 @@ class AcaoController extends Controller
                     if($status != 'Já existe uma campanha cadastrada com esse título!')
                     {
                         $acao = new Acao;
-                        $acao->titulo = $titulo_da_acao;
+                        $acao->titulo = $titulo_da_acao.' '.$instituicao->prefixo;
                         $acao->destinatarios = $destinarios;
                         $acao->status = $status;
                         $acao->agendamento = $agendamento_envio;

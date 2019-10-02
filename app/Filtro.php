@@ -11,4 +11,9 @@ class Filtro extends Model
     public $fillable = [
         'regra'
     ];
+
+    public function tipos_de_acoes_das_instituicoes()
+    {
+        return $this->belongsToMany(TipoDeAcaoDaInstituicao::class);
+    }
 }

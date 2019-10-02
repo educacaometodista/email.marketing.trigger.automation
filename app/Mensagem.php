@@ -46,5 +46,10 @@ class Mensagem extends Model
     {
         unlink(public_path("mensagens/".strtolower($instituicao_prefixo)."/$file_name.html"));
     }
+
+    public function tipos_de_acoes_das_instituicoes()
+    {
+        return $this->belongsToMany(TipoDeAcaoDaInstituicao::class);
+    }
     
 }

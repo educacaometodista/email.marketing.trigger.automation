@@ -52,7 +52,7 @@ class TipoDeAcaoController extends Controller
         $tipo_de_acao->nome_de_exibicao = $request->input('nome_de_exibicao');
         $tipo_de_acao->save();
         
-        return redirect()->route('admin.tipos-de-acoes.edit', compact('tipos_de_aco'))
+        return redirect()->route('admin.tipos-de-acoes.edit', compact('tipo_de_acao'))
             ->with('success', 'Tipo de Ação criada com sucesso!');
     }
 
@@ -97,7 +97,7 @@ class TipoDeAcaoController extends Controller
             'nome_de_exibicao' => $request->nome_de_exibicao,
         ]);
 
-        return redirect()->route('admin.tipos-de-acoes.edit', compact('tipos_de_aco'))
+        return redirect()->route('admin.tipos-de-acoes.edit', compact('tipo_de_acao'))
             ->with('success', 'Tipo de Ação atualizada com sucesso!');
     }
 

@@ -69,7 +69,7 @@ class TipoDeAcaoController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.emkt.tipos-de-acoes.edit', ['tipo_de_acao' => TipoDeAcao::findOrFail($id)]);
     }
 
     /**

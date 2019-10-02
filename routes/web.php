@@ -44,6 +44,9 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
 
     Route::resource('tipos-de-acoes', 'TipoDeAcaoController');
 
+    Route::resource('filtros', 'FiltroController');
+
+
 });
 
 Auth::routes();

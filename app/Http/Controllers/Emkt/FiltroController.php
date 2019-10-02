@@ -56,4 +56,10 @@ class FiltroController extends Controller
             ->with('success', 'Filtro criado com sucesso!');
     }
 
+    public function edit($id)
+    {
+        return view('admin.emkt.filtros.edit', ['filtro' => Filtro::findOrFail($id)]);
+    }
+
+    
 }

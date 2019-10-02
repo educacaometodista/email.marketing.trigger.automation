@@ -24,5 +24,14 @@ class FiltroController extends Controller
         return view('admin.emkt.filtros.index', ['filtros' => Filtro::all()]);
     }
 
-    
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.emkt.filtros.create');
+    }
+
 }

@@ -81,7 +81,18 @@ class TipoDeAcaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nome' => 'required|min:2|max:255|string',
+            'nome_de_exibicao' => 'required|min:2|max:255|string',
+        ]);
+
+        $tipo_de_acao = TipoDeAcao::findOrFail($id)->update([
+            'nome' => $request->nome,
+            'nome_de_exibicao' => $request->nome_de_exibicao,
+        ]);
+
+        return redirect()->route('admin.tipos-de-acoes.edit', compact('tipos_de_aco'))
+            ->with('success', 'Tipo de Ação atualizada com sucesso!');
     }
 
     /**

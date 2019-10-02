@@ -13,9 +13,8 @@ class Acao extends Model
         'destinatarios',
         'status',
         'agendamento',
-        'tipo_de_acao_id',
         'usuario_id',
-        'instituicao_id'
+        'tipo_de_acao_da_instituicao_id'
     ];
 
     public function usuario()
@@ -23,8 +22,8 @@ class Acao extends Model
         return $this->belongsTo(Admin::class, 'usuario_id');
     }
 
-    public function instituicao()
+    public function tipo_de_acao_da_instituicao()
     {
-        return $this->belongsTo(Instituicao::class, 'instituicao_id');
+        return $this->belongsTo(TipoDeAcaoDaInstituicao::class, 'tipo_de_acao_da_instituicao_id');
     }
 }

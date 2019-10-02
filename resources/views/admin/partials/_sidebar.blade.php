@@ -56,7 +56,7 @@
                         </ul>
                     </li>
 
-                    <li class="{{ classActivePath('/admin/acoes', 'open', 2) }}">
+                    <li class="{{ classActivePath('/admin/tipos-de-acoes', 'open', 2) }}">
                         <a href="javascript:void(0)">
                         <i class="fas fa-paper-plane"></i>
                             <span>Tipos de Ações</span>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Emkt;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\TipoDeAcao;
 
 class TipoDeAcaoController extends Controller
 {
@@ -14,7 +15,7 @@ class TipoDeAcaoController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.emtk.tipos-de-acoes.index', ['tipos_de_acoes' => TipoDeAcao::all()]);
     }
 
     /**

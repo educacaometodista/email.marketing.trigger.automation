@@ -83,4 +83,18 @@ class FiltroController extends Controller
         return redirect()->route('admin.filtros.edit', compact('filtro'))
             ->with('success', 'Filtro atualizado com sucesso!');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        Filtro::findOrFail($id)->delete();
+
+        return redirect()->route('admin.filtros.index')
+            ->with('success', 'Filtro removido com sucesso!');
+    }
 }

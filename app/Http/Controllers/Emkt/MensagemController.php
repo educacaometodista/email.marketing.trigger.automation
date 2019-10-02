@@ -123,7 +123,7 @@ class MensagemController extends Controller
             'nome_do_arquivo' => $request->nome_do_arquivo,
             'conteudo' => $request->conteudo,
             'assunto' => $request->assunto,
-            'tipo_de_acao_id' => $request->tipo_de_acao_id,
+            'tipo_de_acao_id' => $request->tipo_de_acao,
             'instituicao_id' => $request->instituicao
         ]);
 

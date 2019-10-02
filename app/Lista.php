@@ -13,6 +13,6 @@ class Lista extends Model
         'nome_do_arquivo',
         'contatos',
         'conteudo',
-        'instituicao_id',
+        'filtro_id'
     ];
 }

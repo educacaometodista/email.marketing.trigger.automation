@@ -282,13 +282,25 @@ class PlanilhaController extends Controller
         foreach($currentFile as $key_row => $row)
         {
             foreach($row as $key => $cell)
+            {
                 if(!($key == 'nome' || $key == 'e_mail' || $key == 'número' || $key == 'ddd'))
-                        unset($currentFile[$key_row][$key]);               
-            
+                {
+                    unset($currentFile[$key_row][$key]);               
+                }
+
+                if($key == 'número')
+                {
+                    $currentFile[$key_row]['número'] = str_replace('-', '', $currentFile[$key_row]['ddd'].$currentFile[$key_row]['número']);
+                    $currentFile[$key_row]['número'] = str_replace('(', '', $currentFile[$key_row]['número']);
+                    $currentFile[$key_row]['número'] = str_replace(')', '', $currentFile[$key_row]['número']);
+                    $currentFile[$key_row]['número'] = str_replace(' ', '', $currentFile[$key_row]['número']);              
+                }
+            }
+
             $planilha = new Planilha;
             $planilha->nome = $currentFile[$key_row]['nome'];
             $planilha->email = $currentFile[$key_row]['e_mail'];
-            $planilha->celular = ($currentFile[$key_row]['número'] && $currentFile[$key_row]['ddd']) ? $currentFile[$key_row]['ddd'].$currentFile[$key_row]['número'] : '';
+            $planilha->celular = $currentFile[$key_row]['número'];
             $planilha->instituicao = 'EaD-UMESP';
             $planilha->documento = $document_hash;
 

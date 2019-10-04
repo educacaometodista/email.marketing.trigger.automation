@@ -46,7 +46,7 @@ class ListaController extends Controller
     {
         $request->validate([
             'import_file' => 'required|file|mimes:xlsx,csv,txt',
-            'tipo_de_acao' => 'required|min:1|max:30|string',
+            'tipo_de_acao' => 'required|min:1|max:255|string',
             'date' => 'required|date'
         ]);
 

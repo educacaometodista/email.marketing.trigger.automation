@@ -111,18 +111,18 @@
                             <div class="form-group row"> <span class="label-text col-md-2 col-form-label text-md-right py-0">Situação da Lista</span>
                                 <div class="col-md-10">
                                 <label class="form-radio">
-                                        <input type="radio" name="hasList" value="concluido" class="form-radio-input" checked>
+                                        <input type="radio" name="hasList" value="concluido" class="form-radio-input">
                                         <span class="form-radio-label">Já Importado</span>
                                     </label>
                                     <label class="form-radio">
-                                        <input type="radio" name="hasList" value="importar-agora" class="form-radio-input" >
+                                        <input type="radio" name="hasList" value="importar-agora" class="form-radio-input" checked>
                                         <span class="form-radio-label">Importar Agora</span>
                                     </label>
                                 </div>
                             </div>
 
                             <!-- Form Group Start -->
-                            <div id="input-lista" class="form-group row d-none">
+                            <div id="input-lista" class="form-group row">
                                 <span class="label-text col-md-2 col-form-label text-md-right">Arquivo</span>
 
                                 <div class="col-md-10">

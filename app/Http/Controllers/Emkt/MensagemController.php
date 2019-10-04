@@ -51,7 +51,7 @@ class MensagemController extends Controller
             'nome_do_arquivo' => 'required|min:1|max:10000|string|unique:mensagens',
             'conteudo' => 'required|min:1|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
-            'tipo_de_acao' => 'required|min:1|max:80|string',
+            'tipo_de_acao' => 'required|min:1|max:80',
             'instituicao' => 'required|min:1|max:40|string'
         ]);
         
@@ -110,7 +110,7 @@ class MensagemController extends Controller
             'nome_do_arquivo' => 'required|min:1|max:10000|string',
             'conteudo' => 'required|min:1|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
-            'tipo_de_acao' => 'required|min:1|max:80|string',
+            'tipo_de_acao' => 'required|min:1|max:80',
             'instituicao' => 'required|min:1|max:40|string'
         ]);
         

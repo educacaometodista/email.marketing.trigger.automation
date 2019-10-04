@@ -45,9 +45,9 @@ class InstituicaoController extends Controller
         $request->validate([
             'nome' => 'required|min:2|max:100|string|unique:instituicoes',
             'prefixo' => 'required|min:2|max:16/string|unique:instituicoes',
-            'nome_do_remetente' => 'required|min:2|max:80',
-            'email_do_remetente' => 'required|min:4|max:40|email',
-            'email_de_retorno' => 'required|min:4|max:40|email',
+            'nome_do_remetente' => 'required|min:2|max:255',
+            'email_do_remetente' => 'required|min:4|max:255|email',
+            'email_de_retorno' => 'required|min:4|max:255|email',
             'codigo_da_empresa' => 'required|min:4|max:5'
         ]);
 
@@ -96,11 +96,11 @@ class InstituicaoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nome' => 'required|min:2|max:100|string',
-            'prefixo' => 'required|min:2|max:16|string',
-            'nome_do_remetente' => 'required|min:2|max:80',
-            'email_do_remetente' => 'required|min:4|max:40|email',
-            'email_de_retorno' => 'required|min:4|max:40|email',
+            'nome' => 'required|min:2|max:255|string',
+            'prefixo' => 'required|min:2|max:255|string',
+            'nome_do_remetente' => 'required|min:2|max:255',
+            'email_do_remetente' => 'required|min:4|max:255|email',
+            'email_de_retorno' => 'required|min:4|max:255|email',
             'codigo_da_empresa' => 'required|min:4|max:5'
         ]);
 

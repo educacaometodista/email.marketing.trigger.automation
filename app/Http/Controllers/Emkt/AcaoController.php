@@ -62,8 +62,8 @@ class AcaoController extends Controller
     {
         $request->validate([
             'date' => 'required|date',
-            'tipo_de_acao' => 'required|min:1|max:30',
-            'titulo' => 'required|min:2|max:30',
+            'tipo_de_acao' => 'required|min:1|max:255',
+            'titulo' => 'required|min:2|max:255',
             'data_agendamento' => 'required|date',
             'hora_agendamento'=> 'required',
             'hasList' => 'required',
@@ -75,7 +75,7 @@ class AcaoController extends Controller
         $tipo_de_acao_id = $request->input('tipo_de_acao');
                 
         $date = str_replace('-', '/', $date);
-        $titulo_da_acao = $request->input('titulo').' '.$date;
+        $titulo_da_acao = $request->input('titulo').' '.$date; 
         $agendamento_envio = $request->input('envio');
         $data_agendamento =  date('Y-m-d', strtotime($request->input('data_agendamento')));
         $hora_agendamento = $request->input('hora_agendamento');
@@ -151,8 +151,8 @@ class AcaoController extends Controller
                     } else {
                         Session::flash('message-danger-'.$instituicao->prefixo, 'Já existe uma campanha cadastrada com o título "'.$titulo_da_acao.'" em '. $instituicao->nome.'.');
                     }
-                        
-                    Session::flash('success', "Ação criada com sucesso em $instituicao->nome!");
+                    
+                    Session::flash('message-danger-'.$instituicao->prefixo, "Ação criada com sucesso em $instituicao->nome!");
 
                 }
             }

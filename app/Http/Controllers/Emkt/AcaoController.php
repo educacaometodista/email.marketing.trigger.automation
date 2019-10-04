@@ -123,10 +123,23 @@ class AcaoController extends Controller
 
         foreach ($instituicoes_selecionadas as $instituicao)
         {
-            $mensagem = Mensagem::all()
-                ->where('tipo_de_acao_id', '=', $tipo_de_acao_id)
-                ->where('instituicao_id', '=', $instituicao->id)
-                ->first();
+            /*
+            $tipos_de_acoes_da_instituicao = TipoDeAcaoDaInstituicao::all()
+                ->where('tipo_de_acao_id', '=', $tipo_de_acao_id);
+                ->where('instituicao_id', '=', $instituicao->id);
+            */
+
+            $tipos_de_acoes_da_instituicao = $instituicao->tipos_de_acoes_da_instituicao;
+            $mensagem = null;
+
+            foreach($tipos_de_acoes_da_instituicao as $tipo_de_acao_da_instituicao)
+            {
+                if($tipo_de_acao_da_instituicao->tipo_de_acao_id == $tipo_de_acao_id)
+                {
+                    $mensagem = $tipo_de_acao_da_instituicao->mensagem;
+                    break;
+                }
+            }
 
             if(isset($acoes_a_criar[$instituicao->prefixo]))
             {

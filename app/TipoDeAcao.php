@@ -15,6 +15,6 @@ class TipoDeAcao extends Model
 
     public function tipo_de_acao_das_instituicoes()
     {
-        return $this->hasMany(TipoDeAcaoDaInstituicao::class, 'tipo_de_acao_id', 'id');
+        return $this->hasOne(TipoDeAcaoDaInstituicao::class, 'tipo_de_acao_id', 'id');
     }
 }

@@ -17,7 +17,7 @@ class Mensagem extends Model
 
     public function getUrl()
     {
-        return (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].'/mensagens/'.strtolower($this->tipos_de_acoes_das_instituicoes->instituicao->prefixo).'/'.$this->nome_do_arquivo.'.html';
+        return (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].'/mensagens/'.strtolower($this->tipo_de_acao_da_instituicao->instituicao_id).'/'.$this->nome_do_arquivo.'.html';
     }
 
     public static function editFileContent($file_name, $new_content, $instituicao_prefixo)
@@ -47,9 +47,9 @@ class Mensagem extends Model
         unlink(public_path("mensagens/".strtolower($instituicao_prefixo)."/$file_name.html"));
     }
 
-    public function tipos_de_acoes_das_instituicoes()
+    public function tipo_de_acao_da_instituicao()
     {
-        return $this->belongsToMany(TipoDeAcaoDaInstituicao::class);
+        return $this->hasOne(TipoDeAcaoDaInstituicao::class, 'mensagem_id', 'id');
     }
     
 }

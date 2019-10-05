@@ -27,11 +27,11 @@ class TipoDeAcaoDaInstituicao extends Model
 
     public function filtro()
     {
-        return $this->hasOne(Filtro::class, 'filtro_id');
+        return $this->belongsTo(Filtro::class, 'filtro_id');
     }
 
     public function mensagem()
     {
-        return $this->hasOne(Mensagem::class, 'mensagem_id');
+        return $this->belongsTo(Mensagem::class, 'mensagem_id');
     }
 }

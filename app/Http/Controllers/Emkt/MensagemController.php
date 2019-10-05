@@ -33,9 +33,7 @@ class MensagemController extends Controller
      */
     public function create()
     {        
-        return view('admin.emkt.mensagens.create', [
-            'instituicoes' => Instituicao::all(),
-            'tipos_de_acoes' => TipoDeAcao::all() ]);
+        return view('admin.emkt.mensagens.create');
     }
 
     /**
@@ -51,8 +49,6 @@ class MensagemController extends Controller
             'nome_do_arquivo' => 'required|min:1|max:10000|string',
             'conteudo' => 'required|min:1|max:10000|string',
             'assunto' => 'required|min:2|max:150|string',
-            'tipo_de_acao' => 'required|min:1|max:80',
-            'instituicao' => 'required|min:1|max:40|string'
         ]);
         
         $mensagem = new Mensagem;
@@ -60,8 +56,6 @@ class MensagemController extends Controller
         $mensagem->nome_do_arquivo = $request->input('nome_do_arquivo');
         $mensagem->conteudo = $request->input('conteudo');
         $mensagem->assunto = $request->input('assunto');
-        $mensagem->tipo_de_acao_id = $request->input('tipo_de_acao');
-        $mensagem->instituicao_id = $request->input('instituicao');
         $mensagem->save();
 
         Mensagem::createFile($mensagem->nome_do_arquivo, $mensagem->conteudo, $mensagem->instituicao->prefixo);
@@ -90,10 +84,7 @@ class MensagemController extends Controller
     public function edit($id)
     {
 
-        return view('admin.emkt.mensagens.edit', [
-            'mensagem' => Mensagem::findOrFail($id),
-            'instituicoes' => Instituicao::all(), 
-            'tipos_de_acoes' => TipoDeAcao::all() ]);
+        return view('admin.emkt.mensagens.edit', ['mensagem' => Mensagem::findOrFail($id)]);
     }
 
     /**
@@ -109,9 +100,7 @@ class MensagemController extends Controller
             'titulo' => 'required|min:2|max:80|string',
             'nome_do_arquivo' => 'required|min:1|max:10000|string',
             'conteudo' => 'required|min:1|max:10000|string',
-            'assunto' => 'required|min:2|max:150|string',
-            'tipo_de_acao' => 'required|min:1|max:80',
-            'instituicao' => 'required|min:1|max:40|string'
+            'assunto' => 'required|min:2|max:150|string'
         ]);
         
         $mensagem = Mensagem::findOrFail($id);
@@ -122,9 +111,7 @@ class MensagemController extends Controller
             'titulo' => $request->titulo,
             'nome_do_arquivo' => $request->nome_do_arquivo,
             'conteudo' => $request->conteudo,
-            'assunto' => $request->assunto,
-            'tipo_de_acao_id' => $request->tipo_de_acao,
-            'instituicao_id' => $request->instituicao
+            'assunto' => $request->assunto
         ]);
 
         Mensagem::editFileContent($request->nome_do_arquivo, $request->conteudo, $mensagem->instituicao->prefixo);

@@ -12,8 +12,8 @@ class FiltrosTableSeeder extends Seeder
     public function run()
     {
         $filtro = new App\Filtro;
-        $filtro->nome = '';
-        $filtro->regra = '';
+        $filtro->nome = 'teste filtro';
+        $filtro->regra = 'teste filtro';
         $filtro->save();
     }
 }

@@ -17,7 +17,7 @@ class Mensagem extends Model
 
     public function getUrl()
     {
-        return (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].'/mensagens/'.strtolower($this->instituicao->prefixo).'/'.$this->nome_do_arquivo.'.html';
+        return (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].'/mensagens/'.strtolower($this->tipos_de_acoes_das_instituicoes->instituicao->prefixo).'/'.$this->nome_do_arquivo.'.html';
     }
 
     public static function editFileContent($file_name, $new_content, $instituicao_prefixo)

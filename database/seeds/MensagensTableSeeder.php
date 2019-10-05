@@ -286,12 +286,12 @@ class MensagensTableSeeder extends Seeder
         $mensagem->assunto = '[PRIMEIRONOME], finalize sua inscrição no Vestibular';
         $mensagem->save();
         
-        /*$mensagem = new App\Mensagem;
+        $mensagem = new App\Mensagem;
         $mensagem->titulo = 'Lembrete de Prova - Template Branco';
         $mensagem->nome_do_arquivo = 'lembrete-de-prova';
         $mensagem->conteudo = file_get_contents(public_path('mensagens/ead-fames/lembrete-de-prova.html'));
         $mensagem->assunto = 'Não se esqueça: o dia da sua prova está chegando!';
-        $mensagem->save();*/
+        $mensagem->save();
 
         $mensagem = new App\Mensagem;
         $mensagem->titulo = 'Aprovados Não Matriculados - Template Branco';

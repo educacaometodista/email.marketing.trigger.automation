@@ -15,6 +15,6 @@ class Filtro extends Model
 
     public function tipos_de_acoes_das_instituicoes()
     {
-        return $this->belongsToMany(TipoDeAcaoDaInstituicao::class);
+        return $this->hasOne(TipoDeAcaoDaInstituicao::class, 'filtro_id', 'id');
     }
 }

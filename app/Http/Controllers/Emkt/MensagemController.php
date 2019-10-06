@@ -8,6 +8,8 @@ use App\Mensagem;
 use App\Instituicao;
 use App\TipoDeAcao;
 use Storage;
+use App\Http\Resources\MensagemResource;
+
 
 class MensagemController extends Controller
 {
@@ -22,8 +24,7 @@ class MensagemController extends Controller
      */
     public function index()
     {
-        
-        return view('admin.emkt.mensagens.index', ['mensagens' => Mensagem::all()]);
+        return view('admin.emkt.mensagens.index', ['mensagens' => Mensagem::whereHas('tipo_de_acao_da_instituicao')->get()]);
     }
 
     /**

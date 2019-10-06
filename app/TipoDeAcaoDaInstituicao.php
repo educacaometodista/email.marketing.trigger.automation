@@ -9,6 +9,7 @@ class TipoDeAcaoDaInstituicao extends Model
     public $table = 'tipos_de_acoes_das_instituicoes';
 
     public $fillable = [
+        'nome',
         'tipo_de_acao_id',
         'instituicao_id',
         'filtro_id',

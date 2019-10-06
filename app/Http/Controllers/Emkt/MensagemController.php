@@ -8,8 +8,6 @@ use App\Mensagem;
 use App\Instituicao;
 use App\TipoDeAcao;
 use Storage;
-use App\Http\Resources\MensagemResource;
-
 
 class MensagemController extends Controller
 {

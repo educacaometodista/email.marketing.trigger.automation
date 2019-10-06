@@ -11,7 +11,9 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
      */
     public function run()
     {
+        //UMESP - Ausentes
         $tipo_de_acao_da_instituicao = new App\TipoDeAcaoDaInstituicao;
+        $tipo_de_acao_da_instituicao->nome = 'Ausentes UMESP Presencial';
         $tipo_de_acao_da_instituicao->tipo_de_acao_id = 1;
         $tipo_de_acao_da_instituicao->instituicao_id = 1;
         $tipo_de_acao_da_instituicao->filtro_id = 1;

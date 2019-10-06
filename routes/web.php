@@ -31,6 +31,9 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
         Route::post('/store', 'MensagemController@store')->name('store');
         Route::put('/{id}', 'MensagemController@update')->name('update');
         Route::delete('/{id}', 'MensagemController@destroy')->name('destroy');
+        Route::get('/{id}', function ($id) {
+            return redirect()->route('admin.mensagens.edit', $id);
+        });
     });
 
     Route::prefix('instituicoes')->name('instituicoes.')->group(function () {

@@ -23,19 +23,23 @@ class CreateTiposDeAcoesDasInstituicoesTable extends Migration
 
             $table->foreign('tipo_de_acao_id')
                 ->references('id')
-                ->on('tipos_de_acoes');
+                ->on('tipos_de_acoes')
+                ->onDelete('cascade');
 
             $table->foreign('instituicao_id')
                 ->references('id')
-                ->on('instituicoes');
+                ->on('instituicoes')
+                ->onDelete('cascade');
 
             $table->foreign('filtro_id')
                 ->references('id')
-                ->on('filtros');
+                ->on('filtros')
+                ->onDelete('cascade');
 
             $table->foreign('mensagem_id')
                 ->references('id')
-                ->on('mensagens');
+                ->on('mensagens')
+                ->onDelete('cascade');
         });
     }
 

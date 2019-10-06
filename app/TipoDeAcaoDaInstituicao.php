@@ -22,7 +22,7 @@ class TipoDeAcaoDaInstituicao extends Model
 
     public function instituicao()
     {
-        return $this->belongsTo(Instituicao::class, 'instituicao_id');
+        return $this->belongsTo(Instituicao::class, 'instituicao_id', 'id');
     }
 
     public function filtro()

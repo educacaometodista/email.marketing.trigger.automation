@@ -84,7 +84,10 @@ class AcaoController extends Controller
         $hasAction = true;
         $hasList = $request->input('hasList');
 
-        $instituicoes = Instituicao::all();
+        $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function ($query) {
+            $query->where('tipo_de_acao_id', 'like', $tipo_de_acao_id);
+            })->get();
+
         $instituicoes_selecionadas = [];
 
         foreach($instituicoes as $instituicao)
@@ -99,7 +102,7 @@ class AcaoController extends Controller
                     $currentFile = $this->planilha()->load($request->file('import_file')->getRealPath());
                 }
         
-                $nomes_das_listas = (new ListaController())->import($currentFile, $extension, $tipo_de_acao_id, $date, $hasAction);
+                $nomes_das_listas = (new ListaController())->import($currentFile, $extension, $instituicoes, $date, $hasAction);
 
             } else {
                 $nomes_das_listas = null;

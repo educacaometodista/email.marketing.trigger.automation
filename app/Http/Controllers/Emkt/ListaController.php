@@ -38,7 +38,15 @@ class ListaController extends Controller
 
     public function create()
     {
-        return view('admin.emkt.listas.create')->with(['instituicoes' =>  Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get(), 'tipos_de_acoes' =>  TipoDeAcao::whereHas('tipo_de_acao_das_instituicoes')->get()]);
+        return view('admin.emkt.listas.create')->with([
+            'instituicoes' =>  Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get(),
+            'tipos_de_acoes' =>  TipoDeAcao::whereHas('tipo_de_acao_das_instituicoes')->get()
+            ]);
+    }
+
+    public function upload_files(Request $request)
+    {
+        Session::put('imported_files', $request->file('import_file'));
     }
 
     public function store(Request $request)
@@ -55,8 +63,12 @@ class ListaController extends Controller
             $date = date('d-m-Y', strtotime($request->input('date')));
             $currentFile = $this->planilha()->load($request->file('import_file')->getRealPath());
             $hasAction = false;
+
+
             $this->multiplos_arquivos = false;
             //$multiplos_arquivos = $request->input('multiplos_arquivos');
+
+
             $tipo_de_acao_id = $request->input('tipo_de_acao');
             $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get();
             $instituicoes_selecionadas = [];

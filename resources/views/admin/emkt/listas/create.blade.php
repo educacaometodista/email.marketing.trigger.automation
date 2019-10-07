@@ -40,18 +40,18 @@
                     <div class="panel-content">
                     @include('admin.partials._alert')
                     @if(isset($instituicoes))
-                        @foreach($instituicoes as $instituicao => $prefixo)
-                            @if(session('message-'.$prefixo))
-                                @if(session('message-'.$prefixo) == "Acesso negado em $instituicao!")
+                        @foreach($instituicoes as $instituicao)
+                            @if(session('message-'.$instituicao->prefixo))
+                                @if(session('message-'.$instituicao->prefixo) == "Acesso negado em $instituicao!")
                                     <div class="alert alert-danger" role="alert">
-                                        {{ session('message-'.$prefixo) }}
+                                        {{ session('message-'.$instituicao->prefixo) }}
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                @elseif(session('message-'.$prefixo) == "Lista importada com sucesso em $instituicao!")
+                                @elseif(session('message-'.$instituicao->prefixo) == "Lista importada com sucesso em $instituicao->nome!")
                                     <div class="alert alert-success" role="alert">
-                                        {{ session('message-'.$prefixo) }}
+                                        {{ session('message-'.$instituicao->prefixo) }}
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -75,6 +75,25 @@
                                         <option value="{{ $tipo_de_acao->id }}">{{ $tipo_de_acao->nome_de_exibicao }}</option>
                                     @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
+                            <!-- Form Group Start -->
+                            <div class="form-group row"> <span class="label-text col-md-2 col-form-label text-md-right py-0">Instituições</span>
+                                <div class="col-md-5 form-inline">
+                                    @foreach($instituicoes as $key => $instituicao)
+
+                                    <label class="form-check mr-3" id="{{ $instituicao->prefixo }}">
+                                        <input type="checkbox" name="{{ 'instituicao-'.strtolower($instituicao->prefixo) }}" value="{{ $instituicao->prefixo }}" class="form-check-input"> <span class="form-check-label">{{ $instituicao->nome }}</span>
+                                    </label>
+
+                                    @if(round(count($instituicoes)) / 2 == ($key+1))
+                                        </div>
+                                        <div class="col-md-5 form-inline">
+                                    @endif
+
+                                    @endforeach
                                 </div>
                             </div>
                             <!-- Form Group End -->

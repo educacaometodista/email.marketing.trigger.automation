@@ -16,6 +16,7 @@ class CreatePlanilhasTable extends Migration
         Schema::create('planilhas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
+            $table->string('ddd');
             $table->string('email');
             $table->string('celular');
             $table->string('instituicao');

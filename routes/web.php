@@ -14,6 +14,7 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
 
     Route::prefix('listas')->name('listas.')->group(function () {
         Route::get('create', 'ListaController@create')->name('create');
+        Route::get('selecionar-instituicoes', 'ListaController@selecionar_instituicoes')->name('selecionar-instituicoes');
         Route::post('store', 'ListaController@store')->name('store');
     });
 

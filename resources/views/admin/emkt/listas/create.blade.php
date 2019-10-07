@@ -109,11 +109,11 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                <span class="label-text col-md-2 col-form-label text-md-right">Arquivo</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Arquivos</span>
 
                                 <div class="col-md-10">
                                     <label class="custom-file">
-                                        <input type="file" name="import_file" class="custom-file-input" id="arquivo">
+                                        <input type="file" name="import_file[]" class="custom-file-input" id="arquivo" multiple>
                                         <span class="custom-file-label">Selecione um arquivo</span>
                                     </label>
                                 </div>

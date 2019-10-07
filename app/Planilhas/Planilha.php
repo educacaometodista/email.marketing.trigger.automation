@@ -10,6 +10,7 @@ class Planilha extends Model
 
     protected $fillable = [
         'nome',
+        'ddd',
         'email',
         'celular',
         'instituicao',

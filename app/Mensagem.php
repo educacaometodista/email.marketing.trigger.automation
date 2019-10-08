@@ -17,7 +17,13 @@ class Mensagem extends Model
 
     public function getUrl()
     {
-        return (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].'/mensagens/'.strtolower($this->tipo_de_acao_da_instituicao->instituicao->prefixo).'/'.$this->nome_do_arquivo.'.html';
+        
+        if($this->tipo_de_acao_da_instituicao()->exists()) {
+            return (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].'/mensagens/'.strtolower($this->tipo_de_acao_da_instituicao->instituicao->prefixo).'/'.$this->nome_do_arquivo.'.html';
+        } else {
+            return '#';
+        }
+
     }
 
     public static function editFileContent($file_name, $new_content, $instituicao_prefixo)

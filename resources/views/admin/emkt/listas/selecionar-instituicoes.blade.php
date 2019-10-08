@@ -54,7 +54,7 @@
                                 </div>
                             </div>
 
-                            @if($listas)
+                            @if(session('importacao-de-listas'))
                                 @foreach($listas as $lista)
                                         <div class="row">
                                             <div class="col-md-8">
@@ -70,7 +70,7 @@
                                                     <option></option>
                                                     <option value="todas">Todas</option>
                                                     @foreach($instituicoes as $instituicao)
-                                                        <option value="{{ $instituicao->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->id }}">{{ $instituicao->nome }}</option>
+                                                        <option value="{{ $instituicao->tipos_de_acoes_da_instituicao->first()->id }}">{{ $instituicao->nome }}</option>
                                                     @endforeach
                                                     </select>
                                                 </div>

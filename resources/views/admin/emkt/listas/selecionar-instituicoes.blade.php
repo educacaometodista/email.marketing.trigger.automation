@@ -54,8 +54,8 @@
                                 </div>
                             </div>
 
-                            @if(session('importacao-de-listas'))
-                                @foreach(session('importacao-de-listas')['arquivos'] as $lista)
+                            @if($listas)
+                                @foreach($listas as $lista)
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">

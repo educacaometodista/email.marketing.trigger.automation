@@ -34,7 +34,7 @@
                 <!-- Panel Start -->
                 <div class="panel">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Novo Cadastro</h3>
+                        <h3 class="panel-title">Importar Listas</h3>
                     </div>
 
                     <div class="panel-content">
@@ -61,7 +61,7 @@
                         @endforeach
                     @endif
 
-                        <form action="{{ route('admin.listas.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.listas.upload') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <!-- Form Group Start -->

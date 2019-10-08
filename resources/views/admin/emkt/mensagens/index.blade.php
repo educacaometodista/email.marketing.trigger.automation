@@ -69,8 +69,8 @@
                                     <td>{{ $mensagem->titulo }}</td>
                                     <td>{{ $mensagem->assunto }}</td>
                                     <td>{{ $mensagem->nome_do_arquivo.'.html' }}</td>
-                                    <td>{{ $mensagem->tipo_de_acao_da_instituicao->first()->instituicao->first()->nome }}</td>
-                                    <td><a href="{{ $mensagem->getUrl() }}" target="_blank"><i class="fas fa-eye"></i></a></td>
+                                    <td>{{ $mensagem->tipo_de_acao_da_instituicao()->exists() ? $mensagem->tipo_de_acao_da_instituicao->first()->instituicao->first()->nome : '(nenhuma)' }}</td>
+                                    <td><a href="{{ $mensagem->getUrl() }}" target="{{ $mensagem->getUrl() == '#' ? '_self' : '_blank'}}"><i class="fas fa-eye"></i></a></td>
                                     <td>
                                         <div class="dropleft">
                                             <a href="#" class="btn-link" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>

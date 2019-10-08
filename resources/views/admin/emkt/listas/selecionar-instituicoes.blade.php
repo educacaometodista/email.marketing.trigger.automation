@@ -66,7 +66,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <select name="{{ $lista['input_name'] }}" class="form-control" id="instituicao_da_lista_1">
+                                                    <select name="{{ $lista['input_instituicao'] }}" class="form-control" id="instituicao_da_lista_1">
                                                     <option></option>
                                                     <option value="todas">Todas</option>
                                                     @foreach($instituicoes as $instituicao)

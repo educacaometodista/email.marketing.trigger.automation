@@ -196,13 +196,13 @@ class PlanilhaController extends Controller
             'NOME' => 'nome',
             'EMAIL' => 'e_mail',
             'CELULAR' => 'celular',
-            'INSTITUICAO' => 'instituição',
+            'INSTITUICAO' => 'instituição'
         ];
 
         if($this->hasColumns($filtro, $arrayFile))
         {
             foreach ($arrayFile as $key_row => $row) {
-                $arrayFile[$key_row] = $this->celular($filtro['CELULAR'], $row);
+                $arrayFile[$key_row] = $this->celular($filtro, $row);
                 $arrayFile[$key_row] = $this->clearRow($filtro, $arrayFile[$key_row]);
             }
 
@@ -218,20 +218,23 @@ class PlanilhaController extends Controller
         
     }
 
-
-    public function celular($nome_da_coluna, $row)
+    public function celular($filtro, $row)
     {
-       
         foreach($row as $key => $cell)
         {
-            if($key == $nome_da_coluna)
+            if($key == $filtro['CELULAR'])
             {
-                $row[$nome_da_coluna] = str_replace('-', '', $row[$nome_da_coluna]);              
-                $row[$nome_da_coluna] = str_replace('(', '', $row[$nome_da_coluna]);
-                $row[$nome_da_coluna] = str_replace(')', '', $row[$nome_da_coluna]);
-                $row[$nome_da_coluna] = str_replace(' ', '', $row[$nome_da_coluna]);
-                if(strlen($row[$nome_da_coluna]) != 11)
-                    $row[$nome_da_coluna] = '';            
+                $row[$filtro['CELULAR']] = str_replace('-', '', $row[$filtro['CELULAR']]);              
+                $row[$filtro['CELULAR']] = str_replace('(', '', $row[$filtro['CELULAR']]);
+                $row[$filtro['CELULAR']] = str_replace(')', '', $row[$filtro['CELULAR']]);
+                $row[$filtro['CELULAR']] = str_replace(' ', '', $row[$filtro['CELULAR']]);
+
+                if(array_key_exists('DDD', $filtro))
+                    if(array_key_exists($filtro['DDD'], $row))
+                        $row[$filtro['CELULAR']] = $row[$filtro['DDD']].$row[$filtro['CELULAR']];
+                    
+                if(strlen($row[$filtro['CELULAR']]) != 11)
+                    $row[$filtro['CELULAR']] = '';            
             }
         }
         return $row;

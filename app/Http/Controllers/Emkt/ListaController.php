@@ -112,11 +112,12 @@ class ListaController extends Controller
         $files = $importacao_de_listas['arquivos'];
         $extension = 'csv';
         $date = $importacao_de_listas['data'];
+
         $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($tipo_de_acao_id){
                 $query->where('tipo_de_acao_id', '=', $tipo_de_acao_id);
             }
         )->get();
-
+        
         $hasAction = false;
 
         $instituicoes_selecionadas = [];
@@ -145,13 +146,15 @@ class ListaController extends Controller
         if(isset($instituicoes_selecionadas))
         {
             $listas_de_contatos = $this->planilha()->filter($files, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
-            foreach ($listas_de_contatos as $prefixo_da_instituicao => $lista_de_contatos)
+            
+            foreach ($instituicoes_selecionadas as $instituicao)
             {
+                $lista_de_contatos = $listas_de_contatos[$instituicao->prefixo];
+
                 foreach($lista_de_contatos as $contato)
                 {
-                    /*if($instituicao->prefixo == $prefixo_da_instituicao)
-                        $this->aknaAPI()->importarContato($contato, $instituicao);*/
-                }
+                    $this->aknaAPI()->importarContato($contato, $instituicao);
+                }  
             }
 
         } else {

@@ -103,6 +103,7 @@ class PlanilhaController extends Controller
 
             if(array_key_exists('INSTITUICAO', $filtro))
                 $arrayFile = $this->orderByColumn($filtro['INSTITUICAO'], $arrayFile);
+
             
             $arrayFile = $this->renameColumns($arrayFile, $filtro);
 
@@ -139,6 +140,7 @@ class PlanilhaController extends Controller
                         if($key == $filtro['INSTITUICAO'])
                             $new_row['INSTITUICAO'] = $row[$filtro['INSTITUICAO']];
             }
+            array_push($newArrayFile, $new_row);
         }
 
         return $newArrayFile;

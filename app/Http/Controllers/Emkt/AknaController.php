@@ -156,4 +156,20 @@ class AknaController extends Controller
 
         return $xml->EMKT->ACAO->CONTATOS->TOTAL;
     }
+
+    public function importarContato($contato, $instituicao)
+    {
+        $this->data['Client'] = $instituicao->codigo_da_empresa;
+
+        $xml_request = $this->getXml('listas/importar-contato');
+        $xml_request = str_replace('[NOME DA LISTA]', $instituicao->tipos_de_acoes_da_instituicao->first()->nome_da_lista_de_contatos, $xml_request);
+        $xml_request = str_replace('[NOME]', $contato['NOME'], $xml_request);
+        $xml_request = str_replace('[EMAIL]', $contato['EMAIL'], $xml_request);
+
+        $xml_response = $this->post([], $xml_request);
+
+        $xml = new \SimpleXMLElement($xml_response);
+
+        return $xml;
+    }
 }

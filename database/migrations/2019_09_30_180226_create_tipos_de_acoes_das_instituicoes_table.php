@@ -20,6 +20,9 @@ class CreateTiposDeAcoesDasInstituicoesTable extends Migration
             $table->unsignedInteger('instituicao_id');
             $table->unsignedInteger('filtro_id');
             $table->unsignedInteger('mensagem_id');
+            $table->string('nome_da_lista_de_contatos');
+            $table->string('nome_do_arquivo');
+
             $table->timestamps();
 
             $table->foreign('tipo_de_acao_id')

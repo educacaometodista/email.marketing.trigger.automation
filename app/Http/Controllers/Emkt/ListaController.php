@@ -115,7 +115,6 @@ class ListaController extends Controller
             }
         )->get();
         
-        dd($instituicoes);
 
         $currentFiles = [];
         
@@ -130,11 +129,15 @@ class ListaController extends Controller
         //tipo de acao da instituicao -> instituicao
 
         foreach($instituicoes as $instituicao)
-            if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
-                array_push($instituicoes_selecionadas, $instituicao);
+        {
+            //hasAction
+            //if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
+            array_push($instituicoes_selecionadas, $instituicao);
+        }
+            
 
                 //try import single
-        return $this->import($currentFile, $extension, $instituicoes_selecionadas, $date, $hasAction);
+        return $this->importSingle($currentFiles, $extension, $instituicoes_selecionadas, $date, $hasAction);
 
         /*
         // 
@@ -148,7 +151,7 @@ class ListaController extends Controller
         //}
     }
 
-    public function importSingle($currentFile, $extension, $instituicoes, $date, $hasAction)
+    public function importSingle($currentFiles, $extension, $instituicoes_selecionadas, $date, $hasAction)
     {
         $explode_date = explode('-', str_replace('/', '-', $date));
         $day = $explode_date[0];
@@ -156,12 +159,13 @@ class ListaController extends Controller
         $period = $explode_date[2];
         $period .= $month >=7 ? '-2' : '';
 
-        if(isset($instituicoes))
+
+        if(isset($instituicoes_selecionadas))
         {
             //campo tipo de acaio em lista create
-            $tipo_de_acao = $instituicoes->first()->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->nome;
+            //$tipo_de_acao = $instituicoes_selecionadas->first()->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->nome;
 
-            $this->planilha()->filter($currentFile, $extension, $instituicoes, $day.'-'.$month.'-'.$period, 'akna_lists', $this->multiplos_arquivos);
+            $this->planilha()->filter($currentFiles, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
 
             $all_files = $this->planilha()->getFiles('akna_lists');
 

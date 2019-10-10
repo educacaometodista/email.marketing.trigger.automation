@@ -175,7 +175,7 @@ class PlanilhaController extends Controller
             $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($currentFile['tipo_de_acao_da_instituicao']);
 
             //dd($tipo_de_acao_da_instituicao->instituicao);
-            dd($tipo_de_acao_da_instituicao->filtro);
+            //dd($tipo_de_acao_da_instituicao->filtro);
             $this->getFilter($currentFile['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
         }
 
@@ -187,9 +187,33 @@ class PlanilhaController extends Controller
        
     }
 
-    public function getFilter()
+    public function getFilter($arrayFile, $extension, $tipo_de_acao_da_instituicao, $date, $storage_path)
     {
+        foreach ($arrayFile as $key_row => $row) {
+            $arrayFile[$key_row] = $this->celular('celular', $row);
+        }
 
+        dd($arrayFile); 
+    }
+
+
+
+    public function celular($nome_da_coluna, $row)
+    {
+       
+        foreach($row as $key => $cell)
+        {
+            if($key == $nome_da_coluna)
+            {
+                $row[$nome_da_coluna] = str_replace('-', '', $row[$nome_da_coluna]);              
+                $row[$nome_da_coluna] = str_replace('(', '', $row[$nome_da_coluna]);
+                $row[$nome_da_coluna] = str_replace(')', '', $row[$nome_da_coluna]);
+                $row[$nome_da_coluna] = str_replace(' ', '', $row[$nome_da_coluna]);
+                if(strlen($row[$nome_da_coluna]) != 11)
+                    $row[$nome_da_coluna] = '';            
+            }
+        }
+        return $row;
     }
 
 

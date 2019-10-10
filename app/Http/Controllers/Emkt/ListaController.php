@@ -37,6 +37,8 @@ class ListaController extends Controller
 
     public function create()
     {
+        Session::remove('importacao-de-listas');
+
         return view('admin.emkt.listas.create')->with([
             'instituicoes' =>  Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get(),
             'tipos_de_acoes' =>  TipoDeAcao::whereHas('tipo_de_acao_das_instituicoes')->get()
@@ -153,18 +155,24 @@ class ListaController extends Controller
             foreach ($instituicoes_selecionadas as $instituicao)
             {
                 $lista_de_contatos = $listas_de_contatos[$instituicao->prefixo];
-
+                $status = false;
 
                 foreach($lista_de_contatos as $contato)
-                {
-                    $this->aknaAPI()->importarContato($contato, $instituicao, $dados);
-                }  
+                    if($this->aknaAPI()->importarContato($contato, $instituicao, $dados) == "Ok")
+                        $status = "Ok";
             }
+
+            if($status == "Ok")
+                Session::flash('message-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
 
         } else {
 
+            Session::remove('importacao-de-listas');
             return back()->with('warning', 'Não há instituições cadastradas para importar este arquivo!');
         }   
+
+        Session::remove('importacao-de-listas');
+        return redirect()->route('admin.listas.create');
     }
 
     public function download($nome_da_lista, $extension)

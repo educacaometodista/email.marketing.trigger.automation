@@ -170,6 +170,6 @@ class AknaController extends Controller
 
         $xml = new \SimpleXMLElement($xml_response);
 
-        return $xml;
+        return $xml->EMKT->RETURN[0];
     }
 }

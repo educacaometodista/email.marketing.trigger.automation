@@ -189,11 +189,29 @@ class PlanilhaController extends Controller
 
     public function getFilter($arrayFile, $extension, $tipo_de_acao_da_instituicao, $date, $storage_path)
     {
-        foreach ($arrayFile as $key_row => $row) {
-            $arrayFile[$key_row] = $this->celular('celular', $row);
+        //$filtro = $tipo_de_acao_da_instituicao->filtro;
+        //array regra
+
+        $filtro = [
+            'NOME' => 'nome',
+            'EMAIL' => 'e_email',
+            'CELULAR' => 'celular',
+            'INSTITUICAO' => 'instituicao',
+        ];
+
+        if($this->hasColumns($filtro, $arrayFile))
+        {
+            foreach ($arrayFile as $key_row => $row) {
+                $arrayFile[$key_row] = $this->celular($filtro['CELULAR'], $row);
+            }
+            //dd($arrayFile);
+
+        } else {
+            //formato inválido
         }
 
-        dd($arrayFile); 
+
+        
     }
 
 
@@ -215,6 +233,24 @@ class PlanilhaController extends Controller
         }
         return $row;
     }
+
+
+    
+
+    public function hasColumns($nomes_das_colunas, $arrayFile)
+    {
+       $hasColumns = false;
+       foreach($nomes_das_colunas as $nome_da_coluna)
+       {
+            foreach($arrayFile as $row)
+                if(array_key_exists($nome_da_coluna, $row))
+                    $hasColumns = true;
+       }
+       return $hasColumns;  
+    }
+
+
+    
 
 
 

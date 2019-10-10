@@ -2,7 +2,7 @@
 <main>
     <emkt trans="11.05">
         <nome>[NOME DA LISTA]</nome>
-        <substituir>S</substituir>
+        <substituir>N</substituir>
         <destinatario>
             <nome>[NOME]</nome>
             <email>[EMAIL]</email>

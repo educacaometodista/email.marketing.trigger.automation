@@ -18,6 +18,11 @@ class TipoDeAcaoDaInstituicao extends Model
         'nome_do_arquivo'
     ];
 
+    public function getNomeDaListaDeContatos(array $dados)
+    {
+        return CampoVariavel::getCampo($this->nome_da_lista_de_contatos, $dados);
+    }
+
     public function tipo_de_acao()
     {
         return $this->belongsTo(TipoDeAcao::class, 'tipo_de_acao_id');

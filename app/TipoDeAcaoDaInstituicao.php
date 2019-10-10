@@ -13,7 +13,9 @@ class TipoDeAcaoDaInstituicao extends Model
         'tipo_de_acao_id',
         'instituicao_id',
         'filtro_id',
-        'mensagem_id'
+        'mensagem_id',
+        'nome_da_lista_de_contatos',
+        'nome_do_arquivo'
     ];
 
     public function tipo_de_acao()

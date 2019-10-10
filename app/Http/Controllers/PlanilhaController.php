@@ -75,7 +75,7 @@ class PlanilhaController extends Controller
             $lista = $this->getFilter($file['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
             $listas_de_contatos[$tipo_de_acao_da_instituicao->first()->instituicao->prefixo] = $lista;
         }
-        
+
         return $listas_de_contatos;
     }
 
@@ -95,14 +95,18 @@ class PlanilhaController extends Controller
         
         if($this->hasColumns($filtro, $arrayFile))
         {
-            foreach ($arrayFile as $key_row => $row) {
+            foreach ($arrayFile as $key_row => $row)
+            {
                 $arrayFile[$key_row] = $this->celular($filtro, $row);
                 $arrayFile[$key_row] = $this->clearRow($filtro, $arrayFile[$key_row]);
             }
 
             if(array_key_exists('INSTITUICAO', $filtro))
                 $arrayFile = $this->orderByColumn($filtro['INSTITUICAO'], $arrayFile);
-                //
+            
+            $arrayFile = $this->renameColumns($arrayFile, $filtro);
+
+            dd($arrayFile);
     
             return $arrayFile;
 
@@ -110,8 +114,34 @@ class PlanilhaController extends Controller
             Session::flash('danger', 'O formato do arquivo não é válido!');
             return back();
         }
+    }
 
-        
+    public function renameColumns($arrayFile, $filtro)
+    {
+        $newArrayFile = [];
+        foreach ($arrayFile as $key_row => $row) {
+            $new_row = [];
+            foreach ($row as $key => $cell) {
+
+                if(array_key_exists('NOME', $filtro))
+                    if($key == $filtro['NOME'])
+                        $new_row['NOME'] = $row[$filtro['NOME']];
+
+                if(array_key_exists('EMAIL', $filtro))
+                    if($key == $filtro['EMAIL'])
+                        $new_row['EMAIL'] = $row[$filtro['EMAIL']];
+                
+                if(array_key_exists('CELULAR', $filtro))
+                    if($key == $filtro['CELULAR'])
+                        $new_row['CELULAR'] = $row[$filtro['CELULAR']];
+
+                if(array_key_exists('INSTITUICAO', $filtro))
+                        if($key == $filtro['INSTITUICAO'])
+                            $new_row['INSTITUICAO'] = $row[$filtro['INSTITUICAO']];
+            }
+        }
+
+        return $newArrayFile;
     }
 
     public function celular($filtro, $row)

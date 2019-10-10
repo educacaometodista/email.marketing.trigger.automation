@@ -63,132 +63,21 @@ class PlanilhaController extends Controller
         }
     }
 
-    public function validator($tipo_de_acao, $currentFile)
-    {
-        $currentFile = is_object($currentFile) ? $currentFile->toArray() : (is_array($currentFile) ? $currentFile : null);
-
-        
-        /*if($tipo_de_acao == 'ausentes' || $tipo_de_acao == 'inscritos-parciais' || $tipo_de_acao == 'lembrete-de-prova' || $tipo_de_acao == 'aprovados-nao-matriculados') {
-            
-            $this->filter_name = 'Presencial';
-
-        } elseif($tipo_de_acao == 'ausentes-a-distancia' || $tipo_de_acao == 'inscritos-parciais-a-distancia' || $tipo_de_acao == 'lembrete-de-prova-a-distancia' || $tipo_de_acao == 'aprovados-nao-matriculados-a-distancia')
-        {
-            $this->filter_name = 'Ead';
-        }
-        
-        if($this->filter_name == 'Ead')
-        {
-            if(!empty($currentFile[0]))
-            {
-                if(!array_key_exists('nome', $currentFile[0]) || !array_key_exists('e_mail', $currentFile[0]) || !array_key_exists('número', $currentFile[0]) || !array_key_exists('ddd', $currentFile[0]))
-                {
-                    //Não possui todas as colunas
-                    Session::flash('danger', 'O formato do arquivo não é válido!');
-                    return false;
-                }
-            } else {
-                Session::flash('danger', 'O formato do arquivo não é válido!');
-                return false;
-            }
-
-        } elseif($this->filter_name == 'Presencial') {
-
-            if(!empty($currentFile[0]))
-            {
-                if(!array_key_exists('nome', $currentFile[0]) || !array_key_exists('e_mail', $currentFile[0]) || !array_key_exists('celular', $currentFile[0]) || !array_key_exists('instituição', $currentFile[0]))
-                {
-                    //Não possui todas as colunas
-                    Session::flash('danger', 'O formato do arquivo não é válido!');
-                    return false;
-                }
-            } else {
-                Session::flash('danger', 'O formato do arquivo não é válido!');
-                return false;
-            }
-        }
-        
-        
-
-        $campos = ['NOME', 'EMAIL', 'DDD', 'CELULAR', 'INSTITUICAO'];
-        $campos_do_filtro = [];
-
-        foreach($campos as $campo)
-        {
-            if(isset($this->filtro[$campo]))
-            {
-                array_push($campos_do_filtro, $this->filtro[$campo]);
-            }
-        }
-
-        foreach($campos_do_filtro as $campo => $coluna_da_planilha)
-        {
-            if(!isset($currentFile[0][$coluna_da_planilha]))
-            {
-                Session::flash('danger', 'O formato do arquivo não é válido!');
-                return false;
-            }
-        }
-        */
-
-    }
-
-    /*public function getFilter($currentFile, $extension, $tipo_de_acao, $date, $storage_path)
-    {
-        if($this->filter_name == 'Ead')
-        {
-            $this->filtroEad($currentFile, $extension, $tipo_de_acao, $date, $storage_path);
-
-        } elseif($this->filter_name == 'Presencial') {
-
-            $this->filtroPresencial($currentFile, $extension, $tipo_de_acao, $date, $storage_path);
-
-        }
-    }*/
+    //
 
     public function filter($currentFiles, $extension, $instituicoes, $date, $storage_path)
     {
-
-        //$tipo_de_acao = $instituicao->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->nome;
-
-        //$this->filtro = $instituicoes->first()->tipos_de_acoes_da_instituicao->first()->filtro->first();
-
-        
-        foreach ($instituicoes as $instituicao) {
-            $this->filtros[$instituicao->prefixo] = $instituicao->tipos_de_acoes_da_instituicao->first();
-        }
-
-        //dd($currentFiles);
-
-        //dd($this->filtros);
-
-        
-        /*$this->filtro = eval("[
-            'NOME' => 'nome',
-            'EMAIL' => 'e_email',
-            'CELULAR' => 'celular',
-            'INSTITUICAO' => 'instituicao',
-        ]");*/
         $tipo_de_acao_da_instituicao = null;
         $file = null;
         $files = [];
 
         foreach ($currentFiles as $currentFile) {
             $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($currentFile['tipo_de_acao_da_instituicao']);
-
-            //dd($tipo_de_acao_da_instituicao->instituicao);
-            //dd($tipo_de_acao_da_instituicao->filtro);
             $file = $this->getFilter($currentFile['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
-
             array_push($files, $file);
-
         }
 
         return $files;
-
-        
-        
-       
     }
 
     public function getFilter($arrayFile, $extension, $tipo_de_acao_da_instituicao, $date, $storage_path)
@@ -297,8 +186,7 @@ class PlanilhaController extends Controller
         return $newArrayFile;
     }
 
-
-
+    //
 
     public function filtroPresencial($currentFile, $extension, $instituicoes, $date, $storage_path, $multiplos_arquivos)
     {

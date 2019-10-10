@@ -147,31 +147,12 @@ class ListaController extends Controller
             $listas_de_contatos = $this->planilha()->filter($files, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
             foreach ($listas_de_contatos as $prefixo_da_instituicao => $lista_de_contatos)
             {
-                            dd($listas_de_contatos);
-
                 foreach($lista_de_contatos as $contato)
                 {
-                    if($instituicao->prefixo == $prefixo_da_instituicao)
-                        $this->aknaAPI()->importarContato($contato, $instituicao);
+                    /*if($instituicao->prefixo == $prefixo_da_instituicao)
+                        $this->aknaAPI()->importarContato($contato, $instituicao);*/
                 }
             }
-
-            /*foreach($instituicoes_selecionadas as $instituicao)
-            {
-                $nome_do_arquivo = strtolower($this->prefixo[$instituicao->nome]).'-'.str_replace('-a-distancia', '', str_replace(' ', '-', strtolower($tipo_de_acao))).'-'.$day.'-'.$month.'-'.$period.'.'.$extension;
-
-                $nome_do_arquivo = str_replace(' ', '-', $nome_do_arquivo);
-
-                if(in_array(public_path("akna_lists/$nome_do_arquivo"), $all_files))
-                {
-                    $nome_da_lista = 'teste-'.ucwords($this->prefixo[$instituicao->nome]).' - '.str_replace('-', ' ', $tipo_de_acao).' - '.$day.'/'.$month.' - '.str_replace('-', '/',$period);
-                    $status = $this->aknaAPI()->importarListaDeContatos($nome_da_lista, $nome_do_arquivo, $instituicao->nome, $instituicao->codigo_da_empresa);
-                    Session::flash('message-'.$this->prefixo[$instituicao->nome], $status);
-                    $nomes_das_listas[$this->prefixo[$instituicao->nome]] = $nome_da_lista;
-                }
-            }*/
-
-            //return $hasAction == true ? $nomes_das_listas : back();
 
         } else {
 

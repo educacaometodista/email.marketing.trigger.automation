@@ -170,18 +170,22 @@ class PlanilhaController extends Controller
             'INSTITUICAO' => 'instituicao',
         ]");*/
         $tipo_de_acao_da_instituicao = null;
+        $file = null;
+        $files = [];
 
         foreach ($currentFiles as $currentFile) {
             $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($currentFile['tipo_de_acao_da_instituicao']);
 
             //dd($tipo_de_acao_da_instituicao->instituicao);
             //dd($tipo_de_acao_da_instituicao->filtro);
-            $this->getFilter($currentFile['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
+            $file = $this->getFilter($currentFile['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
+
+            array_push($files, $file);
+
         }
 
+        return $files;
 
-
-        $currentFile = $currentFile->toArray();
         
         
        
@@ -211,7 +215,7 @@ class PlanilhaController extends Controller
             if(array_key_exists('INSTITUICAO', $filtro))
                 $arrayFile = $this->orderByColumn($filtro['INSTITUICAO'], $arrayFile);
     
-            dd($arrayFile);
+            return $arrayFile;
 
         } else {
             Session::flash('danger', 'O formato do arquivo não é válido!');

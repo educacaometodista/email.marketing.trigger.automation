@@ -206,10 +206,13 @@ class PlanilhaController extends Controller
                 $arrayFile[$key_row] = $this->clearRow($filtro, $arrayFile[$key_row]);
             }
 
+            $arrayFile = $this->orderByColumn($filtro['INSTITUICAO'], $arrayFile);
+
             dd($arrayFile);
 
         } else {
-            //formato inválido
+            Session::flash('danger', 'O formato do arquivo não é válido!');
+            return back();
         }
 
         
@@ -248,8 +251,6 @@ class PlanilhaController extends Controller
     }
 
 
-    
-
     public function hasColumns($nomes_das_colunas, $arrayFile)
     {
        $hasColumns = false;
@@ -262,25 +263,29 @@ class PlanilhaController extends Controller
        return $hasColumns;  
     }
 
+    public function orderByColumn($nome_da_coluna, $arrayFile)
+    {
+        $valores_da_coluna = [];
+        $newArrayFile = [];
 
-    
+        foreach ($arrayFile as $key_row => $row) {
+            if(!in_array($row[$nome_da_coluna], $valores_da_coluna))
+                array_push($valores_da_coluna, $row[$nome_da_coluna]);
+                
+        }
 
+        sort($valores_da_coluna);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        foreach ($valores_da_coluna as $valor) {
+            foreach ($arrayFile as $key_row => $row) {
+                if($valor == $row[$nome_da_coluna])
+                {
+                    array_push($newArrayFile, $row);
+                }
+            }
+        }
+        return $newArrayFile;
+    }
 
 
 

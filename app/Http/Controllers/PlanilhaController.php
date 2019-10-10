@@ -63,26 +63,19 @@ class PlanilhaController extends Controller
         }
     }
 
-    public function filter($files, $extension, $instituicoes, $date, $storage_path)
+    public function filter($files, $extension, $date, $storage_path)
     {
         $tipo_de_acao_da_instituicao = null;
         $lista = null;
         $listas_de_contatos = [];
 
-        foreach ($instituicoes as $instituicao)
+        foreach ($files as $file)
         {
-            foreach ($files as $file)
-            {
-                $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($file['tipo_de_acao_da_instituicao'])::with('Instituicao');
-
-                if($instituicao->prefixo == $tipo_de_acao_da_instituicao->first()->instituicao->prefixo)
-                {
-                    $lista = $this->getFilter($file['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
-                    $listas_de_contatos[$tipo_de_acao_da_instituicao->first()->instituicao->prefixo] = $lista;
-                }
-            }        
+            $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($file['tipo_de_acao_da_instituicao'])::with('Instituicao');
+            $lista = $this->getFilter($file['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
+            $listas_de_contatos[$tipo_de_acao_da_instituicao->first()->instituicao->prefixo] = $lista;
         }
-
+        
         return $listas_de_contatos;
     }
 

@@ -165,6 +165,8 @@ class ListaController extends Controller
             //campo tipo de acaio em lista create
             //$tipo_de_acao = $instituicoes_selecionadas->first()->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->nome;
 
+            //dd($currentFiles);
+
             $this->planilha()->filter($currentFiles, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
 
             $all_files = $this->planilha()->getFiles('akna_lists');

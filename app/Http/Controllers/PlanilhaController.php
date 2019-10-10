@@ -208,8 +208,9 @@ class PlanilhaController extends Controller
                 $arrayFile[$key_row] = $this->clearRow($filtro, $arrayFile[$key_row]);
             }
 
-            $arrayFile = $this->orderByColumn($filtro['INSTITUICAO'], $arrayFile);
-
+            if(array_key_exists('INSTITUICAO', $filtro))
+                $arrayFile = $this->orderByColumn($filtro['INSTITUICAO'], $arrayFile);
+    
             dd($arrayFile);
 
         } else {

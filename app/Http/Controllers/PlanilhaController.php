@@ -192,13 +192,15 @@ class PlanilhaController extends Controller
         //$filtro = $tipo_de_acao_da_instituicao->filtro;
         //array regra
 
-        $filtro = [
-            'NOME' => 'nome',
-            'EMAIL' => 'e_mail',
-            'CELULAR' => 'celular',
-            'INSTITUICAO' => 'instituição'
-        ];
+        $filtro = 'return [
+            "NOME" => "nome",
+            "EMAIL" => "e_mail",
+            "CELULAR" => "celular",
+            "INSTITUICAO" => "instituição"
+        ];';
 
+        $filtro = eval($filtro);
+        
         if($this->hasColumns($filtro, $arrayFile))
         {
             foreach ($arrayFile as $key_row => $row) {

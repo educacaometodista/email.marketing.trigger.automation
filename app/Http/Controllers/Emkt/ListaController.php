@@ -112,46 +112,25 @@ class ListaController extends Controller
         $listas = $importacao_de_listas['arquivos'];
         $extension = 'csv';
         $date = $importacao_de_listas['data'];
-
         $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($tipo_de_acao_id){
                 $query->where('tipo_de_acao_id', '=', $tipo_de_acao_id);
             }
         )->get();
         
-
         $currentFiles = [];
         
         foreach($listas as $lista)
-        {
             array_push($currentFiles, $lista);
-        }
 
         $hasAction = false;
         
         $instituicoes_selecionadas = [];
-        //tipo de acao da instituicao -> instituicao
 
         foreach($instituicoes as $instituicao)
         {
-            //hasAction
-            //if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
-            array_push($instituicoes_selecionadas, $instituicao);
         }
-            
 
-                //try import single
         return $this->importSingle($currentFiles, $extension, $instituicoes_selecionadas, $date, $hasAction);
-
-        /*
-        // 
-        foreach($instituicoes as $instituicao)
-            if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))) && $instituicao->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->id == $tipo_de_acao_id)
-                array_push($instituicoes_selecionadas, $instituicao);
-                */
-            
-        //} else {
-            //return back()->with('danger', 'Você precisa importar um documento!');
-        //}
     }
 
     public function importSingle($currentFiles, $extension, $instituicoes_selecionadas, $date, $hasAction)

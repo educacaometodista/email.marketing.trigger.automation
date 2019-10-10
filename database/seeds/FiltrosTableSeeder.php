@@ -13,7 +13,12 @@ class FiltrosTableSeeder extends Seeder
     {
         $filtro = new App\Filtro;
         $filtro->nome = 'teste filtro';
-        $filtro->regra = 'teste filtro';
+        $filtro->regra = 'return [
+            "NOME" => "nome",
+            "EMAIL" => "e_mail",
+            "CELULAR" => "celular",
+            "INSTITUICAO" => "instituição"
+        ];';
         $filtro->save();
     }
 }

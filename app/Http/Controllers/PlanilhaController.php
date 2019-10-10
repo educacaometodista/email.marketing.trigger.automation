@@ -194,26 +194,26 @@ class PlanilhaController extends Controller
 
         $filtro = [
             'NOME' => 'nome',
-            'EMAIL' => 'e_email',
+            'EMAIL' => 'e_mail',
             'CELULAR' => 'celular',
-            'INSTITUICAO' => 'instituicao',
+            'INSTITUICAO' => 'instituição',
         ];
 
         if($this->hasColumns($filtro, $arrayFile))
         {
             foreach ($arrayFile as $key_row => $row) {
                 $arrayFile[$key_row] = $this->celular($filtro['CELULAR'], $row);
+                $arrayFile[$key_row] = $this->clearRow($filtro, $arrayFile[$key_row]);
             }
-            //dd($arrayFile);
+
+            dd($arrayFile);
 
         } else {
             //formato inválido
         }
 
-
         
     }
-
 
 
     public function celular($nome_da_coluna, $row)
@@ -232,6 +232,19 @@ class PlanilhaController extends Controller
             }
         }
         return $row;
+    }
+
+    public function clearRow($nomes_das_colunas, $row)
+    {
+        $removeColumn = false;
+        $new_row = [];
+        foreach($row as $key => $cell)
+        {
+            if(in_array($key, $nomes_das_colunas))
+                $new_row[$key] = $cell;
+
+        }
+        return $new_row;
     }
 
 

@@ -14,6 +14,8 @@ class PlanilhaController extends Controller
 {
     public $filter_name;
 
+    public $filtro;
+
     public function __construct()
     {
         $this->middleware('auth:admin');
@@ -64,7 +66,8 @@ class PlanilhaController extends Controller
     {
         $currentFile = is_object($currentFile) ? $currentFile->toArray() : (is_array($currentFile) ? $currentFile : null);
 
-        if($tipo_de_acao == 'ausentes' || $tipo_de_acao == 'inscritos-parciais' || $tipo_de_acao == 'lembrete-de-prova' || $tipo_de_acao == 'aprovados-nao-matriculados') {
+        
+        /*if($tipo_de_acao == 'ausentes' || $tipo_de_acao == 'inscritos-parciais' || $tipo_de_acao == 'lembrete-de-prova' || $tipo_de_acao == 'aprovados-nao-matriculados') {
             
             $this->filter_name = 'Presencial';
 
@@ -103,11 +106,33 @@ class PlanilhaController extends Controller
                 return false;
             }
         }
+        
+        
 
-        return true;
+        $campos = ['NOME', 'EMAIL', 'DDD', 'CELULAR', 'INSTITUICAO'];
+        $campos_do_filtro = [];
+
+        foreach($campos as $campo)
+        {
+            if(isset($this->filtro[$campo]))
+            {
+                array_push($campos_do_filtro, $this->filtro[$campo]);
+            }
+        }
+
+        foreach($campos_do_filtro as $campo => $coluna_da_planilha)
+        {
+            if(!isset($currentFile[0][$coluna_da_planilha]))
+            {
+                Session::flash('danger', 'O formato do arquivo não é válido!');
+                return false;
+            }
+        }
+        */
+
     }
 
-    public function getFilter($currentFile, $extension, $tipo_de_acao, $date, $storage_path)
+    /*public function getFilter($currentFile, $extension, $tipo_de_acao, $date, $storage_path)
     {
         if($this->filter_name == 'Ead')
         {
@@ -118,61 +143,111 @@ class PlanilhaController extends Controller
             $this->filtroPresencial($currentFile, $extension, $tipo_de_acao, $date, $storage_path);
 
         }
-    }
+    }*/
 
-    public function filter($currentFile, $extension, $tipo_de_acao, $date, $storage_path)
+    public function filter($currentFile, $extension, $instituicoes, $date, $storage_path, $multiplos_arquivos)
     {
+
+        $tipo_de_acao = $instituicao->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->nome;
+
+        //$this->filtro = $instituicoes->first()->tipos_de_acoes_da_instituicao->first()->filtro->first();
+
+        
+        $this->filtro = eval("[
+            'NOME' => 'nome',
+            'EMAIL' => 'e_email',
+            'CELULAR' => 'celular',
+            'INSTITUICAO' => 'instituicao',
+        ]");
+
+
+        $tipo_de_acao = str_replace('', '', str_replace(' ', '-', strtolower($tipo_de_acao)));
 
         if(!$this->validator($tipo_de_acao, $currentFile)) {
             return back();
         }
-
-        $tipo_de_acao = strtolower($tipo_de_acao);
         
         $currentFile = $currentFile->toArray();
         
-        $this->getFilter($currentFile, $extension, $tipo_de_acao, $date, $storage_path);
+        $this->getFilter($currentFile, $extension, strtolower($tipo_de_acao), $date, $storage_path);
        
     }
 
-    public function filtroPresencial($currentFile, $extension, $tipo_de_acao, $date, $storage_path)
+    public function filtroPresencial($currentFile, $extension, $instituicoes, $date, $storage_path, $multiplos_arquivos)
     {
         $document_hash = md5($tipo_de_acao.$date.date('d-m-y h:i:s'));
 
         $headers = [];
 
         foreach($currentFile[0] as $header => $value)
+        {
             array_push($headers, $header);
+        }
+
         
         foreach($currentFile as $key_row => $row)
         {
             
             foreach($row as $key => $cell)
             {
-                if($key == $headers[2])
+
+
+
+
+                if($key == $this->filtro['CELULAR'])
                 {
                     $currentFile[$key_row][$key] = str_replace('-', '', $currentFile[$key_row][$key]);
                     $currentFile[$key_row][$key] = str_replace('(', '', $currentFile[$key_row][$key]);
                     $currentFile[$key_row][$key] = str_replace(')', '', $currentFile[$key_row][$key]);
                     $currentFile[$key_row][$key] = str_replace(' ', '', $currentFile[$key_row][$key]);
 
-                    if(strlen($currentFile[$key_row][$key]) != 11)
+                    if(isset($row[$this->filtro['DDD']]))
+                        if(count($row[$this->filtro['DDD']]) == 2)
+                            $currentFile[$key_row][$key] = $row[$this->filtro['DDD']].$currentFile[$key_row][$key];
+
+                    if(strlen($currentFile[$key_row][$key]) != 9 && strlen($currentFile[$key_row][$key]) != 11)
                         if(isset($currentFile[$key_row][$key]))
                             $currentFile[$key_row][$key] = '';
-                }
 
-                if(!($key == $headers[0] || $key == $headers[1] || $key == $headers[2] || $key == $headers[17]))
+                            
+                }
+                
+                if(!($key == $this->filtro['NOME'] || $key == $this->filtro['EMAIL'] || $key == $this->filtro['CELULAR']) && $this->filtro['CELULAR'])
                     unset($currentFile[$key_row][$key]);
+            
+                
+
+
+
+
+
+
 
             }
+
+
+
+
+
             
             $planilha = new Planilha;
-            $planilha->nome = $currentFile[$key_row][$headers[0]];
-            $planilha->email = $currentFile[$key_row][$headers[1]];
-            $planilha->celular = ($currentFile[$key_row][$headers[2]]) ? $currentFile[$key_row][$headers[2]] : '';
-            $planilha->instituicao = $currentFile[$key_row][$headers[17]];
+            $planilha->nome = $currentFile[$key_row][$this->filtro['NOME']];
+            $planilha->email = $currentFile[$key_row][$this->filtro['EMAIL']];
+            $planilha->celular = ($currentFile[$key_row][$this->filtro['CELULAR']]) ? $currentFile[$key_row][$this->filtro['CELULAR']] : '';
+
+            $planilha->instituicao = $currentFile[$key_row][$this->filtro['INSTITUICAO']];
+
             $planilha->documento = $document_hash;
             $planilha->save();
+
+
+
+
+
+
+
+
+
         }
 
         Session::put('zipName', "$tipo_de_acao-$date");

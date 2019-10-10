@@ -65,19 +65,20 @@ class PlanilhaController extends Controller
 
     //
 
-    public function filter($currentFiles, $extension, $instituicoes, $date, $storage_path)
+    public function filter($files, $extension, $instituicoes, $date, $storage_path)
     {
         $tipo_de_acao_da_instituicao = null;
-        $file = null;
-        $files = [];
+        $lista = null;
+        $listas_de_contatos = [];
 
-        foreach ($currentFiles as $currentFile) {
-            $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($currentFile['tipo_de_acao_da_instituicao']);
-            $file = $this->getFilter($currentFile['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
-            array_push($files, $file);
+        foreach ($files as $file) {
+            $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($file['tipo_de_acao_da_instituicao']);
+            $lista = $this->getFilter($file['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
+
+            $listas_de_contatos[$tipo_de_acao_da_instituicao->instituicao->prefixo] = $lista;
         }
 
-        return $files;
+        return $listas_de_contatos;
     }
 
     public function getFilter($arrayFile, $extension, $tipo_de_acao_da_instituicao, $date, $storage_path)

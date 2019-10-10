@@ -451,16 +451,6 @@ class PlanilhaController extends Controller
 
     }
 
-    public function select($document_hash)
-    {
-        return Planilha::select('nome', 'email', 'celular', 'instituicao')
-            ->where('documento', '=', $document_hash)
-            ->orderBy('instituicao')
-            ->orderBy('nome')
-            ->get()
-            ->toArray();
-    }
-
     public function filtroEad($currentFile, $extension, $tipo_de_acao, $date, $storage_path)
     {
 

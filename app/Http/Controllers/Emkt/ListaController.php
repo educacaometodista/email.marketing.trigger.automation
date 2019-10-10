@@ -53,38 +53,41 @@ class ListaController extends Controller
 
         if($request->hasFile('import_file'))
         {
-            $extension = 'csv';
-            $date = date('d-m-Y', strtotime($request->input('date')));
-            $files = [];
-            $count = 0;
-            $new_file = [];
-            $tipo_de_acao_da_instituicao = null;
-            $tipo_de_acao_id = $request->input('tipo_de_acao');
-
-            foreach ($request->file('import_file') as $file)
-            {
-                $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($tipo_de_acao_id);
-                $new_file['input_instituicao'] = 'lista_da_instituicao_'.++$count;
-                $new_file['ClientOriginalName'] = $file->getClientOriginalName();
-                $new_file['file_content'] = $this->planilha()->load($file->getRealPath());
-                $new_file['tipo_de_acao_da_instituicao'] = $tipo_de_acao_da_instituicao->id;
-                array_push($files, $new_file);
-            }
-
-            $hasAction = false;
-            $importacao_de_listas = [];
-            $importacao_de_listas['tipo_de_acao'] = $request->input('tipo_de_acao');
-            $importacao_de_listas['data'] = $date;
-            $importacao_de_listas['arquivos'] = $files;
-
-            Session::remove('importacao-de-listas');
-            Session::put('importacao-de-listas', $importacao_de_listas);
+           $this->saveInSession($request->file('import_file'), date('d-m-Y', strtotime($request->input('date'))), $request->input('tipo_de_acao'));
 
             return redirect()->route('admin.listas.selecionar-instituicoes');
             
         } else {
+
             return back();
         }
+    }
+
+    public function saveInSession($files, $date, $tipo_de_acao_id)
+    {
+        $extension = 'csv';
+        $listas_de_contatos = [];
+        $count = 0;
+        $lista = [];
+        $tipo_de_acao_da_instituicao = null;
+
+        foreach ($files as $file)
+        {
+            $lista['input_instituicao'] = 'lista_da_instituicao_'.++$count;
+            $lista['ClientOriginalName'] = $file->getClientOriginalName();
+            $lista['file_content'] = $this->planilha()->load($file->getRealPath());
+            $lista['tipo_de_acao_da_instituicao'] = $tipo_de_acao_id;
+            array_push($listas_de_contatos, $lista);
+        }
+
+        $hasAction = false;
+        $importacao_de_listas = [];
+        $importacao_de_listas['tipo_de_acao'] = $tipo_de_acao_id;
+        $importacao_de_listas['data'] = $date;
+        $importacao_de_listas['arquivos'] = $listas_de_contatos;
+
+        Session::remove('importacao-de-listas');
+        Session::put('importacao-de-listas', $importacao_de_listas);
     }
 
     public function selecionar_instituicoes()
@@ -162,21 +165,18 @@ class ListaController extends Controller
 
         if(isset($instituicoes_selecionadas))
         {
-            //campo tipo de acaio em lista create
-            //$tipo_de_acao = $instituicoes_selecionadas->first()->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->nome;
+          
+            $listas_de_contatos = $this->planilha()->filter($currentFiles, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
 
-            //dd($currentFiles);
+            foreach ($listas_de_contatos as $lista_de_contatos)
+            {
+                foreach($lista_de_contatos as $contato)
+                {
 
-            $this->planilha()->filter($currentFiles, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
+                }
+            }
 
-            $all_files = $this->planilha()->getFiles('akna_lists');
-
-            $codigos_dos_processos = [];
-            $nomes_das_listas = [];
-
-            //dd($all_files);
-        
-            foreach($instituicoes as $instituicao)
+            /*foreach($instituicoes_selecionadas as $instituicao)
             {
                 $nome_do_arquivo = strtolower($this->prefixo[$instituicao->nome]).'-'.str_replace('-a-distancia', '', str_replace(' ', '-', strtolower($tipo_de_acao))).'-'.$day.'-'.$month.'-'.$period.'.'.$extension;
 
@@ -189,9 +189,9 @@ class ListaController extends Controller
                     Session::flash('message-'.$this->prefixo[$instituicao->nome], $status);
                     $nomes_das_listas[$this->prefixo[$instituicao->nome]] = $nome_da_lista;
                 }
-            }
+            }*/
 
-            return $hasAction == true ? $nomes_das_listas : back();
+            //return $hasAction == true ? $nomes_das_listas : back();
 
         } else {
 

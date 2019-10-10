@@ -14,7 +14,7 @@ class PlanilhaController extends Controller
 {
     public $filter_name;
 
-    public $filtro;
+    public $filtros = [];
 
     public function __construct()
     {
@@ -145,20 +145,27 @@ class PlanilhaController extends Controller
         }
     }*/
 
-    public function filter($currentFile, $extension, $instituicoes, $date, $storage_path, $multiplos_arquivos)
+    public function filter($currentFile, $extension, $instituicoes, $date, $storage_path)
     {
 
-        $tipo_de_acao = $instituicao->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->nome;
+        //$tipo_de_acao = $instituicao->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->nome;
 
         //$this->filtro = $instituicoes->first()->tipos_de_acoes_da_instituicao->first()->filtro->first();
 
         
-        $this->filtro = eval("[
+        foreach ($instituicoes as $instituicao) {
+            $this->filtros[$instituicao->prefixo] = $instituicao->tipos_de_acoes_da_instituicao->first();
+        }
+
+        dd($this->filtros);
+
+        
+        /*$this->filtro = eval("[
             'NOME' => 'nome',
             'EMAIL' => 'e_email',
             'CELULAR' => 'celular',
             'INSTITUICAO' => 'instituicao',
-        ]");
+        ]");*/
 
 
         $tipo_de_acao = str_replace('', '', str_replace(' ', '-', strtolower($tipo_de_acao)));

@@ -9,6 +9,7 @@ use illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
 use App\Planilhas\Planilha;
 use Session;
+use App\TipoDeAcaoDaInstituicao;
 
 class PlanilhaController extends Controller
 {
@@ -145,7 +146,7 @@ class PlanilhaController extends Controller
         }
     }*/
 
-    public function filter($currentFile, $extension, $instituicoes, $date, $storage_path)
+    public function filter($currentFiles, $extension, $instituicoes, $date, $storage_path)
     {
 
         //$tipo_de_acao = $instituicao->tipos_de_acoes_da_instituicao->first()->tipo_de_acao->first()->nome;
@@ -157,7 +158,9 @@ class PlanilhaController extends Controller
             $this->filtros[$instituicao->prefixo] = $instituicao->tipos_de_acoes_da_instituicao->first();
         }
 
-        dd($this->filtros);
+        //dd($currentFiles);
+
+        //dd($this->filtros);
 
         
         /*$this->filtro = eval("[
@@ -166,19 +169,48 @@ class PlanilhaController extends Controller
             'CELULAR' => 'celular',
             'INSTITUICAO' => 'instituicao',
         ]");*/
+        $tipo_de_acao_da_instituicao = null;
 
+        foreach ($currentFiles as $currentFile) {
+            $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($currentFile['tipo_de_acao_da_instituicao']);
 
-        $tipo_de_acao = str_replace('', '', str_replace(' ', '-', strtolower($tipo_de_acao)));
-
-        if(!$this->validator($tipo_de_acao, $currentFile)) {
-            return back();
+            //dd($tipo_de_acao_da_instituicao->instituicao);
+            dd($tipo_de_acao_da_instituicao->filtro);
+            $this->getFilter($currentFile['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
         }
-        
+
+
+
         $currentFile = $currentFile->toArray();
         
-        $this->getFilter($currentFile, $extension, strtolower($tipo_de_acao), $date, $storage_path);
+        
        
     }
+
+    public function getFilter()
+    {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function filtroPresencial($currentFile, $extension, $instituicoes, $date, $storage_path, $multiplos_arquivos)
     {

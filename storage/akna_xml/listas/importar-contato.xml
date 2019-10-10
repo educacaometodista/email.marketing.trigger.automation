@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+    <emkt trans="11.05">
+        <nome>[NOME DA LISTA]</nome>
+        <substituir>S</substituir>
+        <destinatario>
+            <nome>[NOME]</nome>
+            <email>[EMAIL]</email>
+        </destinatario>
+    </emkt>
+</main>

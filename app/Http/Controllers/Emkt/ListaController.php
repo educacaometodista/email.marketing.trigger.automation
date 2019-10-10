@@ -143,6 +143,9 @@ class ListaController extends Controller
         $period = $explode_date[2];
         $period .= $month >=7 ? '-2' : '';
 
+        $dados = [];
+        $dados['DATE'] = $date;
+
         if(isset($instituicoes_selecionadas))
         {
             $listas_de_contatos = $this->planilha()->filter($files, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
@@ -151,9 +154,10 @@ class ListaController extends Controller
             {
                 $lista_de_contatos = $listas_de_contatos[$instituicao->prefixo];
 
+
                 foreach($lista_de_contatos as $contato)
                 {
-                    $this->aknaAPI()->importarContato($contato, $instituicao);
+                    $this->aknaAPI()->importarContato($contato, $instituicao, $dados);
                 }  
             }
 

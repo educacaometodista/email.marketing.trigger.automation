@@ -40,6 +40,8 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
         $tipo_de_acao_da_instituicao->instituicao_id = 1;
         $tipo_de_acao_da_instituicao->filtro_id = 1;
         $tipo_de_acao_da_instituicao->mensagem_id = 3;
+        $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'UMESP - Lembrete de Prova - [DATE d/m] - [DATE Y]/[DATE HALF]';
+        $tipo_de_acao_da_instituicao->nome_do_arquivo = 'umesp-lembrete-de-prova-[DATE d-m-Y]-[DATE HALF].csv';
         $tipo_de_acao_da_instituicao->save();
     }
 }

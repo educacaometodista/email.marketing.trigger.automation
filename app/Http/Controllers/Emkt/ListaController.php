@@ -164,8 +164,7 @@ class ListaController extends Controller
             {
                 $status = false;
                 if(array_key_exists($instituicao->prefixo, $listas_de_contatos))
-                    foreach($listas_de_contatos[$instituicao->prefixo] as $contato)
-                        if($this->aknaAPI()->importarContato($contato, $instituicao, $dados) == "Ok")
+                        if($this->aknaAPI()->importarContatos($listas_de_contatos[$instituicao->prefixo], $instituicao, $dados) == "Ok")
                             Session::flash('message-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
             }
 

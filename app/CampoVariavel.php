@@ -38,7 +38,7 @@ class CampoVariavel extends Model
     public static function campoDate($string, $date, $format, $separator)
     {
         $date = date($format, strtotime($date));
-        $date = str_replace('-', $separator, $string);
+        $date = str_replace('-', $separator, $date);
         return $date;
     }
 

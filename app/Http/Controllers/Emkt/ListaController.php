@@ -56,11 +56,9 @@ class ListaController extends Controller
         if($request->hasFile('import_file'))
         {
            $this->saveInSession($request->file('import_file'), date('d-m-Y', strtotime($request->input('date'))), $request->input('tipo_de_acao'));
-
             return redirect()->route('admin.listas.selecionar-instituicoes');
             
         } else {
-
             return back();
         }
     }
@@ -94,17 +92,24 @@ class ListaController extends Controller
 
     public function selecionar_instituicoes()
     {
-        $importacao_de_listas = Session::get('importacao-de-listas');
 
-        $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($importacao_de_listas) {
-                $query->where('tipo_de_acao_id', '=', $importacao_de_listas['tipo_de_acao']);
-            }
-        )->get();
+        if(Session::has('importacao-de-listas'))
+        {
+            $importacao_de_listas = Session::get('importacao-de-listas');
 
-        return view('admin.emkt.listas.selecionar-instituicoes', [
-            'instituicoes' => $instituicoes,
-            'listas' => $importacao_de_listas['arquivos']
-            ]);
+            $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($importacao_de_listas) {
+                    $query->where('tipo_de_acao_id', '=', $importacao_de_listas['tipo_de_acao']);
+                }
+            )->get();
+    
+            return view('admin.emkt.listas.selecionar-instituicoes', [
+                'instituicoes' => $instituicoes,
+                'listas' => $importacao_de_listas['arquivos']
+                ]);
+
+        } else {
+            return redirect()->route('admin.listas.create');
+        }
     }
 
     public function store(Request $request)
@@ -121,7 +126,6 @@ class ListaController extends Controller
         )->get();
         
         $hasAction = false;
-
         $instituicoes_selecionadas = [];
 
         foreach($instituicoes as $instituicao)
@@ -144,35 +148,29 @@ class ListaController extends Controller
         $month = $explode_date[1];
         $period = $explode_date[2];
         $period .= $month >=7 ? '-2' : '';
-
         $dados = [];
         $dados['DATE'] = $date;
 
-        if(isset($instituicoes_selecionadas))
+        if(!isset($instituicoes_selecionadas))
         {
-            $listas_de_contatos = $this->planilha()->filter($files, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
+            Session::remove('importacao-de-listas');
+            return redirect()->route('admin.listas.create')->with('warning', 'Não há instituições cadastradas para importar este arquivo!');
             
-            foreach ($instituicoes_selecionadas as $instituicao)
-            {
-                $lista_de_contatos = $listas_de_contatos[$instituicao->prefixo];
-                $status = false;
-
-                foreach($lista_de_contatos as $contato)
-                    if($this->aknaAPI()->importarContato($contato, $instituicao, $dados) == "Ok")
-                        $status = "Ok";
-            }
-
-            if($status == "Ok")
-                Session::flash('message-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
-
         } else {
 
-            Session::remove('importacao-de-listas');
-            return back()->with('warning', 'Não há instituições cadastradas para importar este arquivo!');
-        }   
+            $listas_de_contatos = $this->planilha()->filter($files, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
 
-        Session::remove('importacao-de-listas');
-        return redirect()->route('admin.listas.create');
+            foreach ($instituicoes_selecionadas as $instituicao)
+            {
+                $status = false;
+                if(array_key_exists($instituicao->prefixo, $listas_de_contatos))
+                    foreach($listas_de_contatos[$instituicao->prefixo] as $contato)
+                        if($this->aknaAPI()->importarContato($contato, $instituicao, $dados) == "Ok")
+                            Session::flash('message-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
+            }
+
+            return redirect()->route('admin.listas.create');
+        }
     }
 
     public function download($nome_da_lista, $extension)

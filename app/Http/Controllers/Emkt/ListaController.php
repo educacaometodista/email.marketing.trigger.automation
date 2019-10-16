@@ -165,11 +165,18 @@ class ListaController extends Controller
                 $status = false;
                 if(array_key_exists($instituicao->prefixo, $listas_de_contatos))
                         if($this->aknaAPI()->importarContatos($listas_de_contatos[$instituicao->prefixo], $instituicao, $dados) == "Ok")
+                        {
                             Session::flash('message-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
+                        }
             }
 
-            return redirect()->route('admin.listas.create');
+            //return redirect()->route('admin.listas.create');*/
         }
+    }
+
+    public function getProgress()
+    {
+        echo json_encode(Session::get('progresso_lista'));
     }
 
     public function download($nome_da_lista, $extension)

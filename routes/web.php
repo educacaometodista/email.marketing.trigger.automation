@@ -17,7 +17,11 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
         Route::get('selecionar-instituicoes', 'ListaController@selecionar_instituicoes')->name('selecionar-instituicoes');
         Route::post('upload', 'ListaController@upload')->name('upload');
         Route::post('store', 'ListaController@store')->name('store');
+        /* progresso da importação de listas de contatos */
+        Route::get('progresso', 'ListaController@getProgress')->name('progresso');
     });
+
+    
 
     Route::prefix('acoes')->name('acoes.')->group(function () {
         Route::get('/', 'AcaoController@index')->name('index');

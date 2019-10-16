@@ -160,25 +160,34 @@ class AknaController extends Controller
     public function importarContatos($lista_de_contatos, $instituicao, $dados)
     {
         $this->data['Client'] = $instituicao->codigo_da_empresa;
-
-        $xml_request = $this->getXml('listas/importar-contatos');
         
+        $xml_request = $this->getXml('listas/importar-contatos');
         $contatos = '';
+        $numero_de_contatos = count($lista_de_contatos);
+        $numero_de_contatos_importados = 0;
+        $porcentagem_do_progresso = 100 / $numero_de_contatos;
+        $progresso = 0;
+        $xml_response = '';
+        $xml = '';
 
         foreach($lista_de_contatos as $contato)
+        {
             $contatos .= '<destinatario><nome>'.$contato['NOME'].'</nome><email>'.$contato['EMAIL'].'</email></destinatario>';
+            $xml_request = str_replace('[NOME DA LISTA]', 'teste 222', $xml_request);
+            $xml_request = str_replace('<destinatario>[DESTINATARIOS]</destinatario>', $contatos, $xml_request);
+            $xml_response = $this->post([], $xml_request);
+            $xml = new \SimpleXMLElement($xml_response);
 
-        //dd($contatos);
+            if($xml->EMKT->RETURN[0] == 'Ok')
+            {
+                $progresso = $progresso + $porcentagem_do_progresso;
+                $numero_de_contatos_importados++;
+            }
 
-        $xml_request = str_replace('[NOME DA LISTA]', $instituicao->tipos_de_acoes_da_instituicao->first()->getNomeDaListaDeContatos($dados), $xml_request);
-        $xml_request = str_replace('<destinatario>[DESTINATARIOS]</destinatario>', $contatos, $xml_request);
+            Session::put('progresso_lista', $progresso);
+        }
 
-        dd($xml_request);
-
-        $xml_response = $this->post([], $xml_request);
-
-        $xml = new \SimpleXMLElement($xml_response);
-
-        return $xml->EMKT->RETURN[0];
+        return !is_null($numero_de_contatos_importados) ? 'Ok' : 'Erro';
+        
     }
 }

@@ -108,8 +108,6 @@
         </div>
     </section>
 
-
-
     @include('admin.partials._footer')
 
     @push('js')
@@ -134,28 +132,20 @@
     });
 
     $('#formulario').submit(function(event) {
-        event.preventDefault();
-
         $('#progress-bar').removeClass('d-none');
         $('#formulario').addClass('d-none');
 
-        $.ajax({
-            method: 'POST',
-            url: '/admin/listas/store',
-            data: lista_das_instituicoes,
-        },
-            setInterval(function(){
-                $.get( "/admin/listas/progresso", function(data) {
-                    console.log(JSON.parse(data));
-                    if(JSON.parse(data).progresso_do_processo >= 99.99){
-                        window.location = '/admin/listas/create';
-                    }
-                    $('div#progresso_do_processo').css('width', JSON.parse(data).progresso_do_processo+'%');
-                })
-        }, 1000)
-        
-        );
+        setInterval(function(){
+            $.get( "/admin/listas/progresso", function(data) {
+                //console.log(JSON.parse(data));
+                if(JSON.parse(data).progresso_do_processo == 'Ok'){
+                    window.location = '/admin/listas/create';
+                } else {
+                    $('div#progresso_do_processo').css('width', (JSON.parse(data).progresso_do_processo-1)+'%');
+                }
+            });
 
+        }, 1000)
 
     });
     

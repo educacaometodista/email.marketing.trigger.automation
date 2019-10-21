@@ -11,6 +11,8 @@ use App\Lista;
 use App\TipoDeAcao;
 use Session;
 use App\TipoDeAcaoDaInstituicao;
+use App\Processo;
+
 
 class ListaController extends Controller
 {
@@ -55,7 +57,8 @@ class ListaController extends Controller
 
         if($request->hasFile('import_file'))
         {
-           $this->saveInSession($request->file('import_file'), date('d-m-Y', strtotime($request->input('date'))), $request->input('tipo_de_acao'));
+            $identificador_do_processo = md5(uniqid(rand(), true));
+            $this->saveInSession($request->file('import_file'), date('d-m-Y', strtotime($request->input('date'))), $request->input('tipo_de_acao'), $identificador_do_processo);
             return redirect()->route('admin.listas.selecionar-instituicoes');
             
         } else {
@@ -63,7 +66,7 @@ class ListaController extends Controller
         }
     }
 
-    public function saveInSession($files, $date, $tipo_de_acao_id)
+    public function saveInSession($files, $date, $tipo_de_acao_id, $identificador_do_processo)
     {
         $extension = 'csv';
         $listas_de_contatos = [];
@@ -82,6 +85,8 @@ class ListaController extends Controller
 
         $hasAction = false;
         $importacao_de_listas = [];
+
+        $importacao_de_listas['identificador_do_processo'] = $identificador_do_processo;
         $importacao_de_listas['tipo_de_acao'] = $tipo_de_acao_id;
         $importacao_de_listas['data'] = $date;
         $importacao_de_listas['arquivos'] = $listas_de_contatos;
@@ -101,7 +106,9 @@ class ListaController extends Controller
                     $query->where('tipo_de_acao_id', '=', $importacao_de_listas['tipo_de_acao']);
                 }
             )->get();
-    
+
+            //Session::remove('importacao-de-listas');
+
             return view('admin.emkt.listas.selecionar-instituicoes', [
                 'instituicoes' => $instituicoes,
                 'listas' => $importacao_de_listas['arquivos']
@@ -150,38 +157,63 @@ class ListaController extends Controller
         $period .= $month >=7 ? '-2' : '';
         $dados = [];
         $dados['DATE'] = $date;
+        $lista = null;
 
         if(!isset($instituicoes_selecionadas))
         {
             Session::remove('importacao-de-listas');
+
             return redirect()->route('admin.listas.create')->with('warning', 'Não há instituições cadastradas para importar este arquivo!');
             
         } else {
 
             $listas_de_contatos = $this->planilha()->filter($files, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
 
+            $importacao_de_listas = Session::get('importacao-de-listas');
+            $identificador_do_processo = $importacao_de_listas['identificador_do_processo'];
+            $processo = new Processo;
+            $processo->identificador = $identificador_do_processo;
+            $processo->progresso = 0;
+            $processo->save();
+            $processo = null;
+
             foreach ($instituicoes_selecionadas as $instituicao)
             {
                 $status = false;
+
                 if(array_key_exists($instituicao->prefixo, $listas_de_contatos))
-                        if($this->aknaAPI()->importarContatos($listas_de_contatos[$instituicao->prefixo], $instituicao, $dados) == "Ok")
-                        {
-                            Session::flash('message-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
-                        }
+                {
+                    if($this->aknaAPI()->importarContatos($listas_de_contatos[$instituicao->prefixo], $instituicao, $dados, $identificador_do_processo) == "Ok")
+                    {
+                        Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
+                    }
+                }
             }
 
-            //return redirect()->route('admin.listas.create');*/
+            $processo = Processo::where('identificador', $identificador_do_processo)->first();
+
+            $processo->update([
+                'identificador' => $identificador_do_processo,
+                'progresso' => 'Ok',
+            ]);
+
+            Session::remove('importacao_de_listas');
+            
+            return redirect()->route('admin.listas.create');
         }
     }
 
     public function getProgress()
     {
-        echo json_encode(Session::get('progresso_lista'));
+        $importacao_de_listas = Session::get('importacao-de-listas');
+        $identificador_do_processo = $importacao_de_listas['identificador_do_processo'];
+        $processo = Processo::where('identificador', $identificador_do_processo)->first();
+        echo json_encode(['progresso_do_processo' => $processo->progresso]);
     }
 
     public function download($nome_da_lista, $extension)
     {
-        $lista = Lista::where($nome_da_lista, '==', 'nome_da_lista')->first();
+        $lista = Lista::where($nome_da_lista, 'nome_da_lista')->first();
         return (new PlanilhaController)->download(eval($lista), $extension);
     }
 }

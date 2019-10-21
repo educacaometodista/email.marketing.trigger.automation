@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Emkt;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Ixudra\Curl\Facades\Curl;
+use Session;
+use App\Processo;
 
 class AknaController extends Controller
 {
@@ -157,35 +159,54 @@ class AknaController extends Controller
         return $xml->EMKT->ACAO->CONTATOS->TOTAL;
     }
 
-    public function importarContatos($lista_de_contatos, $instituicao, $dados)
+    public function importarContatos($lista_de_contatos, $instituicao, $dados, $identificador_do_processo)
     {
         $this->data['Client'] = $instituicao->codigo_da_empresa;
-        
         $xml_request = $this->getXml('listas/importar-contatos');
-        $contatos = '';
         $numero_de_contatos = count($lista_de_contatos);
         $numero_de_contatos_importados = 0;
         $porcentagem_do_progresso = 100 / $numero_de_contatos;
-        $progresso = 0;
-        $xml_response = '';
-        $xml = '';
+        $xml_response = null;
+        $xml = null;
+        $contatos_xml = '';
+        $processo = Processo::where('identificador', $identificador_do_processo)->first();
 
-        foreach($lista_de_contatos as $contato)
+        if(!is_null($processo))
+            $progresso = $processo->progresso;
+        else 
+            $progresso = 0;
+
+        //$numero_de_contatos_por_requisicao = count($lista_de_contatos) / 20;
+
+        $contatos_a_importar = array_chunk($lista_de_contatos, 50);
+        
+        foreach($contatos_a_importar as $contatos)
         {
-            $contatos .= '<destinatario><nome>'.$contato['NOME'].'</nome><email>'.$contato['EMAIL'].'</email></destinatario>';
-            $xml_request = str_replace('[NOME DA LISTA]', 'teste 222', $xml_request);
-            $xml_request = str_replace('<destinatario>[DESTINATARIOS]</destinatario>', $contatos, $xml_request);
-            $xml_response = $this->post([], $xml_request);
-            $xml = new \SimpleXMLElement($xml_response);
-
-            if($xml->EMKT->RETURN[0] == 'Ok')
+            $contatos_xml = '';
+            foreach($contatos as $contato)
             {
+                $contatos_xml .= '<destinatario><nome>'.$contato['NOME'].'</nome><email>'.$contato['EMAIL'].'</email></destinatario>';
                 $progresso = $progresso + $porcentagem_do_progresso;
+
                 $numero_de_contatos_importados++;
+                $processo->update([
+                    'identificador' => $identificador_do_processo,
+                    'progresso' => $progresso,
+                ]);
+                sleep(1);
             }
 
-            Session::put('progresso_lista', $progresso);
+            
+
+            $nome_da_lista = $instituicao->tipos_de_acoes_da_instituicao->first()->getNomeDaListaDeContatos($dados);
+            $xml_request = str_replace('[NOME DA LISTA]', 'TESTE 12', $xml_request);
+            $xml_request = str_replace('<destinatario>[DESTINATARIOS]</destinatario>', $contatos_xml, $xml_request);
+            $xml_response = $this->post([], $xml_request);
+            $xml = new \SimpleXMLElement($xml_response);
+  
         }
+
+        //Session::remove('importacao_de_listas');
 
         return !is_null($numero_de_contatos_importados) ? 'Ok' : 'Erro';
         

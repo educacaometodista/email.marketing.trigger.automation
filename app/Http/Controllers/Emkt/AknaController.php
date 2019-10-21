@@ -176,8 +176,6 @@ class AknaController extends Controller
         else 
             $progresso = 0;
 
-        //$numero_de_contatos_por_requisicao = count($lista_de_contatos) / 20;
-
         $contatos_a_importar = array_chunk($lista_de_contatos, 50);
         
         foreach($contatos_a_importar as $contatos)
@@ -193,22 +191,16 @@ class AknaController extends Controller
                     'identificador' => $identificador_do_processo,
                     'progresso' => $progresso,
                 ]);
-                sleep(1);
             }
 
-            
-
             $nome_da_lista = $instituicao->tipos_de_acoes_da_instituicao->first()->getNomeDaListaDeContatos($dados);
-            $xml_request = str_replace('[NOME DA LISTA]', 'TESTE 12', $xml_request);
+            $xml_request = str_replace('[NOME DA LISTA]', $nome_da_lista, $xml_request);
             $xml_request = str_replace('<destinatario>[DESTINATARIOS]</destinatario>', $contatos_xml, $xml_request);
             $xml_response = $this->post([], $xml_request);
             $xml = new \SimpleXMLElement($xml_response);
   
         }
 
-        //Session::remove('importacao_de_listas');
-
         return !is_null($numero_de_contatos_importados) ? 'Ok' : 'Erro';
-        
     }
 }

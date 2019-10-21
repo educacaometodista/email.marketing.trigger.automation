@@ -16,7 +16,7 @@ class CreateProcessosTable extends Migration
         Schema::create('processos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('identificador');
-            $table->float('progresso');
+            $table->string('progresso');
             $table->timestamps();
         });
     }

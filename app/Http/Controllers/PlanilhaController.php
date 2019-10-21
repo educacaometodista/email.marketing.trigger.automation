@@ -106,8 +106,6 @@ class PlanilhaController extends Controller
 
             
             $arrayFile = $this->renameColumns($arrayFile, $filtro);
-
-            dd($arrayFile);
     
             return $arrayFile;
 

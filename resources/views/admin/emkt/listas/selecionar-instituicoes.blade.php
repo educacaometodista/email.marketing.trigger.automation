@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="panel-content">
-                        <form action="{{ route('admin.listas.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.listas.store') }}" method="POST" enctype="multipart/form-data" id="formulario">
                             @csrf
 
                             <div class="row">
@@ -87,6 +87,20 @@
                             </div>
 
                         </form>
+
+                        <div class="col-md-12 mb-5 d-none" id="progress-bar">
+                            <h5 class="h5 fw--600 mb-3">Aguarde, isso pode levar alguns minutos...</h5>
+
+                            <div class="progress h-15px">
+                                <div id="progresso_do_processo" class="progress-bar progress-bar-striped progress-bar-animated bg-orange">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        
                     </div>
                 </div>
                 <!-- Panel End -->
@@ -97,6 +111,57 @@
 
 
     @include('admin.partials._footer')
+
+    @push('js')
+    <script>
+
+    var lista_das_instituicoes = new Object();
+    var campos = $('select');
+
+    $('select').change(function() {
+
+        lista_das_instituicoes = new Object();
+
+        campos = $('select');
+
+        for(let i = 0; i < campos.length; i++)
+        {
+            lista_das_instituicoes[campos[i].name] = campos[i].value;
+        }
+
+        lista_das_instituicoes['_token'] = $('input[name="_token"]').val();
+
+    });
+
+    $('#formulario').submit(function(event) {
+        event.preventDefault();
+
+        $('#progress-bar').removeClass('d-none');
+        $('#formulario').addClass('d-none');
+
+        $.ajax({
+            method: 'POST',
+            url: '/admin/listas/store',
+            data: lista_das_instituicoes,
+        },
+            setInterval(function(){
+                $.get( "/admin/listas/progresso", function(data) {
+                    console.log(JSON.parse(data));
+                    if(JSON.parse(data).progresso_do_processo >= 99.99){
+                        window.location = '/admin/listas/create';
+                    }
+                    $('div#progresso_do_processo').css('width', JSON.parse(data).progresso_do_processo+'%');
+                })
+        }, 1000)
+        
+        );
+
+
+    });
+    
+    </script>
+    @endpush
+
 </main>
 <!-- Main Container End -->
 @endsection

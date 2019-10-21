@@ -39,27 +39,8 @@
 
                     <div class="panel-content">
                     @include('admin.partials._alert')
-                    @if(isset($instituicoes))
-                        @foreach($instituicoes as $instituicao)
-                            @if(session('message-'.$instituicao->prefixo))
-                                @if(session('message-'.$instituicao->prefixo) == "Acesso negado em $instituicao!")
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ session('message-'.$instituicao->prefixo) }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @elseif(session('message-'.$instituicao->prefixo) == "Lista importada com sucesso em $instituicao->nome!")
-                                    <div class="alert alert-success" role="alert">
-                                        {{ session('message-'.$instituicao->prefixo) }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                @endif
-                            @endif
-                        @endforeach
-                    @endif
+                    @include('admin.emkt.listas.partials._alert')
+
 
                         <form action="{{ route('admin.listas.upload') }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -129,6 +110,8 @@
                             </div>
 
                         </form>
+
+                        
                     </div>
                 </div>
                 <!-- Panel End -->

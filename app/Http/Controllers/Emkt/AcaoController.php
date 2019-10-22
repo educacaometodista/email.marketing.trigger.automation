@@ -61,8 +61,23 @@ class AcaoController extends Controller
 
     public function uploadLists(Request $request)
     {
-        
+        /*$request->validate([
+            'import_file' => 'required|file|mimes:xlsx,csv,txt',
+            'tipo_de_acao' => 'required|min:1|max:255|string',
+            'date' => 'required|date'
+        ]);*/
+
+        if($request->hasFile('import_file'))
+        {
+            $importacao_de_listas = (new ListaController())->saveInSession($request->file('import_file'), date('d-m-Y', strtotime($request->input('date'))), $request->input('tipo_de_acao'));
+            return redirect()->route('admin.acoes.selecionar-instituicoes');
+            
+        } else {
+            return back();
+        }
+
     }
+
 
 
     public function store(Request $request)

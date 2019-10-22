@@ -175,13 +175,18 @@ class ListaController extends Controller
         $processo->save();
         $processo = null;
 
+        $total_de_contatos_das_listas = 0;
+        foreach ($instituicoes_selecionadas as $instituicao)
+            if(array_key_exists($instituicao->prefixo, $listas_de_contatos))
+                $total_de_contatos_das_listas += count($listas_de_contatos[$instituicao->prefixo]);
+        
         foreach ($instituicoes_selecionadas as $instituicao)
         {
             $status = false;
 
             if(array_key_exists($instituicao->prefixo, $listas_de_contatos))
             {
-                if($this->aknaAPI()->importarContatos($listas_de_contatos[$instituicao->prefixo], $instituicao, $dados, $identificador_do_processo) == "Ok")
+                if($this->aknaAPI()->importarContatos($listas_de_contatos[$instituicao->prefixo], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
                 {
                     Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
                 }

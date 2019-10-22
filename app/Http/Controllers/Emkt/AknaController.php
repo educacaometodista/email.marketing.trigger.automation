@@ -159,13 +159,14 @@ class AknaController extends Controller
         return $xml->EMKT->ACAO->CONTATOS->TOTAL;
     }
 
-    public function importarContatos($lista_de_contatos, $instituicao, $dados, $identificador_do_processo)
+    public function importarContatos($lista_de_contatos, $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas)
     {
         $this->data['Client'] = $instituicao->codigo_da_empresa;
         $xml_request = $this->getXml('listas/importar-contatos');
         $numero_de_contatos = count($lista_de_contatos);
         $numero_de_contatos_importados = 0;
-        $porcentagem_do_progresso = 100 / $numero_de_contatos;
+        $porcentagem_do_progresso = 100 / $total_de_contatos_das_listas;
+
         $xml_response = null;
         $xml = null;
         $contatos_xml = '';
@@ -176,7 +177,7 @@ class AknaController extends Controller
         else 
             $progresso = 0;
 
-        $contatos_a_importar = array_chunk($lista_de_contatos, 50);
+        $contatos_a_importar = array_chunk($lista_de_contatos, 30);
         
         foreach($contatos_a_importar as $contatos)
         {
@@ -185,7 +186,6 @@ class AknaController extends Controller
             {
                 $contatos_xml .= '<destinatario><nome>'.$contato['NOME'].'</nome><email>'.$contato['EMAIL'].'</email></destinatario>';
                 $progresso = $progresso + $porcentagem_do_progresso;
-
                 $numero_de_contatos_importados++;
                 $processo->update([
                     'identificador' => $identificador_do_processo,
@@ -194,11 +194,10 @@ class AknaController extends Controller
             }
 
             $nome_da_lista = $instituicao->tipos_de_acoes_da_instituicao->first()->getNomeDaListaDeContatos($dados);
-            $xml_request = str_replace('[NOME DA LISTA]', $nome_da_lista, $xml_request);
+            $xml_request = str_replace('[NOME DA LISTA]', 'TESTE 3 - '.$nome_da_lista, $xml_request);
             $xml_request = str_replace('<destinatario>[DESTINATARIOS]</destinatario>', $contatos_xml, $xml_request);
             $xml_response = $this->post([], $xml_request);
             $xml = new \SimpleXMLElement($xml_response);
-  
         }
 
         return !is_null($numero_de_contatos_importados) ? 'Ok' : 'Erro';

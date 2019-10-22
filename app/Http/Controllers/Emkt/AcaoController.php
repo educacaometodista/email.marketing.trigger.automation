@@ -78,6 +78,28 @@ class AcaoController extends Controller
 
     }
 
+    public function selecionar_instituicoes()
+    {
+        //if(Session::has('importacao-de-listas'))
+        //{
+            $importacao_de_listas = Session::get('importacao-de-listas');
+
+            $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($importacao_de_listas) {
+                    $query->where('tipo_de_acao_id', '=', $importacao_de_listas['tipo_de_acao']);
+                }
+            )->get();
+
+            //Session::remove('importacao-de-listas');
+
+            return view('admin.emkt.listas.selecionar-instituicoes', [
+                'instituicoes' => $instituicoes,
+                'listas' => $importacao_de_listas['arquivos']
+                ]);
+
+        //} else {
+            return redirect()->route('admin.acoes.create');
+        //}
+    }
 
 
     public function store(Request $request)

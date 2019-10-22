@@ -71,7 +71,7 @@ class PlanilhaController extends Controller
 
         foreach ($files as $file)
         {
-            $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($file['tipo_de_acao_da_instituicao'])::with('Instituicao');
+            $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($file['tipo_de_acao_da_instituicao'])::with('Instituicao', 'Filtro');
             $lista = $this->getFilter($file['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
             $listas_de_contatos[$tipo_de_acao_da_instituicao->first()->instituicao->prefixo] = $lista;
         }
@@ -81,15 +81,14 @@ class PlanilhaController extends Controller
 
     public function getFilter($arrayFile, $extension, $tipo_de_acao_da_instituicao, $date, $storage_path)
     {
-        //$filtro = $tipo_de_acao_da_instituicao->filtro;
-        //array regra
+        $filtro = $tipo_de_acao_da_instituicao->first()->filtro->regra;
 
-        $filtro = 'return [
+        /*$filtro = 'return [
             "NOME" => "nome",
             "EMAIL" => "e_mail",
             "CELULAR" => "celular",
             "INSTITUICAO" => "instituição"
-        ];';
+        ];';*/
 
         $filtro = eval($filtro);
         

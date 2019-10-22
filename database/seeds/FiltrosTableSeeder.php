@@ -20,5 +20,15 @@ class FiltrosTableSeeder extends Seeder
             "INSTITUICAO" => "instituição"
         ];';
         $filtro->save();
+
+        $filtro = new App\Filtro;
+        $filtro->nome = 'teste filtro ead';
+        $filtro->regra = 'return [
+            "NOME" => "nome",
+            "EMAIL" => "e_mail",
+            "DDD" => "ddd",
+            "NUMERO" => "número"
+        ];';
+        $filtro->save();
     }
 }

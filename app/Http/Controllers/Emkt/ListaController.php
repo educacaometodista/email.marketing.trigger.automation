@@ -58,7 +58,7 @@ class ListaController extends Controller
         if($request->hasFile('import_file'))
         {
             
-            $this->saveInSession($request->file('import_file'), date('d-m-Y', strtotime($request->input('date'))), $request->input('tipo_de_acao'));
+            $importacao_de_listas = $this->saveInSession($request->file('import_file'), date('d-m-Y', strtotime($request->input('date'))), $request->input('tipo_de_acao'));
             return redirect()->route('admin.listas.selecionar-instituicoes');
             
         } else {
@@ -94,6 +94,8 @@ class ListaController extends Controller
 
         Session::remove('importacao-de-listas');
         Session::put('importacao-de-listas', $importacao_de_listas);
+
+        return $importacao_de_listas;
     }
 
     public function selecionar_instituicoes()

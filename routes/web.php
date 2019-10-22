@@ -25,6 +25,8 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
 
     Route::prefix('acoes')->name('acoes.')->group(function () {
         Route::get('/', 'AcaoController@index')->name('index');
+        Route::get('selecionar-instituicoes', 'AcaoController@selecionar_instituicoes')->name('selecionar-instituicoes');
+        Route::post('upload_lists', 'AcaoController@uploadLists')->name('upload_lists');
         Route::get('/create', 'AcaoController@create')->name('create');
         Route::post('/store', 'AcaoController@store')->name('store');
         //Route::get('/{id}', 'AcaoController@show')->name('show');

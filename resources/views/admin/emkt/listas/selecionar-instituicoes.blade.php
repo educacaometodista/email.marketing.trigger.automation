@@ -17,8 +17,8 @@
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Lista de Contatos</a></li>
-                        <li class="breadcrumb-item active"><span>Importar Lista</span></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Selecionar Instituições</a></li>
+                        <li class="breadcrumb-item active"><span>Selecionar Instituições</span></li>
                     </ul>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <!-- Panel Start -->
                 <div class="panel">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Importar Listas</h3>
+                        <h3 class="panel-title">Selecionar Instituições</h3>
                     </div>
 
                     <div class="panel-content">

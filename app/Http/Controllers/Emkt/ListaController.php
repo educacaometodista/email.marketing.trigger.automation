@@ -55,6 +55,19 @@ class ListaController extends Controller
             'date' => 'required|date'
         ]);*/
 
+
+        /*
+        $hasAction = false;
+        foreach($instituicoes as $instituicao)
+        {
+            if($hasAction){
+                if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
+                    array_push($instituicoes_selecionadas, $instituicao);
+            } else {
+                array_push($instituicoes_selecionadas, $instituicao);
+            }
+        }*/
+
         if($request->hasFile('import_file'))
         {
             
@@ -80,11 +93,10 @@ class ListaController extends Controller
             $lista['input_instituicao'] = 'lista_da_instituicao_'.++$count;
             $lista['ClientOriginalName'] = $file->getClientOriginalName();
             $lista['file_content'] = $this->planilha()->load($file->getRealPath());
-            $lista['tipo_de_acao_da_instituicao'] = $tipo_de_acao_id;
+            $lista['tipo_de_acao_da_instituicao'] = null;
             array_push($listas_de_contatos, $lista);
         }
 
-        $hasAction = false;
         $importacao_de_listas = [];
 
         $importacao_de_listas['identificador_do_processo'] = $identificador_do_processo;
@@ -100,7 +112,6 @@ class ListaController extends Controller
 
     public function selecionar_instituicoes()
     {
-
         if(Session::has('importacao-de-listas'))
         {
             $importacao_de_listas = Session::get('importacao-de-listas');
@@ -109,8 +120,6 @@ class ListaController extends Controller
                     $query->where('tipo_de_acao_id', '=', $importacao_de_listas['tipo_de_acao']);
                 }
             )->get();
-
-            //Session::remove('importacao-de-listas');
 
             return view('admin.emkt.listas.selecionar-instituicoes', [
                 'instituicoes' => $instituicoes,
@@ -138,14 +147,17 @@ class ListaController extends Controller
         $hasAction = false;
         $instituicoes_selecionadas = [];
 
-        foreach($instituicoes as $instituicao)
+        //
+        $instituicoes_selecionadas = $instituicoes;
+
+        $i = 0;
+        foreach ($files as $file)
         {
-            if($hasAction){
-                if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
-                    array_push($instituicoes_selecionadas, $instituicao);
-            } else {
-                array_push($instituicoes_selecionadas, $instituicao);
+            if(!is_null($request->input($file['input_instituicao'])))
+            {
+                $files[$i]['tipo_de_acao_da_instituicao'] = $request->input($file['input_instituicao']);
             }
+            $i++;
         }
 
         $nomes_das_listas = $this->import($files, $extension, $instituicoes_selecionadas, $date, $hasAction, $importacao_de_listas);
@@ -176,6 +188,7 @@ class ListaController extends Controller
         $processo = null;
 
         $total_de_contatos_das_listas = 0;
+
         foreach ($instituicoes_selecionadas as $instituicao)
             if(array_key_exists($instituicao->prefixo, $listas_de_contatos))
                 $total_de_contatos_das_listas += count($listas_de_contatos[$instituicao->prefixo]);
@@ -200,6 +213,8 @@ class ListaController extends Controller
             'identificador' => $identificador_do_processo,
             'progresso' => 'Ok',
         ]);
+
+        return false;
     }
 
     public function getProgress()

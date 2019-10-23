@@ -71,9 +71,12 @@ class PlanilhaController extends Controller
 
         foreach ($files as $file)
         {
-            $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($file['tipo_de_acao_da_instituicao'])::with('Instituicao', 'Filtro');
+            $tipo_de_acao_da_instituicao_id = $file['tipo_de_acao_da_instituicao'];
+            
+            $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($tipo_de_acao_da_instituicao_id);
+
             $lista = $this->getFilter($file['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
-            $listas_de_contatos[$tipo_de_acao_da_instituicao->first()->instituicao->prefixo] = $lista;
+            $listas_de_contatos[$tipo_de_acao_da_instituicao->instituicao->prefixo] = $lista;
         }
 
         return $listas_de_contatos;

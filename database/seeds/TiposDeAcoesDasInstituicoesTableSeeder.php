@@ -76,5 +76,28 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
         $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'EAD UMESP - Inscritos Parciais - [DATE d/m] - [DATE Y]/[DATE HALF]';
         $tipo_de_acao_da_instituicao->nome_do_arquivo = 'ead-umesp-inscritos-parciais-[DATE d-m-Y]-[DATE HALF].csv';
         $tipo_de_acao_da_instituicao->save();
+
+        //UNIMEP - Ausentes - Presencial
+        $tipo_de_acao_da_instituicao = new App\TipoDeAcaoDaInstituicao;
+        $tipo_de_acao_da_instituicao->nome = 'UNIMEP Ausentes Presencial';
+        $tipo_de_acao_da_instituicao->tipo_de_acao_id = 1;
+        $tipo_de_acao_da_instituicao->instituicao_id = 3;
+        $tipo_de_acao_da_instituicao->filtro_id = 1;
+        $tipo_de_acao_da_instituicao->mensagem_id = 6;
+        $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'UNIMEP - Ausentes - [DATE d/m] - [DATE Y]/[DATE HALF]';
+        $tipo_de_acao_da_instituicao->nome_do_arquivo = 'unimep-ausentes-[DATE d-m-Y]-[DATE HALF].csv';
+        $tipo_de_acao_da_instituicao->save();
+
+        //UNIMEP - Inscritos Parciais - Presencial
+        $tipo_de_acao_da_instituicao = new App\TipoDeAcaoDaInstituicao;
+        $tipo_de_acao_da_instituicao->nome = 'UNIMEP Inscritos Parciais Presencial';
+        $tipo_de_acao_da_instituicao->tipo_de_acao_id = 3;
+        $tipo_de_acao_da_instituicao->instituicao_id = 3;
+        $tipo_de_acao_da_instituicao->filtro_id = 1;
+        $tipo_de_acao_da_instituicao->mensagem_id = 9;
+        $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'UNIMEP - Inscritos Parciais - [DATE d/m] - [DATE Y]/[DATE HALF]';
+        $tipo_de_acao_da_instituicao->nome_do_arquivo = 'unimep-inscritos-parciais-[DATE d-m-Y]-[DATE HALF].csv';
+        $tipo_de_acao_da_instituicao->save();
+
     }
 }

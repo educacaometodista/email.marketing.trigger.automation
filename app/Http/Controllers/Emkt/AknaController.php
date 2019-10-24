@@ -182,9 +182,13 @@ class AknaController extends Controller
         foreach($contatos_a_importar as $contatos)
         {
             $contatos_xml = '';
+
+            
             foreach($contatos as $contato)
             {
+
                 $contatos_xml .= '<destinatario><nome>'.$contato['NOME'].'</nome><email>'.$contato['EMAIL'].'</email></destinatario>';
+
                 $progresso = $progresso + $porcentagem_do_progresso;
                 $numero_de_contatos_importados++;
                 $processo->update([
@@ -194,7 +198,7 @@ class AknaController extends Controller
             }
 
             $nome_da_lista = $instituicao->tipos_de_acoes_da_instituicao->first()->getNomeDaListaDeContatos($dados);
-            $xml_request = str_replace('[NOME DA LISTA]', 'TESTE 3 - '.$nome_da_lista, $xml_request);
+            $xml_request = str_replace('[NOME DA LISTA]', 'TESTE - '.$nome_da_lista, $xml_request);
             $xml_request = str_replace('<destinatario>[DESTINATARIOS]</destinatario>', $contatos_xml, $xml_request);
             $xml_response = $this->post([], $xml_request);
             $xml = new \SimpleXMLElement($xml_response);

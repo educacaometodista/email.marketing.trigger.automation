@@ -189,22 +189,35 @@ class ListaController extends Controller
 
         $total_de_contatos_das_listas = 0;
 
-        foreach ($instituicoes_selecionadas as $instituicao)
+        if(array_key_exists('all', $listas_de_contatos)) {
+            foreach ($instituicoes_selecionadas as $instituicao)
+                if(array_key_exists($instituicao->prefixo, $listas_de_contatos['all']))
+                    $total_de_contatos_das_listas += count($listas_de_contatos['all'][$instituicao->prefixo]);
+        } else {
+
+            foreach ($instituicoes_selecionadas as $instituicao)
             if(array_key_exists($instituicao->prefixo, $listas_de_contatos))
                 $total_de_contatos_das_listas += count($listas_de_contatos[$instituicao->prefixo]);
-        
+        }
+
         foreach ($instituicoes_selecionadas as $instituicao)
         {
             $status = false;
 
-            if(array_key_exists($instituicao->prefixo, $listas_de_contatos))
+            if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
             {
                 if($this->aknaAPI()->importarContatos($listas_de_contatos[$instituicao->prefixo], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
                 {
                     Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
                 }
-            }
+            } elseif(array_key_exists('all', $listas_de_contatos)) {
 
+                
+                if($this->aknaAPI()->importarContatos($listas_de_contatos['all'][$instituicao->prefixo], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas, $separar_por_instituicao) == "Ok")
+                {
+                    Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
+                }
+            }
         }
 
         $processo = Processo::where('identificador', $identificador_do_processo)->first();
@@ -214,7 +227,6 @@ class ListaController extends Controller
             'progresso' => 'Ok',
         ]);
 
-        return false;
     }
 
     public function getProgress()

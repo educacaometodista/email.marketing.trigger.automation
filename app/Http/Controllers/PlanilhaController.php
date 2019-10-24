@@ -72,11 +72,22 @@ class PlanilhaController extends Controller
         foreach ($files as $file)
         {
             $tipo_de_acao_da_instituicao_id = $file['tipo_de_acao_da_instituicao'];
-            
-            $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($tipo_de_acao_da_instituicao_id);
 
-            $lista = $this->getFilter($file['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
-            $listas_de_contatos[$tipo_de_acao_da_instituicao->instituicao->prefixo] = $lista;
+            if($tipo_de_acao_da_instituicao_id != 'all')
+            {
+                $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($tipo_de_acao_da_instituicao_id);
+
+                $lista = $this->getFilter($file['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
+                $listas_de_contatos[$tipo_de_acao_da_instituicao->instituicao->prefixo] = $lista;
+
+            } else {
+
+                $lista = $this->getFilter($file['file_content']->toArray(), $extension, 'all', $date, $storage_path);
+                $listas_de_contatos['all'] = $lista;
+
+            }
+            
+            
         }
 
         return $listas_de_contatos;
@@ -84,7 +95,19 @@ class PlanilhaController extends Controller
 
     public function getFilter($arrayFile, $extension, $tipo_de_acao_da_instituicao, $date, $storage_path)
     {
-        $filtro = $tipo_de_acao_da_instituicao->first()->filtro->regra;
+        if($tipo_de_acao_da_instituicao != 'all')
+        {
+            $filtro = $tipo_de_acao_da_instituicao->first()->filtro->regra;
+        } else {
+            //Filtro padrão
+            $filtro = 'return [
+                "NOME" => "nome",
+                "EMAIL" => "e_mail",
+                "CELULAR" => "celular",
+                "INSTITUICAO" => "instituição"
+            ];';
+
+        }
 
         /*$filtro = 'return [
             "NOME" => "nome",
@@ -94,6 +117,7 @@ class PlanilhaController extends Controller
         ];';*/
 
         $filtro = eval($filtro);
+        $newArrayFile = [];
         
         if($this->hasColumns($filtro, $arrayFile))
         {
@@ -105,11 +129,26 @@ class PlanilhaController extends Controller
 
             if(array_key_exists('INSTITUICAO', $filtro))
                 $arrayFile = $this->orderByColumn($filtro['INSTITUICAO'], $arrayFile);
-
             
             $arrayFile = $this->renameColumns($arrayFile, $filtro);
-    
-            return $arrayFile;
+
+            //
+            if(array_key_exists('INSTITUICAO', $filtro) && $tipo_de_acao_da_instituicao != 'all')
+            {  
+                foreach ($arrayFile as $key_row => $row)
+                {
+                    if($tipo_de_acao_da_instituicao->instituicao->prefixo == strtoupper($arrayFile[$key_row]['INSTITUICAO']))
+                    {
+                        $newArrayFile[$key_row] = $arrayFile[$key_row];
+                    }
+                }
+
+            } else {
+                foreach ($arrayFile as $key_row => $row)
+                    $newArrayFile[strtoupper($arrayFile[$key_row]['INSTITUICAO'])][$key_row] = $arrayFile[$key_row];
+            }
+
+            return $newArrayFile;
 
         } else {
             Session::flash('danger', 'O formato do arquivo não é válido!');
@@ -181,7 +220,6 @@ class PlanilhaController extends Controller
         return $new_row;
     }
 
-
     public function hasColumns($nomes_das_colunas, $arrayFile)
     {
        $hasColumns = false;
@@ -217,5 +255,5 @@ class PlanilhaController extends Controller
         }
         return $newArrayFile;
     }
-
+    
 }

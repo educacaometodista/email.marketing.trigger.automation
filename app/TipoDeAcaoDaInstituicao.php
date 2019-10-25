@@ -30,6 +30,7 @@ class TipoDeAcaoDaInstituicao extends Model
 
     public function instituicao()
     {
+        //return $this->belongsTo(Instituicao::class, 'instituicao_id', 'id');
         return $this->belongsTo(Instituicao::class, 'instituicao_id', 'id');
     }
 

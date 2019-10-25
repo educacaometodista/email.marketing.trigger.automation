@@ -19,6 +19,7 @@ class Instituicao extends Model
 
     public function tipos_de_acoes_da_instituicao()
     {
-        return $this->hasOne(TipoDeAcaoDaInstituicao::class, 'instituicao_id', 'id');
+        //return $this->hasOne(TipoDeAcaoDaInstituicao::class, 'instituicao_id', 'id');
+        return $this->hasMany(TipoDeAcaoDaInstituicao::class, 'instituicao_id');
     }
 }

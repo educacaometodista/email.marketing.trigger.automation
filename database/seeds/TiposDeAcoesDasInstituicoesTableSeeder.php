@@ -47,7 +47,7 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
         //UMESP - Convocados Não Matriculados - Presencial
         $tipo_de_acao_da_instituicao = new App\TipoDeAcaoDaInstituicao;
         $tipo_de_acao_da_instituicao->nome = 'UMESP Convocados Não Matriculados Presencial';
-        $tipo_de_acao_da_instituicao->tipo_de_acao_id = 5;
+        $tipo_de_acao_da_instituicao->tipo_de_acao_id = 7;
         $tipo_de_acao_da_instituicao->instituicao_id = 1;
         $tipo_de_acao_da_instituicao->filtro_id = 1;
         $tipo_de_acao_da_instituicao->mensagem_id = 3;
@@ -59,7 +59,7 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
         $tipo_de_acao_da_instituicao = new App\TipoDeAcaoDaInstituicao;
         $tipo_de_acao_da_instituicao->nome = 'UMESP Ausentes EaD';
         $tipo_de_acao_da_instituicao->tipo_de_acao_id = 2;
-        $tipo_de_acao_da_instituicao->instituicao_id = 1;
+        $tipo_de_acao_da_instituicao->instituicao_id = 2;
         $tipo_de_acao_da_instituicao->filtro_id = 2;
         $tipo_de_acao_da_instituicao->mensagem_id = 5;
         $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'EAD UMESP - Ausentes - [DATE d/m] - [DATE Y]/[DATE HALF]';
@@ -70,7 +70,7 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
         $tipo_de_acao_da_instituicao = new App\TipoDeAcaoDaInstituicao;
         $tipo_de_acao_da_instituicao->nome = 'UMESP Inscritos Parciais EaD';
         $tipo_de_acao_da_instituicao->tipo_de_acao_id = 4;
-        $tipo_de_acao_da_instituicao->instituicao_id = 1;
+        $tipo_de_acao_da_instituicao->instituicao_id = 2;
         $tipo_de_acao_da_instituicao->filtro_id = 2;
         $tipo_de_acao_da_instituicao->mensagem_id = 6;
         $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'EAD UMESP - Inscritos Parciais - [DATE d/m] - [DATE Y]/[DATE HALF]';

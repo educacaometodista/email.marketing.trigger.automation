@@ -182,11 +182,9 @@ class AknaController extends Controller
         foreach($contatos_a_importar as $contatos)
         {
             $contatos_xml = '';
-
             
             foreach($contatos as $contato)
             {
-
                 $contatos_xml .= '<destinatario><nome>'.$contato['NOME'].'</nome><email>'.$contato['EMAIL'].'</email></destinatario>';
 
                 $progresso = $progresso + $porcentagem_do_progresso;
@@ -197,7 +195,13 @@ class AknaController extends Controller
                 ]);
             }
 
-            $nome_da_lista = $instituicao->tipos_de_acoes_da_instituicao->first()->getNomeDaListaDeContatos($dados);
+            $importacao_de_listas = Session::get('importacao-de-listas');
+            $tipo_de_acao_id = $importacao_de_listas['tipo_de_acao'];
+
+            foreach ($instituicao->tipos_de_acoes_da_instituicao as $tipo_de_acao_da_instituicao)
+                if($tipo_de_acao_da_instituicao->tipo_de_acao_id == $tipo_de_acao_id)
+                    $nome_da_lista = $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados);
+
             $xml_request = str_replace('[NOME DA LISTA]', 'TESTE - '.$nome_da_lista, $xml_request);
             $xml_request = str_replace('<destinatario>[DESTINATARIOS]</destinatario>', $contatos_xml, $xml_request);
             $xml_response = $this->post([], $xml_request);

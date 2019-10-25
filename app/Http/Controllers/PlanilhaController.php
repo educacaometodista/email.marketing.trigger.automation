@@ -78,16 +78,15 @@ class PlanilhaController extends Controller
                 $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($tipo_de_acao_da_instituicao_id);
 
                 $lista = $this->getFilter($file['file_content']->toArray(), $extension, $tipo_de_acao_da_instituicao, $date, $storage_path);
-                $listas_de_contatos[$tipo_de_acao_da_instituicao->instituicao->prefixo] = $lista;
+                $listas_de_contatos[strtoupper($tipo_de_acao_da_instituicao->instituicao->prefixo)] = $lista;
 
             } else {
 
                 $lista = $this->getFilter($file['file_content']->toArray(), $extension, 'all', $date, $storage_path);
                 $listas_de_contatos['all'] = $lista;
 
-            }
-            
-            
+            }            
+        
         }
 
         return $listas_de_contatos;
@@ -97,7 +96,8 @@ class PlanilhaController extends Controller
     {
         if($tipo_de_acao_da_instituicao != 'all')
         {
-            $filtro = $tipo_de_acao_da_instituicao->first()->filtro->regra;
+            $filtro = $tipo_de_acao_da_instituicao->filtro->regra;
+
         } else {
             //Filtro padrão
             $filtro = 'return [
@@ -118,19 +118,22 @@ class PlanilhaController extends Controller
 
         $filtro = eval($filtro);
         $newArrayFile = [];
+
         
         if($this->hasColumns($filtro, $arrayFile))
         {
+
             foreach ($arrayFile as $key_row => $row)
             {
                 $arrayFile[$key_row] = $this->celular($filtro, $row);
                 $arrayFile[$key_row] = $this->clearRow($filtro, $arrayFile[$key_row]);
             }
 
+
             if(array_key_exists('INSTITUICAO', $filtro))
                 $arrayFile = $this->orderByColumn($filtro['INSTITUICAO'], $arrayFile);
             
-            $arrayFile = $this->renameColumns($arrayFile, $filtro);
+                $arrayFile = $this->renameColumns($arrayFile, $filtro);
 
             //
             if(array_key_exists('INSTITUICAO', $filtro) && $tipo_de_acao_da_instituicao != 'all')
@@ -142,6 +145,14 @@ class PlanilhaController extends Controller
                         $newArrayFile[$key_row] = $arrayFile[$key_row];
                     }
                 }
+                
+
+            } elseif(!array_key_exists('INSTITUICAO', $filtro) && $tipo_de_acao_da_instituicao != 'all') {
+
+                foreach ($arrayFile as $key_row => $row)
+                {
+                    $newArrayFile[$key_row] = $arrayFile[$key_row];
+                }
 
             } else {
                 foreach ($arrayFile as $key_row => $row)
@@ -149,6 +160,7 @@ class PlanilhaController extends Controller
             }
 
             return $newArrayFile;
+            
 
         } else {
             Session::flash('danger', 'O formato do arquivo não é válido!');
@@ -175,6 +187,9 @@ class PlanilhaController extends Controller
                     if($key == $filtro['CELULAR'])
                         $new_row['CELULAR'] = $row[$filtro['CELULAR']];
 
+                if($key == 'CELULAR')
+                    $new_row['CELULAR'] = $row['CELULAR'];
+
                 if(array_key_exists('INSTITUICAO', $filtro))
                         if($key == $filtro['INSTITUICAO'])
                             $new_row['INSTITUICAO'] = $row[$filtro['INSTITUICAO']];
@@ -189,21 +204,43 @@ class PlanilhaController extends Controller
     {
         foreach($row as $key => $cell)
         {
-            if($key == $filtro['CELULAR'])
+            if(array_key_exists('DDD', $filtro) && array_key_exists('NUMERO', $filtro))
             {
-                $row[$filtro['CELULAR']] = str_replace('-', '', $row[$filtro['CELULAR']]);              
-                $row[$filtro['CELULAR']] = str_replace('(', '', $row[$filtro['CELULAR']]);
-                $row[$filtro['CELULAR']] = str_replace(')', '', $row[$filtro['CELULAR']]);
-                $row[$filtro['CELULAR']] = str_replace(' ', '', $row[$filtro['CELULAR']]);
 
-                if(array_key_exists('DDD', $filtro))
-                    if(array_key_exists($filtro['DDD'], $row))
-                        $row[$filtro['CELULAR']] = $row[$filtro['DDD']].$row[$filtro['CELULAR']];
+                if($key == $filtro['DDD'] || $key == $filtro['NUMERO'])
+                {
+
+                    if(array_key_exists($filtro['DDD'], $row) && array_key_exists($filtro['NUMERO'], $row))
+                    {
+                        $row['CELULAR'] = $row[$filtro['DDD']].$row[$filtro['NUMERO']];
+                    }
                     
-                if(strlen($row[$filtro['CELULAR']]) != 11)
-                    $row[$filtro['CELULAR']] = '';            
+                    $row['CELULAR'] = str_replace('-', '', $row['CELULAR']);              
+                    $row['CELULAR'] = str_replace('(', '', $row['CELULAR']);
+                    $row['CELULAR'] = str_replace(')', '', $row['CELULAR']);
+                    $row['CELULAR'] = str_replace(' ', '', $row['CELULAR']);
+                        
+                    if(strlen($row['CELULAR']) != 11)
+                        $row['CELULAR'] = '';      
+
+                }
+
+            }  elseif(array_key_exists('CELULAR', $filtro)) {
+
+                if($key == $filtro['CELULAR'])
+                {
+                    $row['CELULAR'] = str_replace('-', '', $row[$filtro['CELULAR']]);              
+                    $row['CELULAR'] = str_replace('(', '', $row[$filtro['CELULAR']]);
+                    $row['CELULAR'] = str_replace(')', '', $row[$filtro['CELULAR']]);
+                    $row['CELULAR'] = str_replace(' ', '', $row[$filtro['CELULAR']]);
+                        
+                    if(strlen($row['CELULAR']) != 11)
+                        $row['CELULAR'] = '';      
+                }
+
             }
         }
+
         return $row;
     }
 
@@ -212,11 +249,9 @@ class PlanilhaController extends Controller
         $removeColumn = false;
         $new_row = [];
         foreach($row as $key => $cell)
-        {
-            if(in_array($key, $nomes_das_colunas))
+            if(in_array($key, $nomes_das_colunas) || $key == 'CELULAR')
                 $new_row[$key] = $cell;
 
-        }
         return $new_row;
     }
 
@@ -224,11 +259,10 @@ class PlanilhaController extends Controller
     {
        $hasColumns = false;
        foreach($nomes_das_colunas as $nome_da_coluna)
-       {
             foreach($arrayFile as $row)
                 if(array_key_exists($nome_da_coluna, $row))
                     $hasColumns = true;
-       }
+
        return $hasColumns;  
     }
 
@@ -237,22 +271,17 @@ class PlanilhaController extends Controller
         $valores_da_coluna = [];
         $newArrayFile = [];
 
-        foreach ($arrayFile as $key_row => $row) {
+        foreach ($arrayFile as $key_row => $row)
             if(!in_array($row[$nome_da_coluna], $valores_da_coluna))
                 array_push($valores_da_coluna, $row[$nome_da_coluna]);
-                
-        }
 
         sort($valores_da_coluna);
 
-        foreach ($valores_da_coluna as $valor) {
-            foreach ($arrayFile as $key_row => $row) {
+        foreach ($valores_da_coluna as $valor)
+            foreach ($arrayFile as $key_row => $row)
                 if($valor == $row[$nome_da_coluna])
-                {
                     array_push($newArrayFile, $row);
-                }
-            }
-        }
+
         return $newArrayFile;
     }
     

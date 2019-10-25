@@ -70,7 +70,7 @@
                                                     <option></option>
                                                     <option value="all">Todas</option>
                                                     @foreach($instituicoes as $instituicao)
-                                                        <option value="{{ $instituicao->tipos_de_acoes_da_instituicao->id }}">{{ $instituicao->nome }}</option>
+                                                        <option value="{{ $instituicao['tipo_de_acao_da_instituicao'] }}">{{ $instituicao['nome'] }}</option>
                                                     @endforeach
                                                     </select>
                                                 </div>

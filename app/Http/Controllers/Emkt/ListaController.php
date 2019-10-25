@@ -41,6 +41,8 @@ class ListaController extends Controller
     {
         Session::remove('importacao-de-listas');
 
+        //dd(Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get());
+
         return view('admin.emkt.listas.create')->with([
             'instituicoes' =>  Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get(),
             'tipos_de_acoes' =>  TipoDeAcao::whereHas('tipo_de_acao_das_instituicoes')->get()
@@ -116,13 +118,40 @@ class ListaController extends Controller
         {
             $importacao_de_listas = Session::get('importacao-de-listas');
 
+            //dd($importacao_de_listas['tipo_de_acao']);
+            
+
             $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($importacao_de_listas) {
-                    $query->where('tipo_de_acao_id', '=', $importacao_de_listas['tipo_de_acao']);
+                    //$query->where('tipo_de_acao_id', $importacao_de_listas['tipo_de_acao']);
                 }
             )->get();
 
+            
+            
+            /*$instituicoes = Instituicao::has('tipos_de_acoes_da_instituicao'
+            )->get();*/
+
+            //dd($instituicoes[0]->tipos_de_acoes_da_instituicao);
+
+            $instituicoes_selecionadas = [];
+            $instituicao_array = [];
+
+            foreach ($instituicoes as $instituicao) {
+                foreach ($instituicao->tipos_de_acoes_da_instituicao as $tipo_de_acao_da_instituicao) {
+                    if($tipo_de_acao_da_instituicao->tipo_de_acao_id == $importacao_de_listas['tipo_de_acao'])
+                    {
+                        $instituicao_array['tipo_de_acao_da_instituicao'] = $tipo_de_acao_da_instituicao->id;
+                        $instituicao_array['nome'] = $instituicao->nome;
+                        array_push($instituicoes_selecionadas, $instituicao_array);
+                    }
+                        
+                }
+            }
+
+            //dd($instituicoes_selecionadas);
+
             return view('admin.emkt.listas.selecionar-instituicoes', [
-                'instituicoes' => $instituicoes,
+                'instituicoes' => $instituicoes_selecionadas,
                 'listas' => $importacao_de_listas['arquivos']
                 ]);
 
@@ -191,13 +220,13 @@ class ListaController extends Controller
 
         if(array_key_exists('all', $listas_de_contatos)) {
             foreach ($instituicoes_selecionadas as $instituicao)
-                if(array_key_exists($instituicao->prefixo, $listas_de_contatos['all']))
-                    $total_de_contatos_das_listas += count($listas_de_contatos['all'][$instituicao->prefixo]);
+                if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos['all']))
+                    $total_de_contatos_das_listas += count($listas_de_contatos['all'][strtoupper($instituicao->prefixo)]);
         } else {
 
             foreach ($instituicoes_selecionadas as $instituicao)
-            if(array_key_exists($instituicao->prefixo, $listas_de_contatos))
-                $total_de_contatos_das_listas += count($listas_de_contatos[$instituicao->prefixo]);
+            if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
+                $total_de_contatos_das_listas += count($listas_de_contatos[strtoupper($instituicao->prefixo)]);
         }
 
         foreach ($instituicoes_selecionadas as $instituicao)
@@ -206,14 +235,14 @@ class ListaController extends Controller
 
             if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
             {
-                if($this->aknaAPI()->importarContatos($listas_de_contatos[$instituicao->prefixo], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
+                if($this->aknaAPI()->importarContatos($listas_de_contatos[strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
                 {
                     Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
                 }
             } elseif(array_key_exists('all', $listas_de_contatos)) {
 
                 
-                if($this->aknaAPI()->importarContatos($listas_de_contatos['all'][$instituicao->prefixo], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas, $separar_por_instituicao) == "Ok")
+                if($this->aknaAPI()->importarContatos($listas_de_contatos['all'][strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
                 {
                     Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
                 }

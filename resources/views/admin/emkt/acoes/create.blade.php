@@ -17,8 +17,8 @@
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Ações</a></li>
-                        <li class="breadcrumb-item active"><span>Criar Nova</span></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Lista de Contatos</a></li>
+                        <li class="breadcrumb-item active"><span>Importar Lista</span></li>
                     </ul>
                 </div>
             </div>
@@ -34,17 +34,19 @@
                 <!-- Panel Start -->
                 <div class="panel">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Novo Cadastro</h3>
+                        <h3 class="panel-title">Importar Listas</h3>
                     </div>
 
                     <div class="panel-content">
                     @include('admin.partials._alert')
-                    @include('admin.emkt.acoes.partials._alert')
+                    @include('admin.emkt.listas.partials._alert')
 
-                        <form action="{{ route('admin.acoes.store') }}" method="POST" enctype="multipart/form-data" id="formulario">
+
+                        <form action="{{ route('admin.listas.upload') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <!-- Form Group Start -->
-                            <div class="form-group row">
+
+                             <!-- Form Group Start -->
+                             <div class="form-group row">
                                     <span class="label-text col-md-2 col-form-label text-md-right">Título</span>
                                 <div class="col-md-10">
                                     <input type="text" name="titulo" class="form-control" id="titulo" maxlenght="20" value="{{ old('titulo') }}">
@@ -54,23 +56,15 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                <span class="label-text col-md-2 col-form-label text-md-right" id="tipoAcao">Tipo de Ação</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Tipo de Ação</span>
+
                                 <div class="col-md-10">
                                     <select name="tipo_de_acao" class="form-control" id="tipo_de_acao">
-                                        <option></option>
-                                        @foreach($tipos_de_acoes as $tipo_de_acao)
-                                            <option value="{{ $tipo_de_acao->id }}">{{ $tipo_de_acao->nome_de_exibicao }}</option>
-                                        @endforeach
+                                    <option></option>
+                                    @foreach($tipos_de_acoes as $tipo_de_acao)
+                                        <option value="{{ $tipo_de_acao->id }}">{{ $tipo_de_acao->nome_de_exibicao }}</option>
+                                    @endforeach
                                     </select>
-                                </div>
-                            </div>
-                            <!-- Form Group End -->
-
-                            <!-- Form Group Start -->
-                            <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Data da Ação</span>
-                                <div class="col-md-10">
-                                    <input type="date" name="date" class="form-control" id="data">
                                 </div>
                             </div>
                             <!-- Form Group End -->
@@ -96,6 +90,15 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Incluir Data</span>
+                                <div class="col-md-10">
+                                    <input type="date" name="date" class="form-control" id="data-do-documento">
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
+                             <!-- Form Group Start -->
+                             <div class="form-group row">
                                     <span class="label-text col-md-2 col-form-label text-md-right">Agendamento</span>
                                 <div class="col-md-3">
                                     <input type="date" name="data_agendamento" class="form-control" id="data_agendamento">
@@ -108,6 +111,7 @@
                             </div>
                             <!-- Form Group End -->
 
+                            <!-- Form Group Start -->
                             <div class="form-group row"> <span class="label-text col-md-2 col-form-label text-md-right py-0">Situação da Lista</span>
                                 <div class="col-md-10">
                                 <label class="form-radio">
@@ -137,33 +141,26 @@
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
                                     
-                                    <input type="submit" value="Salvar" class="btn btn-sm btn-rounded btn-success">
+                                    <input type="submit" value="Importar" class="btn btn-sm btn-rounded btn-success">
                                     <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button>
                                 </div>
                             </div>
-                        
+
                         </form>
 
-                        <div class="col-md-12 mb-5 d-none" id="progress-bar">
-                            <h5 class="h5 fw--600 mb-3">Aguarde, isso pode levar alguns minutos...</h5>
-
-                            <div class="progress h-15px">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-orange w-75">
-
-                                </div>
-                            </div>
-                            
-                            
+                        
                     </div>
                 </div>
                 <!-- Panel End -->
             </div>
         </div>
     </section>
+
+
+
     @include('admin.partials._footer')
 </main>
 <!-- Main Container End -->
-
 @push('js')
 <script>
     $('input[name="hasList"]').click(function () {
@@ -212,3 +209,4 @@
 @endpush
 
 @endsection
+

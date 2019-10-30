@@ -210,7 +210,7 @@ class AknaController extends Controller
         return str_replace('.', "$instituicao->nome!", $xml->EMKT->RETURN[0]);
     }*/
 
-    public function criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas)
+    public function criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $listas_de_contatos)
     {
         $this->data['Client'] = $instituicao->codigo_da_empresa;
         $data_envio = explode(' ', $agendamento_envio);
@@ -225,14 +225,17 @@ class AknaController extends Controller
         $xml_request = str_replace('[EMAIL PARA RETORNO]', $instituicao->email_de_retorno, $xml_request);
         $xml_request = str_replace('[LINK DA MENSAGEM]', $mensagem->getUrl(), $xml_request);
         $xml_request = str_replace('[ASSUNTO]', $mensagem->assunto, $xml_request);
+        $prefixo_da_instituicao = strtoupper($instituicao->prefixo);
         
-            $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'. 'TESTE - '.$nomes_das_listas[strtoupper($instituicao->prefixo)].'</lista>', $xml_request);;
+            $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'. 'TESTE - '.$listas_de_contatos[$prefixo_da_instituicao].'</lista>', $xml_request);;
 
         $xml_response = $this->post([], $xml_request);
 
         $xml = new \SimpleXMLElement($xml_response);
 
-        return str_replace('.', "$instituicao->nome!", $xml->EMKT->RETURN[0]);
+        return 'OK';
+
+        //return str_replace('.', "$instituicao->nome!", $xml->EMKT->RETURN[0]);
     }
 
 }

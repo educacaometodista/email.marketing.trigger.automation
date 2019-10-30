@@ -17,7 +17,7 @@
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Selecionar Instituições</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Importação de Listas</a></li>
                         <li class="breadcrumb-item active"><span>Selecionar Instituições</span></li>
                     </ul>
                 </div>

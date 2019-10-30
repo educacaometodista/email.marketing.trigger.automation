@@ -13,11 +13,11 @@
             <div class="row">
                 <div class="col-lg-6">
                     <!-- Page Title Start -->
-                    <h2 class="page--title h5">Selecionar Instituições</h2>
+                    <h2 class="page--title h5">Ações</h2>
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Ações</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Importação de Listas</a></li>
                         <li class="breadcrumb-item active"><span>Selecionar Instituições</span></li>
                     </ul>
                 </div>
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="panel-content">
-                        <form action="{{ route('admin.listas.store') }}" method="POST" enctype="multipart/form-data" id="formulario">
+                        <form action="{{ route('admin.acoes.store') }}" method="POST" enctype="multipart/form-data" id="formulario">
                             @csrf
 
                             <div class="row">
@@ -68,9 +68,9 @@
                                                 <div class="form-group">
                                                     <select name="{{ $lista['input_instituicao'] }}" class="form-control" id="instituicao_da_lista_1">
                                                     <option></option>
-                                                    <option value="todas">Todas</option>
+                                                    <option value="all">Todas</option>
                                                     @foreach($instituicoes as $instituicao)
-                                                        <option value="{{ $instituicao->tipos_de_acoes_da_instituicao->first()->id }}">{{ $instituicao->nome }}</option>
+                                                        <option value="{{ $instituicao['tipo_de_acao_da_instituicao'] }}">{{ $instituicao['nome'] }}</option>
                                                     @endforeach
                                                     </select>
                                                 </div>

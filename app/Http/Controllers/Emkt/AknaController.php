@@ -185,7 +185,7 @@ class AknaController extends Controller
     }
 
     /* Ações */
-    public function criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas)
+    /*public function criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas)
     {
         $this->data['Client'] = $instituicao->codigo_da_empresa;
         $data_envio = explode(' ', $agendamento_envio);
@@ -202,6 +202,31 @@ class AknaController extends Controller
         $xml_request = str_replace('[ASSUNTO]', $mensagem->assunto, $xml_request);
         
             $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'. $nomes_das_listas[$instituicao->prefixo].'</lista>', $xml_request);;
+
+        $xml_response = $this->post([], $xml_request);
+
+        $xml = new \SimpleXMLElement($xml_response);
+
+        return str_replace('.', "$instituicao->nome!", $xml->EMKT->RETURN[0]);
+    }*/
+
+    public function criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas)
+    {
+        $this->data['Client'] = $instituicao->codigo_da_empresa;
+        $data_envio = explode(' ', $agendamento_envio);
+
+        $xml_request = $this->getXml('acoes/criar-acao-pontual');
+        $xml_request = str_replace('[TITULO DA ACAO]', $titulo_da_acao, $xml_request);
+        $xml_request = str_replace('[E-MAIL USUARIO]', $this->data['User'], $xml_request);
+        $xml_request = str_replace('[AGENDAMENTO]', $agendamento_envio, $xml_request);
+        $xml_request = str_replace('[DATA ENCERRAMENTO]', date('Y-m-d', strtotime($data_envio[0]. ' + 30 day')), $xml_request);
+        $xml_request = str_replace('[NOME DO REMETENTE]', $instituicao->nome_do_remetente, $xml_request);
+        $xml_request = str_replace('[EMAIL DO REMETENTE]', $instituicao->email_do_remetente, $xml_request);
+        $xml_request = str_replace('[EMAIL PARA RETORNO]', $instituicao->email_de_retorno, $xml_request);
+        $xml_request = str_replace('[LINK DA MENSAGEM]', $mensagem->getUrl(), $xml_request);
+        $xml_request = str_replace('[ASSUNTO]', $mensagem->assunto, $xml_request);
+        
+            $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'. 'TESTE - '.$nomes_das_listas[strtoupper($instituicao->prefixo)].'</lista>', $xml_request);;
 
         $xml_response = $this->post([], $xml_request);
 

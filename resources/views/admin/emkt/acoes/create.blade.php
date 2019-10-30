@@ -42,7 +42,7 @@
                     @include('admin.emkt.listas.partials._alert')
 
 
-                        <form action="{{ route('admin.listas.upload') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.acoes.upload_lists') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                              <!-- Form Group Start -->
@@ -131,7 +131,7 @@
 
                                 <div class="col-md-10">
                                     <label class="custom-file">
-                                        <input type="file" name="import_file" class="custom-file-input" id="arquivo">
+                                        <input type="file" name="import_file[]" class="custom-file-input" id="arquivo" multiple>
                                         <span class="custom-file-label">Selecione um arquivo</span>
                                     </label>
                                 </div>

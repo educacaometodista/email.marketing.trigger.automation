@@ -31,22 +31,12 @@ class AcaoController extends Controller
         return new PlanilhaController;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         
         return view('admin.emkt.acoes.index', ['acoes' => Acao::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         Session::remove('importacao-de-listas');
@@ -56,13 +46,6 @@ class AcaoController extends Controller
             'tipos_de_acoes' =>  TipoDeAcao::whereHas('tipo_de_acao_das_instituicoes')->get()
             ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     public function uploadLists(Request $request)
     {
@@ -144,6 +127,7 @@ class AcaoController extends Controller
         $titulo = $criacao_de_acao['titulo'];
         $data_agendamento = $criacao_de_acao['data_agendamento'];
         $hora_agendamento = $criacao_de_acao['hora_agendamento'];
+        $agendamento_envio = $data_agendamento.' '.$hora_agendamento;
 
         $titulo_da_acao = $titulo.date('Y-m-d', strtotime($date));
         
@@ -158,6 +142,7 @@ class AcaoController extends Controller
 
         //
         $instituicoes_selecionadas = $instituicoes;
+        
 
         $i = 0;
         foreach ($files as $file)
@@ -169,18 +154,37 @@ class AcaoController extends Controller
             $i++;
         }
 
-        $nomes_das_listas = (new ListaController())->import($files, $extension, $instituicoes_selecionadas, $date, $hasAction, $importacao_de_listas);
+        $listas_de_contatos = (new ListaController())->import($files, $extension, $instituicoes_selecionadas, $date, $hasAction, $importacao_de_listas);
 
         //
-        foreach ($files as $file)
+        $response = '';
+
+        if(array_key_exists('all', $listas_de_contatos))
         {
-            $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($file['tipo_de_acao_da_instituicao']);
-        }
+            foreach ($instituicoes_selecionadas as $instituicao)
+            {
+                if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos['all']))
+                {
+                    dd('all: consultar mensagem com tipo de acao + instituicao ');
+                } 
+            }
+            
+        } else {
 
-        foreach ($instituicoes_selecionadas as $instituicao) {
+            foreach ($instituicoes_selecionadas as $instituicao)
+            {
+                if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
+                {
+                    //$tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($file['tipo_de_acao_da_instituicao']);
 
-            if(array_key_exists(strtoupper($instituicao->prefixo), $nomes_das_listas)) {
-                //(new AknaController())->criarAcaoPontual($titulo_da_acao, $mensagem, $agendamento_envio, $instituicao, $nomes_das_listas);
+                    $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::with('mensagem')
+                        ->where('tipo_de_acao_id', $tipo_de_acao_id)
+                        ->where('instituicao_id', $instituicao->id)->get();
+
+                    //dd($tipo_de_acao_da_instituicao->mensagem);
+
+                    $response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $listas_de_contatos);
+                } 
             }
         }
 

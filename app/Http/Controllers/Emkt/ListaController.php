@@ -41,8 +41,6 @@ class ListaController extends Controller
     {
         Session::remove('importacao-de-listas');
 
-        //dd(Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get());
-
         return view('admin.emkt.listas.create')->with([
             'instituicoes' =>  Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get(),
             'tipos_de_acoes' =>  TipoDeAcao::whereHas('tipo_de_acao_das_instituicoes')->get()
@@ -72,7 +70,7 @@ class ListaController extends Controller
 
         if($request->hasFile('import_file'))
         {
-            
+
             $importacao_de_listas = $this->saveInSession($request->file('import_file'), date('d-m-Y', strtotime($request->input('date'))), $request->input('tipo_de_acao'));
             return redirect()->route('admin.listas.selecionar-instituicoes');
             
@@ -98,6 +96,8 @@ class ListaController extends Controller
             $lista['tipo_de_acao_da_instituicao'] = null;
             array_push($listas_de_contatos, $lista);
         }
+
+        //dd($files);
 
         $importacao_de_listas = [];
 
@@ -255,6 +255,10 @@ class ListaController extends Controller
             'identificador' => $identificador_do_processo,
             'progresso' => 'Ok',
         ]);
+
+
+        return $listas_de_contatos;
+
 
     }
 

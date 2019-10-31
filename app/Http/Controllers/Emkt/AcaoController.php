@@ -121,6 +121,7 @@ class AcaoController extends Controller
         $files = $importacao_de_listas['arquivos'];
         $extension = 'csv';
         $date = $importacao_de_listas['data'];
+        $dados['DATE'] = $date;
 
         //ações
         $criacao_de_acao = Session::get('criacao-de-acao');
@@ -156,36 +157,22 @@ class AcaoController extends Controller
 
         $listas_de_contatos = (new ListaController())->import($files, $extension, $instituicoes_selecionadas, $date, $hasAction, $importacao_de_listas);
 
-        //
         $response = '';
 
         if(array_key_exists('all', $listas_de_contatos))
+            $listas_de_contatos = $listas_de_contatos['all'];
+
+        foreach ($instituicoes_selecionadas as $instituicao)
         {
-            foreach ($instituicoes_selecionadas as $instituicao)
+            if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
             {
-                if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos['all']))
-                {
-                    dd('all: consultar mensagem com tipo de acao + instituicao ');
-                } 
-            }
-            
-        } else {
 
-            foreach ($instituicoes_selecionadas as $instituicao)
-            {
-                if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
-                {
-                    //$tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::findOrFail($file['tipo_de_acao_da_instituicao']);
+                $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::with('mensagem')
+                    ->where('tipo_de_acao_id', $tipo_de_acao_id)
+                    ->where('instituicao_id', $instituicao->id)->get()->first();
 
-                    $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::with('mensagem')
-                        ->where('tipo_de_acao_id', $tipo_de_acao_id)
-                        ->where('instituicao_id', $instituicao->id)->get();
-
-                    //dd($tipo_de_acao_da_instituicao->mensagem);
-
-                    $response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $listas_de_contatos);
-                } 
-            }
+                $response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados));
+            } 
         }
 
         Session::remove('importacao-de-listas');

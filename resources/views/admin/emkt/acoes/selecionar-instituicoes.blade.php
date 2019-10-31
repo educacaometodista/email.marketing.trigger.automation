@@ -135,17 +135,17 @@
         $('#progress-bar').removeClass('d-none');
         $('#formulario').addClass('d-none');
 
-        setInterval(function(){
+        /*setInterval(function(){
             $.get( "/admin/listas/progresso", function(data) {
                 //console.log(JSON.parse(data));
                 if(JSON.parse(data).progresso_do_processo == 'Ok'){
-                    window.location = '/admin/listas/create';
+                    window.location = '/admin/acoes/create';
                 } else {
                     $('div#progresso_do_processo').css('width', (JSON.parse(data).progresso_do_processo-1)+'%');
                 }
             });
 
-        }, 1000)
+        }, 1000)*/
 
     });
     

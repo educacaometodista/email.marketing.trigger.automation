@@ -58,7 +58,7 @@
 
                     <li class="{{ classActivePath('/admin/filtros', 'open', 2) }}">
                         <a href="javascript:void(0)">
-                        <i class="fas fa-paper-plane"></i>
+                        <i class="fas fa-table"></i>
                             <span>Filtros</span>
                         </a>
 
@@ -70,7 +70,7 @@
 
                     <li class="{{ classActivePath('/admin/tipos-de-acoes', 'open', 2) }}">
                         <a href="javascript:void(0)">
-                        <i class="fas fa-paper-plane"></i>
+                        <i class="fas fa-bars"></i>
                             <span>Tipos de Ações</span>
                         </a>
 

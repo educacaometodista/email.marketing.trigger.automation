@@ -55,8 +55,12 @@ class AcaoController extends Controller
             'date' => 'required|date'
         ]);*/
 
+
         if($request->hasFile('import_file'))
         {
+
+            $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get();
+
             $data_agendamento = $request->input('data_agendamento');
             $hora_agendamento = $request->input('hora_agendamento');
 
@@ -64,7 +68,11 @@ class AcaoController extends Controller
             $criacao_de_acao['titulo'] = $request->input('titulo');
             $criacao_de_acao['data_agendamento'] = $request->input('data_agendamento');
             $criacao_de_acao['hora_agendamento'] = $request->input('hora_agendamento');
+            $criacao_de_acao['instituicoes_selecionadas_ids'] = [];
 
+            foreach($instituicoes as $instituicao)
+                if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
+                    array_push($criacao_de_acao['instituicoes_selecionadas_ids'], $instituicao->id);
             Session::remove('criacao-de-acao');
             Session::put('criacao-de-acao', $criacao_de_acao);
             
@@ -81,29 +89,29 @@ class AcaoController extends Controller
     {
         if(Session::has('importacao-de-listas'))
         {
-            $importacao_de_listas = Session::get('importacao-de-listas'); 
-            
-            $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($importacao_de_listas) {
-                    //$query->where('tipo_de_acao_id', $importacao_de_listas['tipo_de_acao']);
-                }
-            )->get();
-
+            $importacao_de_listas = Session::get('importacao-de-listas');
+            $criacao_de_acao = Session::get('criacao-de-acao');
             $instituicoes_selecionadas = [];
+            $instituicoes_selecionadas_array = [];
+            
+            foreach ($criacao_de_acao['instituicoes_selecionadas_ids'] as $id_da_instituicao_selecionada)
+                array_push($instituicoes_selecionadas, Instituicao::findOrFail($id_da_instituicao_selecionada));
+
             $instituicao_array = [];
 
-            foreach ($instituicoes as $instituicao) {
+            foreach ($instituicoes_selecionadas as $instituicao) {
                 foreach ($instituicao->tipos_de_acoes_da_instituicao as $tipo_de_acao_da_instituicao) {
                     if($tipo_de_acao_da_instituicao->tipo_de_acao_id == $importacao_de_listas['tipo_de_acao'])
                     {
                         $instituicao_array['tipo_de_acao_da_instituicao'] = $tipo_de_acao_da_instituicao->id;
                         $instituicao_array['nome'] = $instituicao->nome;
-                        array_push($instituicoes_selecionadas, $instituicao_array);
+                        array_push($instituicoes_selecionadas_array, $instituicao_array);
                     }
                 }
             }
 
             return view('admin.emkt.acoes.selecionar-instituicoes', [
-                'instituicoes' => $instituicoes_selecionadas,
+                'instituicoes' => $instituicoes_selecionadas_array,
                 'listas' => $importacao_de_listas['arquivos']
                 ]);
 

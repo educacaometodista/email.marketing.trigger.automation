@@ -173,7 +173,6 @@ class ListaController extends Controller
             }
         )->get();
         
-        $hasAction = false;
         $instituicoes_selecionadas = [];
 
         //
@@ -189,14 +188,14 @@ class ListaController extends Controller
             $i++;
         }
 
-        $nomes_das_listas = $this->import($files, $extension, $instituicoes_selecionadas, $date, $hasAction, $importacao_de_listas);
+        $nomes_das_listas = $this->import($files, $extension, $instituicoes_selecionadas, $date, $importacao_de_listas);
 
         Session::remove('importacao_de_listas');
 
         return redirect()->route('admin.listas.create');
     }
 
-    public function import($files, $extension, $instituicoes_selecionadas, $date, $hasAction, $importacao_de_listas)
+    public function import($files, $extension, $instituicoes_selecionadas, $date, $importacao_de_listas)
     {
         $explode_date = explode('-', str_replace('/', '-', $date));
         $day = $explode_date[0];

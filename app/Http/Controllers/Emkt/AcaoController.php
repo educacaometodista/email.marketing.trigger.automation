@@ -130,7 +130,7 @@ class AcaoController extends Controller
         $hora_agendamento = $criacao_de_acao['hora_agendamento'];
         $agendamento_envio = $data_agendamento.' '.$hora_agendamento;
 
-        $titulo_da_acao = $titulo.date('Y-m-d', strtotime($date));
+        $titulo_da_acao = $titulo.' '.str_replace('-', '/', date('Y-m-d', strtotime($date)));
         
         $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($tipo_de_acao_id){
                 $query->where('tipo_de_acao_id', '=', $tipo_de_acao_id);

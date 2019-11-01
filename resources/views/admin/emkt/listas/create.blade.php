@@ -64,18 +64,7 @@
                             <div class="form-group row">
                                 <span class="label-text col-md-2 col-form-label text-md-right py-0">Instituições</span>
                                 <div id="instituicoes" class="col-md-5 form-inline">
-                                    @foreach($instituicoes as $key => $instituicao)
-
-                                    <label class="form-check mr-3" id="{{ $instituicao->prefixo }}">
-                                        <input type="checkbox" name="{{ 'instituicao-'.strtolower($instituicao->prefixo) }}" value="{{ $instituicao->prefixo }}" class="form-check-input"> <span class="form-check-label">{{ $instituicao->nome }}</span>
-                                    </label>
-
-                                    @if(round(count($instituicoes)) / 2 == ($key+1))
-                                        </div>
-                                        <div class="col-md-5 form-inline">
-                                    @endif
-
-                                    @endforeach
+                                    
                                 </div>
                             </div>
                             <!-- Form Group End -->
@@ -126,25 +115,20 @@
 
 @push('js')
 <script>
-
-
+    var tipo_de_acao = null;
     $('select[name="tipo_de_acao"]').on('change', function() {
-        
-        var tipo_de_acao = $(this).val();
-
-        console.log(tipo_de_acao);
-
+        tipo_de_acao = $(this).val();
         if(tipo_de_acao != false) {
-            $.get( "/admin/instituicoes/"+tipo_de_acao+"/all", function(data) {
-                console.log(data);        
+            $.get( "/admin/instituicoes/"+tipo_de_acao+"/all", function(instituicoes) {
+                $('#instituicoes').html('');
+                for(let i = 0; i < instituicoes.length; i++) {
+                    let innerHtml = $('#instituicoes').html();
+                    $('#instituicoes').html(innerHtml+'<label class="form-check mr-3" id="'+instituicoes[i].prefixo+'"><input type="checkbox" name="instituicao-'+instituicoes[i].prefixo.toLowerCase()+'" value="'+instituicoes[i].prefixo+'" class="form-check-input"> <span class="form-check-label">'+instituicoes[i].nome+'</span></label>');
+                }
             });
-
-            //$('#instituicoes').html('$instituicoes');
         }
     });
-
 </script>
 @endpush
 
 @endsection
-

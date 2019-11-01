@@ -51,6 +51,9 @@ Route::prefix('admin')->name('admin.')->namespace('Emkt')->group(function () {
         Route::post('/store', 'InstituicaoController@store')->name('store');
         Route::put('/{id}', 'InstituicaoController@update')->name('update');
         Route::delete('/{id}', 'InstituicaoController@destroy')->name('destroy');
+
+        //carregamento com ajax
+        Route::get('/{id}/all', 'InstituicaoController@allByTipoDeAcao')->name('all');
     });
 
     Route::resource('tipos-de-acoes', 'TipoDeAcaoController');

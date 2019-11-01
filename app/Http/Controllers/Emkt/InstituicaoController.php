@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Emkt;
 
 use App\Instituicao;
+use App\TipoDeAcaoDaInstituicao;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -131,4 +132,15 @@ class InstituicaoController extends Controller
         return redirect()->route('admin.instituicoes.index')
             ->with('success', 'Instituição removida com sucesso!');
     }
+
+    public function allByTipoDeAcao($tipo_de_acao_id)
+    {
+        $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($tipo_de_acao_id){
+            $query->where('tipo_de_acao_id', $tipo_de_acao_id);
+        })->get();
+
+        return response()->json($instituicoes->toArray());
+    }
+
+
 }

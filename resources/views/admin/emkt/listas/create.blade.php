@@ -61,8 +61,9 @@
                             <!-- Form Group End -->
 
                             <!-- Form Group Start -->
-                            <div class="form-group row"> <span class="label-text col-md-2 col-form-label text-md-right py-0">Instituições</span>
-                                <div class="col-md-5 form-inline">
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right py-0">Instituições</span>
+                                <div id="instituicoes" class="col-md-5 form-inline">
                                     @foreach($instituicoes as $key => $instituicao)
 
                                     <label class="form-check mr-3" id="{{ $instituicao->prefixo }}">
@@ -119,10 +120,31 @@
         </div>
     </section>
 
-
-
     @include('admin.partials._footer')
 </main>
 <!-- Main Container End -->
+
+@push('js')
+<script>
+
+
+    $('select[name="tipo_de_acao"]').on('change', function() {
+        
+        var tipo_de_acao = $(this).val();
+
+        console.log(tipo_de_acao);
+
+        if(tipo_de_acao != false) {
+            $.get( "/admin/instituicoes/"+tipo_de_acao+"/all", function(data) {
+                console.log(data);        
+            });
+
+            //$('#instituicoes').html('$instituicoes');
+        }
+    });
+
+</script>
+@endpush
+
 @endsection
 

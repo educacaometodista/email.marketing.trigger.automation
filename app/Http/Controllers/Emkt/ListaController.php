@@ -68,6 +68,18 @@ class ListaController extends Controller
             }
         }*/
 
+        $instituicoes_selecionadas_ids = [];
+
+        $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get();
+
+        foreach($instituicoes as $instituicao)
+            if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
+                array_push($instituicoes_selecionadas_ids, $instituicao->id);
+        
+        Session::remove('instituicoes_selecionadas_ids');
+        Session::put('instituicoes_selecionadas_ids', $instituicoes_selecionadas_ids);
+
+
         if($request->hasFile('import_file'))
         {
 
@@ -118,20 +130,11 @@ class ListaController extends Controller
         {
             $importacao_de_listas = Session::get('importacao-de-listas');
 
-            //dd($importacao_de_listas['tipo_de_acao']);
-            
+            $instituicoes_selecionadas_ids = Session::get('instituicoes_selecionadas_ids');
+            $instituicoes = [];
 
-            $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($importacao_de_listas) {
-                    //$query->where('tipo_de_acao_id', $importacao_de_listas['tipo_de_acao']);
-                }
-            )->get();
-
-            
-            
-            /*$instituicoes = Instituicao::has('tipos_de_acoes_da_instituicao'
-            )->get();*/
-
-            //dd($instituicoes[0]->tipos_de_acoes_da_instituicao);
+            foreach ($instituicoes_selecionadas_ids as $id_da_instituicao_selecionada)
+                array_push($instituicoes, Instituicao::findOrFail($id_da_instituicao_selecionada));
 
             $instituicoes_selecionadas = [];
             $instituicao_array = [];
@@ -144,11 +147,8 @@ class ListaController extends Controller
                         $instituicao_array['nome'] = $instituicao->nome;
                         array_push($instituicoes_selecionadas, $instituicao_array);
                     }
-                        
                 }
             }
-
-            //dd($instituicoes_selecionadas);
 
             return view('admin.emkt.listas.selecionar-instituicoes', [
                 'instituicoes' => $instituicoes_selecionadas,
@@ -168,15 +168,18 @@ class ListaController extends Controller
         $extension = 'csv';
         $date = $importacao_de_listas['data'];
 
-        $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($tipo_de_acao_id){
+        /*$instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($tipo_de_acao_id){
                 $query->where('tipo_de_acao_id', '=', $tipo_de_acao_id);
             }
-        )->get();
+        )->get();*/
         
         $instituicoes_selecionadas = [];
 
-        //
-        $instituicoes_selecionadas = $instituicoes;
+        $instituicoes_selecionadas_ids = Session::get('instituicoes_selecionadas_ids');
+
+        foreach ($instituicoes_selecionadas_ids as $id_da_instituicao_selecionada)
+            array_push($instituicoes_selecionadas, Instituicao::findOrFail($id_da_instituicao_selecionada));
+
 
         $i = 0;
         foreach ($files as $file)
@@ -234,16 +237,21 @@ class ListaController extends Controller
 
             if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
             {
+
                 if($this->aknaAPI()->importarContatos($listas_de_contatos[strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
                 {
+                    
                     Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
+
                 }
             } elseif(array_key_exists('all', $listas_de_contatos)) {
 
                 
                 if($this->aknaAPI()->importarContatos($listas_de_contatos['all'][strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
                 {
+
                     Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
+
                 }
             }
         }

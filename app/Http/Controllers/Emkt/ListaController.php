@@ -55,19 +55,6 @@ class ListaController extends Controller
             'date' => 'required|date'
         ]);*/
 
-
-        /*
-        $hasAction = false;
-        foreach($instituicoes as $instituicao)
-        {
-            if($hasAction){
-                if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
-                    array_push($instituicoes_selecionadas, $instituicao);
-            } else {
-                array_push($instituicoes_selecionadas, $instituicao);
-            }
-        }*/
-
         $instituicoes_selecionadas_ids = [];
 
         $instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao')->get();
@@ -108,8 +95,6 @@ class ListaController extends Controller
             $lista['tipo_de_acao_da_instituicao'] = null;
             array_push($listas_de_contatos, $lista);
         }
-
-        //dd($files);
 
         $importacao_de_listas = [];
 
@@ -168,11 +153,6 @@ class ListaController extends Controller
         $extension = 'csv';
         $date = $importacao_de_listas['data'];
 
-        /*$instituicoes = Instituicao::whereHas('tipos_de_acoes_da_instituicao', function($query) use($tipo_de_acao_id){
-                $query->where('tipo_de_acao_id', '=', $tipo_de_acao_id);
-            }
-        )->get();*/
-        
         $instituicoes_selecionadas = [];
 
         $instituicoes_selecionadas_ids = Session::get('instituicoes_selecionadas_ids');
@@ -211,12 +191,14 @@ class ListaController extends Controller
 
         $listas_de_contatos = $this->planilha()->filter($files, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
 
+        dd($listas_de_contatos);
+        
         //validation alerts
         foreach ($listas_de_contatos as $lista) {
             if($lista == 'invalid')
             {
                 Session::flash('danger', 'O formato do arquivo não é válido!');
-                return redirect()->route('admin.listas.create');
+                return redirect()->route('admin.listas.selecionar-instituicoes');
             }
         }
 
@@ -246,21 +228,16 @@ class ListaController extends Controller
 
             if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
             {
-
                 if($this->aknaAPI()->importarContatos($listas_de_contatos[strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
                 {
-                    
                     Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
-
                 }
+
             } elseif(array_key_exists('all', $listas_de_contatos)) {
 
-                
                 if($this->aknaAPI()->importarContatos($listas_de_contatos['all'][strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
                 {
-
                     Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
-
                 }
             }
         }
@@ -272,10 +249,7 @@ class ListaController extends Controller
             'progresso' => 'Ok',
         ]);
 
-
         return $listas_de_contatos;
-
-
     }
 
     public function getProgress()

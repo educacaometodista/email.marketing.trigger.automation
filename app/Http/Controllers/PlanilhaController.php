@@ -109,6 +109,20 @@ class PlanilhaController extends Controller
 
         }
 
+        /*if($tipo_de_acao_da_instituicao == 'all')
+        {
+            dd($arrayFile);
+        }*/
+
+
+
+
+
+
+
+
+
+
         /*$filtro = 'return [
             "NOME" => "nome",
             "EMAIL" => "e_mail",
@@ -262,6 +276,8 @@ class PlanilhaController extends Controller
             foreach($arrayFile as $row)
                 if(array_key_exists($nome_da_coluna, $row))
                     $hasColumns = true;
+                else
+                    $hasColumns = false;
 
        return $hasColumns;  
     }

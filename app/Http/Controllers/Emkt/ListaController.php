@@ -211,6 +211,15 @@ class ListaController extends Controller
 
         $listas_de_contatos = $this->planilha()->filter($files, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
 
+        //validation alerts
+        foreach ($listas_de_contatos as $lista) {
+            if($lista == 'invalid')
+            {
+                Session::flash('danger', 'O formato do arquivo não é válido!');
+                return redirect()->route('admin.listas.create');
+            }
+        }
+
         $identificador_do_processo = $importacao_de_listas['identificador_do_processo'];
         $processo = new Processo;
         $processo->identificador = $identificador_do_processo;

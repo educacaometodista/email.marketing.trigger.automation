@@ -99,7 +99,8 @@ class PlanilhaController extends Controller
             $filtro = $tipo_de_acao_da_instituicao->filtro->regra;
 
         } else {
-            //Filtro padrão
+
+            //Filtro padrão presencial (landing)
             $filtro = 'return [
                 "NOME" => "nome",
                 "EMAIL" => "e_mail",
@@ -154,7 +155,7 @@ class PlanilhaController extends Controller
             
 
         } else {
-            
+
             return 'invalid';
         }
     }

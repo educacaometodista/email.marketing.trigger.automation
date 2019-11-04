@@ -109,34 +109,11 @@ class PlanilhaController extends Controller
 
         }
 
-        /*if($tipo_de_acao_da_instituicao == 'all')
-        {
-            dd($arrayFile);
-        }*/
-
-
-
-
-
-
-
-
-
-
-        /*$filtro = 'return [
-            "NOME" => "nome",
-            "EMAIL" => "e_mail",
-            "CELULAR" => "celular",
-            "INSTITUICAO" => "instituição"
-        ];';*/
-
         $filtro = eval($filtro);
         $newArrayFile = [];
-
         
         if($this->hasColumns($filtro, $arrayFile))
         {
-
             foreach ($arrayFile as $key_row => $row)
             {
                 $arrayFile[$key_row] = $this->celular($filtro, $row);
@@ -177,8 +154,8 @@ class PlanilhaController extends Controller
             
 
         } else {
-            Session::flash('danger', 'O formato do arquivo não é válido!');
-            return back();
+            
+            return 'invalid';
         }
     }
 

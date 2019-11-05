@@ -12,7 +12,7 @@ class FiltrosTableSeeder extends Seeder
     public function run()
     {
         $filtro = new App\Filtro;
-        $filtro->nome = 'teste filtro';
+        $filtro->nome = 'Landing';
         $filtro->regra = 'return [
             "NOME" => "nome",
             "EMAIL" => "e_mail",
@@ -22,7 +22,17 @@ class FiltrosTableSeeder extends Seeder
         $filtro->save();
 
         $filtro = new App\Filtro;
-        $filtro->nome = 'teste filtro ead';
+        $filtro->nome = 'SGPS 1';
+        $filtro->regra = 'return [
+            "NOME" => "nome",
+            "EMAIL" => "email",
+            "DDD" => "ddd2",
+            "NUMERO" => "fone2"
+        ];';
+        $filtro->save();
+
+        $filtro = new App\Filtro;
+        $filtro->nome = 'SGPS 2';
         $filtro->regra = 'return [
             "NOME" => "nome",
             "EMAIL" => "e_mail",

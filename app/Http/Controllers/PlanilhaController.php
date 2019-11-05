@@ -85,8 +85,7 @@ class PlanilhaController extends Controller
                 $lista = $this->getFilter($file['file_content']->toArray(), $extension, 'all', $date, $storage_path);
                 $listas_de_contatos['all'] = $lista;
 
-            }            
-        
+            }   
         }
 
         return $listas_de_contatos;
@@ -99,7 +98,6 @@ class PlanilhaController extends Controller
             $filtro = $tipo_de_acao_da_instituicao->filtro->regra;
 
         } else {
-
             //Filtro padrão presencial (landing)
             $filtro = 'return [
                 "NOME" => "nome",
@@ -107,10 +105,10 @@ class PlanilhaController extends Controller
                 "CELULAR" => "celular",
                 "INSTITUICAO" => "instituição"
             ];';
-
         }
 
         $filtro = eval($filtro);
+
         $newArrayFile = [];
         
         if($this->hasColumns($filtro, $arrayFile))

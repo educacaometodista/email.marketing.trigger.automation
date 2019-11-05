@@ -115,6 +115,17 @@ class ListaController extends Controller
         {
             $importacao_de_listas = Session::get('importacao-de-listas');
 
+            // verifica se existe a coluna instituicao no arquivo e adiciona <option value="all"></option>
+            $columnName = 'instituição';
+            $hasColumn = false;
+            foreach ($importacao_de_listas['arquivos'][0]['file_content']->toArray() as $file_row)
+            {
+                if(array_key_exists($columnName, $file_row))
+                    $hasColumn = true;
+                else
+                    $hasColumn = false;
+            }
+
             $instituicoes_selecionadas_ids = Session::get('instituicoes_selecionadas_ids');
             $instituicoes = [];
 
@@ -134,6 +145,10 @@ class ListaController extends Controller
                     }
                 }
             }
+
+            //adiciona <option value="all">Todas</option>
+            if($hasColumn)
+                array_unshift($instituicoes_selecionadas, ['nome' => 'Todas', 'tipo_de_acao_da_instituicao' => 'all']);
 
             return view('admin.emkt.listas.selecionar-instituicoes', [
                 'instituicoes' => $instituicoes_selecionadas,
@@ -190,8 +205,6 @@ class ListaController extends Controller
         $lista = null;
 
         $listas_de_contatos = $this->planilha()->filter($files, $extension, $instituicoes_selecionadas, $day.'-'.$month.'-'.$period, 'akna_lists');
-
-        dd($listas_de_contatos);
         
         //validation alerts
         foreach ($listas_de_contatos as $lista) {

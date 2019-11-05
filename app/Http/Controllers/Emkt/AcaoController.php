@@ -105,6 +105,17 @@ class AcaoController extends Controller
     {
         if(Session::has('importacao-de-listas'))
         {
+            // verifica se existe a coluna instituicao no arquivo e adiciona <option value="all"></option>
+            $columnName = 'instituição';
+            $hasColumn = false;
+            foreach ($importacao_de_listas['arquivos'][0]['file_content']->toArray() as $file_row)
+            {
+                if(array_key_exists($columnName, $file_row))
+                    $hasColumn = true;
+                else
+                    $hasColumn = false;
+            }
+
             $importacao_de_listas = Session::get('importacao-de-listas');
             $criacao_de_acao = Session::get('criacao-de-acao');
             $instituicoes_selecionadas = [];
@@ -127,6 +138,10 @@ class AcaoController extends Controller
                     }
                 }
             }
+
+            //adiciona <option value="all">Todas</option>
+            if($hasColumn)
+                array_unshift($instituicoes_selecionadas, ['nome' => 'Todas', 'tipo_de_acao_da_instituicao' => 'all']);
 
             return view('admin.emkt.acoes.selecionar-instituicoes', [
                 'instituicoes' => $instituicoes_selecionadas_array,

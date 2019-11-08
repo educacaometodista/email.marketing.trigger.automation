@@ -320,7 +320,7 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
         $tipo_de_acao_da_instituicao = new App\TipoDeAcaoDaInstituicao;
         $tipo_de_acao_da_instituicao->nome = 'Granbery Ausentes';
         $tipo_de_acao_da_instituicao->tipo_de_acao_id = 1;
-        $tipo_de_acao_da_instituicao->instituicao_id = 6;
+        $tipo_de_acao_da_instituicao->instituicao_id = 7;
         $tipo_de_acao_da_instituicao->filtro_id = 1;
         $tipo_de_acao_da_instituicao->mensagem_id = 25;
         $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'Granbery - Ausentes - [DATE d/m] - [DATE Y]/[DATE HALF]';
@@ -331,7 +331,7 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
         $tipo_de_acao_da_instituicao = new App\TipoDeAcaoDaInstituicao;
         $tipo_de_acao_da_instituicao->nome = 'Granbery Inscritos Parciais';
         $tipo_de_acao_da_instituicao->tipo_de_acao_id = 3;
-        $tipo_de_acao_da_instituicao->instituicao_id = 6;
+        $tipo_de_acao_da_instituicao->instituicao_id = 7;
         $tipo_de_acao_da_instituicao->filtro_id = 1;
         $tipo_de_acao_da_instituicao->mensagem_id = 26;
         $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'Granbery - Inscritos Parciais - [DATE d/m] - [DATE Y]/[DATE HALF]';
@@ -342,7 +342,7 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
         $tipo_de_acao_da_instituicao = new App\TipoDeAcaoDaInstituicao;
         $tipo_de_acao_da_instituicao->nome = 'Granbery Lembrete de Prova';
         $tipo_de_acao_da_instituicao->tipo_de_acao_id = 5;
-        $tipo_de_acao_da_instituicao->instituicao_id = 6;
+        $tipo_de_acao_da_instituicao->instituicao_id = 7;
         $tipo_de_acao_da_instituicao->filtro_id = 1;
         $tipo_de_acao_da_instituicao->mensagem_id = 27;
         $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'Granbery - Lembrete de Prova - [DATE d/m] - [DATE Y]/[DATE HALF]';
@@ -353,7 +353,7 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
         $tipo_de_acao_da_instituicao = new App\TipoDeAcaoDaInstituicao;
         $tipo_de_acao_da_instituicao->nome = 'Granbery Aprovados Não Matriculados';
         $tipo_de_acao_da_instituicao->tipo_de_acao_id = 7;
-        $tipo_de_acao_da_instituicao->instituicao_id = 6;
+        $tipo_de_acao_da_instituicao->instituicao_id = 7;
         $tipo_de_acao_da_instituicao->filtro_id = 1;
         $tipo_de_acao_da_instituicao->mensagem_id = 28;
         $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'Granbery - Aprovados Não Matriculados - [DATE d/m] - [DATE Y]/[DATE HALF]';

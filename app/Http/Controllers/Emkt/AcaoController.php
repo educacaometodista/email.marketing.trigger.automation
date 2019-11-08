@@ -247,11 +247,14 @@ class AcaoController extends Controller
                     ->where('instituicao_id', $instituicao->id)->get()->first();
 
                 $response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados));
-                //alert
+                
+
+                Session::flash('message-'.$response['status'].'-'.$instituicao->prefixo, $response['message'].' em '.$instituicao->nome.'!');
+
             } 
         }
 
-        dd($response);
+        
 
         Session::remove('importacao-de-listas');
         Session::remove('criacao-de-acao');

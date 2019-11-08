@@ -206,11 +206,30 @@ class AknaController extends Controller
 
         $xml_response = $this->post([], $xml_request);
 
-        $xml = new \SimpleXMLElement($xml_response);
+        $response = [
+            'status' => '',
+            'message' => ''
+        ];
 
-        return 'OK';
+        dd($xml_response);
 
-        //return str_replace('.', "$instituicao->nome!", $xml->EMKT->RETURN[0]);
+        //id="00"
+        if(strstr($xml_response, 'Data de encerramento deve ter no maximo 6 meses'))
+        {
+            $response['status'] = 'danger';
+            $response['message'] = 'Data de encerramento deve ter no maximo 6 meses';
+        }
+
+        //id="99"
+        if(strstr($xml_response, 'success'))
+        {
+            $response['status'] = 'success';
+            $response['message'] = 'Data de encerramento deve ter no maximo 6 meses';
+        }
+            
+
+        return $response;
+
     }
 
 }

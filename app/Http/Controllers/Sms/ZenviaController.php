@@ -11,6 +11,7 @@ class ZenviaController extends Controller
 {
     public $headers = [];
 
+    public $sms = [
         //remetente
         'from' => '',
         //destinatario
@@ -97,5 +98,4 @@ class ZenviaController extends Controller
         $this->$headers['Content-Type'] = 'application/json';
         $this->$headers['Accept'] = 'application/json';
     }
-
 }

@@ -4,10 +4,25 @@ namespace App\Http\Controllers\Sms;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Ixudra\Curl\Facades\Curl;
+use Session;
 
 class ZenviaController extends Controller
 {
     public $headers = [];
+
+        //remetente
+        'from' => '',
+        //destinatario
+        'to' => '',
+        //horario
+        'schedule' => '',
+        //conteudo
+        'smg' => '',
+        'callbackOption' => 'NONE',
+        'id' => '',
+        'flashSms' => false
+    ];
 
     public $statusCode = [
         '00' => 'OK',

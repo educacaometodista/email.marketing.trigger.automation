@@ -97,7 +97,7 @@ class TiposDeAcoesDasInstituicoesTableSeeder extends Seeder
         $tipo_de_acao_da_instituicao->nome = 'EaD UMESP Aprovados Não Matriculados';
         $tipo_de_acao_da_instituicao->tipo_de_acao_id = 8;
         $tipo_de_acao_da_instituicao->instituicao_id = 2;
-        $tipo_de_acao_da_instituicao->filtro_id = 3;
+        $tipo_de_acao_da_instituicao->filtro_id = 2;
         $tipo_de_acao_da_instituicao->mensagem_id = 8;
         $tipo_de_acao_da_instituicao->nome_da_lista_de_contatos = 'EaD UMESP - Aprovados Não Matriculados - [DATE d/m] - [DATE Y]/[DATE HALF]';
         $tipo_de_acao_da_instituicao->nome_do_arquivo = 'ead-umesp-aprovados-nao-matriculados-[DATE d-m-Y]-[DATE HALF].csv';

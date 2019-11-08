@@ -122,8 +122,8 @@ class ListaController extends Controller
             {
                 if(array_key_exists($columnName, $file_row))
                     $hasColumn = true;
-                else
-                    $hasColumn = false;
+                //else
+                //    $hasColumn = false;
             }
 
             $instituicoes_selecionadas_ids = Session::get('instituicoes_selecionadas_ids');
@@ -246,12 +246,24 @@ class ListaController extends Controller
                     Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
                 }
 
-            } elseif(array_key_exists('all', $listas_de_contatos)) {
-
-                if($this->aknaAPI()->importarContatos($listas_de_contatos['all'][strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
+                if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
                 {
-                    Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
+                    if($this->aknaAPI()->importarContatos($listas_de_contatos[strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
+                    {
+                        Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
+                    }
                 }
+
+            } elseif(array_key_exists('all', $listas_de_contatos)) {
+                if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos['all']))
+                {
+                    if($this->aknaAPI()->importarContatos($listas_de_contatos['all'][strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
+                    {
+                        Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
+                    }
+                }
+
+                
             }
         }
 

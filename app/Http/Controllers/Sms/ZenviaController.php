@@ -9,6 +9,72 @@ class ZenviaController extends Controller
 {
     public $headers = [];
 
+    public $statusCode = [
+        '00' => 'OK',
+        '01' => 'Programado',
+        '02' => 'Enviado',
+        '03' => 'Entregue',
+        '04' => 'Não recebido',
+        '05' => 'Bloqueado - sem cobertura',
+        '06' => 'Bloqueado - black listed',
+        '07' => 'Bloqueado - número inválido',
+        '08' => 'Bloqueado - conteúdo não permitido | mensagem expirada',
+        '09' => 'Bloqueado',
+        '10' => 'Erro'
+    ];
+
+    public $detailCode = [
+        '000' => 'Mensagem enviada',
+        '002' => 'Mensagem cancelada com sucesso',
+        '010' => 'Conteúdo da mensagem vazia',
+        '011' => 'Corpo da mensagem inválido',
+        '012' => 'Estouro de conteúdo da mensagem',
+        '013' => 'Número de celular incorreto ou incompleto "para"',
+        '014' => 'Número de celular "para" vazio',
+        '015' => 'Data de agendamento inválida ou incorreta',
+        '016' => 'ID em excesso',
+        '017' => 'O parâmetro "url" é inválido ou incorreto',
+        '018' => 'Campo "de" inválido',
+        '021' => 'Campo "id" obrigatório',
+        '080' => 'Mensagem com o mesmo ID já enviada',
+        '100' => 'Mensagem na fila',
+        '110' => 'Mensagem enviada ao operador',
+        '111' => 'Confirmação de mensagem indisponível',
+        '120' => 'Mensagem recebida pelo celula',
+        '130' => 'Mensagem bloqueada',
+        '131' => 'Mensagem bloqueada pela limpeza preditiva',
+        '132' => 'Mensagem já cancelada',
+        '133' => 'Conteúdo da mensagem na análise',
+        '134' => 'Mensagem bloqueada por conteúdo proibido',
+        '135' => 'O agregado é inválido ou inativo',
+        '136' => 'Mensagem expirada',
+        '140' => 'Número de celular não coberto',
+        '141' => 'Envio internacional não permitido',
+        '145' => 'Número de celular inativo',
+        '150' => 'Mensagem expirada no operador',
+        '160' => 'Erro de rede do operador',
+        '161' => 'Mensagem rejeitada pelo operador',
+        '162' => 'Mensagem cancelada ou bloqueada pelo operador',
+        '170' => 'Mensagem incorreta',
+        '171' => 'Número incorreto',
+        '172' => 'Parâmetro ausente',
+        '180' => 'ID da mensagem não encontrado',
+        '190' => 'Erro desconhecido',
+        '200' => 'Mensagens enviadas',
+        '210' => 'Mensagens agendadas, mas o limite da conta foi atingido',
+        '240' => 'Arquivo vazio ou não enviado',
+        '241' => 'Arquivo muito grande',
+        '242' => 'File readerror',
+        '300' => 'Mensagens recebidas encontradas',
+        '301' => 'Nenhuma mensagem recebida encontrada',
+        '400' => 'Entidade salva',
+        '900' => 'Erro de autenticação',
+        '901' => 'O tipo de conta não suporta esta operação',
+        '990' => 'Limite de conta atingido - entre em contato com o suporte',
+        '998' => 'Operação incorreta solicitada',
+        '999' => 'Erro desconhecido'
+    ];
+
     public function setHeaders()
     {
         $credentials = include 'credentials.php';
@@ -16,4 +82,5 @@ class ZenviaController extends Controller
         $this->$headers['Content-Type'] = 'application/json';
         $this->$headers['Accept'] = 'application/json';
     }
+
 }

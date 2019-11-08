@@ -105,6 +105,8 @@ class AcaoController extends Controller
     {
         if(Session::has('importacao-de-listas'))
         {
+            $importacao_de_listas = Session::get('importacao-de-listas');
+
             // verifica se existe a coluna instituicao no arquivo e adiciona <option value="all"></option>
             $columnName = 'instituição';
             $hasColumn = false;
@@ -112,11 +114,11 @@ class AcaoController extends Controller
             {
                 if(array_key_exists($columnName, $file_row))
                     $hasColumn = true;
-                else
-                    $hasColumn = false;
+                //else
+                //    $hasColumn = false;
             }
 
-            $importacao_de_listas = Session::get('importacao-de-listas');
+
             $criacao_de_acao = Session::get('criacao-de-acao');
             $instituicoes_selecionadas = [];
             $instituicoes_selecionadas_array = [];
@@ -141,7 +143,7 @@ class AcaoController extends Controller
 
             //adiciona <option value="all">Todas</option>
             if($hasColumn)
-                array_unshift($instituicoes_selecionadas, ['nome' => 'Todas', 'tipo_de_acao_da_instituicao' => 'all']);
+                array_unshift($instituicoes_selecionadas_array, ['nome' => 'Todas', 'tipo_de_acao_da_instituicao' => 'all']);
 
             return view('admin.emkt.acoes.selecionar-instituicoes', [
                 'instituicoes' => $instituicoes_selecionadas_array,
@@ -234,6 +236,8 @@ class AcaoController extends Controller
         
         $response = '';
 
+        //dd($instituicao_selecionadas);
+
         foreach ($instituicoes_selecionadas as $instituicao)
         {
             if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos) || is_null($listas_de_contatos))
@@ -246,6 +250,8 @@ class AcaoController extends Controller
                 //alert
             } 
         }
+
+        dd($response);
 
         Session::remove('importacao-de-listas');
         Session::remove('criacao-de-acao');

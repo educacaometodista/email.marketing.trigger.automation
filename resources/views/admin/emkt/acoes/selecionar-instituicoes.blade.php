@@ -13,11 +13,11 @@
             <div class="row">
                 <div class="col-lg-6">
                     <!-- Page Title Start -->
-                    <h2 class="page--title h5">Ações</h2>
+                    <h2 class="page--title h5">Criar Ações</h2>
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Importação de Listas</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.acoes.index') }}">Importar Listas</a></li>
                         <li class="breadcrumb-item active"><span>Selecionar Instituições</span></li>
                     </ul>
                 </div>
@@ -81,8 +81,8 @@
 
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
-                                    <input type="submit" value="Importar" class="btn btn-sm btn-rounded btn-success">
-                                    <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button>
+                                    <input type="submit" value="Criar Ações" class="btn btn-sm btn-rounded btn-success">
+                                        <!-- <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Voltar</button> -->
                                 </div>
                             </div>
 

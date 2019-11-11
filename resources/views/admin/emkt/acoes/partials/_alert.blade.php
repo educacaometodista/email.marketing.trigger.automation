@@ -1,8 +1,8 @@
 @if(isset($instituicoes))
     @foreach($instituicoes as $instituicao)
-        @if(session('message-success-'.$instituicao->prefixo))
+        @if(session('message-success-acao-'.$instituicao->prefixo))
             <div class="alert alert-success" role="alert">
-                {{ session('message-success-'.$instituicao->prefixo) }}
+                {{ session('message-success-acao-'.$instituicao->prefixo) }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,9 +13,9 @@
 
 @if(isset($instituicoes))
     @foreach($instituicoes as $instituicao)
-        @if(session('message-danger-'.$instituicao->prefixo))
+        @if(session('message-danger-acao-'.$instituicao->prefixo))
             <div class="alert alert-danger" role="alert">
-                {{ session('message-danger-'.$instituicao->prefixo) }}
+                {{ session('message-danger-acao-'.$instituicao->prefixo) }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

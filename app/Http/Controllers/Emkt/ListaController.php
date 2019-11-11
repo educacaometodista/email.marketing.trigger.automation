@@ -224,57 +224,41 @@ class ListaController extends Controller
 
         $total_de_contatos_das_listas = 0;
 
-        if(array_key_exists('all', $listas_de_contatos)) {
-            foreach ($instituicoes_selecionadas as $instituicao)
-                if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos['all']))
-                    $total_de_contatos_das_listas += count($listas_de_contatos['all'][strtoupper($instituicao->prefixo)]);
-        } else {
-
-            foreach ($instituicoes_selecionadas as $instituicao)
-            if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
-                $total_de_contatos_das_listas += count($listas_de_contatos[strtoupper($instituicao->prefixo)]);
-        }
+        if(array_key_exists('all', $listas_de_contatos))
+            $listas_de_contatos = $listas_de_contatos['all'];
 
         foreach ($instituicoes_selecionadas as $instituicao)
-        {
-            $status = false;
-
             if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
-            {
-                if($this->aknaAPI()->importarContatos($listas_de_contatos[strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
-                {
-                    Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
-                }
+                $total_de_contatos_das_listas += count($listas_de_contatos[strtoupper($instituicao->prefixo)]);
 
-                if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
-                {
-                    if($this->aknaAPI()->importarContatos($listas_de_contatos[strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
-                    {
-                        Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
-                    }
-                }
-
-            } elseif(array_key_exists('all', $listas_de_contatos)) {
-                if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos['all']))
-                {
-                    if($this->aknaAPI()->importarContatos($listas_de_contatos['all'][strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas) == "Ok")
-                    {
-                        Session::flash('message-success-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
-                    }
-                }
-
-                
-            }
-        }
+        foreach ($instituicoes_selecionadas as $instituicao)
+            if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
+                $this->importarListasDeContatos($listas_de_contatos, $instituicao, $dados,$identificador_do_processo, $total_de_contatos_das_listas);
 
         $processo = Processo::where('identificador', $identificador_do_processo)->first();
-
         $processo->update([
             'identificador' => $identificador_do_processo,
             'progresso' => 'Ok',
         ]);
 
         return $listas_de_contatos;
+    }
+
+    public function importarListasDeContatos($listas_de_contatos, $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas)
+    {
+        $response = null;
+        if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
+        {
+            $response = $this->aknaAPI()->importarContatos($listas_de_contatos[strtoupper($instituicao->prefixo)], $instituicao, $dados, $identificador_do_processo, $total_de_contatos_das_listas);
+
+            if ($response == "Ok")
+                Session::flash('message-success-lista-'.$instituicao->prefixo, 'Lista importada com sucesso em '.$instituicao->nome.'!');
+            elseif($response == 'Nenhum contato foi importado')
+                Session::flash('message-danger-lista-'.$instituicao->prefixo, 'Nenhum contato foi importado em '.$instituicao->nome.'!');
+            else
+                Session::flash('message-danger-lista-'.$instituicao->prefixo, 'Algo deu errado ao importar a lista em '.$instituicao->nome.'!');
+
+        }
     }
 
     public function getProgress()

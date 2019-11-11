@@ -175,7 +175,6 @@ class AcaoController extends Controller
             array_push($instituicoes_selecionadas, Instituicao::findOrFail($id_da_instituicao_selecionada));
 
         
-
         if($hasList == 'importar-agora')
         {
             $i = 0;
@@ -189,8 +188,8 @@ class AcaoController extends Controller
             }
 
             $listas_de_contatos = (new ListaController())->import($files, $extension, $instituicoes_selecionadas, $date, $importacao_de_listas);
-            if(array_key_exists('all', $listas_de_contatos))
-            $listas_de_contatos = $listas_de_contatos['all'];
+            /*if(array_key_exists('all', $ listas_de_contatos))
+            $ listas_de_contatos = $ listas_de_contatos['all'];*/
 
         } else {
             $listas_de_contatos = 'importadas';
@@ -240,7 +239,7 @@ class AcaoController extends Controller
 
         foreach ($instituicoes_selecionadas as $instituicao)
         {
-            if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos) || is_null($listas_de_contatos))
+            if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
             {
                 $tipo_de_acao_da_instituicao = TipoDeAcaoDaInstituicao::with('mensagem')
                     ->where('tipo_de_acao_id', $tipo_de_acao_id)
@@ -249,7 +248,7 @@ class AcaoController extends Controller
                 $response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados));
                 
 
-                Session::flash('message-'.$response['status'].'-'.$instituicao->prefixo, $response['message'].' em '.$instituicao->nome.'!');
+                Session::flash('message-'.$response['status'].'-acao-'.$instituicao->prefixo, $response['message'].' em '.$instituicao->nome.'!');
 
             } 
         }

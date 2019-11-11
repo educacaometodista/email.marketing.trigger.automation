@@ -17,7 +17,7 @@
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Importação de Listas</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.listas.create') }}">Importação de Listas</a></li>
                         <li class="breadcrumb-item active"><span>Selecionar Instituições</span></li>
                     </ul>
                 </div>
@@ -81,7 +81,7 @@
 
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
-                                    <input type="submit" value="Importar" class="btn btn-sm btn-rounded btn-success">
+                                    <input type="submit" value="Salvar Listas" class="btn btn-sm btn-rounded btn-success">
                                     <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button>
                                 </div>
                             </div>

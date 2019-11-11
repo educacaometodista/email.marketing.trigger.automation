@@ -151,11 +151,13 @@ class AknaController extends Controller
         else 
             $progresso = 0;
 
-        $contatos_a_importar = array_chunk($lista_de_contatos, 30);
+        $contatos_a_importar = array_chunk($lista_de_contatos, 40);
         
         foreach($contatos_a_importar as $contatos)
         {
             $contatos_xml = '';
+
+            $progresso = 0;
             
             foreach($contatos as $contato)
             {
@@ -163,11 +165,12 @@ class AknaController extends Controller
 
                 $progresso = $progresso + $porcentagem_do_progresso;
                 $numero_de_contatos_importados++;
-                $processo->update([
-                    'identificador' => $identificador_do_processo,
-                    'progresso' => $progresso,
-                ]);
             }
+
+            $processo->update([
+                'identificador' => $identificador_do_processo,
+                'progresso' => $progresso,
+            ]);
 
             $importacao_de_listas = Session::get('importacao-de-listas');
             $tipo_de_acao_id = $importacao_de_listas['tipo_de_acao'];
@@ -176,13 +179,14 @@ class AknaController extends Controller
                 if($tipo_de_acao_da_instituicao->tipo_de_acao_id == $tipo_de_acao_id)
                     $nome_da_lista = $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados);
 
+
             $xml_request = str_replace('[NOME DA LISTA]', 'TESTE - '.$nome_da_lista, $xml_request);
             $xml_request = str_replace('<destinatario>[DESTINATARIOS]</destinatario>', $contatos_xml, $xml_request);
             $xml_response = $this->post([], $xml_request);
             $xml = new \SimpleXMLElement($xml_response);
         }
 
-        return !is_null($numero_de_contatos_importados) ? 'Ok' : 'Erro';
+        return !is_null($numero_de_contatos_importados) ? 'Ok' : 'Nenhum contato foi importado';
     }
 
     /* Ações */
@@ -202,7 +206,7 @@ class AknaController extends Controller
         $xml_request = str_replace('[LINK DA MENSAGEM]', $mensagem->getUrl(), $xml_request);
         $xml_request = str_replace('[ASSUNTO]', $mensagem->assunto, $xml_request);
         
-        $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'. 'TESTE - '.$nome_da_lista.'</lista>', $xml_request);;
+        $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'. 'TESTE - '.$nome_da_lista.'</lista>', $xml_request);
 
         $xml_response = $this->post([], $xml_request);
 
@@ -210,8 +214,6 @@ class AknaController extends Controller
             'status' => '',
             'message' => ''
         ];
-
-        dd($xml_response);
 
         //id="00"
         if(strstr($xml_response, 'Data de encerramento deve ter no maximo 6 meses'))
@@ -221,11 +223,20 @@ class AknaController extends Controller
         }
 
         //id="99"
-        if(strstr($xml_response, 'success'))
+        if(strstr($xml_response, 'Ok'))
         {
             $response['status'] = 'success';
-            $response['message'] = 'Data de encerramento deve ter no maximo 6 meses';
+            $response['message'] = 'Ação "'.$titulo_da_acao.'" foi criada em "'.$instituicao->nome.'"';
         }
+
+
+        //id="99"
+        if(strstr($xml_response, 'A lista') && strstr($xml_response, 'não foi encontrada'))
+        {
+            $response['status'] = 'danger';
+            $response['message'] = 'A lista "'.'TESTE - '.$nome_da_lista.'" não foi encontrada';
+        }
+           
             
 
         return $response;

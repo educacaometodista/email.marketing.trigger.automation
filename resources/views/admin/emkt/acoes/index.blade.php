@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <!-- Page Title Start -->
-                            <h2 class="page--title h5">Cadastros</h2>
+                            <h2 class="page--title h5">Ações</h2>
                             <!-- Page Title End -->
 
                             <ul class="breadcrumb">

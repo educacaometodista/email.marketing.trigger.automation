@@ -13,12 +13,12 @@
             <div class="row">
                 <div class="col-lg-6">
                     <!-- Page Title Start -->
-                    <h2 class="page--title h5">Listas</h2>
+                    <h2 class="page--title h5">Importar Listas</h2>
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Lista de Contatos</a></li>
-                        <li class="breadcrumb-item active"><span>Importar Lista</span></li>
+                        <li class="breadcrumb-item active"><span>Importar Listas</span></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.listas.selecionar-instituicoes') }}">Selecionar Instituições</a></li>
                     </ul>
                 </div>
             </div>

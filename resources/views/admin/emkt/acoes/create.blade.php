@@ -40,6 +40,8 @@
                     <div class="panel-content">
                     @include('admin.partials._alert')
                     @include('admin.emkt.listas.partials._alert')
+                    @include('admin.emkt.acoes.partials._alert')
+
 
 
                         <form action="{{ route('admin.acoes.upload_lists') }}" method="POST" enctype="multipart/form-data">

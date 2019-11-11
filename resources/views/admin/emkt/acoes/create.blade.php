@@ -11,14 +11,14 @@
     <section class="page--header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <!-- Page Title Start -->
-                    <h2 class="page--title h5">Ações</h2>
+                    <h2 class="page--title h5">Criar Ações</h2>
                     <!-- Page Title End -->
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.instituicoes.index') }}">Lista de Contatos</a></li>
-                        <li class="breadcrumb-item active"><span>Importar Lista</span></li>
+                        <li class="breadcrumb-item active"><span>Importar Listas</span></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.acoes.selecionar-instituicoes') }}">Selecionar Instituições</a></li>
                     </ul>
                 </div>
             </div>
@@ -131,7 +131,7 @@
                                 <div class="col-lg-10 offset-lg-2">
                                     
                                     <input type="submit" value="Importar" class="btn btn-sm btn-rounded btn-success">
-                                    <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button>
+                                    <!--<a href=" route('admin.acoes.index') "><button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Voltar</button></a> -->
                                 </div>
                             </div>
 

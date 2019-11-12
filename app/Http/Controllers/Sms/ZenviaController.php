@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Sms;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Ixudra\Curl\Facades\Curl;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class ZenviaController extends Controller
@@ -19,7 +20,7 @@ class ZenviaController extends Controller
         //horario
         'schedule' => '',
         //conteudo
-        'smg' => '',
+        'msg' => '',
         'callbackOption' => 'NONE',
         'id' => '',
         'flashSms' => false
@@ -91,6 +92,8 @@ class ZenviaController extends Controller
         '999' => 'Erro desconhecido'
     ];
 
+    public $requestList;
+
     public function setHeaders()
     {
         $credentials = include 'credentials.php';
@@ -98,4 +101,38 @@ class ZenviaController extends Controller
         $this->$headers['Content-Type'] = 'application/json';
         $this->$headers['Accept'] = 'application/json';
     }
+
+
+    public function sendMulti($number_list, $from, $schedule, $msg)
+    {
+        $requestList = [];
+        $sms = null;
+        $this->sms['from'] = $from;
+        $this->sms['schedule'] = $schedule;
+        $this->sms['msg'] = $msg;
+
+        $last_sms_id = (DB::table('smss')->orderBy('id', 'DESC')->first())->id;
+        $usedIds = [];
+
+        foreach($number_list as $number)
+        {
+            $sms = $this->sms;
+            $sms['id'] = ++$last_sms_id;
+            $sms['to'] = $number;
+            array_push($requestList, $sms);
+            array_push($usedIds, $last_sms_id);
+        }
+
+        $smsRequest = [
+            "sendSmsMultiRequest" => [
+                "aggregateId" => 1750,
+                "sendSmsRequestList" =>
+                [ $requestList ]
+            ]
+        ];
+
+    }
+
 }
+
+

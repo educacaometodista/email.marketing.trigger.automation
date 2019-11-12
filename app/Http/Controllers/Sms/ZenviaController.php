@@ -112,7 +112,8 @@ class ZenviaController extends Controller
         $this->sms['schedule'] = $schedule;
         $this->sms['msg'] = $msg;
 
-        $last_sms_id = (DB::table('smss')->orderBy('id', 'DESC')->first())->id;
+        $last_sms = DB::table('smss')->orderBy('id', 'DESC')->first();
+        $last_sms_id = is_null($last_sms) ? $last_sms : $last_sms->id;
         $usedIds = [];
 
         foreach($number_list as $number)

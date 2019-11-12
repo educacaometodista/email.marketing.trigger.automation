@@ -105,6 +105,8 @@ class ZenviaController extends Controller
 
     public function sendMulti($number_list, $from, $schedule, $msg)
     {
+
+        
         $requestList = [];
         $sms = null;
         $this->sms['from'] = $from;
@@ -131,6 +133,20 @@ class ZenviaController extends Controller
             ]
         ];
 
+        $response = $this->post([], $smsRequest);
+
+        return $response;
+
+    }
+
+
+    
+    public function post($headers=[], $json)
+    {
+        return $response = Curl::to($this->endPoint)
+            ->withData($json)
+            ->withHeaders($headers)
+            ->post();
     }
 
 }

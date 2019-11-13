@@ -46,7 +46,7 @@ class MensagemController extends Controller
         $request->validate([
             'titulo' => 'required|min:2|max:80|string|unique:mensagens',
             'nome_do_arquivo' => 'required|min:1|max:10000|string',
-            'conteudo' => 'required|min:1|max:10000|string',
+            'conteudo' => 'required|min:1|string',
             'assunto' => 'required|min:2|max:150|string',
         ]);
         
@@ -57,7 +57,7 @@ class MensagemController extends Controller
         $mensagem->assunto = $request->input('assunto');
         $mensagem->save();
 
-        Mensagem::createFile($mensagem->nome_do_arquivo, $mensagem->conteudo, $mensagem->instituicao->prefixo);
+        Mensagem::createFile($mensagem->nome_do_arquivo, $mensagem->conteudo, $mensagem->tipo_de_acao_da_instituicao->instituicao->prefixo);
 
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))
             ->with('success', 'Mensagem criada com sucesso!');
@@ -98,7 +98,7 @@ class MensagemController extends Controller
         $request->validate([
             'titulo' => 'required|min:2|max:80|string',
             'nome_do_arquivo' => 'required|min:1|max:10000|string',
-            'conteudo' => 'required|min:1|max:10000|string',
+            'conteudo' => 'required|min:1|string',
             'assunto' => 'required|min:2|max:150|string'
         ]);
         
@@ -113,8 +113,8 @@ class MensagemController extends Controller
             'assunto' => $request->assunto
         ]);
 
-        Mensagem::editFileContent($request->nome_do_arquivo, $request->conteudo, $mensagem->instituicao->prefixo);
-        Mensagem::renameFile($nome_do_arquivo, $request->nome_do_arquivo, $mensagem->instituicao->prefixo);
+        Mensagem::editFileContent($request->nome_do_arquivo, $request->conteudo, $mensagem->tipo_de_acao_da_instituicao->instituicao->prefixo);
+        Mensagem::renameFile($nome_do_arquivo, $request->nome_do_arquivo, $mensagem->tipo_de_acao_da_instituicao->instituicao->prefixo);
 
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))
             ->with('success', 'Mensagem atualizada com sucesso!');
@@ -130,7 +130,7 @@ class MensagemController extends Controller
     public function destroy($id)
     {
         $mensagem = Mensagem::findOrFail($id);
-        Mensagem::deleteFile($mensagem->nome_do_arquivo, $mensagem->instituicao->prefixo);
+        Mensagem::deleteFile($mensagem->nome_do_arquivo, $mensagem->tipo_de_acao_da_instituicao->instituicao->prefixo);
         $mensagem->delete();
 
         return redirect()->route('admin.mensagens.index')

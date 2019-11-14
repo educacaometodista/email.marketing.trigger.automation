@@ -135,6 +135,8 @@ class ZenviaController extends Controller
 
         $response = $this->post($this->headers, $smsRequest);
 
+        dd($response);
+
         return $response;
     }
 

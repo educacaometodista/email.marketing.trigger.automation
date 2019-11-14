@@ -261,7 +261,7 @@ class AcaoController extends Controller
                 
 
                 //SMS
-                //$sms_response = (new ZenviaController())->send($listas_de_contatos[strtoupper($instituicao->prefixo)]);
+                //$sms_response = (new ZenviaController())->sendMulti($listas_de_contatos[strtoupper($instituicao->prefixo)]);
 
                 Session::flash('message-'.$response['status'].'-acao-'.$instituicao->prefixo, $response['message'].' em '.$instituicao->nome.'!');
 
@@ -277,6 +277,17 @@ class AcaoController extends Controller
         Session::remove('criacao-de-acao');
 
         return redirect()->route('admin.acoes.create');
+    }
+
+    public function setListaDeCelulares($lista_de_contatos)
+    {
+        $lista_de_celulares = [];
+
+        foreach($lista_de_contatos as $contato)
+                if(!is_null($contato['CELULAR']) && $contato['CELULAR'] != '')
+                    array_push($lista_de_celulares, $contato['CELULAR']);
+
+        return $lista_de_celulares;
     }
 
 }

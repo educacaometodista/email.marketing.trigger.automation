@@ -42,8 +42,6 @@
                     @include('admin.emkt.listas.partials._alert')
                     @include('admin.emkt.acoes.partials._alert')
 
-
-
                         <form action="{{ route('admin.acoes.upload_lists') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
@@ -115,7 +113,8 @@
                                     </label>
                                 </div>
                             </div>
-
+                            <!-- Form Group End -->
+                            
                             <!-- Form Group Start -->
                             <div id="input-lista" class="form-group row">
                                 <span class="label-text col-md-2 col-form-label text-md-right">Arquivo</span>
@@ -124,6 +123,18 @@
                                     <label class="custom-file">
                                         <input type="file" name="import_file[]" class="custom-file-input" id="arquivo" multiple>
                                         <span class="custom-file-label">Selecione um arquivo</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right py-0"></span>
+                                <div class="col-md-10">
+                                    <label class="form-check">
+                                        <input type="checkbox" name="enviar_sms" value="1" class="form-check-input">
+                                        <span class="form-check-label">Enviar SMS</span>
                                     </label>
                                 </div>
                             </div>

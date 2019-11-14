@@ -190,6 +190,17 @@ class PlanilhaController extends Controller
         return $newArrayFile;
     }
 
+    public function hasColumn($nome_da_coluna, $arrayFile)
+    {
+        foreach($arrayFile as $row)
+            if(array_key_exists($nome_da_coluna, $row))
+                $hasColumn = true;
+            else
+                $hasColumn = false;
+
+        return $hasColumn;
+    }
+
     public function celular($filtro, $row)
     {
         foreach($row as $key => $cell)

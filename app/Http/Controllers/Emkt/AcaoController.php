@@ -13,6 +13,8 @@ use App\Mensagem;
 use App\TipoDeAcao;
 use App\TipoDeAcaoDaInstituicao;
 use Session;
+use App\Http\Controllers\Sms\ZenviaController;
+
 
 class AcaoController extends Controller
 {
@@ -79,6 +81,9 @@ class AcaoController extends Controller
         $criacao_de_acao['instituicoes_selecionadas_ids'] = [];
         $criacao_de_acao['hasList'] = $hasList;
 
+        $criacao_de_acao['enviar_sms'] = !is_null($request->input('enviar_sms')) ? $request->input('enviar_sms') : false;
+
+
 
         foreach($instituicoes as $instituicao)
             if(!is_null($request->input('instituicao-'.strtolower($instituicao->prefixo))))
@@ -117,7 +122,6 @@ class AcaoController extends Controller
                 //else
                 //    $hasColumn = false;
             }
-
 
             $criacao_de_acao = Session::get('criacao-de-acao');
             $instituicoes_selecionadas = [];
@@ -214,6 +218,8 @@ class AcaoController extends Controller
         $data_agendamento = $criacao_de_acao['data_agendamento'];
         $hora_agendamento = $criacao_de_acao['hora_agendamento'];
         $agendamento_envio = $data_agendamento.' '.$hora_agendamento;
+        $enviar_sms = $criacao_de_acao['enviar_sms'];
+
 
         $titulo_da_acao = $titulo.' '.str_replace('-', '/', date('d-m-Y', strtotime($date)));
         
@@ -237,6 +243,8 @@ class AcaoController extends Controller
 
         //dd($instituicao_selecionadas);
 
+        //dd($listas_de_contatos);
+
         foreach ($instituicoes_selecionadas as $instituicao)
         {
             if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
@@ -245,12 +253,22 @@ class AcaoController extends Controller
                     ->where('tipo_de_acao_id', $tipo_de_acao_id)
                     ->where('instituicao_id', $instituicao->id)->get()->first();
 
+
+
+
+                //EMKT
                 $response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados));
                 
 
+                //SMS
+                //$sms_response = (new ZenviaController())->sendMulti($listas_de_contatos[strtoupper($instituicao->prefixo)]);
+
                 Session::flash('message-'.$response['status'].'-acao-'.$instituicao->prefixo, $response['message'].' em '.$instituicao->nome.'!');
 
-            } 
+                //incluir alerts de sms para as instituicoes
+
+            }
+
         }
 
         
@@ -259,6 +277,17 @@ class AcaoController extends Controller
         Session::remove('criacao-de-acao');
 
         return redirect()->route('admin.acoes.create');
+    }
+
+    public function setListaDeCelulares($lista_de_contatos)
+    {
+        $lista_de_celulares = [];
+
+        foreach($lista_de_contatos as $contato)
+                if(!is_null($contato['CELULAR']) && $contato['CELULAR'] != '')
+                    array_push($lista_de_celulares, $contato['CELULAR']);
+
+        return $lista_de_celulares;
     }
 
 }

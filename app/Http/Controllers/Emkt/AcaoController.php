@@ -261,7 +261,9 @@ class AcaoController extends Controller
                 
 
                 //SMS
-                //$sms_response = (new ZenviaController())->sendMulti($listas_de_contatos[strtoupper($instituicao->prefixo)]);
+                //add $from, $schedule(agendamento), $msg(texto da mensagem)
+                //$sms_response = (new ZenviaController())->sendMulti($this->setListaDeCelulares($listas_de_contatos[strtoupper($instituicao->prefixo)]));
+
 
                 Session::flash('message-'.$response['status'].'-acao-'.$instituicao->prefixo, $response['message'].' em '.$instituicao->nome.'!');
 

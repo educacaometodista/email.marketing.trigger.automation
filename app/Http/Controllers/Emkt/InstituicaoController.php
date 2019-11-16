@@ -46,7 +46,8 @@ class InstituicaoController extends Controller
         $request->validate([
             'nome' => 'required|min:2|max:100|string|unique:instituicoes',
             'prefixo' => 'required|min:2|max:16/string|unique:instituicoes',
-            'nome_do_remetente' => 'required|min:2|max:255',
+            'remetente_do_email' => 'required|min:2|max:255',
+            'remetente_do_sms' => 'required|min:2|max:255',
             'email_do_remetente' => 'required|min:4|max:255|email',
             'email_de_retorno' => 'required|min:4|max:255|email',
             'codigo_da_empresa' => 'required|min:4|max:5'
@@ -55,7 +56,8 @@ class InstituicaoController extends Controller
         $instituicao = new Instituicao;
         $instituicao->nome = $request->input('nome');
         $instituicao->prefixo = $request->input('prefixo');
-        $instituicao->nome_do_remetente = $request->input('nome_do_remetente');
+        $instituicao->remetente_do_email = $request->input('remetente_do_email');
+        $instituicao->remetente_do_sms = $request->input('remetente_do_sms');
         $instituicao->email_do_rementente = $request->input('email_do_remetente');
         $instituicao->email_de_retorno = $request->input('email_de_retono');
 
@@ -100,6 +102,8 @@ class InstituicaoController extends Controller
             'nome' => 'required|min:2|max:255|string',
             'prefixo' => 'required|min:2|max:255|string',
             'nome_do_remetente' => 'required|min:2|max:255',
+            'remetente_do_email' => 'required|min:2|max:255',
+            'remetente_do_sms' => 'required|min:2|max:255',
             'email_do_remetente' => 'required|min:4|max:255|email',
             'email_de_retorno' => 'required|min:4|max:255|email',
             'codigo_da_empresa' => 'required|min:4|max:5'
@@ -109,7 +113,8 @@ class InstituicaoController extends Controller
             'nome' => $request->nome,
             'prefixo' => $request->prefixo,
             'codigo_da_empresa' => $request->codigo_da_empresa,
-            'nome_do_remetente' => $request->nome_do_remetente,
+            'remetente_do_email' => $request->remetente_do_email,
+            'remetente_do_sms' => $request->remetente_do_sms,
             'email_do_remetente' => $request->email_do_remetente,
             'email_de_retorno' => $request->email_de_retorno
         ]);

@@ -75,12 +75,21 @@
 
                              <!-- Form Group Start -->
                              <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Nome do Remetente</span>
+                                    <span class="label-text col-md-2 col-form-label text-md-right">Remetente do E-mail</span>
                                 <div class="col-md-10">
-                                    <input type="text" name="nome_do_remetente" class="form-control" id="nome_do_remetente" maxlenght="16" value="{{ old('nome_do_remetente') }}">
+                                    <input type="text" name="remetente_do_email" class="form-control" id="remetente_do_email" maxlenght="16" value="{{ old('remetente_do_email') }}">
                                 </div>
                             </div>
                             <!-- Form Group End -->
+
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Remetente do SMS</span>
+                            <div class="col-md-10">
+                                <input type="text" name="remetente_do_sms" class="form-control" id="remetente_do_sms" maxlenght="160" value="{{ old('remetente_do_sms') }}">
+                            </div>
+                        </div>
+                        <!-- Form Group End -->
 
 
                              <!-- Form Group Start -->

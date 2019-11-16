@@ -1,7 +1,3 @@
-
-
-
-
 @extends('layouts.dadmin')
 
 @section('content')
@@ -16,20 +12,19 @@
         <div class="container-fluid">
             <div class="row">
             <div class="col-lg-6">
-                            <!-- Page Title Start -->
-                            <h2 class="page--title h5">Mensagens</h2>
-                            <!-- Page Title End -->
+                    <!-- Page Title Start -->
+                    <h2 class="page--title h5">Mensagens</h2>
+                    <!-- Page Title End -->
 
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('admin.mensagens.index') }}">Mensagens</a></li>
-                                <li class="breadcrumb-item active"><span>Nova Mensagem</span></li>
-                            </ul>
-                        </div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.mensagens.index') }}">Mensagens</a></li>
+                        <li class="breadcrumb-item active"><span>Nova Mensagem</span></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
     <!-- Page Header End -->
-
 
     <!-- Main Content Start -->
     <section class="main--content">
@@ -74,16 +69,23 @@
                             </div>
                             <!-- Form Group End -->
 
-                        <!-- Form Group Start -->
-                        <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Conteúdo</span>
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Conteúdo do SMS</span>
                                 <div class="col-md-10">
-                                <textarea style="height:300px; background-color:#1c2324;color:#eee;font-size:12px;" id="conteudo" name="conteudo" class="form-control" data-trigger="summernote">{{ old('conteudo') }}</textarea>
+                                    <textarea id="conteudo_do_sms" name="conteudo_do_sms" class="form-control" data-trigger="summernote">{{ old('conteudo_do_sms') }}</textarea>
                                 </div>
                             </div>
                             <!-- Form Group End -->
 
-                            <!--<input type="hidden" name="conteudo" class="form-control" id="conteudo" maxlenght="16" value="{{ old('conteudo') }}">-->
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Conteúdo do E-mail</span>
+                                <div class="col-md-10">
+                                    <textarea style="height:300px; background-color:#1c2324;color:#eee;font-size:12px;" id="conteudo_do_email" name="conteudo_do_email" class="form-control" data-trigger="summernote">{{ old('conteudo_do_email') }}</textarea>
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
 
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
@@ -146,7 +148,4 @@
 
 @endpush
 
-
-
 @endsection
-

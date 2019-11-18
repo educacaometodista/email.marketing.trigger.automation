@@ -102,9 +102,9 @@ class ZenviaController extends Controller
     public function setHeaders()
     {
         $credentials = include 'credentials.php';
-        $this->$headers['Authorization'] = 'Basic '.base64_encode($credentials['conta'].':'.$credentials['senha']);
-        $this->$headers['Content-Type'] = 'application/json';
-        $this->$headers['Accept'] = 'application/json';
+        $this->headers['Authorization'] = 'Basic '.base64_encode($credentials['conta'].':'.$credentials['senha']);
+        $this->headers['Content-Type'] = 'application/json';
+        $this->headers['Accept'] = 'application/json';
     }
 
     public function sendMulti($number_list, $from, $schedule, $msg)

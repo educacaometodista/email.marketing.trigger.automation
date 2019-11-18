@@ -200,7 +200,7 @@ class AknaController extends Controller
         $xml_request = str_replace('[E-MAIL USUARIO]', $this->data['User'], $xml_request);
         $xml_request = str_replace('[AGENDAMENTO]', $agendamento_envio, $xml_request);
         $xml_request = str_replace('[DATA ENCERRAMENTO]', date('Y-m-d', strtotime($data_envio[0]. ' + 30 day')), $xml_request);
-        $xml_request = str_replace('[NOME DO REMETENTE]', $instituicao->nome_do_remetente, $xml_request);
+        $xml_request = str_replace('[NOME DO REMETENTE]', $instituicao->remetente_do_email, $xml_request);
         $xml_request = str_replace('[EMAIL DO REMETENTE]', $instituicao->email_do_remetente, $xml_request);
         $xml_request = str_replace('[EMAIL PARA RETORNO]', $instituicao->email_de_retorno, $xml_request);
         $xml_request = str_replace('[LINK DA MENSAGEM]', $mensagem->getUrl(), $xml_request);

@@ -45,7 +45,7 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Título</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Título</span>
                                 <div class="col-md-10">
                                     <input type="text" name="titulo" class="form-control" id="titulo" maxlenght="20" value="{{ $mensagem->titulo }}">
                                 </div>
@@ -54,7 +54,7 @@
 
                              <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Nome do Arquivo</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Nome do Arquivo</span>
                                 <div class="col-md-10">
                                     <input type="text" name="nome_do_arquivo" class="form-control" id="nome_do_arquivo" maxlenght="30" value="{{ $mensagem->nome_do_arquivo }}">
                                 </div>
@@ -63,7 +63,7 @@
                             
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Assunto</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Assunto</span>
                                 <div class="col-md-10">
                                     <input type="text" name="assunto" class="form-control" id="assunto" value="{{ $mensagem->assunto }}">
                                 </div>
@@ -72,16 +72,24 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Conteúdo</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Conteúdo do SMS</span>
                                 <div class="col-md-10">
-                                <textarea style="height:300px; background-color:#1c2324;color:#eee;font-size:12px;" id="conteudo" name="conteudo" class="form-control" data-trigger="summernote">{{ $mensagem->conteudo }}</textarea>
+                                    <textarea id="conteudo_do_sms" name="conteudo_do_sms" class="form-control" data-trigger="summernote">{{ $mensagem->conteudo_do_sms }}</textarea>
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Conteúdo do E-mail</span>
+                                <div class="col-md-10">
+                                    <textarea style="height:300px; background-color:#1c2324;color:#eee;font-size:12px;" id="conteudo_do_email" name="conteudo_do_email" class="form-control" data-trigger="summernote">{{ $mensagem->conteudo_do_email }}</textarea>
                                 </div>
                             </div>
                             <!-- Form Group End -->
 
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
-                                    
                                     <input type="submit" value="Salvar" class="btn btn-sm btn-rounded btn-success">
                                     <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button>
                                 </div>

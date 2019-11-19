@@ -17,7 +17,8 @@ class CreateMensagensTable extends Migration
             $table->increments('id');
             $table->string('titulo');
             $table->string('nome_do_arquivo');
-            $table->longText('conteudo');
+            $table->longText('conteudo_do_email');
+            $table->string('conteudo_do_sms');
             $table->string('assunto');
             $table->timestamps();
 

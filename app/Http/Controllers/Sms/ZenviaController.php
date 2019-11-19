@@ -14,16 +14,16 @@ class ZenviaController extends Controller
 
     public $sms = [
         //remetente
-        'from' => '',
+        'from\\' => '',
         //destinatario
-        'to' => '',
+        'to\\' => '',
         //horario
-        'schedule' => '',
+        'schedule\\' => '',
         //conteudo
-        'msg' => '',
-        'callbackOption' => 'NONE',
-        'id' => '',
-        'flashSms' => false
+        'msg\\' => '',
+        'callbackOption\\' => 'NONE\\',
+        'id\\' => '',
+        'flashSms\\' => false
     ];
 
     public $statusCode = [
@@ -94,56 +94,63 @@ class ZenviaController extends Controller
 
     public $requestList;
 
+    public function __construct()
+    {
+        $this->setHeaders();
+    }
+
     public function setHeaders()
     {
         $credentials = include 'credentials.php';
-        $this->$headers['Authorization'] = 'Basic '.base64_encode($credentials['conta'].':'.$credentials['senha']);
-        $this->$headers['Content-Type'] = 'application/json';
-        $this->$headers['Accept'] = 'application/json';
+        $this->headers['Authorization'] = 'Basic '.base64_encode($credentials['conta'].':'.$credentials['senha']);
+        $this->headers['Content-Type'] = 'application/json';
+        $this->headers['Accept'] = 'application/json';
     }
 
     public function sendMulti($number_list, $from, $schedule, $msg)
-    {
-        $this->setHeaders();
-        
+    {        
         $requestList = [];
         $sms = null;
-        $this->sms['from'] = $from;
-        $this->sms['schedule'] = $schedule;
-        $this->sms['msg'] = $msg;
+        $this->sms['from\\'] = $from.'\\';
+        $this->sms['schedule\\'] = $schedule.'\\';
+        $this->sms['msg\\'] = $msg.'\\';
 
         $last_sms = DB::table('smss')->orderBy('id', 'DESC')->first();
-        $last_sms_id = is_null($last_sms) ? $last_sms : $last_sms->id;
+        $last_sms_id = is_null($last_sms) ? '0' : $last_sms->id;
         $usedIds = [];
 
         foreach($number_list as $number)
         {
             $sms = $this->sms;
-            $sms['id'] = ++$last_sms_id;
-            $sms['to'] = $number;
+            $sms['id\\'] = ++$last_sms_id.'\\';
+            $sms['to\\'] = '55'.$number.'\\';
             array_push($requestList, $sms);
             array_push($usedIds, $last_sms_id);
         }
 
-        $smsRequest = [
-            "sendSmsMultiRequest" => [
-                "aggregateId" => 1750,
-                "sendSmsRequestList" =>
-                [ $requestList ]
+        $body = [
+            "sendSmsMultiRequest\\" => [
+                "aggregateId\\" => 1231,
+                "sendSmsRequestList\\" => $requestList 
             ]
         ];
 
-        $response = $this->post($this->headers, $smsRequest);
+        $response = $this->post('https://api-rest.zenvia.com/services/send-sms-multiple', $body);
 
         return $response;
     }
 
-    public function post($headers, $json)
+    public function post($endPoint, $body)
     {
-        return $response = Curl::to($this->endPoint)
-            ->withData($json)
-            ->withHeaders($headers)
+        $response = Curl::to($endPoint)
+            ->withHeaders($this->headers)
+            ->withResponseHeaders()
+            ->withData($body)
+            ->asJson()
+            ->returnResponseObject()
             ->post();
+        
+        return $response;
     }
 
 }

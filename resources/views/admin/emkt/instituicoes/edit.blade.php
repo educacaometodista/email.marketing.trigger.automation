@@ -29,7 +29,6 @@
     </section>
     <!-- Page Header End -->
 
-
     <!-- Main Content Start -->
     <section class="main--content">
         <div class="row gutter-20">
@@ -49,7 +48,7 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Nome</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Nome</span>
                                 <div class="col-md-10">
                                     <input type="text" name="nome" class="form-control" id="nome" maxlenght="20" value="{{ $instituicao->nome }}">
                                 </div>
@@ -58,7 +57,7 @@
 
                              <!-- Form Group Start -->
                              <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Prefixo</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Prefixo</span>
                                 <div class="col-md-10">
                                     <input type="text" name="prefixo" class="form-control" id="prefixo" maxlenght="16" value="{{ $instituicao->prefixo }}">
                                 </div>
@@ -67,7 +66,7 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Código da Empresa</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Código da Empresa</span>
                                 <div class="col-md-10">
                                     <input type="text" name="codigo_da_empresa" class="form-control" id="codigo_da_empresa" maxlenght="5" value="{{ $instituicao->codigo_da_empresa }}">
                                 </div>
@@ -76,16 +75,25 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Nome do Remetente</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Remetente do E-mail</span>
                                 <div class="col-md-10">
-                                    <input type="text" name="nome_do_remetente" class="form-control" id="nome_do_remetente" maxlenght="16" value="{{ $instituicao->nome_do_remetente }}">
+                                    <input type="text" name="remetente_do_email" class="form-control" id="remetente_do_email" maxlenght="16" value="{{ $instituicao->remetente_do_email }}">
                                 </div>
                             </div>
                             <!-- Form Group End -->
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Email do Remetente</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Remetente do SMS</span>
+                                <div class="col-md-10">
+                                    <input type="text" name="remetente_do_sms" class="form-control" id="remetente_do_sms" maxlenght="16" value="{{ $instituicao->remetente_do_sms }}">
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right">Email do Remetente</span>
                                 <div class="col-md-10">
                                     <input type="text" name="email_do_remetente" class="form-control" id="email_do_remetente" maxlenght="26" value="{{ $instituicao->email_do_remetente }}">
                                 </div>
@@ -94,7 +102,7 @@
 
                             <!-- Form Group Start -->
                             <div class="form-group row">
-                                    <span class="label-text col-md-2 col-form-label text-md-right">Email de Retorno</span>
+                                <span class="label-text col-md-2 col-form-label text-md-right">Email de Retorno</span>
                                 <div class="col-md-10">
                                     <input type="text" name="email_de_retorno" class="form-control" id="email_de_retorno" maxlenght="5" value="{{ $instituicao->email_de_retorno }}">
                                 </div>
@@ -103,7 +111,6 @@
 
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
-                                    
                                     <input type="submit" value="Salvar" class="btn btn-sm btn-rounded btn-success">
                                     <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button>
                                 </div>

@@ -46,18 +46,20 @@ class MensagemController extends Controller
         $request->validate([
             'titulo' => 'required|min:2|max:80|string|unique:mensagens',
             'nome_do_arquivo' => 'required|min:1|max:10000|string',
-            'conteudo' => 'required|min:1|string',
+            'conteudo_do_email' => 'required|min:1|string',
+            'conteudo_do_sms' => 'required|min:1|max:155|string',
             'assunto' => 'required|min:2|max:150|string',
         ]);
         
         $mensagem = new Mensagem;
         $mensagem->titulo = $request->input('titulo');
         $mensagem->nome_do_arquivo = $request->input('nome_do_arquivo');
-        $mensagem->conteudo = $request->input('conteudo');
+        $mensagem->conteudo_do_email = $request->input('conteudo_do_email');
+        $mensagem->conteudo_do_sms = $request->input('conteudo_do_sms');
         $mensagem->assunto = $request->input('assunto');
         $mensagem->save();
 
-        Mensagem::createFile($mensagem->nome_do_arquivo, $mensagem->conteudo, $mensagem->tipo_de_acao_da_instituicao->instituicao->prefixo);
+        Mensagem::createFile($mensagem->nome_do_arquivo, $mensagem->conteudo_do_email, $mensagem->tipo_de_acao_da_instituicao->instituicao->prefixo);
 
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))
             ->with('success', 'Mensagem criada com sucesso!');
@@ -98,7 +100,8 @@ class MensagemController extends Controller
         $request->validate([
             'titulo' => 'required|min:2|max:80|string',
             'nome_do_arquivo' => 'required|min:1|max:10000|string',
-            'conteudo' => 'required|min:1|string',
+            'conteudo_do_email' => 'required|min:1|string',
+            'conteudo_do_sms' => 'required|min:1|max:155|string',
             'assunto' => 'required|min:2|max:150|string'
         ]);
         
@@ -109,11 +112,12 @@ class MensagemController extends Controller
         $mensagem->update([
             'titulo' => $request->titulo,
             'nome_do_arquivo' => $request->nome_do_arquivo,
-            'conteudo' => $request->conteudo,
+            'conteudo_do_email' => $request->conteudo_do_email,
+            'conteudo_do_sms' => $request->conteudo_do_sms,
             'assunto' => $request->assunto
         ]);
 
-        Mensagem::editFileContent($request->nome_do_arquivo, $request->conteudo, $mensagem->tipo_de_acao_da_instituicao->instituicao->prefixo);
+        Mensagem::editFileContent($request->nome_do_arquivo, $request->conteudo_do_email, $mensagem->tipo_de_acao_da_instituicao->instituicao->prefixo);
         Mensagem::renameFile($nome_do_arquivo, $request->nome_do_arquivo, $mensagem->tipo_de_acao_da_instituicao->instituicao->prefixo);
 
         return redirect()->route('admin.mensagens.edit', compact('mensagem'))

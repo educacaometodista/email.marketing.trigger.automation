@@ -11,7 +11,8 @@ class Mensagem extends Model
     public $fillable = [
         'titulo',
         'nome_do_arquivo',
-        'conteudo',
+        'conteudo_do_email',
+        'conteudo_do_sms',
         'assunto',
     ];
 

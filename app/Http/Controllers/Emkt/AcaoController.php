@@ -241,10 +241,6 @@ class AcaoController extends Controller
         
         $response = '';
 
-        //dd($instituicao_selecionadas);
-
-        //dd($listas_de_contatos);
-
         foreach ($instituicoes_selecionadas as $instituicao)
         {
             if(array_key_exists(strtoupper($instituicao->prefixo), $listas_de_contatos))
@@ -253,25 +249,21 @@ class AcaoController extends Controller
                     ->where('tipo_de_acao_id', $tipo_de_acao_id)
                     ->where('instituicao_id', $instituicao->id)->get()->first();
 
-
-
-
                 //EMKT
                 $response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados));
                 
-
                 //SMS
-                //$sms_response = (new ZenviaController())->sendMulti($listas_de_contatos[strtoupper($instituicao->prefixo)]);
+                $agendamento_sms = $data_agendamento.'T'.$hora_agendamento.':00';
+                
+                $sms_response = (new ZenviaController())->sendMulti($this->setListaDeCelulares($listas_de_contatos[strtoupper($instituicao->prefixo)]), $instituicao->remetente_do_sms, $agendamento_sms, $tipo_de_acao_da_instituicao->mensagem->conteudo_do_sms);
+
+                dd($sms_response);
 
                 Session::flash('message-'.$response['status'].'-acao-'.$instituicao->prefixo, $response['message'].' em '.$instituicao->nome.'!');
-
-                //incluir alerts de sms para as instituicoes
 
             }
 
         }
-
-        
 
         Session::remove('importacao-de-listas');
         Session::remove('criacao-de-acao');

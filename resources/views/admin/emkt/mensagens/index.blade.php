@@ -56,9 +56,10 @@
                                     <th>ID</th>
                                     <th>Título</th>
                                     <th>Assunto</th>
-                                    <th>Nome do Arquivo</th>
                                     <th>Instituição</th>
-                                    <th>Visualizar</th>
+                                    <th>Conteúdo do SMS</th>
+                                    <th>Arquivo do E-mail</th>
+                                    <th>Visualizar E-mail</th>
                                     <th class="not-sortable">Ações</th>
                                 </tr>
                             </thead>
@@ -68,8 +69,9 @@
                                     <td>{{ $mensagem->id }}</td>
                                     <td>{{ $mensagem->titulo }}</td>
                                     <td>{{ $mensagem->assunto }}</td>
+                                    <td>{{ $mensagem->tipo_de_acao_da_instituicao()->exists() ? $mensagem->tipo_de_acao_da_instituicao->instituicao->prefixo : '(nenhuma)' }}</td>
+                                    <td>{{ $mensagem->conteudo_do_sms }}</td>
                                     <td>{{ $mensagem->nome_do_arquivo.'.html' }}</td>
-                                    <td>{{ $mensagem->tipo_de_acao_da_instituicao()->exists() ? $mensagem->tipo_de_acao_da_instituicao->instituicao->nome : '(nenhuma)' }}</td>
                                     <td><a href="{{ $mensagem->getUrl() }}" target="{{ $mensagem->getUrl() == '#' ? '_self' : '_blank'}}"><i class="fas fa-eye"></i></a></td>
                                     <td>
                                         <div class="dropleft">

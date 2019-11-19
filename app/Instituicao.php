@@ -12,7 +12,8 @@ class Instituicao extends Model
         'nome',
         'prefixo',
         'codigo_da_empresa',
-        'nome_do_remetente',
+        'remetente_do_email',
+        'remetente_do_sms',
         'email_do_remetente',
         'email_de_retorno',
     ];

@@ -17,11 +17,11 @@ class CreateInstituicoesTable extends Migration
             $table->increments('id');
             $table->string('nome')->unique();
             $table->string('prefixo')->unique();
-            $table->string('nome_do_remetente');
+            $table->string('remetente_do_email');
+            $table->string('remetente_do_sms');
             $table->string('email_do_remetente');
             $table->string('email_de_retorno');
             $table->string('codigo_da_empresa');
-
             $table->timestamps();
         });
     }

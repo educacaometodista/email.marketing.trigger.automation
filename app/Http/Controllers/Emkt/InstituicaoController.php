@@ -101,7 +101,6 @@ class InstituicaoController extends Controller
         $request->validate([
             'nome' => 'required|min:2|max:255|string',
             'prefixo' => 'required|min:2|max:255|string',
-            'nome_do_remetente' => 'required|min:2|max:255',
             'remetente_do_email' => 'required|min:2|max:255',
             'remetente_do_sms' => 'required|min:2|max:255',
             'email_do_remetente' => 'required|min:4|max:255|email',

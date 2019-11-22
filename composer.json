@@ -8,15 +8,13 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">=7",
+        "php": "7.1.*",
         "chumper/zipper": "^1.0",
         "fideloper/proxy": "^4.0",
         "ixudra/curl": "^6.16",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "luisdalmolin/laravel-zenvia-channel": "^0.3.0",
-        "maatwebsite/excel": "2.*",
-        "rackspace/php-opencloud": "dev-master"
+        "maatwebsite/excel": "2.*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

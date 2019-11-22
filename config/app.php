@@ -180,8 +180,6 @@ return [
         Ixudra\Curl\CurlServiceProvider::class,
         /* Excel */
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        /* Zenvia */
-        NotificationChannels\Zenvia\ZenviaServiceProvider::class,
 
 
     ],

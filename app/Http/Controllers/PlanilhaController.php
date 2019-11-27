@@ -231,9 +231,9 @@ class PlanilhaController extends Controller
                 if($key == $filtro['CELULAR'])
                 {
                     $row['CELULAR'] = str_replace('-', '', $row[$filtro['CELULAR']]);              
-                    $row['CELULAR'] = str_replace('(', '', $row[$filtro['CELULAR']]);
-                    $row['CELULAR'] = str_replace(')', '', $row[$filtro['CELULAR']]);
-                    $row['CELULAR'] = str_replace(' ', '', $row[$filtro['CELULAR']]);
+                    $row['CELULAR'] = str_replace('(', '', $row['CELULAR']);
+                    $row['CELULAR'] = str_replace(')', '', $row['CELULAR']);
+                    $row['CELULAR'] = str_replace(' ', '', $row['CELULAR']);
                         
                     if(strlen($row['CELULAR']) != 11)
                         $row['CELULAR'] = '';      

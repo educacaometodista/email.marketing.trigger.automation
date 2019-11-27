@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\DB;
 use Session;
+use App\Sms;
 
 class ZenviaController extends Controller
 {
@@ -127,10 +128,10 @@ class ZenviaController extends Controller
             foreach($number_list as $number)
             {
                 $sms = $this->sms;
-                $sms['id'] = ++$last_sms_id;
+                $sms['id'] = 'ZENVIA_ID_'.(++$last_sms_id);
                 $sms['to'] = '55'.$number;
                 array_push($requestList, $sms);
-                array_push($usedIds, $last_sms_id);
+                array_push($usedIds, 'ZENVIA_ID_'.$last_sms_id);
             }
 
             $body = [
@@ -140,17 +141,32 @@ class ZenviaController extends Controller
                 ]
             ];
 
+            
+
             $response = $this->post('https://api-rest.zenvia.com/services/send-sms-multiple', $body);
             $response = json_decode(json_encode($response), true);
             $statusCode = $response['content']['sendSmsMultiResponse']['sendSmsResponseList'][0]['statusCode'];
             $detailCode = $response['content']['sendSmsMultiResponse']['sendSmsResponseList'][0]['detailCode'];
             $status_class = $statusCode == '04' || $statusCode == '05' || $statusCode == '06' || $statusCode == '07' || $statusCode == '08'  || $statusCode == '09'  || $statusCode == '10' ? 'danger' : 'success';
 
+            $this->saveUsedIds($usedIds);
+
             return [
                 'status' => $status_class,
                 'message' => $this->statusCode[$statusCode].'. '.$this->detailCode[$detailCode].' em "'.$nome_da_instituicao.'"'
             ];
 
+        }
+    }
+
+    public function saveUsedIds($usedIds)
+    {
+        $sms = null;
+        foreach($usedIds as $zenvia_id)
+        {
+            $sms = new Sms;
+            $sms->zenvia_id = $zenvia_id;
+            $sms->save();
         }
     }
 

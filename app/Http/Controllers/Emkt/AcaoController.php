@@ -250,16 +250,15 @@ class AcaoController extends Controller
                     ->where('instituicao_id', $instituicao->id)->get()->first();
 
                 //EMKT
-                $response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados));
+                $akna_response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados));
                 
                 //SMS
                 $agendamento_sms = $data_agendamento.'T'.$hora_agendamento.':00';
                 
-                $sms_response = (new ZenviaController())->sendMulti($this->setListaDeCelulares($listas_de_contatos[strtoupper($instituicao->prefixo)]), $instituicao->remetente_do_sms, $agendamento_sms, $tipo_de_acao_da_instituicao->mensagem->conteudo_do_sms);
+                $zenvia_response = (new ZenviaController())->sendMulti($this->setListaDeCelulares($listas_de_contatos[strtoupper($instituicao->prefixo)]), $instituicao->remetente_do_sms, $agendamento_sms, $tipo_de_acao_da_instituicao->mensagem->conteudo_do_sms, $instituicao->nome);
 
-                dd($sms_response);
-
-                Session::flash('message-'.$response['status'].'-acao-'.$instituicao->prefixo, $response['message'].' em '.$instituicao->nome.'!');
+                Session::flash('message-'.$akna_response['status'].'-acao-'.$instituicao->prefixo, $akna_response['message'].' !');
+                Session::flash('message-'.$zenvia_response['status'].'-sms-'.$instituicao->prefixo, $zenvia_response['message'].' !');
 
             }
 

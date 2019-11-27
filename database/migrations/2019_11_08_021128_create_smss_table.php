@@ -15,6 +15,7 @@ class CreateSmssTable extends Migration
     {
         Schema::create('smss', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('zenvia_id');
             $table->timestamps();
         });
     }

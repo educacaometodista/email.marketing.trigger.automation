@@ -9,9 +9,6 @@ class Sms extends Model
     public $table = 'smss';
 
     public $fillable = [
-        'remetente',
-        'destinatario',
-        'horario',
-        'msg',
+        'zenvia_id',
     ];
 }

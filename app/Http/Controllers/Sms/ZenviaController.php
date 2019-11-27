@@ -13,13 +13,9 @@ class ZenviaController extends Controller
     public $headers = [];
 
     public $sms = [
-        //remetente
         'from' => '',
-        //destinatario
         'to' => '',
-        //horario
         'schedule' => '',
-        //conteudo
         'msg' => '',
         'callbackOption' => 'NONE',
         'id' => '',
@@ -145,10 +141,14 @@ class ZenviaController extends Controller
             ];
 
             $response = $this->post('https://api-rest.zenvia.com/services/send-sms-multiple', $body);
+            $response = json_decode(json_encode($response), true);
+            $statusCode = $response['content']['sendSmsMultiResponse']['sendSmsResponseList'][0]['statusCode'];
+            $detailCode = $response['content']['sendSmsMultiResponse']['sendSmsResponseList'][0]['detailCode'];
+            $status_class = $statusCode == '04' || $statusCode == '05' || $statusCode == '06' || $statusCode == '07' || $statusCode == '08'  || $statusCode == '09'  || $statusCode == '10' ? 'danger' : 'success';
 
             return [
-                'status' => 'success',
-                'message' => '[SUCCESS] em '.$nome_da_instituicao
+                'status' => $status_class,
+                'message' => $this->statusCode[$statusCode].'. '.$this->detailCode[$detailCode].' em "'.$nome_da_instituicao.'"'
             ];
 
         }

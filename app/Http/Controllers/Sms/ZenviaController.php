@@ -14,16 +14,16 @@ class ZenviaController extends Controller
 
     public $sms = [
         //remetente
-        'from\\' => '',
+        'from' => '',
         //destinatario
-        'to\\' => '',
+        'to' => '',
         //horario
-        'schedule\\' => '',
+        'schedule' => '',
         //conteudo
-        'msg\\' => '',
-        'callbackOption\\' => 'NONE\\',
-        'id\\' => '',
-        'flashSms\\' => false
+        'msg' => '',
+        'callbackOption' => 'NONE',
+        'id' => '',
+        'flashSms' => false
     ];
 
     public $statusCode = [
@@ -111,9 +111,9 @@ class ZenviaController extends Controller
     {        
         $requestList = [];
         $sms = null;
-        $this->sms['from\\'] = $from.'\\';
-        $this->sms['schedule\\'] = $schedule.'\\';
-        $this->sms['msg\\'] = $msg.'\\';
+        $this->sms['from'] = $from;
+        $this->sms['schedule'] = $schedule;
+        $this->sms['msg'] = $msg;
 
         $last_sms = DB::table('smss')->orderBy('id', 'DESC')->first();
         $last_sms_id = is_null($last_sms) ? '0' : $last_sms->id;
@@ -122,16 +122,16 @@ class ZenviaController extends Controller
         foreach($number_list as $number)
         {
             $sms = $this->sms;
-            $sms['id\\'] = ++$last_sms_id.'\\';
-            $sms['to\\'] = '55'.$number.'\\';
+            $sms['id'] = ++$last_sms_id;
+            $sms['to'] = '55'.$number;
             array_push($requestList, $sms);
             array_push($usedIds, $last_sms_id);
         }
 
         $body = [
-            "sendSmsMultiRequest\\" => [
-                "aggregateId\\" => 1231,
-                "sendSmsRequestList\\" => $requestList 
+            "sendSmsMultiRequest" => [
+                "aggregateId" => 1231,
+                "sendSmsRequestList" => $requestList 
             ]
         ];
 

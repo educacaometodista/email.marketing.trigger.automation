@@ -107,37 +107,51 @@ class ZenviaController extends Controller
         $this->headers['Accept'] = 'application/json';
     }
 
-    public function sendMulti($number_list, $from, $schedule, $msg)
+    public function sendMulti($number_list, $from, $schedule, $msg, $nome_da_instituicao)
     {        
-        $requestList = [];
-        $sms = null;
-        $this->sms['from'] = $from;
-        $this->sms['schedule'] = $schedule;
-        $this->sms['msg'] = $msg;
-
-        $last_sms = DB::table('smss')->orderBy('id', 'DESC')->first();
-        $last_sms_id = is_null($last_sms) ? '0' : $last_sms->id;
-        $usedIds = [];
-
-        foreach($number_list as $number)
+        if(is_null($number_list) || count($number_list) == 0)
         {
-            $sms = $this->sms;
-            $sms['id'] = ++$last_sms_id;
-            $sms['to'] = '55'.$number;
-            array_push($requestList, $sms);
-            array_push($usedIds, $last_sms_id);
+            return [
+                'status' => 'danger',
+                'message' => 'Não há números de celulares para enviar SMS em '.$nome_da_instituicao
+            ];
+
+        } else {
+
+            $requestList = [];
+            $sms = null;
+            $this->sms['from'] = $from;
+            $this->sms['schedule'] = $schedule;
+            $this->sms['msg'] = $msg;
+
+            $last_sms = DB::table('smss')->orderBy('id', 'DESC')->first();
+            $last_sms_id = is_null($last_sms) ? '0' : $last_sms->id;
+            $usedIds = [];
+
+            foreach($number_list as $number)
+            {
+                $sms = $this->sms;
+                $sms['id'] = ++$last_sms_id;
+                $sms['to'] = '55'.$number;
+                array_push($requestList, $sms);
+                array_push($usedIds, $last_sms_id);
+            }
+
+            $body = [
+                "sendSmsMultiRequest" => [
+                    "aggregateId" => 1231,
+                    "sendSmsRequestList" => $requestList 
+                ]
+            ];
+
+            $response = $this->post('https://api-rest.zenvia.com/services/send-sms-multiple', $body);
+
+            return [
+                'status' => 'success',
+                'message' => '[SUCCESS] em '.$nome_da_instituicao
+            ];
+
         }
-
-        $body = [
-            "sendSmsMultiRequest" => [
-                "aggregateId" => 1231,
-                "sendSmsRequestList" => $requestList 
-            ]
-        ];
-
-        $response = $this->post('https://api-rest.zenvia.com/services/send-sms-multiple', $body);
-
-        return $response;
     }
 
     public function post($endPoint, $body)

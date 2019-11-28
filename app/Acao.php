@@ -13,10 +13,16 @@ class Acao extends Model
         'destinatarios',
         'agendamento',
         'usuario_id',
+        'instituicao_id',
     ];
 
     public function usuario()
     {
         return $this->belongsTo(Admin::class, 'usuario_id');
+    }
+
+    public function instituicao()
+    {
+        return $this->belongsTo(Instituicao::class, 'instituicao_id');
     }
 }

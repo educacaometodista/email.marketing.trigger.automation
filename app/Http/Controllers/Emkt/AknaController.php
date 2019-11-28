@@ -180,7 +180,7 @@ class AknaController extends Controller
                     $nome_da_lista = $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados);
 
 
-            $xml_request = str_replace('[NOME DA LISTA]', 'TESTE - '.$nome_da_lista, $xml_request);
+            $xml_request = str_replace('[NOME DA LISTA]', $nome_da_lista, $xml_request);
             $xml_request = str_replace('<destinatario>[DESTINATARIOS]</destinatario>', $contatos_xml, $xml_request);
             $xml_response = $this->post([], $xml_request);
             $xml = new \SimpleXMLElement($xml_response);
@@ -206,7 +206,7 @@ class AknaController extends Controller
         $xml_request = str_replace('[LINK DA MENSAGEM]', $mensagem->getUrl(), $xml_request);
         $xml_request = str_replace('[ASSUNTO]', $mensagem->assunto, $xml_request);
         
-        $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'. 'TESTE - '.$nome_da_lista.'</lista>', $xml_request);
+        $xml_request = str_replace('[NOMES DAS LISTAS]', '<lista>'.$nome_da_lista.'</lista>', $xml_request);
 
         $xml_response = $this->post([], $xml_request);
 
@@ -234,7 +234,7 @@ class AknaController extends Controller
         if(strstr($xml_response, 'A lista') && strstr($xml_response, 'não foi encontrada'))
         {
             $response['status'] = 'danger';
-            $response['message'] = 'A lista "'.'TESTE - '.$nome_da_lista.'" não foi encontrada';
+            $response['message'] = 'A lista "'.$nome_da_lista.'" não foi encontrada';
         }
            
             

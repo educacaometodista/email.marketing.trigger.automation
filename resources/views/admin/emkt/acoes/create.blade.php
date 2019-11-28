@@ -140,6 +140,18 @@
                             </div>
                             <!-- Form Group End -->
 
+                            <!-- Form Group Start -->
+                            <div class="form-group row">
+                                <span class="label-text col-md-2 col-form-label text-md-right py-0"></span>
+                                <div class="col-md-10">
+                                    <label class="form-check">
+                                        <input type="checkbox" name="enviar_email" value="1" class="form-check-input">
+                                        <span class="form-check-label">Enviar E-Mail</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Form Group End -->
+
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
                                     

@@ -82,6 +82,8 @@ class AcaoController extends Controller
         $criacao_de_acao['hasList'] = $hasList;
 
         $criacao_de_acao['enviar_sms'] = !is_null($request->input('enviar_sms')) ? $request->input('enviar_sms') : false;
+        $criacao_de_acao['enviar_email'] = !is_null($request->input('enviar_email')) ? $request->input('enviar_email') : false;
+
 
 
 
@@ -219,6 +221,8 @@ class AcaoController extends Controller
         $hora_agendamento = $criacao_de_acao['hora_agendamento'];
         $agendamento_envio = $data_agendamento.' '.$hora_agendamento;
         $enviar_sms = $criacao_de_acao['enviar_sms'];
+        $enviar_email = $criacao_de_acao['enviar_email'];
+
 
 
         $titulo_da_acao = $titulo.' '.str_replace('-', '/', date('d-m-Y', strtotime($date)));
@@ -250,10 +254,12 @@ class AcaoController extends Controller
                     ->where('instituicao_id', $instituicao->id)->get()->first();
 
                 //EMKT
-                $akna_response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados));
-                $this->salvarAcao($titulo_da_acao, count($listas_de_contatos[strtoupper($instituicao->prefixo)]), $agendamento_envio, Auth::user()->id, $instituicao->id);
-                Session::flash('message-'.$akna_response['status'].'-acao-'.$instituicao->prefixo, $akna_response['message'].' !');
-
+                if($enviar_email)
+                {
+                    $akna_response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados));
+                    $this->salvarAcao($titulo_da_acao, count($listas_de_contatos[strtoupper($instituicao->prefixo)]), $agendamento_envio, Auth::user()->id, $instituicao->id);
+                    Session::flash('message-'.$akna_response['status'].'-acao-'.$instituicao->prefixo, $akna_response['message'].' !');
+                }
                 
                 //SMS
                 if($enviar_sms)

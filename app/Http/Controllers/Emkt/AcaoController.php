@@ -251,7 +251,7 @@ class AcaoController extends Controller
 
                 //EMKT
                 $akna_response = (new AknaController())->criarAcaoPontual($titulo_da_acao, $tipo_de_acao_da_instituicao->mensagem, $agendamento_envio, $tipo_de_acao_da_instituicao->instituicao, $tipo_de_acao_da_instituicao->getNomeDaListaDeContatos($dados));
-                $this->salvarAcao($titulo_da_acao, count($listas_de_contatos[strtoupper($instituicao->prefixo)]), $agendamento_envio, Auth::user()->id);
+                $this->salvarAcao($titulo_da_acao, count($listas_de_contatos[strtoupper($instituicao->prefixo)]), $agendamento_envio, Auth::user()->id, $instituicao->id);
                 Session::flash('message-'.$akna_response['status'].'-acao-'.$instituicao->prefixo, $akna_response['message'].' !');
 
                 
@@ -273,13 +273,14 @@ class AcaoController extends Controller
         return redirect()->route('admin.acoes.create');
     }
 
-    public function salvarAcao($titulo, $destinatarios, $agendamento, $usuario_id)
+    public function salvarAcao($titulo, $destinatarios, $agendamento, $usuario_id, $instituicao_id)
     {
         $acao = new Acao;
         $acao->titulo = $titulo;
         $acao->destinatarios = $destinatarios;
         $acao->agendamento = $agendamento;
         $acao->usuario_id = $usuario_id;
+        $acao->instituicao_id = $instituicao_id;
         $acao->save();
     }
 

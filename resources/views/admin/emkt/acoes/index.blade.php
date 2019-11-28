@@ -77,8 +77,6 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Título</th>
-                                    <th>Tipo de Ação</th>
-                                    <th>Status</th>
                                     <th>Agendamento</th>
                                     <th>Destinatários</th>
                                     <th>Usuário</th>
@@ -91,12 +89,10 @@
                                 <tr id="{{ 'acao-'.$acao->id }}">
                                     <td>{{ $acao->id }}</td>
                                     <td>{{ $acao->titulo }}</td>
-                                    <td>{{ $acao->tipo_de_acao->nome_de_exibicao }}</td>
-                                    <td>{{ $acao->status }}</td>
                                     <td>{{ $acao->agendamento }}</td>
                                     <td>{{ $acao->destinatarios }}</td>
                                     <td>{{ $acao->usuario->name }}</td>
-                                    <td>{{ $acao->instituicao->nome }}</td>
+                                    <td>{{ $acao->instituicao_id->nome }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

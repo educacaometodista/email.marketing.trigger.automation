@@ -193,9 +193,11 @@ class AcaoController extends Controller
                 $i++;
             }
 
-            $listas_de_contatos = (new ListaController())->import($files, $extension, $instituicoes_selecionadas, $date, $importacao_de_listas);
-            /*if(array_key_exists('all', $ listas_de_contatos))
-            $ listas_de_contatos = $ listas_de_contatos['all'];*/
+            if($enviar_email) {
+                $listas_de_contatos = (new ListaController())->import($files, $extension, $instituicoes_selecionadas, $date, $importacao_de_listas);
+            } else {
+                $listas_de_contatos = false;
+            }
 
         } else {
             $listas_de_contatos = 'importadas';

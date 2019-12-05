@@ -91,7 +91,7 @@
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
                                     <input type="submit" value="Salvar" class="btn btn-sm btn-rounded btn-success">
-                                    <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button>
+                                <a href="{{ route('admin.mensagens.index') }}"><button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button></a>
                                 </div>
                             </div>
 

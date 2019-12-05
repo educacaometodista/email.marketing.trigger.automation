@@ -82,7 +82,7 @@
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
                                     <input type="submit" value="Salvar Listas" class="btn btn-sm btn-rounded btn-success">
-                                    <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button>
+                                <a href="{{ route('admin.listas.create') }}"><button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Voltar</button></a>
                                 </div>
                             </div>
 

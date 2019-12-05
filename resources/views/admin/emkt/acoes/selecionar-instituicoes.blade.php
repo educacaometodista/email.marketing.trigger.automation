@@ -82,7 +82,7 @@
                             <div class="row">
                                 <div class="col-lg-10 offset-lg-2">
                                     <input type="submit" value="Criar Ações" class="btn btn-sm btn-rounded btn-success">
-                                        <!-- <button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Voltar</button> -->
+                                    <a href="{{ route('admin.acoes.create') }}"><button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Voltar</button>
                                 </div>
                             </div>
 

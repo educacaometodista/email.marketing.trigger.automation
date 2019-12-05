@@ -156,7 +156,7 @@
                                 <div class="col-lg-10 offset-lg-2">
                                     
                                     <input type="submit" value="Importar" class="btn btn-sm btn-rounded btn-success">
-                                    <!--<a href=" route('admin.acoes.index') "><button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Voltar</button></a> -->
+                                    <a href=" route('admin.acoes.index') "><button type="button" class="btn btn-sm btn-rounded btn-outline-secondary">Cancelar</button></a>
                                 </div>
                             </div>
 

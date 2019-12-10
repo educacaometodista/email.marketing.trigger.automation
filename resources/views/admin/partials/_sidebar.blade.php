@@ -17,13 +17,13 @@
             </li>
 
             <li>
-                <a href="javascript:void(0)">E-Mail Marketing</a>
+                <a href="javascript:void(0)">Automação de Envios</a>
 
                 <ul>
                     <li class="{{ classActivePath('/admin/instituicoes', 'open', 2) }}">
                         <a href="javascript:void(0)">
                             <i class="fas fa-university"></i>
-                            <span>Instituições</span> 
+                            <span>Instituições</span>
                         </a>
 
                         <ul>
@@ -95,62 +95,6 @@
                 </ul>
             </li>
 
-
-            <li>
-                <a href="javascript:void(0)">SMS Marketing <span class="badge bg-orange text-white">Em breve</span></a>
-
-                <!-- <ul>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fas fa-university"></i>
-                            <span>Instituições</span> 
-                        </a>
-
-                        <ul>
-                            <li><a href="{{ route('admin.instituicoes.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
-                            <li><a href="{{ route('admin.instituicoes.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fas fa-list-ul"></i>
-                            <span>Listas de Contatos</span>
-                        </a>
-
-                        <ul>
-                            <li><a href="javascript:void(0)"><i class="fas fa-bars"></i> Todas as Listas</a></li>
-                            <li><a href="{{ route('admin.listas.create') }}"><i class="fas fa-cloud-upload-alt"></i> Importar Lista</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fas fa-inbox"></i>
-                            <span>Mensagens</span>
-                        </a>
-
-                        <ul>
-                            <li><a href="{{ route('admin.mensagens.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
-                            <li><a href="{{ route('admin.mensagens.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript:void(0)">
-                        <i class="fas fa-paper-plane"></i>
-                            <span>Ações</span>
-                        </a>
-
-                        <ul>
-                            <li><a href="{{ route('admin.acoes.index') }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
-                            <li><a href="{{ route('admin.acoes.create') }}"><i class="fas fa-plus"></i> Criar Nova</a></li>
-                        </ul>
-                    </li>
-
-                </ul> -->
-            </li>
-
         </ul>
     </div>
     <!-- Sidebar Navigation End -->
@@ -188,7 +132,7 @@
                     <p class="summary--title">CPU Usage</p>
                     <p class="summary--stats">37.05-32</p>
                 </div>
-                
+
                 <div class="summary--item">
                     <p class="summary--chart" data-trigger="sparkline" data-type="bar" data-width="5" data-height="38" data-color="#ff4040">5,6,7,9,15,5,6,7,9,11,7,9,11,7,9,9,3,2</p>
 

@@ -27,8 +27,7 @@
                         </a>
 
                         <ul>
-                            <!-- LISTAR TODAS (CORRIGIR O QUANTO ANTES) -->
-                            <!-- li class="{{ classActivePath('/admin/instituicoes', 'active', 0) }}"><a href="{{ route('admin.instituicoes.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li -->
+                            <li class="{{ classActivePath('/admin/instituicoes', 'active', 0) }}"><a href="{{ route('admin.instituicoes.index' ) }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
                             <li class="{{ classActivePath('/admin/instituicoes/create', 'active', 0) }}"><a href="{{ route('admin.instituicoes.create') }}"><i class="fas fa-plus"></i> Novo Cadastro</a></li>
                         </ul>
                     </li>
@@ -88,7 +87,8 @@
                         </a>
 
                         <ul>
-                            <li class="{{ classActivePath('/admin/acoes', 'open', 0) }}"><a href="{{ route('admin.acoes.index') }}"><i class="fas fa-bars"></i> Listar Todas</a></li>
+                            <!-- LISTAR TODAS (CORRIGIR O QUANTO ANTES) -->
+                            <!-- <li class="{{ classActivePath('/admin/acoes', 'open', 0) }}"><a href="{{ route('admin.acoes.index') }}"><i class="fas fa-bars"></i> Listar Todas</a></li> -->
                             <li class="{{ classActivePath('/admin/acoes/create', 'open', 0) }}"><a href="{{ route('admin.acoes.create') }}"><i class="fas fa-plus"></i> Criar Nova</a></li>
                         </ul>
                     </li>

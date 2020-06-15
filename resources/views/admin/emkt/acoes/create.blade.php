@@ -61,7 +61,7 @@
                                 <div class="col-md-10">
                                     <select name="tipo_de_acao" class="form-control" id="tipo_de_acao">
                                     <option></option>
-                                    @foreach($tipos_de_acoes as $tipo_de_acao)
+                                    @foreach($tipos_de_acoes->sortBy('nome') as $tipo_de_acao)
                                         <option value="{{ $tipo_de_acao->id }}">{{ $tipo_de_acao->nome_de_exibicao }}</option>
                                     @endforeach
                                     </select>
@@ -177,6 +177,7 @@
 <!-- Main Container End -->
 @push('js')
 <script>
+
     $('input[name="hasList"]').click(function () {
         if($(this).val() == 'importar-agora')
         {
@@ -209,4 +210,3 @@
 @endpush
 
 @endsection
-
